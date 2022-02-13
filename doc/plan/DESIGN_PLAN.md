@@ -109,7 +109,6 @@ Happy Input:
   magnitude (integer value)
 - File containing a sequence of valid commands
 - Different pen colors
--
 
 Sad Input:
 
@@ -117,6 +116,8 @@ Sad Input:
 - Incorrect command types
 - Incorrect file format
 - Click on wrong button with empty list of commands
+
+
 
 ## Team Responsibilities
 
