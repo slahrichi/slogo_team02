@@ -16,6 +16,11 @@ commandSubmitted(playerInput);
 
 // Then goes to the Controller TurtleManager:
 setTurtleCommands(playerInput);
+
+Goes to the back-end and modifies the Turtle's position, then call the displayTurtle() and 
+updateScriptWindow() methods to update the simulation window
+
+Now, the script window shows the newly entered the command and the moved turtle
 ~~~
 
 * The user types '50 fd' in the command window and sees an error message that the command was not formatted correctly.
@@ -24,3 +29,21 @@ setTurtleCommands(playerInput);
 
 
 #### Added Use Cases - 3 per Person
+
+* Inputting an Invalid File Type
+
+~~~
+
+~~~
+
+* Inputting a Wrongly Formatted Slogo File
+
+~~~
+
+~~~
+
+* Set Simulation Speed
+
+~~~
+
+~~~
