@@ -60,3 +60,30 @@ in the GUI are stored there.
 ~~~
 
 ~~~
+* Read Inputs from a file
+~~~
+FileReader parses the text file and throws and exceptions (bad file etc.)
+
+FileReader then passes the text per command to the InputParser and it creates the commands
+just like it would for UI string inputs
+
+The backend turtle is then updated accordingly in the turleManager then animated once the
+ user clicks play, by stepping it and the pen in those view classes.
+~~~
+* The user wants to change the language
+~~~
+In a dropdown box in the GUI, the user selects the language they want. (GUI helper give GUI list
+ of .properties files) 
+
+Once they click "apply", the GUI helper in a setLanguage() changes the path of the resources to the
+corresponding .properties file using a switch case.
+~~~
+* The turle hits the edge of the screen
+~~~
+The turtle class has a ifHitBounds() so where the turtle will stop moving (or wrap or bounce) when
+if called.
+
+Only the view will know the exact positioning of the turtle and therefore the turtleView will have
+call the ifHitBounds() from turtle instance in TurtleHelper therefore making the turtle perform 
+whatever action we decide. 
+~~~
