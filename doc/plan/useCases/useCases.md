@@ -136,3 +136,31 @@ by selecting a thickness value from the dropdown/inputting it in a GUI box
 The user can choose to hide the Turtle from the Canvas to only
 see the figure drawn (if any). They can do so by clicking on the 
 Hide/View turtle toggle
+~~~
+
+* The User Places a new object on the Canvas
+~~~ 
+The User will be able to place a new object onto the canvas by inputting the type 
+of object from the UI, selecting its color, and then setting its X and Y position on the 
+Canvas
+~~~
+
+* Update the position of the objects in the view after a step
+~~~
+
+ //The view is updated for all the objects, including the turtles in the next step.
+ 
+  public void updateObjects(TurtlArray arr) {
+    View.updateTurtleView(arr);
+  }
+~~~
+
+* The User changes the language
+~~~
+//Language value is obtained from an enum
+public void changeLanguage(Language language){
+  //Controller handles the update of language by displaying different text in the view class and using
+  //the resources files for language
+  Controller.setLanguage(language);
+}
+~~~
