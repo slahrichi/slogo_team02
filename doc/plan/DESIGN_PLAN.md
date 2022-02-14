@@ -12,7 +12,7 @@ Here is a graphical look at my design:
 
 Here is our amazing UI:
 
-![UI Design](SlogoWireframeDesignPlan.png)
+![UI Design](wireframe/SlogoWireframeDesignPlan.png)
 
 ## Introduction
 
@@ -57,7 +57,7 @@ There should also be some buttons: one to start the turtle's movement, one to st
 the turtle's stroke color, one to undo the turtle's last movement (if any).
 
 
-![UI Design](SlogoWireframeDesignPlan.png)
+![UI Design](wireframe/SlogoWireframeDesignPlan.png)
 
 ## Design Details
 
