@@ -6,7 +6,8 @@
 
 #### Given Use Cases
 
-* The user types 'fd 50' in the command window, and sees the turtle move in the display window leaving a trail, and the command is added to the environment's history.
+* The user types 'fd 50' in the command window, and sees the turtle move in the display window
+  leaving a trail, and the command is added to the environment's history.
 
 ~~~
 TurtleInterface:
@@ -23,10 +24,22 @@ updateScriptWindow() methods to update the simulation window
 Now, the script window shows the newly entered the command and the moved turtle
 ~~~
 
-* The user types '50 fd' in the command window and sees an error message that the command was not formatted correctly.
+* The user types '50 fd' in the command window and sees an error message that the command was not
+  formatted correctly.
 * The user sets a variable's value and sees it updated in the UI's Variable view.
-* The user sets the pen's color using the UI so subsequent lines drawn when the turtle moves use that color.
 
+~~~
+First the UI reads handles the in a text box
+
+Next the GUI helper takes the input and with an updateVariable() changes the variable 
+corresponding to what was specified by the user.
+
+The GUI then is then updated because the GUI helper instace will be updated and the values shown 
+in the GUI are stored there.
+~~~
+
+* The user sets the pen's color using the UI so subsequent lines drawn when the turtle moves use
+  that color.
 
 #### Added Use Cases - 3 per Person
 
