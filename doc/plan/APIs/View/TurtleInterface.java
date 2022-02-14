@@ -56,6 +56,12 @@ public interface TurtleInterface {
 
   }
 
+  public default void changeSpeed(){
+
+    setUpAnimation();
+
+  }
+
 
 
 

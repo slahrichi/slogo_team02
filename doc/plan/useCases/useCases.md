@@ -46,19 +46,37 @@ in the GUI are stored there.
 * Inputting an Invalid File Type
 
 ~~~
+User inputs an invalid file type (something that is not .slogo)
 
+FileReader parses the file and recognizes that it isn't the correct file type and 
+throws an exception
+
+We catch this exception using the InvalidFileException class, and we make sure to return
+an error message to the user explaining the problem.
+
+Program then returns to idle and waits for user to retry an upload
 ~~~
 
 * Inputting a Wrongly Formatted Slogo File
 
 ~~~
+User attempts to upload the correct slogo file, but it is incorrectly formatted (e.g.
+missing a curly bracket).
 
+When FileReader parses through the text, it catches the error and this time passes it to
+the InvalidFormatFileException.java class, which returns an error message to the user
+
+The user then has to edit the file or decide to upload a new file using the upload button
 ~~~
 
 * Set Simulation Speed
 
 ~~~
+User successfully uploads a file or writes commands and wants to play the commands. Before doing so,
+they drag the speed slider to a certain position on the line and then click the play button.
 
+Based on the position using a javaFx element, we pass its variable to the setUpAnimation() in 
+TurtleView that creates the animation and the speed it steps through.
 ~~~
 * Read Inputs from a file
 ~~~
