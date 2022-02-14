@@ -26,6 +26,12 @@ Now, the script window shows the newly entered the command and the moved turtle
 
 * The user types '50 fd' in the command window and sees an error message that the command was not
   formatted correctly.
+~~~
+// this function calls the function createCommandFromText, which will throw an exception in this case
+public void inputFromUser(String command){
+  Command command = InputParser.createCommandFromText(command);
+} 
+~~~
 * The user sets a variable's value and sees it updated in the UI's Variable view.
 
 ~~~
