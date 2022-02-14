@@ -50,4 +50,11 @@ public interface Object {
    * @param degrees: degree value to be set
    */
   public void setDegrees(double degrees);
+
+  /**
+   * Sets the color of the pen so that this is the color that the pen writes with
+   * @param Color : Color that is used to write
+   */
+  public void setColor(Paint Color);
+
 }

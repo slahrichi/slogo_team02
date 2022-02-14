@@ -27,12 +27,12 @@ Now, the script window shows the newly entered the command and the moved turtle
 * The user types '50 fd' in the command window and sees an error message that the command was not
   formatted correctly.
 ~~~
-
 // assuming the user passes a String
-List<Command> commands = createCommandFromText(input)
-catchInputExpression catches the exception and displays a message
- saying the input is invalid
-}
+// this function calls the function createCommandFromText, which will throw an exception in this case
+//and displays a message saying the input is invalid
+public void inputFromUser(String command){
+  List<Command> commands = InputParser.createCommandFromText(input)
+} 
 ~~~
 * The user sets a variable's value and sees it updated in the UI's Variable view.
 

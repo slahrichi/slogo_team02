@@ -1,26 +1,33 @@
 package Controller;
 
 /**
- * This Interface tries to parse all user input and translate it to commands
- * to be sent to the Turtle object. It also checks that the input is valid and handles
+ * This Class Parses the input given to it by the user and has  methods that return the appropriate
+ * command based off those inputs. These commands are returned to the Turtle / Object.
+ * It also checks that the input is valid and handles
  * throwing and catching of appropriate Exceptions
+ * @author Haris Adnan & Saad Lahrichi
  */
 public interface InputParser{
-
   /**
-   * This method takes the user input String and translates it to Command objects
-   * @param input String parsed from the user
-   * @return List of commands the turtle can execute
+   * This Creates a command based off the instructions that the user inputs in the console
+   * @param input : String input from the user
+   * @return List<Command> : Command List matching the input
    */
-  public List<Command> createCommandFromText(String input){
-    catchInputException(input);
+  public Command createCommandFromText(String input){
+    try {
+      List<Command> CommandList = parseText(input);
+    } catch (InvalidUserInputException e) {
+      // Display custom message to the user
+    }
+    return CommandList;
   }
 
   /**
-   * This method checks if the input String is a valid command
-   * @param input String parsed from the user
+   * This function parses the text into a Command
+   * @param text : the text that is input by the user
+   * @return List<Command> : the command list to be performed
    */
-  public void catchInputException(String input){
+  public List<Command> parseText(String text);
 
   }
 
