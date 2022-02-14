@@ -5,7 +5,6 @@ public interface TurtleInterface {
   /**
    * Front end UI of the SLogo simulation, updates the screen items and variables
    *
-   *
    */
 
   // displays turtles on screen
