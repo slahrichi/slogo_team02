@@ -8,17 +8,11 @@
 
 Here is a graphical look at my design:
 
-![This is cool, too bad you can't see it](online-shopping-uml-example.png "An initial UI")
-
-made from [a tool that generates UML from existing code](http://staruml.io/).
+![design_plan](DesignCRC.png)
 
 Here is our amazing UI:
 
-![This is cool, too bad you can't see it](29-sketched-ui-wireframe.jpg "An alternate design")
-
-taken
-from [Brilliant Examples of Sketched UI Wireframes and Mock-Ups](https://onextrapixel.com/40-brilliant-examples-of-sketched-ui-wireframes-and-mock-ups/)
-.
+![UI Design](SlogoWireframeDesignPlan.png)
 
 ## Introduction
 
@@ -61,6 +55,9 @@ The User Interface would consist of a main stage where the user can view the tur
 movements. It would also have a commands input box and another box to show the commands' history.
 There should also be some buttons: one to start the turtle's movement, one to stop it, one to pick
 the turtle's stroke color, one to undo the turtle's last movement (if any).
+
+
+![UI Design](SlogoWireframeDesignPlan.png)
 
 ## Design Details
 
