@@ -53,6 +53,7 @@ public interface Object {
 
   /**
    * Sets the color of the pen so that this is the color that the pen writes with
+   *
    * @param Color : Color that is used to write
    */
   public void setColor(Paint Color);
