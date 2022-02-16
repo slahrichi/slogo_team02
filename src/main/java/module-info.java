@@ -5,7 +5,9 @@ module slogo_app {
     requires javafx.base;
     requires javafx.media;
     requires javafx.web;
+    requires javafx.scene;
 
     // allow other classes to access listed packages in your project
     exports slogo;
+  exports slogo.Model;
 }
