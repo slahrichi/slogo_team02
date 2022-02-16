@@ -2,6 +2,9 @@ package slogo.Model;
 
 import javafx.scene.paint.Paint:
 
+/**
+ * @author Haris Adnan
+ */
 public class Pen {
 
   private Color penColor;
