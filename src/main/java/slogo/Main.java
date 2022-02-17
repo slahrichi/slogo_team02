@@ -7,6 +7,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.ToolBar;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 
@@ -18,16 +22,19 @@ public class Main extends Application {
     @Override
     public void start (Stage stage) {
 
+        BorderPane myRoot = new BorderPane();
+        ToolBar toolbar = new ToolBar();
+        HBox statusbar = new HBox();
+        myRoot.setTop(toolbar);
+        myRoot.setBottom(statusbar);
+        int width = 800;
+        int height = 600;
+        Scene scene = new Scene(myRoot, width, height);
 
-
-
-        FileReader initial = new FileReader(INITIAL_SIMULATION);
-        SimulationInfo myRecord = initial.getRecord();
-        CellSocietyView view = new CellSocietyView(LANGUAGE, myRecord);
         // give the window a title
-        stage.setTitle(TITLE);
+        stage.setTitle("Hello.");
         // add our user interface components to Frame and show it
-        stage.setScene(view.makeScene(DEFAULT_SIZE.width, DEFAULT_SIZE.height));
+        stage.setScene(scene);
         stage.show();
 
     }
@@ -35,20 +42,20 @@ public class Main extends Application {
 
 
 
-/*    private static final String LANGUAGE_RESOURCE_PATH = "/slogo/languages/";
+    private static final String LANGUAGE_RESOURCE_PATH = "/slogo/languages/";
     private static final String EXAMPLE_PROGRAMS_PATH = "/examples";
 
-    *//**
+    /**
      * Get command in a given language.
-     *//*
+     */
     public String getCommand (String language, String command) {
         ResourceBundle resources = ResourceBundle.getBundle(LANGUAGE_RESOURCE_PATH + language);
         return resources.getString(command);
     }
 
-    *//**
+    /**
      * Get first line of given example program.
-     *//*
+     */
     public String getExampleProgram (String category, String example) {
         // regular expression representing one or more whitespace characters (space, tab, or newline)
         final String NEWLINE = "\\n+";
@@ -57,9 +64,8 @@ public class Main extends Application {
         return lines.get(0).trim();
     }
 
-    *//**
-     * A method to test (and a joke :).
-     *//*
+
+    // A method to test (and a joke :).
     public double getVersion () {
         return 0.001;
     }
@@ -78,10 +84,7 @@ public class Main extends Application {
         }
     }
 
-
-    *//**
-     * Start of the program.
-     *//*
+    /*
     public static void main (String[] args) {
         Main m = new Main();
         System.out.println(m.getVersion());
