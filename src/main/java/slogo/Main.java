@@ -6,26 +6,49 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
 
 /**
  * Feel free to completely change this code or delete it entirely. 
  */
-public class Main {
-    private static final String LANGUAGE_RESOURCE_PATH = "/slogo/languages/";
+public class Main extends Application {
+
+    @Override
+    public void start (Stage stage) {
+
+
+
+
+        FileReader initial = new FileReader(INITIAL_SIMULATION);
+        SimulationInfo myRecord = initial.getRecord();
+        CellSocietyView view = new CellSocietyView(LANGUAGE, myRecord);
+        // give the window a title
+        stage.setTitle(TITLE);
+        // add our user interface components to Frame and show it
+        stage.setScene(view.makeScene(DEFAULT_SIZE.width, DEFAULT_SIZE.height));
+        stage.show();
+
+    }
+
+
+
+
+/*    private static final String LANGUAGE_RESOURCE_PATH = "/slogo/languages/";
     private static final String EXAMPLE_PROGRAMS_PATH = "/examples";
 
-    /**
+    *//**
      * Get command in a given language.
-     */
+     *//*
     public String getCommand (String language, String command) {
         ResourceBundle resources = ResourceBundle.getBundle(LANGUAGE_RESOURCE_PATH + language);
         return resources.getString(command);
     }
 
-    /**
+    *//**
      * Get first line of given example program.
-     */
+     *//*
     public String getExampleProgram (String category, String example) {
         // regular expression representing one or more whitespace characters (space, tab, or newline)
         final String NEWLINE = "\\n+";
@@ -34,9 +57,9 @@ public class Main {
         return lines.get(0).trim();
     }
 
-    /**
+    *//**
      * A method to test (and a joke :).
-     */
+     *//*
     public double getVersion () {
         return 0.001;
     }
@@ -56,13 +79,13 @@ public class Main {
     }
 
 
-    /**
+    *//**
      * Start of the program.
-     */
+     *//*
     public static void main (String[] args) {
         Main m = new Main();
         System.out.println(m.getVersion());
         System.out.println(m.getCommand("English", "Forward"));
         System.out.println(m.getExampleProgram("loops", "star"));
-    }
+    }*/
 }
