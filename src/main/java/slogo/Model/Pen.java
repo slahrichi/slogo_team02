@@ -1,6 +1,6 @@
 package slogo.Model;
 
-import javafx.scene.paint.Paint:
+import javafx.scene.paint.Paint;
 
 /**
  * @author Haris Adnan
