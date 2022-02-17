@@ -26,6 +26,14 @@ Now, the script window shows the newly entered the command and the moved turtle
 
 * The user types '50 fd' in the command window and sees an error message that the command was not
   formatted correctly.
+~~~
+// assuming the user passes a String
+// this function calls the function createCommandFromText, which will throw an exception in this case
+//and displays a message saying the input is invalid
+public void inputFromUser(String command){
+  List<Command> commands = InputParser.createCommandFromText(input)
+} 
+~~~
 * The user sets a variable's value and sees it updated in the UI's Variable view.
 
 ~~~
@@ -40,6 +48,11 @@ in the GUI are stored there.
 
 * The user sets the pen's color using the UI so subsequent lines drawn when the turtle moves use
   that color.
+~~~
+The user chooses a color from the dropdown list "PenColor".
+The Controller's listener is notified of this change and calls the Model's
+setColor(newColor) method 
+~~~
 
 #### Added Use Cases - 3 per Person
 
@@ -104,4 +117,50 @@ if called.
 Only the view will know the exact positioning of the turtle and therefore the turtleView will have
 call the ifHitBounds() from turtle instance in TurtleHelper therefore making the turtle perform 
 whatever action we decide. 
+~~~
+* Retrieve last executed call
+~~~
+The user types commands in the terminal and hits enter after each command 
+to see it running. If the user wants to retrieve the last command they submitted
+they can hit the UPARROW key.
+~~~
+
+* Pen thickness
+~~~
+The user can select the thickness of the lines drawn by the pen
+by selecting a thickness value from the dropdown/inputting it in a GUI box
+~~~
+
+* Hide turtle
+~~~
+The user can choose to hide the Turtle from the Canvas to only
+see the figure drawn (if any). They can do so by clicking on the 
+Hide/View turtle toggle
+~~~
+
+* The User Places a new object on the Canvas
+~~~ 
+The User will be able to place a new object onto the canvas by inputting the type 
+of object from the UI, selecting its color, and then setting its X and Y position on the 
+Canvas
+~~~
+
+* Update the position of the objects in the view after a step
+~~~
+
+ //The view is updated for all the objects, including the turtles in the next step.
+ 
+  public void updateObjects(TurtlArray arr) {
+    View.updateTurtleView(arr);
+  }
+~~~
+
+* The User changes the language
+~~~
+//Language value is obtained from an enum
+public void changeLanguage(Language language){
+  //Controller handles the update of language by displaying different text in the view class and using
+  //the resources files for language
+  Controller.setLanguage(language);
+}
 ~~~
