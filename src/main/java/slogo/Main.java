@@ -1,5 +1,6 @@
 package slogo;
 
+import java.awt.Dimension;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -12,6 +13,7 @@ import javafx.scene.control.ToolBar;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import slogo.View.TurtleGUI;
 
 
 /**
@@ -19,20 +21,20 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
+    // useful names for constant values used
+    public static final String TITLE = "Slogo Application";
+    public static final String LANGUAGE = "English";
+    public static final Dimension DEFAULT_SIZE = new Dimension(900, 600);
+    public static final String INITIAL_SIMULATION = "data/testSimulations/spreadingFireEDGE4.xml";
+
     @Override
     public void start (Stage stage) {
 
-        BorderPane myRoot = new BorderPane();
-        ToolBar toolbar = new ToolBar();
-        HBox statusbar = new HBox();
-        myRoot.setTop(toolbar);
-        myRoot.setBottom(statusbar);
-        int width = 800;
-        int height = 600;
-        Scene scene = new Scene(myRoot, width, height);
+        TurtleGUI turtleSim = new TurtleGUI(LANGUAGE);
+        Scene scene = turtleSim.makeScene(DEFAULT_SIZE.width, DEFAULT_SIZE.height);
 
         // give the window a title
-        stage.setTitle("Hello.");
+        stage.setTitle(TITLE);
         // add our user interface components to Frame and show it
         stage.setScene(scene);
         stage.show();
