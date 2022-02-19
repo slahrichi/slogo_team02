@@ -1,0 +1,15 @@
+.label{
+  -fx-font-family: "Segoe UI Semibold";
+  -fx-font-size: 10pt;
+}
+
+#titleText{
+  -fx-padding: 10;
+  -fx-font-size: 25pt;
+}
+#titleBox{
+  -fx-padding: 10;
+  -fx-max-width: infinity;
+  -fx-alignment: center;
+}
+
