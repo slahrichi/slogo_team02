@@ -4,9 +4,9 @@ package slogo.Model;
  * @author Haris Adnan
  */
 public class Turtle {
-  private static final String DEFAULT_IMAGE;
-  private static final int TURTLE_SIZE;
-  public static final double STARTING_TURTLE_ANGLE;
+  private String DEFAULT_IMAGE;
+  private int TURTLE_SIZE;
+  public double STARTING_TURTLE_ANGLE;
 
 
   private double myXPos;
