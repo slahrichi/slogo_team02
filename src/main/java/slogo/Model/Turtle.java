@@ -9,9 +9,7 @@ public class Turtle {
 
   private String DEFAULT_IMAGE;
   private int TURTLE_SIZE;
-  public double STARTING_TURTLE_ANGLE;
-
-
+  //public double STARTING_TURTLE_ANGLE;
 
   private double myXPos;
   private double myYPos;
@@ -19,22 +17,24 @@ public class Turtle {
   private Pen myPen;
   List<Command> myCommandList;
 
-  public Turtle(double Xpos, double Ypos, List<Command> CommandList){
-    Image turtleImage = new javafx.scene.image.Image(this.getClass().getResourceAsStream(DEFAULT_IMAGE));
+  public Turtle(double Xpos, double Ypos, List<Command> CommandList, double turtleAngle){
+    //Image turtleImage = new javafx.scene.image.Image(this.getClass().getResourceAsStream(DEFAULT_IMAGE));
     this.myXPos = Xpos;
     this.myYPos = Ypos;
+    this.myAngle = turtleAngle;
     this.myCommandList = CommandList;
   }
   public double getAngle() {
-    return 1.0;
+    return myAngle;
   }
   public void setAngle(int angle){
+    myAngle = angle;
   }
   public double getTurtleX(){
-    return 1.0;
+    return myXPos;
   }
   public double getTurtleY(){
-    return 1.0;
+    return myYPos;
   }
   public void turn(double angle){
     myAngle += angle;
