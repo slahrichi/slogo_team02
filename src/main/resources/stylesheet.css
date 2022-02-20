@@ -26,9 +26,17 @@
 
 #inputPanel {
   -fx-border-color: BLACK;
+  -fx-padding: 10;
 }
 
 #infoPanel {
   -fx-border-color: BLACK;
+  -fx-padding: 10;
+}
+
+#canvasBox {
+  -fx-alignment: center;
+  -fx-padding: 10;
+
 }
 
