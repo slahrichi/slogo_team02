@@ -1,17 +1,49 @@
 package slogo;
 
+import java.awt.Dimension;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.ToolBar;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
+import slogo.View.TurtleGUI;
 
 
 /**
  * Feel free to completely change this code or delete it entirely. 
  */
-public class Main {
+public class Main extends Application {
+
+    // useful names for constant values used
+    public static final String TITLE = "Slogo Application";
+    public static final String LANGUAGE = "English";
+    public static final Dimension DEFAULT_SIZE = new Dimension(1000, 800);
+    public static final String INITIAL_SIMULATION = "data/testSimulations/spreadingFireEDGE4.xml";
+
+    @Override
+    public void start (Stage stage) {
+
+        TurtleGUI turtleSim = new TurtleGUI(stage, LANGUAGE);
+        Scene scene = turtleSim.makeScene(DEFAULT_SIZE.width, DEFAULT_SIZE.height);
+
+        // give the window a title
+        stage.setTitle(TITLE);
+        // add our user interface components to Frame and show it
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+
+
+
     private static final String LANGUAGE_RESOURCE_PATH = "/slogo/languages/";
     private static final String EXAMPLE_PROGRAMS_PATH = "/examples";
 
@@ -34,9 +66,8 @@ public class Main {
         return lines.get(0).trim();
     }
 
-    /**
-     * A method to test (and a joke :).
-     */
+
+    // A method to test (and a joke :).
     public double getVersion () {
         return 0.001;
     }
@@ -55,14 +86,11 @@ public class Main {
         }
     }
 
-
-    /**
-     * Start of the program.
-     */
+    /*
     public static void main (String[] args) {
         Main m = new Main();
         System.out.println(m.getVersion());
         System.out.println(m.getCommand("English", "Forward"));
         System.out.println(m.getExampleProgram("loops", "star"));
-    }
+    }*/
 }
