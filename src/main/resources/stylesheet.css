@@ -11,5 +11,24 @@
   -fx-padding: 10;
   -fx-max-width: infinity;
   -fx-alignment: center;
+  -fx-border-color: black;
+}
+
+#configButtonBox{
+  -fx-min-width: 350;
+  -fx-pref-width: 350;
+  -fx-alignment: center;
+  -fx-padding: 10;
+  -fx-spacing: 10;
+  -fx-border-color: BLACK;
+}
+
+
+#inputPanel {
+  -fx-border-color: BLACK;
+}
+
+#infoPanel {
+  -fx-border-color: BLACK;
 }
 
