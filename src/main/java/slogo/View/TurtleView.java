@@ -1,8 +1,10 @@
 package slogo.View;
 
 import java.util.ResourceBundle;
+import slogo.Model.Turtle;
 
 // functionality class of animation, updating the elements
+
 public class TurtleView implements ViewAPI {
 
 
@@ -22,7 +24,7 @@ public class TurtleView implements ViewAPI {
 
 
   @Override
-  public void updatePosition() {
+  public void updatePosition(Turtle turtle, int xCoord, int yCoord) {
 
   }
 
@@ -43,6 +45,11 @@ public class TurtleView implements ViewAPI {
 
   @Override
   public void changeBackgroundColor() {
+
+  }
+
+  @Override
+  public void displayException(String errorMsg) {
 
   }
 }
