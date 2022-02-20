@@ -36,7 +36,7 @@ public class TurtleGUI {
   private BorderPane myRoot;
   private ShellView shellNode;
   private Canvas turtleCanvas;
-  private CommandHistoryView commandHistory;
+  private ScriptView scriptNode;
   private Stage myStage;
 
 
@@ -115,7 +115,7 @@ public class TurtleGUI {
     VBox sidePanel = new VBox();
     sidePanel.setId("inputPanel");
     shellNode = new ShellView(sidePanel);
-    commandHistory = new CommandHistoryView();
+    scriptNode = new ScriptView(sidePanel);
     sidePanel.prefWidthProperty().bind(myStage.widthProperty().multiply(0.2));
 
     return sidePanel;
@@ -153,7 +153,8 @@ public class TurtleGUI {
     gridPane.setPadding(new Insets(10));
     gridPane.setHgap(5);
     gridPane.setVgap(5);
-    gridPane.add(new Label("Street Name"), 0, 1);
+    gridPane.add(new Label("Variable 1 Here and Stats"), 0, 1);
+    gridPane.add(new Label("Variable 2 Here and Stats"), 0, 2);
     variablePane.setContent(gridPane);
     infoPanel.getChildren().add(variablePane);
     infoPanel.prefWidthProperty().bind(myStage.widthProperty().multiply(0.2));

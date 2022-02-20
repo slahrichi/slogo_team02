@@ -27,6 +27,7 @@
 #inputPanel {
   -fx-border-color: BLACK;
   -fx-padding: 10;
+  -fx-spacing: 10;
 }
 
 #infoPanel {

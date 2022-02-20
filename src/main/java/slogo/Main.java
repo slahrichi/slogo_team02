@@ -9,9 +9,6 @@ import java.nio.file.Paths;
 import java.util.*;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.ToolBar;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import slogo.View.TurtleGUI;
 
