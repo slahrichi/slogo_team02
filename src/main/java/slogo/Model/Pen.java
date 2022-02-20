@@ -2,6 +2,8 @@ package slogo.Model;
 
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import slogo.Controller.Command;
+
 
 /**
  * @author Haris Adnan
@@ -9,11 +11,15 @@ import javafx.scene.paint.Paint;
 public class Pen {
 
   private Color penColor;
-  private boolean penUp = false;
-  private int penSize = 1;
+  private boolean myPenUp = false;
+  private int myPenSize = 1;
 
-  public Pen(Color color) {
+  public Pen(Color color, boolean penUp, int size) {
+
     this.penColor = color;
+    this.myPenUp = penUp;
+    this.myPenSize = size;
+
   }
 
   public Color getPenColor() {
@@ -21,11 +27,11 @@ public class Pen {
   }
 
   public boolean isMyPenUp() {
-    return this.penUp;
+    return this.myPenUp;
   }
 
-  protected void setPenCond(boolean penUp) {
-    this.penUp = penUp;
+  protected void setPenUpOrDown(boolean penUp) {
+    this.myPenUp = penUp;
   }
 
   protected void setPenColor(Color color) {
@@ -33,12 +39,20 @@ public class Pen {
   }
 
   public int getPenSize() {
-    return this.penSize;
+    return this.myPenSize;
   }
 
   protected void setPenSize(int writingSize) {
-    this.penSize = writingSize;
+    this.myPenSize = writingSize;
   }
+
+  public void draw(Command givenCommand){
+    setPenUpOrDown(false);
+
+    setPenUpOrDown(true);
+
+  }
+
 
 
 }
