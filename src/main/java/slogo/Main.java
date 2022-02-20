@@ -30,7 +30,7 @@ public class Main extends Application {
     @Override
     public void start (Stage stage) {
 
-        TurtleGUI turtleSim = new TurtleGUI(LANGUAGE);
+        TurtleGUI turtleSim = new TurtleGUI(stage, LANGUAGE);
         Scene scene = turtleSim.makeScene(DEFAULT_SIZE.width, DEFAULT_SIZE.height);
 
         // give the window a title
