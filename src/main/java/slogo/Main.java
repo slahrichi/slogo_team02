@@ -44,7 +44,7 @@ public class Main extends Application {
 
 
 
-    private static final String LANGUAGE_RESOURCE_PATH = "/slogo/languages/";
+    private static final String LANGUAGE_RESOURCE_PATH = "/main/resources/slogo.Controller.languages/";
     private static final String EXAMPLE_PROGRAMS_PATH = "/examples";
 
     /**

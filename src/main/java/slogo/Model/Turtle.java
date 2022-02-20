@@ -1,5 +1,7 @@
 package slogo.Model;
-
+import java.util.List;
+import javafx.scene.image.Image;
+import slogo.Controller.Command;
 /**
  * @author Haris Adnan
  */
@@ -17,8 +19,8 @@ public class Turtle {
   private Pen myPen;
   List<Command> myCommandList;
 
-  public Turtle(double Xpos, double Ypos, List<Command> CommandList{
-    turtleImage = new javafx.scene.image.Image(this.getClass().getResourceAsStream(DEFAULT_IMAGE));
+  public Turtle(double Xpos, double Ypos, List<Command> CommandList){
+    Image turtleImage = new javafx.scene.image.Image(this.getClass().getResourceAsStream(DEFAULT_IMAGE));
     this.myXPos = Xpos;
     this.myYPos = Ypos;
     this.myCommandList = CommandList;
