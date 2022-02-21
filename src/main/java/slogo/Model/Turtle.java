@@ -33,7 +33,7 @@ public class Turtle {
   public double getAngle() {
     return myAngle;
   }
-  public void setAngle(int angle){
+  public void setAngle(double angle){
     myAngle = angle;
   }
   public double getTurtleX(){
