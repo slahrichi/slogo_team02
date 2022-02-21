@@ -1,7 +1,6 @@
 package slogo.View.Input;
 
 
-import java.security.Key;
 import java.util.ArrayList;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
