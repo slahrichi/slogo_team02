@@ -3,6 +3,7 @@ package slogo.Controller;
 import java.util.ArrayList;
 import java.util.List;
 import slogo.Model.Command;
+import slogo.Model.ModelExceptions;
 import slogo.Model.Turtle;
 
 public class TurtleManager {
@@ -12,11 +13,11 @@ public class TurtleManager {
   Turtle currentTurtle;
   int commandIndex;
   InputParser inputParser;
-  public TurtleManager(){
-    //Turtle turtleOne = new Turtle(0, 0, 0);
-    //currentTurtle = turtleOne;
+  public TurtleManager(InputParser inputParser){
+    Turtle turtleOne = new Turtle(0, 0, 0);
+    currentTurtle = turtleOne;
     commands = new ArrayList<>();
-    inputParser = new InputParser();
+    this.inputParser = inputParser;
   }
 
 //  public void setCurrentTurtle(Turtle currentTurtle) {
@@ -28,10 +29,10 @@ public class TurtleManager {
   }
 
   public void setCommands(){
-    //commands.addAll(inputParser.getCommands());
+    commands.addAll(inputParser.getCommands());
   }
 
-  public void step(){
+  public void step() throws ModelExceptions {
     if (commandIndex < commands.size()){
       commands.get(commandIndex).execute();
       commandIndex++;
