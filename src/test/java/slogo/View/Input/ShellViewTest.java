@@ -16,4 +16,5 @@ class ShellViewTest {
   private int currentCommandIndex = -1;
 
 
+
 }

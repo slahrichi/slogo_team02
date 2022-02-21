@@ -5,6 +5,9 @@ import javafx.scene.paint.Paint;
 import slogo.Controller.Command;
 
 
+//The controller class sets teh pen up or down and executes commands on the turtle iteself.
+//The turtle and the pen need to be joint.
+
 /**
  * @author Haris Adnan
  */
@@ -42,19 +45,19 @@ public class Pen {
   public int getPenSize() {
     return this.myPenSize;
   }
-  protected void setPenSize(int writingSize) {
+  public void setPenSize(int writingSize) {
     this.myPenSize = writingSize;
   }
 
 
-  private void draw(Command givenCommand){
-    setPenUpOrDown(false);
-    //move the pen so that it draws a line
-
-    setPenUpOrDown(true);
-
-
-  }
+//  private void draw(Command givenCommand){
+//    setPenUpOrDown(false);
+//    //move the pen so that it draws a line
+//
+//    setPenUpOrDown(true);
+//
+//
+//  }
 
 
 
