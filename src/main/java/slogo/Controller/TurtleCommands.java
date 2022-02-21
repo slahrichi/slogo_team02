@@ -23,15 +23,15 @@ public class TurtleCommands extends Command {
 
   private void moveForward(int value){
     double angle = commandTurtle.getAngle();
-    double newXpos = commandTurtle.getTurtleX() + value * Math.cos(angle);
-    double newYpos = commandTurtle.getTurtleY() + value * Math.sin(angle);
+    double newXpos = commandTurtle.getTurtleX() + value * Math.cos(Math.toRadians(angle));
+    double newYpos = commandTurtle.getTurtleY() + value * Math.sin(Math.toRadians(angle));
     commandTurtle.changeTurtleLocation(newXpos, newYpos);
   }
 
   private void moveBackwards(int value){
     double angle = commandTurtle.getAngle();
-    double newXpos = commandTurtle.getTurtleX() - value * Math.cos(angle);
-    double newYpos = commandTurtle.getTurtleY() - value * Math.sin(angle);
+    double newXpos = commandTurtle.getTurtleX() - value * Math.cos(Math.toRadians(angle));
+    double newYpos = commandTurtle.getTurtleY() - value * Math.sin(Math.toRadians(angle));
     commandTurtle.changeTurtleLocation(newXpos, newYpos);
   }
 
@@ -40,7 +40,7 @@ public class TurtleCommands extends Command {
   }
 
   private void rotateLeft(int value){
-    commandTurtle.setAngle((int) commandTurtle.getAngle() + value);
+    commandTurtle.setAngle((int) commandTurtle.getAngle() - value);
   }
 
 }
