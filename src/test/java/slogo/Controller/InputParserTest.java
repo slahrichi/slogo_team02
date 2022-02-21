@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.regex.Pattern;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -57,6 +58,7 @@ class InputParserTest {
 
   @Test
   void match() {
+    assertEquals(myParser.match("", Pattern.compile("-?[0-9]+\\.?[0-9]*\n")), false);
   }
 
   @Test
