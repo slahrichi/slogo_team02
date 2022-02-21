@@ -12,11 +12,11 @@ public class TurtleManager {
   Turtle currentTurtle;
   int commandIndex;
   InputParser inputParser;
-  public TurtleManager(){
+  public TurtleManager(InputParser inputParser){
     //Turtle turtleOne = new Turtle(0, 0, 0);
     //currentTurtle = turtleOne;
     commands = new ArrayList<>();
-    inputParser = new InputParser();
+    this.inputParser = inputParser;
   }
 
 //  public void setCurrentTurtle(Turtle currentTurtle) {

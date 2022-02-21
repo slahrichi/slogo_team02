@@ -16,14 +16,16 @@ public class EditorView {
     editorTitle = new Label("Script Editor");
     editorArea = new TextArea();
     sidePanel.getChildren().addAll(editorTitle, editorArea);
+    setUpScript();
 
   }
 
   private void setUpScript() {
 
-    editorArea.setId("editorArea");
     editorArea.setPrefColumnCount(editorColumnSize);
     editorArea.setPrefRowCount(editorRowSize);
+    editorArea.setId("editorArea");
+
 
   }
 
@@ -41,6 +43,10 @@ public class EditorView {
     return editorArea.getText();
 
 
+  }
+
+  public TextArea getTextArea(){
+    return editorArea;
   }
 
 

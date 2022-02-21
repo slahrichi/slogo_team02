@@ -116,6 +116,11 @@ public class TurtleGUI implements ViewAPI {
     Button loadFile = makeButton("LoadFile", event -> loadFilePressed(), myResources);
     Button saveFile = makeButton("SaveFile", event -> saveFilePressed(), myResources);
 
+    playButton.setId("playButton");
+    clearHistory.setId("clearHistory");
+    loadFile.setId("loadFile");
+    saveFile.setId("saveFile");
+
     configBox.getChildren().addAll(playButton, clearHistory, loadFile, saveFile);
     return configBox;
 
@@ -204,30 +209,35 @@ public class TurtleGUI implements ViewAPI {
   @Override
   public void sendFileContents(String fileContent) {
 
+    editorView.getTextArea().appendText("hello.");
+
   }
 
   /**
    * All functions below are meant to be used in the CONTROLLER class, the CONTROLLER class will
    * handle the interconnections between View and the Functionality
+   *
+   * Currently being used for testing
    */
 
-  private static void clearHistoryPressed() {
+  private void clearHistoryPressed() {
 
-    System.out.println("Clear History works.");
-
-
-  }
-
-  private static void loadFilePressed() {
-
-    System.out.println("Load file works.");
+    editorView.getTextArea().appendText("hello.");
 
 
   }
 
-  private static void saveFilePressed() {
+  private void loadFilePressed() {
 
-    System.out.println("Save File works.");
+
+    editorView.getTextArea().appendText("hello.");
+
+  }
+
+  private void saveFilePressed() {
+
+
+    editorView.getTextArea().appendText("hello.");
 
   }
 

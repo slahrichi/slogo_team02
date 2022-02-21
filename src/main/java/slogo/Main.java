@@ -22,7 +22,7 @@ public class Main extends Application {
   public static final String TITLE = "Slogo Application";
   public static final String LANGUAGE = "English";
   public static final Dimension DEFAULT_SIZE = new Dimension(1000, 800);
-  private static final String LANGUAGE_RESOURCE_PATH = "/main/resources/slogo.languages/";
+  private static final String LANGUAGE_RESOURCE_PATH = "slogo.languages.";
   private static final String EXAMPLE_PROGRAMS_PATH = "/examples";
   public static final String INITIAL_SIMULATION = "data/testSimulations/spreadingFireEDGE4.xml";
 
