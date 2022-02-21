@@ -36,11 +36,11 @@ public class TurtleCommands extends Command {
   }
 
   private void rotateRight(int value){
-    commandTurtle.setAngle((int) commandTurtle.getAngle() + value);
+    commandTurtle.setAngle(commandTurtle.getAngle() + value);
   }
 
   private void rotateLeft(int value){
-    commandTurtle.setAngle((int) commandTurtle.getAngle() - value);
+    commandTurtle.setAngle(commandTurtle.getAngle() - value);
   }
 
 }
