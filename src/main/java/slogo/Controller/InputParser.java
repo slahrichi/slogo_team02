@@ -21,8 +21,9 @@ public class InputParser {
   public static final Character HASHTAG = '#';
   public static final String NO_MATCH = "NO MATCH";
   public static final String SYNTAX = "Syntax";
-  private static final String RESOURCES_PACKAGE = InputParser.class.getPackageName() + ".languages.";
+  private static final String RESOURCES_PACKAGE = "slogo.languages.";
   private List<Entry<String, Pattern>> mySymbols;
+
 
   public InputParser() {
     reset();
