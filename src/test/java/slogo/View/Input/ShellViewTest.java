@@ -18,6 +18,5 @@ class ShellViewTest {
 
     TurtleGUI myGUI = new TurtleGUI(stage, "English");
 
-
   }
 }

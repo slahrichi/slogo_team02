@@ -1,8 +1,4 @@
-package slogo.Controller.commands;
-
-import slogo.Controller.Command;
-import slogo.Model.Pen;
-import slogo.Model.Turtle;
+package slogo.Model.commands;
 
 //public class PenCommand extends Command {
 //  private Pen commandPen;
