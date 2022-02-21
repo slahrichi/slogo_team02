@@ -59,6 +59,7 @@ class InputParserTest {
   @Test
   void match() {
     assertEquals(myParser.match("", Pattern.compile("-?[0-9]+\\.?[0-9]*\n")), false);
+
   }
 
   @Test
@@ -67,7 +68,10 @@ class InputParserTest {
   }
 
   @Test
-  void readFile() {
+  void readFile() throws IOException {
+    assertEquals(myParser.readFile("data/examples/simple/forward.slogo"),
+        "# the most basic logo command possible\n"
+            + "fd 50\n");
   }
 
   @Test
