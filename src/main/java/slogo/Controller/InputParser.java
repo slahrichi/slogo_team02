@@ -11,6 +11,7 @@ import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.regex.Pattern;
+import java.lang.reflect.*;
 
 /**
  * this class parses the input received from the user through typing or from an uploaded file
@@ -20,8 +21,9 @@ public class InputParser {
   public static final Character HASHTAG = '#';
   public static final String NO_MATCH = "NO MATCH";
   public static final String SYNTAX = "Syntax";
-  private static final String RESOURCES_PACKAGE = InputParser.class.getPackageName() + ".languages.";
+  private static final String RESOURCES_PACKAGE = "slogo.languages.";
   private List<Entry<String, Pattern>> mySymbols;
+
 
   public InputParser() {
     reset();
@@ -37,6 +39,15 @@ public class InputParser {
       }
       while (nextLine.hasNext()) {
         String token = nextLine.next();
+        // use reflection to do this too
+        //if (getSymbol(token) == "UserCommand"){
+          // add to command stack
+        //  int expectedParameters
+          //reflection
+//        }
+//        else if (getSymbol(token) == "Constant"){
+//          // add to constant stack
+//        }
         System.out.printf("%s : %s%n", token, getSymbol(token));
       }
       nextLine.close();

@@ -6,37 +6,42 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import slogo.Model.Turtle;
+import slogo.View.Input.EditorView;
+import slogo.View.Input.ShellView;
 
 // class for creating the elements
 
 public class TurtleGUI implements ViewAPI {
 
-  public static final String DEFAULT_RESOURCE_PACKAGE = "/";
-  public static final String LANGUAGE_PACKAGE = "slogo.languages/";
+  private static final String DEFAULT_RESOURCE_PACKAGE = "/";
+  private static final String LANGUAGE_PACKAGE = "slogo.Controller.languages/";
+
   private String STYLESHEET;
 
 
   private ResourceBundle myResources;
   private BorderPane myRoot;
-  private ShellView shellNode;
-  private Canvas turtleCanvas;
+  private ShellView shellView;
   private EditorView editorView;
+  private CanvasView turtleCanvas;
   private Stage myStage;
+  private ImageView titleImage;
 
 
   public TurtleGUI(Stage stage, String language){
@@ -46,6 +51,7 @@ public class TurtleGUI implements ViewAPI {
     myRoot = new BorderPane();
     myRoot.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, new CornerRadii(0), Insets.EMPTY)));
     STYLESHEET = "stylesheet.css";
+    titleImage = new ImageView();
     displayApp();
 
 
@@ -72,9 +78,12 @@ public class TurtleGUI implements ViewAPI {
   private Node makeTitle(){
 
     HBox TitleBox = new HBox();
+    titleImage.setImage(new Image(getClass().getResource("/turtlePictures/turtleTitleImage.png").toString(), true));
+    titleImage.setFitHeight(100);
+    titleImage.setFitWidth(100);
     Label titleText = new Label("Team 9 SLogo Application");
     titleText.setId("titleText");
-    TitleBox.getChildren().add(titleText);
+    TitleBox.getChildren().addAll(titleImage, titleText);
     TitleBox.setId("titleBox");
 
     return TitleBox;
@@ -112,7 +121,7 @@ public class TurtleGUI implements ViewAPI {
 
     VBox sidePanel = new VBox();
     sidePanel.setId("inputPanel");
-    shellNode = new ShellView(sidePanel);
+    shellView = new ShellView(sidePanel);
     editorView = new EditorView(sidePanel);
     sidePanel.prefWidthProperty().bind(myStage.widthProperty().multiply(0.2));
 
@@ -120,20 +129,16 @@ public class TurtleGUI implements ViewAPI {
 
   }
 
-  private HBox createTurtleCanvas(){
+  private StackPane createTurtleCanvas(){
 
     // NEED TO CREATE ITS OWN CLASS FOR THIS - TESTING THINGS AND UI SET UP RIGHT NOW
 
-    HBox canvasBox = new HBox();
-    canvasBox.setId("canvasBox");
-    turtleCanvas = new Canvas(800, 800);
-    GraphicsContext gc = turtleCanvas.getGraphicsContext2D();
-    gc.setFill(Color.WHITE);
-    gc.fillRect(0, 0, 800, 800);
-    canvasBox.getChildren().add(turtleCanvas);
-    canvasBox.prefWidthProperty().bind(myStage.widthProperty().multiply(0.6));
+    StackPane canvasPane = new StackPane();
+    turtleCanvas = new CanvasView(canvasPane);
+    canvasPane.setId("canvasBox");
+    canvasPane.prefWidthProperty().bind(myStage.widthProperty().multiply(0.6));
 
-    return canvasBox;
+    return canvasPane;
 
   }
 
@@ -146,6 +151,7 @@ public class TurtleGUI implements ViewAPI {
     VBox infoPanel = new VBox();
     infoPanel.setId("infoPanel");
     TitledPane variablePane = new TitledPane();
+    variablePane.setExpanded(false);
     variablePane.setText("Variables");
     GridPane gridPane = new GridPane();
     gridPane.setPadding(new Insets(10));
