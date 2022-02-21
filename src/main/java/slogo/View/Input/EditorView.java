@@ -11,7 +11,7 @@ public class EditorView {
   private final int editorColumnSize = 15;
   private final int editorRowSize = 25;
 
-  public EditorView(VBox sidePanel){
+  public EditorView(VBox sidePanel) {
 
     editorTitle = new Label("Script Editor");
     editorArea = new TextArea();
@@ -19,7 +19,7 @@ public class EditorView {
 
   }
 
-  private void setUpScript(){
+  private void setUpScript() {
 
     editorArea.setId("editorArea");
     editorArea.setPrefColumnCount(editorColumnSize);
@@ -28,23 +28,20 @@ public class EditorView {
   }
 
   // takes in content and displays it on the script editor
-  private void addContents(String fileContents){
+  private void addContents(String fileContents) {
 
     editorArea.appendText(fileContents);
 
   }
 
 
-
   // takes the text and return it as a string to be parsed
-  public String getContents(){
+  public String getContents() {
 
     return editorArea.getText();
 
 
   }
-
-
 
 
 }

@@ -1,8 +1,6 @@
 package slogo.Model;
 
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import slogo.Controller.Command;
 
 
 //The controller class sets teh pen up or down and executes commands on the turtle iteself.
