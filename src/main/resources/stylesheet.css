@@ -1,11 +1,11 @@
 .label{
   -fx-font-family: "Segoe UI Semibold";
-  -fx-font-size: 15pt;
+  -fx-font-size: 14pt;
 }
 
 #titleText{
   -fx-padding: 10;
-  -fx-font-size: 25pt;
+  -fx-font-size: 24pt;
 }
 #titleBox{
   -fx-padding: 10;
