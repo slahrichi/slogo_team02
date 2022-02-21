@@ -1,4 +1,4 @@
-package slogo.View;
+package slogo.View.Input;
 
 
 import java.security.Key;
@@ -84,6 +84,7 @@ public class ShellView {
     commandHistory.add(command);
     currentCommandIndex = commandHistory.size() - 1;
     shellArea.appendText(headCode);
+    System.out.println(commandHistory);
     // give this string to the parser code here
 
   }
@@ -96,7 +97,6 @@ public class ShellView {
       shellArea.appendText(commandHistory.get(currentCommandIndex));
       currentCommandIndex--;
     }
-    shellArea.positionCaret(shellArea.getText().length() - 1);
 
   }
 
@@ -106,7 +106,6 @@ public class ShellView {
       currentCommandIndex++;
       shellArea.appendText(commandHistory.get(currentCommandIndex));
     }
-    shellArea.positionCaret(shellArea.getText().length() - 1);
 
 
   }
