@@ -2,49 +2,97 @@ package slogo.View;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.awt.Dimension;
+import java.awt.event.KeyEvent;
+import javafx.scene.Scene;
+import javafx.scene.control.TextArea;
+import javafx.scene.input.KeyCode;
+import javafx.stage.Stage;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import util.DukeApplicationTest;
 
-class TurtleGUITest {
+class TurtleGUITest extends DukeApplicationTest {
+
+  public static final String TITLE = "Slogo Application";
+  public static final String LANGUAGE = "English";
+  public static final Dimension DEFAULT_SIZE = new Dimension(1000, 800);
+  private static final String LANGUAGE_RESOURCE_PATH = "slogo.languages.";
+  private static final String EXAMPLE_PROGRAMS_PATH = "/examples";
+  private static final String textTest = "hello.";
+
+  private TextArea myShellArea;
+  private TextArea myScriptEditor;
+
+  @Override
+  public void start(Stage stage){
+
+    TurtleGUI turtleSim = new TurtleGUI(stage, LANGUAGE);
+    Scene scene = turtleSim.makeScene(DEFAULT_SIZE.width, DEFAULT_SIZE.height);
+
+    // give the window a title
+    stage.setTitle(TITLE);
+    // add our user interface components to Frame and show it
+    stage.setScene(scene);
+    stage.setFullScreen(true);
+    stage.show();
+
+    myShellArea = lookup("#textArea").query();
+    myScriptEditor = lookup("#editorArea").query();
+
+  }
 
 
   @Test
   void testShellInput(){
 
+    writeTo(myShellArea, textTest);
+    assertEquals(myShellArea.getText(), textTest);
 
 
   }
 
   @Test
-  void makeButton() {
+  void testTextEditor() {
+
+    writeTo(myScriptEditor, textTest);
+    assertEquals(myScriptEditor.getText(), textTest);
 
   }
 
   @Test
-  void updatePosition() {
+  void testSave(){
+
+    clickOn(lookup("#saveFile").query());
+    assertEquals(myScriptEditor.getText(), textTest);
+
+
+  }
+  @Test
+  void testLoad(){
+
+    clickOn(lookup("#loadFile").query());
+    assertEquals(myScriptEditor.getText(), textTest);
+
+  }
+  @Test
+  void testClear(){
+
+    clickOn(lookup("#clearHistory").query());
+    assertEquals(myScriptEditor.getText(), textTest);
+
+
+  }
+  @Test
+  void testRun(){
+
+    clickOn(lookup("#playButton").query());
+    assertEquals(myScriptEditor.getText(), textTest);
+
+
   }
 
-  @Test
-  void clearConsole() {
-  }
 
-  @Test
-  void clearDisplay() {
-  }
 
-  @Test
-  void clearHistory() {
-  }
-
-  @Test
-  void changeBackgroundColor() {
-  }
-
-  @Test
-  void displayException() {
-  }
-
-  @Test
-  void sendFileContents() {
-  }
 
 }

@@ -120,6 +120,7 @@ public class ShellView {
     shellArea.setText(text.substring(0, text.lastIndexOf(getCommand())));
     shellArea.positionCaret(shellArea.getText().length());
   }
+  
 
 
 }

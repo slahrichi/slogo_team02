@@ -18,10 +18,6 @@ class MainTest {
         m = new Main();
     }
 
-
-
-
-
     @Test
     void testVersionIsReady () {
         // how close do real valued numbers need to be to count as the same
