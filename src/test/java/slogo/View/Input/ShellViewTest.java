@@ -2,18 +2,22 @@ package slogo.View.Input;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.junit.jupiter.api.BeforeEach;
+import slogo.View.TurtleGUI;
 
 class ShellViewTest {
 
+
   private ShellView myShell;
-  private TextArea shellArea;
-  private Label shellTitle;
-  private ArrayList<String> commandHistory;
-  private int currentCommandIndex = -1;
+
+  @BeforeEach
+  void setUp(Stage stage) {
+
+    TurtleGUI myGUI = new TurtleGUI(stage, "English");
 
 
+  }
 }
