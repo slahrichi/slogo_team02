@@ -1,8 +1,6 @@
 package slogo.Model;
 import java.awt.Dimension;
 import java.util.List;
-import javafx.scene.image.Image;
-import slogo.Controller.Command;
 import slogo.Main;
 
 /**
