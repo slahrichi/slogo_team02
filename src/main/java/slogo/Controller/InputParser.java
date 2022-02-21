@@ -5,7 +5,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map.Entry;
@@ -14,7 +13,6 @@ import java.util.Scanner;
 import java.util.Stack;
 import java.util.regex.Pattern;
 import java.lang.reflect.*;
-import slogo.Model.commands.ForwardCommand;
 
 /**
  * this class parses the input received from the user through typing or from an uploaded file

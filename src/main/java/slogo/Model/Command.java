@@ -19,6 +19,6 @@ public abstract class Command {
     return turtleManager;
   }
 
-  public abstract double execute();
+  public abstract double execute() throws ModelExceptions;
 
 }

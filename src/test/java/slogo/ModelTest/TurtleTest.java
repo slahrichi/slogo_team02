@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import slogo.Model.Command;
+import slogo.Model.ModelExceptions;
 import slogo.Model.Turtle;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,7 +15,7 @@ public class TurtleTest {
   //List<Command> ListOfCommands = new ArrayList<Command>();
 
   @Test
-  void changeTurtleLocationTestGoodInput(){
+  void changeTurtleLocationTestGoodInput() throws ModelExceptions {
     Turtle testTurtle = new Turtle(100, 100, 0.0);
     double newAngle = 0;
     double changedXPos = 50;
