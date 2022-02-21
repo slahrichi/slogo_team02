@@ -1,20 +1,21 @@
 package slogo.Controller;
 
 import slogo.Model.Turtle;
-import slogo.Model.Pen;
 
-public class TurtleCommand extends Command {
+public class TurtleCommands extends Command {
 
   private Turtle commandTurtle;
-  public TurtleCommand(String command, int value) {
-    super(command, value);
+  private TurtleHelper turtleHelper;
+  private OverarchingController controller = new OverarchingController();
+  public TurtleCommands() {
+    turtleHelper = controller.getTurtleHelper();
+    commandTurtle = turtleHelper.getCurrentTurtle();
   }
 
-  @Override
-  public void createCommand(String command, int value, Turtle turtle) {
-      commandTurtle = turtle;
-
-  }
+//  @Override
+//  public void createCommand(String command, int value) {
+//    return;
+//  }
 
   private void moveCommand(String command, int value){
 
