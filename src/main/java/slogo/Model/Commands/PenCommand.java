@@ -1,4 +1,4 @@
-package slogo.Model.commands;
+package slogo.Model.Commands;
 
 //public class PenCommand extends Command {
 //  private Pen commandPen;

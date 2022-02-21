@@ -43,7 +43,10 @@ public class Turtle {
   public void turn(double angle){
     myAngle += angle;
   }
-  public void changeTurtleLocation(double newXPos, double newYPos){
+  public void changeTurtleLocation(double newXPos, double newYPos) throws ModelExceptions {
+    if(newXPos > BOUNDS.width || newYPos > BOUNDS.width){
+      throw new ModelExceptions("Error with bounds");
+    }
     theCanvas.createLine(myPen,myXPos, myYPos, newXPos, newYPos);
     myXPos = newXPos;
     myYPos = newYPos;
