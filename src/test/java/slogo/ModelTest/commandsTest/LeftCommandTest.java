@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import slogo.Controller.InputParser;
 import slogo.Controller.TurtleManager;
 import slogo.Model.Command;
+import slogo.Model.ModelExceptions;
 import slogo.Model.commands.*;
 
 class LeftCommandTest extends CommandTest {
@@ -16,7 +17,7 @@ class LeftCommandTest extends CommandTest {
 
   @Override
   @Test
-  void testExecute() {
+  void testExecute() throws ModelExceptions {
     Command leftCommand = new LeftCommand(input, manager);
     double initialAngle = manager.getCurrentTurtle().getAngle();
     leftCommand.execute();

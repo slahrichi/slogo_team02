@@ -10,5 +10,6 @@ open module slogo_app {
     // allow other classes to access listed packages in your project
     exports slogo;
     exports slogo.Model;
+    exports slogo.Model.commands;
     
 }
