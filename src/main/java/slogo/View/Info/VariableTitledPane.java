@@ -6,4 +6,6 @@ import slogo.View.Info.SideTitledPane;
 
 public class VariableTitledPane extends SideTitledPane {
 
+
+
 }

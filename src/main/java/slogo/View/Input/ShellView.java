@@ -16,12 +16,12 @@ public class ShellView {
   private ArrayList<String> commandHistory;
   private int currentCommandIndex = -1;
 
-  private final String headCode = "slogo_team02 %";
+  private final String headCode = "slogo_team02 % ";
   private final int shellColumnSize = 15;
   private final int shellRowSize = 10;
 
 
-  public ShellView(VBox sidePanel){
+  public ShellView(VBox sidePanel) {
 
     shellTitle = new Label("Shell");
     shellArea = new TextArea();
@@ -32,7 +32,7 @@ public class ShellView {
 
   }
 
-  private void setUpShell(){
+  private void setUpShell() {
 
     shellArea.setPrefColumnCount(shellColumnSize);
     shellArea.setPrefRowCount(shellRowSize);
@@ -55,13 +55,12 @@ public class ShellView {
       enterKeyPressed();
 
     } else if (e.getCode() == KeyCode.UP) {
-      e.consume();
       upKeyPressed();
+      e.consume();
 
     } else if (e.getCode() == KeyCode.DOWN) {
-      e.consume();
       downKeyPressed();
-
+      e.consume();
     }
 
   }
@@ -70,17 +69,17 @@ public class ShellView {
     if (e.getCode() == KeyCode.BACK_SPACE || e.getCode() == KeyCode.LEFT) {
       // checks if backspace used to prevent it from deleting header
       if (shellArea.getCaretPosition()
-          == shellArea.getText().lastIndexOf(headCode) + headCode.length() || shellArea.getSelectedText().length() != 0) {
+          == shellArea.getText().lastIndexOf(headCode) + headCode.length()
+          || shellArea.getSelectedText().length() != 0) {
         e.consume();
       }
     }
   }
 
 
-  private void enterKeyPressed(){
+  private void enterKeyPressed() {
     String command = getCommand();
-    System.out.print(command);
-    commandHistory.add(command);
+    commandHistory.add(command.strip());
     currentCommandIndex = commandHistory.size() - 1;
     shellArea.appendText(headCode);
     System.out.println(commandHistory);
@@ -88,10 +87,10 @@ public class ShellView {
 
   }
 
-  private void upKeyPressed(){
+  private void upKeyPressed() {
 
     // clears the current command and replaces it with the one in the history if there is one
-    if(currentCommandIndex >= 0){
+    if (currentCommandIndex >= 0) {
       clearLine();
       shellArea.appendText(commandHistory.get(currentCommandIndex));
       currentCommandIndex--;
@@ -99,8 +98,8 @@ public class ShellView {
 
   }
 
-  private void downKeyPressed(){
-    if(currentCommandIndex < commandHistory.size() - 1){
+  private void downKeyPressed() {
+    if (currentCommandIndex < commandHistory.size() - 1) {
       clearLine();
       currentCommandIndex++;
       shellArea.appendText(commandHistory.get(currentCommandIndex));
@@ -109,17 +108,19 @@ public class ShellView {
 
   }
 
-  private String getCommand(){
+  private String getCommand() {
     int caretPosition = shellArea.getText().lastIndexOf(headCode);
-    String command = shellArea.getText(caretPosition + headCode.length(), shellArea.getText().length());
+    String command = shellArea.getText(caretPosition + headCode.length(),
+        shellArea.getText().length());
     return command;
   }
 
-  private void clearLine(){
+  private void clearLine() {
     String text = shellArea.getText();
     shellArea.setText(text.substring(0, text.lastIndexOf(getCommand())));
     shellArea.positionCaret(shellArea.getText().length());
   }
+  
 
 
 }

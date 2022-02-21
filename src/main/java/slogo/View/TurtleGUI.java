@@ -43,12 +43,13 @@ public class TurtleGUI implements ViewAPI {
   private ImageView titleImage;
 
 
-  public TurtleGUI(Stage stage, String language){
+  public TurtleGUI(Stage stage, String language) {
 
     myStage = stage;
     myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + LANGUAGE_PACKAGE + language);
     myRoot = new BorderPane();
-    myRoot.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, new CornerRadii(0), Insets.EMPTY)));
+    myRoot.setBackground(
+        new Background(new BackgroundFill(Color.LIGHTGRAY, new CornerRadii(0), Insets.EMPTY)));
     STYLESHEET = "stylesheet.css";
     titleImage = new ImageView();
     displayApp();
@@ -56,16 +57,17 @@ public class TurtleGUI implements ViewAPI {
 
   }
 
-  public Scene makeScene(int width, int height){
+  public Scene makeScene(int width, int height) {
 
     Scene scene = new Scene(myRoot, width, height);
-    scene.getStylesheets().add(getClass().getResource(DEFAULT_RESOURCE_PACKAGE + STYLESHEET).toExternalForm());
+    scene.getStylesheets()
+        .add(getClass().getResource(DEFAULT_RESOURCE_PACKAGE + STYLESHEET).toExternalForm());
 
     return scene;
 
   }
 
-  private void displayApp(){
+  private void displayApp() {
     myRoot.setTop(makeTitle());
     myRoot.setLeft(createInputPanel());
     myRoot.setCenter(createTurtleCanvas());
@@ -74,10 +76,11 @@ public class TurtleGUI implements ViewAPI {
 
   }
 
-  private Node makeTitle(){
+  private Node makeTitle() {
 
     HBox TitleBox = new HBox();
-    titleImage.setImage(new Image(getClass().getResource("/turtlePictures/turtleTitleImage.png").toString(), true));
+    titleImage.setImage(
+        new Image(getClass().getResource("/turtlePictures/turtleTitleImage.png").toString(), true));
     titleImage.setFitHeight(100);
     titleImage.setFitWidth(100);
     Label titleText = new Label("Team 9 SLogo Application");
@@ -90,7 +93,8 @@ public class TurtleGUI implements ViewAPI {
   }
 
   //create buttons with their own names and actions
-  public static Button makeButton(String labelName, EventHandler<ActionEvent> handler, ResourceBundle resources){
+  public static Button makeButton(String labelName, EventHandler<ActionEvent> handler,
+      ResourceBundle resources) {
 
     Button buttonCreated = new Button();
     String buttonLabel = resources.getString(labelName);
@@ -106,10 +110,16 @@ public class TurtleGUI implements ViewAPI {
 
     HBox configBox = new HBox();
     configBox.setId("configButtonBox");
-    Button playButton = makeButton("PlayButton", event -> sendFileContents(editorView.getContents()), myResources);
+    Button playButton = makeButton("PlayButton",
+        event -> sendFileContents(editorView.getContents()), myResources);
     Button clearHistory = makeButton("ClearHistory", event -> clearHistoryPressed(), myResources);
     Button loadFile = makeButton("LoadFile", event -> loadFilePressed(), myResources);
     Button saveFile = makeButton("SaveFile", event -> saveFilePressed(), myResources);
+
+    playButton.setId("playButton");
+    clearHistory.setId("clearHistory");
+    loadFile.setId("loadFile");
+    saveFile.setId("saveFile");
 
     configBox.getChildren().addAll(playButton, clearHistory, loadFile, saveFile);
     return configBox;
@@ -128,7 +138,7 @@ public class TurtleGUI implements ViewAPI {
 
   }
 
-  private StackPane createTurtleCanvas(){
+  private StackPane createTurtleCanvas() {
 
     // NEED TO CREATE ITS OWN CLASS FOR THIS - TESTING THINGS AND UI SET UP RIGHT NOW
 
@@ -141,10 +151,9 @@ public class TurtleGUI implements ViewAPI {
 
   }
 
-  private VBox createInformationPanel(){
+  private VBox createInformationPanel() {
 
     // NEED TO CREATE ITS OWN CLASS FOR THIS - TESTING THINGS AND UI SET UP RIGHT NOW
-
 
     // creating multiple titled pane to slide and show different elements
     VBox infoPanel = new VBox();
@@ -200,30 +209,35 @@ public class TurtleGUI implements ViewAPI {
   @Override
   public void sendFileContents(String fileContent) {
 
+    editorView.getTextArea().appendText("hello.");
+
   }
 
   /**
    * All functions below are meant to be used in the CONTROLLER class, the CONTROLLER class will
    * handle the interconnections between View and the Functionality
+   *
+   * Currently being used for testing
    */
 
-  private static void clearHistoryPressed(){
+  private void clearHistoryPressed() {
 
-    System.out.println("Clear History works.");
-
-
-  }
-
-  private static void loadFilePressed(){
-
-    System.out.println("Load file works.");
+    editorView.getTextArea().appendText("hello.");
 
 
   }
 
-  private static void saveFilePressed(){
+  private void loadFilePressed() {
 
-    System.out.println("Save File works.");
+
+    editorView.getTextArea().appendText("hello.");
+
+  }
+
+  private void saveFilePressed() {
+
+
+    editorView.getTextArea().appendText("hello.");
 
   }
 
