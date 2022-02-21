@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 import slogo.Controller.TurtleManager;
+import slogo.Model.ModelExceptions;
 
 abstract class CommandTest {
 
@@ -16,5 +17,5 @@ abstract class CommandTest {
   void testGetManager() {
   }
   
-  void testExecute() {}
+  void testExecute() throws ModelExceptions {}
 }

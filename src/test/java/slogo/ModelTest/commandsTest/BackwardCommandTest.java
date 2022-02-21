@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import slogo.Controller.InputParser;
 import slogo.Controller.TurtleManager;
 import slogo.Model.Command;
+import slogo.Model.ModelExceptions;
 import slogo.Model.commands.*;
 
 class BackwardCommandTest extends CommandTest {
@@ -15,7 +16,7 @@ class BackwardCommandTest extends CommandTest {
 
   @Override
   @Test
-  void testExecute() {
+  void testExecute() throws ModelExceptions {
     Command backwardCommand = new BackwardCommand(input, manager);
     double initialX = manager.getCurrentTurtle().getTurtleX();
     double initialY = manager.getCurrentTurtle().getTurtleY();

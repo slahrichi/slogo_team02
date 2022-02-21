@@ -1,4 +1,4 @@
-package slogo.Model.Commands;
+package slogo.Model.commands;
 
 
 import slogo.Model.Command;
