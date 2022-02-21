@@ -9,9 +9,6 @@ import java.nio.file.Paths;
 import java.util.*;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.ToolBar;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import slogo.View.TurtleGUI;
 
@@ -37,6 +34,7 @@ public class Main extends Application {
         stage.setTitle(TITLE);
         // add our user interface components to Frame and show it
         stage.setScene(scene);
+        stage.setFullScreen(true);
         stage.show();
 
     }
@@ -44,7 +42,7 @@ public class Main extends Application {
 
 
 
-    private static final String LANGUAGE_RESOURCE_PATH = "/slogo/languages/";
+    private static final String LANGUAGE_RESOURCE_PATH = "/main/resources/slogo.Controller.languages/";
     private static final String EXAMPLE_PROGRAMS_PATH = "/examples";
 
     /**
