@@ -23,8 +23,8 @@ public class InputParser {
   public static final String NO_MATCH = "NO MATCH";
   public static final String SYNTAX = "Syntax";
   private static final String RESOURCES_PACKAGE = "slogo.languages.";
-  private List<Entry<String, Pattern>> mySymbols;
-  private List<Entry<String, Pattern>> mySyntaxSymbols;
+  List<Entry<String, Pattern>> mySymbols;
+  List<Entry<String, Pattern>> mySyntaxSymbols;
   private static Stack<Integer> constantStack = new Stack<>();
   private static Stack<String> commandStack = new Stack<>();
   public List<Object> validCommands = new ArrayList<>();
@@ -36,7 +36,8 @@ public class InputParser {
     reset();
   }
 
-  private void parseText(String program)
+  //this has to be private, made public to test
+  public void parseText(String program)
       throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
     Scanner input = new Scanner(program);
 //    Stack<Integer> constantStack = new Stack<>();
@@ -50,7 +51,6 @@ public class InputParser {
       while (nextLine.hasNext()) {
         String token = nextLine.next();
         //later use reflection to do this too
-        System.out.println(token);
         if (getSyntaxSymbol(token) == "UserCommand") {
           // add to command stack
           commandStack.push(getSymbol(token));
@@ -107,6 +107,8 @@ public class InputParser {
       mySyntaxSymbols.add(new SimpleEntry<>(key,
           Pattern.compile(resources.getString(key), Pattern.CASE_INSENSITIVE)));
     }
+
+
   }
   public void setLanguage(String language){
     reset();
@@ -151,7 +153,7 @@ public class InputParser {
     m.addSyntaxPatterns("Syntax");
     // set up the parser, which checks for matches in order given
     //ProgramParser parser = new ProgramParser();
-    m.setLanguage("English");
+    m.setLanguage("French");
     m.parseText(readFile("data/examples/simple/square.slogo"));
     // try against an example program
     //m.parseText(parser, "fd \n 50 \nrt 90 BACK :distance Left :angle");

@@ -14,8 +14,8 @@ public class TurtleManager {
   int commandIndex;
   InputParser inputParser;
   public TurtleManager(InputParser inputParser){
-    //Turtle turtleOne = new Turtle(0, 0, 0);
-    //currentTurtle = turtleOne;
+    Turtle turtleOne = new Turtle(0, 0, 0);
+    currentTurtle = turtleOne;
     commands = new ArrayList<>();
     this.inputParser = inputParser;
   }
@@ -29,7 +29,7 @@ public class TurtleManager {
   }
 
   public void setCommands(){
-    //commands.addAll(inputParser.getCommands());
+    commands.addAll(inputParser.getCommands());
   }
 
   public void step() throws ModelExceptions {
