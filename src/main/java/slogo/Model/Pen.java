@@ -29,14 +29,14 @@ public class Pen {
   public Color getPenColor() {
     return this.penColor;
   }
-  protected void setPenColor(Color color) {
+  public void setPenColor(Color color) {
     this.penColor = color;
   }
 
   public boolean isMyPenUp() {
     return this.myPenUp;
   }
-  protected void setPenUpOrDown(boolean penUp) {
+  public void setPenUpOrDown(boolean penUp) {
     this.myPenUp = penUp;
   }
 
@@ -47,6 +47,11 @@ public class Pen {
     this.myPenSize = writingSize;
   }
 
+//  public void changePenLocation(double newX,double newY){
+//    this.myPenX = newX;
+//    this.myPenY = newY;
+//
+//  }
 
 //  private void draw(Command givenCommand){
 //    setPenUpOrDown(false);
