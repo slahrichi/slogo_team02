@@ -3,9 +3,9 @@ package slogo.Controller.commands;
 import slogo.Controller.Command;
 import slogo.Controller.TurtleManager;
 
-public class RightTurnCommand extends Command {
+public class RightCommand extends Command {
 
-  public RightTurnCommand(double[] values, TurtleManager manager){
+  public RightCommand(double[] values, TurtleManager manager){
     super(values, manager);
   }
 
