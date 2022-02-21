@@ -37,7 +37,7 @@ public class EditorView {
 
 
   // takes the text and return it as a string to be parsed
-  private String getContents(){
+  public String getContents(){
 
     return editorArea.getText();
 
