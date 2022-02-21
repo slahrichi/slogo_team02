@@ -17,12 +17,12 @@ public class Turtle {
   private double myAngle;
   private Pen myPen;
   List<Command> myCommandList;
+  private Canvas theCanvas;
   public static final Dimension BOUNDS= Main.DEFAULT_SIZE;
 
 //Remove Command list
 
   public Turtle(double Xpos, double Ypos, double turtleAngle){
-    //Image turtleImage = new javafx.scene.image.Image(this.getClass().getResourceAsStream(DEFAULT_IMAGE));
     this.myXPos = Xpos;
     this.myYPos = Ypos;
     this.myAngle = turtleAngle;
@@ -43,17 +43,8 @@ public class Turtle {
   public void turn(double angle){
     myAngle += angle;
   }
-  public void moveTurtle(Command givenCommand){
-
-
-    //do movement from Command Class
-//    this.myXPos =
-//    this.myYPos =
-//    Pen.draw(givenCommand);
-
-
-  }
   public void changeTurtleLocation(double newXPos, double newYPos){
+    theCanvas.createLine(myPen,myXPos, myYPos, newXPos, newYPos);
     myXPos = newXPos;
     myYPos = newYPos;
     myAngle = 0.0;
