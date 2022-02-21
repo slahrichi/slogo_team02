@@ -1,4 +1,4 @@
-package slogo.View;
+package slogo.View.Info;
 
 
 // will be super class for the informational titled panes

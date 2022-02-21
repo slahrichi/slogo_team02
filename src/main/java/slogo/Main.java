@@ -9,9 +9,6 @@ import java.nio.file.Paths;
 import java.util.*;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.ToolBar;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import slogo.View.TurtleGUI;
 
@@ -25,6 +22,8 @@ public class Main extends Application {
     public static final String TITLE = "Slogo Application";
     public static final String LANGUAGE = "English";
     public static final Dimension DEFAULT_SIZE = new Dimension(1000, 800);
+    private static final String LANGUAGE_RESOURCE_PATH = "/main/resources/slogo.languages/";
+    private static final String EXAMPLE_PROGRAMS_PATH = "/examples";
     public static final String INITIAL_SIMULATION = "data/testSimulations/spreadingFireEDGE4.xml";
 
     @Override
@@ -37,15 +36,12 @@ public class Main extends Application {
         stage.setTitle(TITLE);
         // add our user interface components to Frame and show it
         stage.setScene(scene);
+        stage.setFullScreen(true);
         stage.show();
 
     }
 
 
-
-
-    private static final String LANGUAGE_RESOURCE_PATH = "/main/resources/slogo.Controller.languages/";
-    private static final String EXAMPLE_PROGRAMS_PATH = "/examples";
 
     /**
      * Get command in a given language.
