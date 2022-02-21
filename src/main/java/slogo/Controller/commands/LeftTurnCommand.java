@@ -6,14 +6,14 @@ import slogo.Controller.TurtleManager;
 
 public class LeftTurnCommand extends Command {
 
-  public LeftTurnCommand(double value, TurtleManager manager){
+  public LeftTurnCommand(double[] value, TurtleManager manager){
     super(value, manager);
   }
 
   @Override
   public double execute(){
-    getManager().getCurrentTurtle().setAngle(getManager().getCurrentTurtle().getAngle() - getParam());
-    return getParam();
+    getManager().getCurrentTurtle().setAngle(getManager().getCurrentTurtle().getAngle() - getParams()[0]);
+    return getParams()[0];
   }
 }
 

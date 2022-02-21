@@ -4,16 +4,16 @@ import slogo.Controller.Command;
 import slogo.Controller.TurtleManager;
 
 public class ForwardCommand extends Command {
-  public ForwardCommand(double value, TurtleManager manager){
-    super(value, manager);
+  public ForwardCommand(double[] values, TurtleManager manager){
+    super(values, manager);
   }
 
   @Override
   public double execute(){
     double angle = getManager().getCurrentTurtle().getAngle();
-    double newXpos = getManager().getCurrentTurtle().getTurtleX() + getParam() * Math.cos(Math.toRadians(angle));
-    double newYpos = getManager().getCurrentTurtle().getTurtleY() + getParam() * Math.sin(Math.toRadians(angle));
+    double newXpos = getManager().getCurrentTurtle().getTurtleX() + getParams()[0] * Math.cos(Math.toRadians(angle));
+    double newYpos = getManager().getCurrentTurtle().getTurtleY() + getParams()[0] * Math.sin(Math.toRadians(angle));
     getManager().getCurrentTurtle().changeTurtleLocation(newXpos, newYpos);
-    return getParam();
+    return getParams()[0];
   }
 }
