@@ -161,6 +161,7 @@ public class TurtleGUI implements ViewAPI {
     TitledPane variablePane = new TitledPane();
     variablePane.setExpanded(false);
     variablePane.setText("Variables");
+    variablePane.setId("variablePane");
     GridPane gridPane = new GridPane();
     gridPane.setPadding(new Insets(10));
     gridPane.setHgap(5);
