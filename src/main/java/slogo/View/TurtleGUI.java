@@ -30,7 +30,7 @@ import slogo.View.Input.ShellView;
 public class TurtleGUI implements ViewAPI {
 
   private static final String DEFAULT_RESOURCE_PACKAGE = "/";
-  private static final String LANGUAGE_PACKAGE = "slogo.Controller.languages/";
+  private static final String LANGUAGE_PACKAGE = "slogo.languages/";
 
   private String STYLESHEET;
 
