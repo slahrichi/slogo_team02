@@ -34,6 +34,7 @@ public class Main extends Application {
         stage.setTitle(TITLE);
         // add our user interface components to Frame and show it
         stage.setScene(scene);
+        stage.setFullScreen(true);
         stage.show();
 
     }

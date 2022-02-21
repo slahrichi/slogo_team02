@@ -3,6 +3,7 @@ package slogo.View;
 
 import java.security.Key;
 import java.util.ArrayList;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -12,6 +13,7 @@ import javafx.scene.layout.VBox;
 public class ShellView {
 
   private TextArea shellArea;
+  private Label shellTitle;
   private ArrayList<String> commandHistory;
   private int currentCommandIndex = -1;
 
@@ -22,8 +24,9 @@ public class ShellView {
 
   public ShellView(VBox sidePanel){
 
+    shellTitle = new Label("Shell");
     shellArea = new TextArea();
-    sidePanel.getChildren().add(shellArea);
+    sidePanel.getChildren().addAll(shellTitle, shellArea);
     setUpShell();
 
     commandHistory = new ArrayList<>();

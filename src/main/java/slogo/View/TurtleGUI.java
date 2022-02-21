@@ -36,7 +36,7 @@ public class TurtleGUI {
   private BorderPane myRoot;
   private ShellView shellNode;
   private Canvas turtleCanvas;
-  private ScriptView scriptNode;
+  private EditorView editorView;
   private Stage myStage;
 
 
@@ -115,7 +115,7 @@ public class TurtleGUI {
     VBox sidePanel = new VBox();
     sidePanel.setId("inputPanel");
     shellNode = new ShellView(sidePanel);
-    scriptNode = new ScriptView(sidePanel);
+    editorView = new EditorView(sidePanel);
     sidePanel.prefWidthProperty().bind(myStage.widthProperty().multiply(0.2));
 
     return sidePanel;
@@ -128,10 +128,10 @@ public class TurtleGUI {
 
     HBox canvasBox = new HBox();
     canvasBox.setId("canvasBox");
-    turtleCanvas = new Canvas(500, 500);
+    turtleCanvas = new Canvas(800, 800);
     GraphicsContext gc = turtleCanvas.getGraphicsContext2D();
     gc.setFill(Color.WHITE);
-    gc.fillRect(0, 0, 500, 500);
+    gc.fillRect(0, 0, 800, 800);
     canvasBox.getChildren().add(turtleCanvas);
     canvasBox.prefWidthProperty().bind(myStage.widthProperty().multiply(0.6));
 

@@ -16,7 +16,10 @@ public interface ViewAPI {
 
   public void changeBackgroundColor();
 
+
   public void displayException(String errorMsg);
+
+  public void sendFileContents(String fileContent);
 
 
 }

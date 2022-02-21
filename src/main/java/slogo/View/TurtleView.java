@@ -52,4 +52,9 @@ public class TurtleView implements ViewAPI {
   public void displayException(String errorMsg) {
 
   }
+
+  @Override
+  public void sendFileContents(String fileContent) {
+
+  }
 }
