@@ -1,4 +1,4 @@
-package slogo.View;
+package slogo.View.Input;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
