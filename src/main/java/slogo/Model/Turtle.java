@@ -36,6 +36,7 @@ public class Turtle {
   public void setAngle(double angle){
     myAngle = angle;
   }
+
   public double getTurtleX(){
     return myXPos;
   }
@@ -46,7 +47,14 @@ public class Turtle {
     myAngle += angle;
   }
   public void moveTurtle(Command givenCommand){
-    myPen.draw(givenCommand);
+
+
+    //do movement from Command Class
+    this.myXPos =
+    this.myYPos =
+    Pen.draw(givenCommand);
+
+
   }
   public void changeTurtleLocation(double newXPos, double newYPos){
     myXPos = newXPos;
