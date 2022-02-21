@@ -1,5 +1,7 @@
-package slogo.Controller;
+package slogo.Model;
 
+
+import slogo.Controller.TurtleManager;
 
 public abstract class Command {
   private TurtleManager turtleManager;
