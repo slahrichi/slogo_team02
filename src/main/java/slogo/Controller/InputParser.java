@@ -14,7 +14,6 @@ import java.util.Scanner;
 import java.util.Stack;
 import java.util.regex.Pattern;
 import java.lang.reflect.*;
-import slogo.Model.commands.ForwardCommand;
 
 /**
  * this class parses the input received from the user through typing or from an uploaded file

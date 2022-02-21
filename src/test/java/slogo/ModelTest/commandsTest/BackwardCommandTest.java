@@ -10,7 +10,8 @@ import slogo.Model.commands.*;
 
 class BackwardCommandTest extends CommandTest {
   private double[] input = {50};
-  private TurtleManager manager = new TurtleManager();
+  private InputParser parser = new InputParser();
+  private TurtleManager manager = new TurtleManager(parser);
 
   @Override
   @Test
