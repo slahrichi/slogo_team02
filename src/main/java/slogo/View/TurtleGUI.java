@@ -34,7 +34,6 @@ public class TurtleGUI implements ViewAPI {
 
   private String STYLESHEET;
 
-
   private ResourceBundle myResources;
   private BorderPane myRoot;
   private ShellView shellView;

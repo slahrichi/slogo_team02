@@ -7,9 +7,16 @@ import org.junit.jupiter.api.Test;
 class TurtleGUITest {
 
 
+  @Test
+  void testShellInput(){
+
+
+
+  }
 
   @Test
   void makeButton() {
+
   }
 
   @Test
