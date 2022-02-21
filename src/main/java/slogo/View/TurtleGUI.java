@@ -1,7 +1,5 @@
 package slogo.View;
 
-import static slogo.View.TurtleView.doTest;
-
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -22,10 +20,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import slogo.Model.Turtle;
 
 // class for creating the elements
 
-public class TurtleGUI {
+public class TurtleGUI implements ViewAPI {
 
   public static final String DEFAULT_RESOURCE_PACKAGE = "/";
   public static final String LANGUAGE_PACKAGE = "slogo.languages/";
@@ -36,7 +35,7 @@ public class TurtleGUI {
   private BorderPane myRoot;
   private ShellView shellNode;
   private Canvas turtleCanvas;
-  private CommandHistoryView commandHistory;
+  private EditorView editorView;
   private Stage myStage;
 
 
@@ -62,7 +61,6 @@ public class TurtleGUI {
   }
 
   private void displayApp(){
-
     myRoot.setTop(makeTitle());
     myRoot.setLeft(createInputPanel());
     myRoot.setCenter(createTurtleCanvas());
@@ -100,10 +98,10 @@ public class TurtleGUI {
 
     HBox configBox = new HBox();
     configBox.setId("configButtonBox");
-    Button playButton = makeButton("PlayButton", event -> doTest(), myResources);
-    Button clearHistory = makeButton("ClearHistory", event -> doTest(), myResources);
-    Button loadFile = makeButton("LoadFile", event -> doTest(), myResources);
-    Button saveFile = makeButton("SaveFile", event -> doTest(), myResources);
+    Button playButton = makeButton("PlayButton", event -> sendFileContents(editorView.getContents()), myResources);
+    Button clearHistory = makeButton("ClearHistory", event -> clearHistoryPressed(), myResources);
+    Button loadFile = makeButton("LoadFile", event -> loadFilePressed(), myResources);
+    Button saveFile = makeButton("SaveFile", event -> saveFilePressed(), myResources);
 
     configBox.getChildren().addAll(playButton, clearHistory, loadFile, saveFile);
     return configBox;
@@ -115,7 +113,7 @@ public class TurtleGUI {
     VBox sidePanel = new VBox();
     sidePanel.setId("inputPanel");
     shellNode = new ShellView(sidePanel);
-    commandHistory = new CommandHistoryView();
+    editorView = new EditorView(sidePanel);
     sidePanel.prefWidthProperty().bind(myStage.widthProperty().multiply(0.2));
 
     return sidePanel;
@@ -128,10 +126,10 @@ public class TurtleGUI {
 
     HBox canvasBox = new HBox();
     canvasBox.setId("canvasBox");
-    turtleCanvas = new Canvas(500, 500);
+    turtleCanvas = new Canvas(800, 800);
     GraphicsContext gc = turtleCanvas.getGraphicsContext2D();
     gc.setFill(Color.WHITE);
-    gc.fillRect(0, 0, 500, 500);
+    gc.fillRect(0, 0, 800, 800);
     canvasBox.getChildren().add(turtleCanvas);
     canvasBox.prefWidthProperty().bind(myStage.widthProperty().multiply(0.6));
 
@@ -153,7 +151,8 @@ public class TurtleGUI {
     gridPane.setPadding(new Insets(10));
     gridPane.setHgap(5);
     gridPane.setVgap(5);
-    gridPane.add(new Label("Street Name"), 0, 1);
+    gridPane.add(new Label("Variable 1 Here and Stats"), 0, 1);
+    gridPane.add(new Label("Variable 2 Here and Stats"), 0, 2);
     variablePane.setContent(gridPane);
     infoPanel.getChildren().add(variablePane);
     infoPanel.prefWidthProperty().bind(myStage.widthProperty().multiply(0.2));
@@ -163,7 +162,64 @@ public class TurtleGUI {
   }
 
 
+  @Override
+  public void updatePosition(Turtle turtle, int xCoord, int yCoord) {
+
+  }
+
+  @Override
+  public void clearConsole() {
+
+  }
+
+  @Override
+  public void clearDisplay() {
+
+  }
+
+  @Override
+  public void clearHistory() {
+
+  }
+
+  @Override
+  public void changeBackgroundColor() {
+
+  }
+
+  @Override
+  public void displayException(String errorMsg) {
+
+  }
+
+  @Override
+  public void sendFileContents(String fileContent) {
+
+  }
+
+  /**
+   * All functions below are meant to be used in the CONTROLLER class, the CONTROLLER class will
+   * handle the interconnections between View and the Functionality
+   */
+
+  private static void clearHistoryPressed(){
+
+    System.out.println("Clear History works.");
 
 
+  }
+
+  private static void loadFilePressed(){
+
+    System.out.println("Load file works.");
+
+
+  }
+
+  private static void saveFilePressed(){
+
+    System.out.println("Save File works.");
+
+  }
 
 }

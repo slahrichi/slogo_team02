@@ -3,7 +3,6 @@ package slogo.ModelTest;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Test;
 import slogo.Controller.Command;
 import slogo.Model.Turtle;
 

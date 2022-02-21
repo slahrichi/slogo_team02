@@ -1,11 +1,11 @@
 .label{
   -fx-font-family: "Segoe UI Semibold";
-  -fx-font-size: 10pt;
+  -fx-font-size: 14pt;
 }
 
 #titleText{
   -fx-padding: 10;
-  -fx-font-size: 25pt;
+  -fx-font-size: 24pt;
 }
 #titleBox{
   -fx-padding: 10;
@@ -27,6 +27,7 @@
 #inputPanel {
   -fx-border-color: BLACK;
   -fx-padding: 10;
+  -fx-spacing: 10;
 }
 
 #infoPanel {
@@ -38,5 +39,18 @@
   -fx-alignment: center;
   -fx-padding: 10;
 
+}
+
+#textArea {
+  -fx-text-fill: GREEN;
+  -fx-highlight-fill: GREEN;
+  -fx-control-inner-background:#000000;
+  -fx-font-family: Consolas;
+  -fx-font-size: 14pt;
+}
+
+#editorArea {
+  -fx-font-size: 14pt;
+  -fx-font-family: Consolas;
 }
 
