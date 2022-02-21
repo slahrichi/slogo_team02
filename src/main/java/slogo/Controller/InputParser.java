@@ -11,6 +11,7 @@ import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.regex.Pattern;
+import java.lang.reflect.*;
 
 /**
  * this class parses the input received from the user through typing or from an uploaded file
@@ -37,6 +38,15 @@ public class InputParser {
       }
       while (nextLine.hasNext()) {
         String token = nextLine.next();
+        // use reflection to do this too
+        //if (getSymbol(token) == "UserCommand"){
+          // add to command stack
+        //  int expectedParameters
+          //reflection
+//        }
+//        else if (getSymbol(token) == "Constant"){
+//          // add to constant stack
+//        }
         System.out.printf("%s : %s%n", token, getSymbol(token));
       }
       nextLine.close();
