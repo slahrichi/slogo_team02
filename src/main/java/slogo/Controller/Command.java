@@ -3,15 +3,15 @@ package slogo.Controller;
 
 public abstract class Command {
   private TurtleManager turtleManager;
-  private double parameter;
+  private double[] parameters;
 
-  public Command(double value, TurtleManager manager){
+  public Command(double[] values, TurtleManager manager){
     turtleManager = manager;
-    parameter = value;
+    parameters = values;
   }
 
-  protected double getParam(){
-    return parameter;
+  protected double[] getParams(){
+    return parameters;
   }
   protected TurtleManager getManager(){
     return turtleManager;

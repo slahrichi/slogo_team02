@@ -31,6 +31,9 @@ public class TurtleManager {
   }
 
   public void step(){
-    commands.get(commandIndex).execute();
+    if (commandIndex < commands.size()){
+      commands.get(commandIndex).execute();
+      commandIndex++;
+    }
   }
 }
