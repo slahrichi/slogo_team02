@@ -12,9 +12,9 @@ public class AnimationHandler {
   Timeline animation;
   TurtleManager manager;
   public AnimationHandler(){
-    manager = new TurtleManager();
-    animation = new Timeline();
-    animation.getKeyFrames().add(new KeyFrame(Duration.seconds(ANIMATION_DELAY), e -> manager.step()));
+//    manager = TurtleManager(this);
+//    animation = new Timeline();
+//    animation.getKeyFrames().add(new KeyFrame(Duration.seconds(ANIMATION_DELAY), e -> manager.step()));
   }
 
   public void pause(){
