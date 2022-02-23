@@ -1,4 +1,4 @@
-package slogo.Controller.ControllerExceptions;
+package slogo.Control.ControllerExceptions;
 
 public class ExceptionClass extends Exception{
 

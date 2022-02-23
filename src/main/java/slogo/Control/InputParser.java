@@ -1,4 +1,4 @@
-package slogo.Controller;
+package slogo.Control;
 
 import java.io.IOException;
 import java.nio.file.Files;

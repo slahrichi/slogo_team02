@@ -1,9 +1,7 @@
 package slogo.View;
 
-import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.util.Duration;
-import slogo.Controller.TurtleManager;
+import slogo.Control.TurtleManager;
 
 public class AnimationHandler {
   public final static double ANIMATION_DELAY = 1;

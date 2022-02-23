@@ -2,10 +2,9 @@ package slogo.ModelTest.commandsTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.assertj.core.api.Assert;
 import org.junit.jupiter.api.Test;
-import slogo.Controller.InputParser;
-import slogo.Controller.TurtleManager;
+import slogo.Control.InputParser;
+import slogo.Control.TurtleManager;
 import slogo.Model.Command;
 import slogo.Model.ModelExceptions;
 import slogo.Model.commands.*;

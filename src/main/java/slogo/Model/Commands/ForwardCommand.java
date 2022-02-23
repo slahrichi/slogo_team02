@@ -1,7 +1,7 @@
 package slogo.Model.commands;
 
 import slogo.Model.Command;
-import slogo.Controller.TurtleManager;
+import slogo.Control.TurtleManager;
 import slogo.Model.ModelExceptions;
 
 public class ForwardCommand extends Command {

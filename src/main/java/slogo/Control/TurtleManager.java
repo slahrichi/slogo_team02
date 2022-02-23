@@ -1,4 +1,4 @@
-package slogo.Controller;
+package slogo.Control;
 
 import java.util.ArrayList;
 import java.util.List;
