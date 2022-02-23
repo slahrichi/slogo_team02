@@ -1,18 +1,24 @@
 package slogo.View;
 
+import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import slogo.Control.TurtleManager;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.util.Duration;
+
 
 public class AnimationHandler {
   public final static double ANIMATION_DELAY = 1;
 
+  private Timeline animation;
 
-  Timeline animation;
-  TurtleManager manager;
   public AnimationHandler(){
-//    manager = TurtleManager(this);
-//    animation = new Timeline();
-//    animation.getKeyFrames().add(new KeyFrame(Duration.seconds(ANIMATION_DELAY), e -> manager.step()));
+    animation = new Timeline();
+    animation.setCycleCount(Timeline.INDEFINITE);
+  }
+
+  public void setupAnimation(EventHandler<ActionEvent> updateStep){
+    animation.getKeyFrames().add(new KeyFrame(Duration.seconds(ANIMATION_DELAY), updateStep));
   }
 
   public void pause(){
