@@ -12,17 +12,16 @@ import slogo.Model.commands.*;
 class ForwardCommandTest extends CommandTest {
 
   private double[] input = {50};
-  private InputParser parser = new InputParser();
-  private TurtleManager manager = new TurtleManager(parser);
+  private TurtleManager manager = new TurtleManager();
 
 
   @Override
   @Test
   void testExecute() throws ModelExceptions {
-    Command forwardCommand = new ForwardCommand(input, manager);
+    Command forwardCommand = new ForwardCommand(input);
     double initialX = manager.getCurrentTurtle().getTurtleX();
     double initialY = manager.getCurrentTurtle().getTurtleY();
-    forwardCommand.execute();
+    forwardCommand.execute(manager.getCurrentTurtle());
     double finalX = manager.getCurrentTurtle().getTurtleX();
     assertEquals(initialX + input[0] * Math.cos(Math.toRadians(manager.getCurrentTurtle().getAngle())), finalX);
     double finalY = manager.getCurrentTurtle().getTurtleY();

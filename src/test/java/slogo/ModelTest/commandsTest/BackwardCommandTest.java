@@ -11,16 +11,15 @@ import slogo.Model.commands.*;
 
 class BackwardCommandTest extends CommandTest {
   private double[] input = {50};
-  private InputParser parser = new InputParser();
-  private TurtleManager manager = new TurtleManager(parser);
+  private TurtleManager manager = new TurtleManager();
 
   @Override
   @Test
   void testExecute() throws ModelExceptions {
-    Command backwardCommand = new BackwardCommand(input, manager);
+    Command backwardCommand = new BackwardCommand(input);
     double initialX = manager.getCurrentTurtle().getTurtleX();
     double initialY = manager.getCurrentTurtle().getTurtleY();
-    backwardCommand.execute();
+    backwardCommand.execute(manager.getCurrentTurtle());
     double finalX = manager.getCurrentTurtle().getTurtleX();
     assertEquals(initialX - input[0] * Math.cos(Math.toRadians(manager.getCurrentTurtle().getAngle())), finalX);
     double finalY = manager.getCurrentTurtle().getTurtleY();

@@ -1,25 +1,20 @@
 package slogo.Model.commands;
 
 
-import slogo.Control.TurtleManager;
 import slogo.Model.ModelExceptions;
+import slogo.Model.Turtle;
 
 public abstract class Command {
-  private TurtleManager turtleManager;
   private double[] parameters;
 
-  public Command(double[] values, TurtleManager manager){
-    turtleManager = manager;
+  public Command(double[] values){
     parameters = values;
   }
 
   protected double[] getParams(){
     return parameters;
   }
-  protected TurtleManager getManager(){
-    return turtleManager;
-  }
 
-  public abstract double execute() throws ModelExceptions;
+  public abstract double execute(Turtle turtle) throws ModelExceptions;
 
 }
