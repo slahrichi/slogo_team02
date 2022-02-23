@@ -1,18 +1,16 @@
 package slogo.Model.commands;
 
-
-import slogo.Model.Command;
-import slogo.Controller.TurtleManager;
+import slogo.Model.Turtle;
 
 public class LeftCommand extends Command {
 
-  public LeftCommand(double[] value, TurtleManager manager){
-    super(value, manager);
+  public LeftCommand(double[] value){
+    super(value);
   }
 
   @Override
-  public double execute(){
-    getManager().getCurrentTurtle().setAngle(getManager().getCurrentTurtle().getAngle() - getParams()[0]);
+  public double execute(Turtle turtle){
+    turtle.setAngle(turtle.getAngle() - getParams()[0]);
     return getParams()[0];
   }
 }

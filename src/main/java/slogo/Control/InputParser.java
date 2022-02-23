@@ -1,4 +1,4 @@
-package slogo.Controller;
+package slogo.Control;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -28,7 +28,6 @@ public class InputParser {
   private static Stack<Integer> constantStack = new Stack<>();
   private static Stack<String> commandStack = new Stack<>();
   public List<Object> validCommands = new ArrayList<>();
-  private TurtleManager manager = new TurtleManager(this);
 
 
 
@@ -82,7 +81,7 @@ public class InputParser {
         Class<?> clazz = Class.forName("slogo.Model.commands."+command+"Command");
         Class<?>[] type = {Array.class, TurtleManager.class};
         Constructor<?> cons = clazz.getConstructor(type);
-        Object[] obj = {args, manager};
+        Object[] obj = {args};
         Object newInstance = cons.newInstance(obj);
         validCommands.add(newInstance);
       }

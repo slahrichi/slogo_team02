@@ -2,28 +2,26 @@ package slogo.ModelTest.commandsTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.assertj.core.api.Assert;
 import org.junit.jupiter.api.Test;
-import slogo.Controller.InputParser;
-import slogo.Controller.TurtleManager;
-import slogo.Model.Command;
+import slogo.Control.InputParser;
+import slogo.Control.TurtleManager;
+import slogo.Model.commands.Command;
 import slogo.Model.ModelExceptions;
 import slogo.Model.commands.*;
 
 class ForwardCommandTest extends CommandTest {
 
   private double[] input = {50};
-  private InputParser parser = new InputParser();
-  private TurtleManager manager = new TurtleManager(parser);
+  private TurtleManager manager = new TurtleManager();
 
 
   @Override
   @Test
   void testExecute() throws ModelExceptions {
-    Command forwardCommand = new ForwardCommand(input, manager);
+    Command forwardCommand = new ForwardCommand(input);
     double initialX = manager.getCurrentTurtle().getTurtleX();
     double initialY = manager.getCurrentTurtle().getTurtleY();
-    forwardCommand.execute();
+    forwardCommand.execute(manager.getCurrentTurtle());
     double finalX = manager.getCurrentTurtle().getTurtleX();
     assertEquals(initialX + input[0] * Math.cos(Math.toRadians(manager.getCurrentTurtle().getAngle())), finalX);
     double finalY = manager.getCurrentTurtle().getTurtleY();

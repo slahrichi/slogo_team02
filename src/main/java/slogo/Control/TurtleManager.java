@@ -1,8 +1,9 @@
-package slogo.Controller;
+package slogo.Control;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
-import slogo.Model.Command;
+import slogo.Model.commands.Command;
 import slogo.Model.ModelExceptions;
 import slogo.Model.Turtle;
 
@@ -12,12 +13,10 @@ public class TurtleManager {
   List<Command> commands;
   Turtle currentTurtle;
   int commandIndex;
-  InputParser inputParser;
-  public TurtleManager(InputParser inputParser){
-    Turtle turtleOne = new Turtle(0, 0, 0);
-    currentTurtle = turtleOne;
+
+  public TurtleManager(){
+    currentTurtle = new Turtle(0, 0, 0);
     commands = new ArrayList<>();
-    this.inputParser = inputParser;
   }
 
 //  public void setCurrentTurtle(Turtle currentTurtle) {
@@ -28,13 +27,13 @@ public class TurtleManager {
     return currentTurtle;
   }
 
-  public void setCommands(){
-    commands.addAll(inputParser.getCommands());
+  public void setCommands(Collection<Command> newCommands){
+    commands.addAll(newCommands);
   }
 
   public void step() throws ModelExceptions {
     if (commandIndex < commands.size()){
-      commands.get(commandIndex).execute();
+      commands.get(commandIndex).execute(currentTurtle);
       commandIndex++;
     }
   }

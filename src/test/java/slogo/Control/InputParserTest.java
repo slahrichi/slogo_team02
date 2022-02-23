@@ -1,4 +1,4 @@
-package slogo.Controller;
+package slogo.Control;
 
 import static org.junit.jupiter.api.Assertions.*;
 

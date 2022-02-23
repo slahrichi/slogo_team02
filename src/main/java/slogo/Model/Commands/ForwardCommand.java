@@ -1,20 +1,19 @@
 package slogo.Model.commands;
 
-import slogo.Model.Command;
-import slogo.Controller.TurtleManager;
 import slogo.Model.ModelExceptions;
+import slogo.Model.Turtle;
 
 public class ForwardCommand extends Command {
-  public ForwardCommand(double[] values, TurtleManager manager){
-    super(values, manager);
+  public ForwardCommand(double[] values){
+    super(values);
   }
 
   @Override
-  public double execute() throws ModelExceptions {
-    double angle = getManager().getCurrentTurtle().getAngle();
-    double newXpos = getManager().getCurrentTurtle().getTurtleX() + getParams()[0] * Math.cos(Math.toRadians(angle));
-    double newYpos = getManager().getCurrentTurtle().getTurtleY() + getParams()[0] * Math.sin(Math.toRadians(angle));
-    getManager().getCurrentTurtle().changeTurtleLocation(newXpos, newYpos);
+  public double execute(Turtle turtle) throws ModelExceptions {
+    double angle = turtle.getAngle();
+    double newXpos = turtle.getTurtleX() + getParams()[0] * Math.cos(Math.toRadians(angle));
+    double newYpos = turtle.getTurtleY() + getParams()[0] * Math.sin(Math.toRadians(angle));
+    turtle.changeTurtleLocation(newXpos, newYpos);
     return getParams()[0];
   }
 }
