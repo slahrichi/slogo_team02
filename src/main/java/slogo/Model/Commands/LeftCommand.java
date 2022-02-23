@@ -1,7 +1,6 @@
 package slogo.Model.commands;
 
 
-import slogo.Model.Command;
 import slogo.Control.TurtleManager;
 
 public class LeftCommand extends Command {

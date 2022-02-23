@@ -3,7 +3,7 @@ package slogo.Control;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import slogo.Model.Command;
+import slogo.Model.commands.Command;
 import slogo.Model.ModelExceptions;
 import slogo.Model.Turtle;
 
@@ -33,7 +33,7 @@ public class TurtleManager {
 
   public void step() throws ModelExceptions {
     if (commandIndex < commands.size()){
-      commands.get(commandIndex).execute();
+      commands.get(commandIndex).execute(currentTurtle);
       commandIndex++;
     }
   }

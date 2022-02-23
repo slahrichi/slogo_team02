@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import slogo.Control.InputParser;
 import slogo.Control.TurtleManager;
-import slogo.Model.Command;
+import slogo.Model.commands.Command;
 import slogo.Model.ModelExceptions;
 import slogo.Model.commands.*;
 

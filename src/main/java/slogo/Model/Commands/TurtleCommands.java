@@ -1,6 +1,6 @@
 //package slogo.Model.commands;
 //
-//import slogo.Model.Command;
+//import slogo.Model.commands.Command;
 //import slogo.Controller.OverarchingController;
 //import slogo.Controller.TurtleManager;
 //import slogo.Model.Turtle;

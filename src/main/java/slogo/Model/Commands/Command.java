@@ -1,7 +1,8 @@
-package slogo.Model;
+package slogo.Model.commands;
 
 
 import slogo.Control.TurtleManager;
+import slogo.Model.ModelExceptions;
 
 public abstract class Command {
   private TurtleManager turtleManager;
