@@ -3,7 +3,7 @@ package slogo.Model.commands;
 import slogo.Model.ModelExceptions;
 import slogo.Model.Turtle;
 
-public class BackwardCommand extends Command {
+public class BackwardCommand extends slogo.Model.commands.Command {
   public BackwardCommand(double[] values){
     super(values);
   }

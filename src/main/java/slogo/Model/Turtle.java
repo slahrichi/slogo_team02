@@ -25,12 +25,10 @@ public class Turtle {
 
 //Remove Command list
 
-  public Turtle(double Xpos, double Ypos, double turtleAngle, double prevXPos, double prevYPos, Pen pen){
+  public Turtle(double Xpos, double Ypos, double turtleAngle, Pen pen){
     this.myXPos = Xpos;
     this.myYPos = Ypos;
     this.myAngle = turtleAngle;
-    this.myPreviousXPos = prevXPos;
-    this.myPreviousYPos = prevYPos;
     this.myPen = pen;
   }
   public double getAngle() {
@@ -46,6 +44,12 @@ public class Turtle {
   public double getTurtleY(){
     return myYPos;
   }
+  public double getTurtlePrevX(){
+    return myPreviousXPos;
+  }
+  public double getTurtlePrevY(){
+    return myPreviousYPos;
+  }
   public void turn(double angle){
     myAngle += angle;
   }
@@ -60,14 +64,8 @@ public class Turtle {
     myYPos = newYPos;
     myAngle = 0.0;
   }
-  public boolean isPenUp() {
-    return myPen.isMyPenUp();
+  public boolean isPenDown() {
+    return myPen.isMyPenDown();
   }
-
-
-
-
-
-
 
 }
