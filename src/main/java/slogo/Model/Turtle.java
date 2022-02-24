@@ -14,7 +14,9 @@ public class Turtle {
   //public double STARTING_TURTLE_ANGLE;
 
   private double myXPos;
+  private double myPreviousXPos;
   private double myYPos;
+  private double myPreviousYPos;
   private double myAngle;
   private Pen myPen;
   List<Command> myCommandList;
@@ -23,10 +25,13 @@ public class Turtle {
 
 //Remove Command list
 
-  public Turtle(double Xpos, double Ypos, double turtleAngle){
+  public Turtle(double Xpos, double Ypos, double turtleAngle, double prevXPos, double prevYPos, Pen pen){
     this.myXPos = Xpos;
     this.myYPos = Ypos;
     this.myAngle = turtleAngle;
+    this.myPreviousXPos = prevXPos;
+    this.myPreviousYPos = prevYPos;
+    this.myPen = pen;
   }
   public double getAngle() {
     return myAngle;
@@ -49,10 +54,16 @@ public class Turtle {
       throw new ModelExceptions("Error with bounds");
     }
     theCanvas.createLine(myPen,myXPos, myYPos, newXPos, newYPos);
+    myPreviousXPos = myXPos;
+    myPreviousYPos = myYPos;
     myXPos = newXPos;
     myYPos = newYPos;
     myAngle = 0.0;
   }
+  public boolean isPenUp() {
+    return myPen.isMyPenUp();
+  }
+
 
 
 
