@@ -79,11 +79,15 @@ public class ShellView {
 
   private void enterKeyPressed() {
     String command = getCommand();
-    commandHistory.add(command.strip());
-    currentCommandIndex = commandHistory.size() - 1;
+    if(!command.equals("")){
+      commandHistory.add(command);
+      currentCommandIndex = commandHistory.size() - 1;
+    }
     shellArea.appendText(headCode);
     System.out.println(commandHistory);
+
     // give this string to the parser code here
+
 
   }
 
@@ -112,7 +116,7 @@ public class ShellView {
     int caretPosition = shellArea.getText().lastIndexOf(headCode);
     String command = shellArea.getText(caretPosition + headCode.length(),
         shellArea.getText().length());
-    return command;
+    return command.strip();
   }
 
   private void clearLine() {

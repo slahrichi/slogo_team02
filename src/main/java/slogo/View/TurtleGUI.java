@@ -21,13 +21,17 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import slogo.Control.Controller;
 import slogo.Model.Turtle;
+import slogo.View.Info.VariableTitledPane;
 import slogo.View.Input.EditorView;
 import slogo.View.Input.ShellView;
 
 // class for creating the elements
 
 public class TurtleGUI implements ViewAPI {
+
+  private Controller turtleController;
 
   private static final String DEFAULT_RESOURCE_PACKAGE = "/";
   private static final String LANGUAGE_PACKAGE = "slogo.languages/";
@@ -45,6 +49,7 @@ public class TurtleGUI implements ViewAPI {
 
   public TurtleGUI(Stage stage, String language) {
 
+    turtleController = new Controller();
     myStage = stage;
     myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + LANGUAGE_PACKAGE + language);
     myRoot = new BorderPane();
@@ -112,7 +117,7 @@ public class TurtleGUI implements ViewAPI {
     configBox.setId("configButtonBox");
     Button playButton = makeButton("PlayButton",
         event -> sendFileContents(editorView.getContents()), myResources);
-    Button clearHistory = makeButton("ClearHistory", event -> clearHistoryPressed(), myResources);
+    Button clearHistory = makeButton("ClearHistory", event -> clearHistory(), myResources);
     Button loadFile = makeButton("LoadFile", event -> loadFilePressed(), myResources);
     Button saveFile = makeButton("SaveFile", event -> saveFilePressed(), myResources);
 
@@ -125,6 +130,14 @@ public class TurtleGUI implements ViewAPI {
     return configBox;
 
   }
+
+  private void saveFilePressed() {
+  }
+
+  private void loadFilePressed() {
+  }
+
+
 
   private VBox createInputPanel() {
 
@@ -158,6 +171,7 @@ public class TurtleGUI implements ViewAPI {
     // creating multiple titled pane to slide and show different elements
     VBox infoPanel = new VBox();
     infoPanel.setId("infoPanel");
+    VariableTitledPane variablePane1 = new VariableTitledPane(infoPanel);
     TitledPane variablePane = new TitledPane();
     variablePane.setExpanded(false);
     variablePane.setText("Variables");
@@ -178,7 +192,7 @@ public class TurtleGUI implements ViewAPI {
 
 
   @Override
-  public void updatePosition(Turtle turtle, int xCoord, int yCoord) {
+  public void updatePosition(Turtle turtle) {
 
   }
 
@@ -210,9 +224,10 @@ public class TurtleGUI implements ViewAPI {
   @Override
   public void sendFileContents(String fileContent) {
 
-    editorView.getTextArea().appendText("hello.");
 
   }
+  
+  
 
   /**
    * All functions below are meant to be used in the CONTROLLER class, the CONTROLLER class will
@@ -221,25 +236,5 @@ public class TurtleGUI implements ViewAPI {
    * Currently being used for testing
    */
 
-  private void clearHistoryPressed() {
-
-    editorView.getTextArea().appendText("hello.");
-
-
-  }
-
-  private void loadFilePressed() {
-
-
-    editorView.getTextArea().appendText("hello.");
-
-  }
-
-  private void saveFilePressed() {
-
-
-    editorView.getTextArea().appendText("hello.");
-
-  }
 
 }
