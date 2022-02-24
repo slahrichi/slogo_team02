@@ -13,11 +13,13 @@ public class Controller {
     parser = new InputParser();
     manager = new TurtleManager();
     animationControl = new AnimationHandler();
+
   }
 
   //Need to add ability to pull text and only call step when running a set of commands
+  //manager.addCommands(parser.getCommands())
   private void updateStep() throws ModelExceptions {
     manager.step();
-   // turtleGUI.updatePosition(manager.getCurrentTurtle());
+ //   turtleGUI.updatePosition(manager.getCurrentTurtle());
   }
 }
