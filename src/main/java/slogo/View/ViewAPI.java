@@ -4,7 +4,7 @@ import slogo.Model.Turtle;
 
 public interface ViewAPI {
 
-  public void updatePosition(Turtle turtle, int xCoord, int yCoord);
+  public void updatePosition(Turtle turtle);
 
   public void clearConsole();
 
