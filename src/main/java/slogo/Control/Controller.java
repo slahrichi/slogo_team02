@@ -1,12 +1,11 @@
 package slogo.Control;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import slogo.Model.ModelExceptions;
-import slogo.Model.commands.BackwardCommand;
-import slogo.Model.commands.Command;
-import slogo.Model.commands.ForwardCommand;
+import slogo.Model.Commands.BackwardCommand;
+import slogo.Model.Commands.Command;
+import slogo.Model.Commands.ForwardCommand;
 import slogo.View.AnimationHandler;
 import slogo.View.Objects.TurtleView;
 

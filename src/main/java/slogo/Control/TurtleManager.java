@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.List;
 import javafx.scene.paint.Color;
 import slogo.Model.Pen;
-import slogo.Model.commands.Command;
+import slogo.Model.Commands.Command;
 import slogo.Model.ModelExceptions;
 import slogo.Model.Turtle;
 

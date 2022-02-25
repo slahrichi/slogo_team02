@@ -1,4 +1,4 @@
-package slogo.Model.commands;
+package slogo.Model.Commands;
 
 
 import slogo.Model.ModelExceptions;
