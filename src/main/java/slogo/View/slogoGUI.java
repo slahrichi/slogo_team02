@@ -1,6 +1,8 @@
 package slogo.View;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ResourceBundle;
+import javafx.animation.Animation;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -22,16 +24,16 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import slogo.Control.Controller;
-import slogo.Model.Turtle;
 import slogo.View.Info.VariableTitledPane;
 import slogo.View.Input.EditorView;
 import slogo.View.Input.ShellView;
+import slogo.View.Objects.TurtleView;
 
 // class for creating the elements
 
-public class TurtleGUI implements ViewAPI {
+public class slogoGUI implements ViewAPI {
 
-  private Controller turtleController;
+  private static Controller turtleController;
 
   private static final String DEFAULT_RESOURCE_PACKAGE = "/";
   private static final String LANGUAGE_PACKAGE = "slogo.languages/";
@@ -45,9 +47,10 @@ public class TurtleGUI implements ViewAPI {
   private CanvasView turtleCanvas;
   private Stage myStage;
   private ImageView titleImage;
+  private TurtleView turtleObject;
 
 
-  public TurtleGUI(Stage stage, String language) {
+  public slogoGUI(Stage stage, String language) {
 
     turtleController = new Controller();
     myStage = stage;
@@ -116,7 +119,21 @@ public class TurtleGUI implements ViewAPI {
     HBox configBox = new HBox();
     configBox.setId("configButtonBox");
     Button playButton = makeButton("PlayButton",
-        event -> sendFileContents(editorView.getContents()), myResources);
+        event -> {
+          try {
+            sendFileContents(editorView.getContents());
+          } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+          } catch (InvocationTargetException e) {
+            e.printStackTrace();
+          } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+          } catch (InstantiationException e) {
+            e.printStackTrace();
+          } catch (IllegalAccessException e) {
+            e.printStackTrace();
+          }
+        }, myResources);
     Button clearHistory = makeButton("ClearHistory", event -> clearHistory(), myResources);
     Button loadFile = makeButton("LoadFile", event -> loadFilePressed(), myResources);
     Button saveFile = makeButton("SaveFile", event -> saveFilePressed(), myResources);
@@ -157,6 +174,7 @@ public class TurtleGUI implements ViewAPI {
 
     StackPane canvasPane = new StackPane();
     turtleCanvas = new CanvasView(canvasPane);
+    turtleObject = new TurtleView(canvasPane);
     canvasPane.setId("canvasBox");
     canvasPane.prefWidthProperty().bind(myStage.widthProperty().multiply(0.6));
 
@@ -192,11 +210,6 @@ public class TurtleGUI implements ViewAPI {
 
 
   @Override
-  public void updatePosition(Turtle turtle) {
-
-  }
-
-  @Override
   public void clearConsole() {
 
   }
@@ -222,19 +235,19 @@ public class TurtleGUI implements ViewAPI {
   }
 
   @Override
-  public void sendFileContents(String fileContent) {
+  public void sendFileContents(String fileContent)
+      throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    Animation anim = turtleObject.updatePosition();
+    anim.play();
 
+    turtleController.parseAndSetCommands(fileContent);
+    turtleController.getAnimation().play();
 
   }
-  
-  
 
-  /**
-   * All functions below are meant to be used in the CONTROLLER class, the CONTROLLER class will
-   * handle the interconnections between View and the Functionality
-   *
-   * Currently being used for testing
-   */
-
+  public static Controller getController(){
+    return turtleController;
+  }
+  
 
 }

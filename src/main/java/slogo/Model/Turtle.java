@@ -2,7 +2,7 @@ package slogo.Model;
 import java.awt.Dimension;
 import java.util.List;
 import slogo.Main;
-import slogo.Model.commands.Command;
+import slogo.Model.Commands.Command;
 
 /**
  * @author Haris Adnan
@@ -25,12 +25,12 @@ public class Turtle {
 
 //Remove Command list
 
-  public Turtle(double Xpos, double Ypos, double turtleAngle, double prevXPos, double prevYPos, Pen pen){
+  public Turtle(double Xpos, double Ypos, double turtleAngle, Pen pen){
     this.myXPos = Xpos;
     this.myYPos = Ypos;
     this.myAngle = turtleAngle;
-    this.myPreviousXPos = prevXPos;
-    this.myPreviousYPos = prevYPos;
+    this.myPreviousXPos = Xpos;
+    this.myPreviousYPos = Ypos;
     this.myPen = pen;
   }
   public double getAngle() {
@@ -46,19 +46,18 @@ public class Turtle {
   public double getTurtleY(){
     return myYPos;
   }
-  public void turn(double angle){
-    myAngle += angle;
-  }
+//  public void turn(double angle){
+//    myAngle += angle;
+//  }
   public void changeTurtleLocation(double newXPos, double newYPos) throws ModelExceptions {
     if(newXPos > BOUNDS.width || newYPos > BOUNDS.width){
       throw new ModelExceptions("Error with bounds");
     }
-    theCanvas.createLine(myPen,myXPos, myYPos, newXPos, newYPos);
+   // theCanvas.createLine(myPen,myXPos, myYPos, newXPos, newYPos);
     myPreviousXPos = myXPos;
     myPreviousYPos = myYPos;
     myXPos = newXPos;
     myYPos = newYPos;
-    myAngle = 0.0;
   }
   public boolean isPenUp() {
     return myPen.isMyPenUp();
