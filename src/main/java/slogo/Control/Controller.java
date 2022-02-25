@@ -3,13 +3,14 @@ package slogo.Control;
 import java.lang.reflect.InvocationTargetException;
 import slogo.Model.ModelExceptions;
 import slogo.View.AnimationHandler;
-import slogo.View.TurtleGUI;
+import slogo.View.Input.TurtleView;
+import slogo.View.slogoGUI;
 
 public class Controller {
   private InputParser parser;
   private TurtleManager manager;
   private AnimationHandler animationControl;
-  private TurtleGUI turtleGUI;
+  private TurtleView turtleView;
   public Controller(){
     parser = new InputParser();
     manager = new TurtleManager();
@@ -31,12 +32,13 @@ public class Controller {
       throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
     parser.parseText(contents);
     manager.setCommands(parser.getCommands());
+    System.out.println(contents);
   }
 
   //Need to add ability to pull text and only call step when running a set of commands
   //manager.addCommands(parser.getCommands())
   private void updateStep() throws ModelExceptions {
     manager.step();
-    turtleGUI.updatePosition(manager.getCurrentTurtle());
+    //turtleView.updatePosition(manager.getCurrentTurtle());
   }
 }
