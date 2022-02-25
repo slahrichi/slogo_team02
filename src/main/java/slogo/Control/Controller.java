@@ -32,7 +32,7 @@ public class Controller {
     return animationControl;
   }
 
-  public void parseAndSetCommands() {
+  public void parseAndSetCommands(String contents) {
     //parser.reset();
     //parser.parseText(contents);
     List<Command> tempCommandList = new ArrayList<>();
@@ -50,6 +50,6 @@ public class Controller {
   //manager.addCommands(parser.getCommands())
   private void updateStep() throws ModelExceptions {
     manager.step();
-   // turtleView.updatePosition(manager.getCurrentTurtle());
+   turtleView.updatePosition(manager.getCurrentTurtle());
   }
 }
