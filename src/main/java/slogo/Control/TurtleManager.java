@@ -18,7 +18,7 @@ public class TurtleManager {
 
   public TurtleManager(){
     Pen pen = new Pen(Color.BLUE, true, 1, 100.0, 100.0);
-    currentTurtle = new Turtle(0, 0, 0,0,0, pen);
+    currentTurtle = new Turtle(0, 0, 0, pen);
     commands = new ArrayList<>();
   }
 
