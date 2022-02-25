@@ -72,7 +72,7 @@ public class InputParser {
         throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
       while (!commandStack.isEmpty()){
         String command = (String) commandStack.peek();
-        ResourceBundle paramsResources = ResourceBundle.getBundle("src/main/resources/Commands/expectedNoParams.properties");
+        ResourceBundle paramsResources = ResourceBundle.getBundle("src/main/resources/Commands/Params.properties");
         int numParams = Integer.parseInt(paramsResources.getString(command));
         double[] args = new double[numParams];
         for (int i=0; i<numParams; i++){
