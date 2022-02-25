@@ -24,17 +24,16 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import slogo.Control.Controller;
-import slogo.Model.Turtle;
 import slogo.View.Info.VariableTitledPane;
 import slogo.View.Input.EditorView;
 import slogo.View.Input.ShellView;
-import slogo.View.Input.TurtleView;
+import slogo.View.Objects.TurtleView;
 
 // class for creating the elements
 
 public class slogoGUI implements ViewAPI {
 
-  private Controller turtleController;
+  private static Controller turtleController;
 
   private static final String DEFAULT_RESOURCE_PACKAGE = "/";
   private static final String LANGUAGE_PACKAGE = "slogo.languages/";
@@ -241,9 +240,13 @@ public class slogoGUI implements ViewAPI {
     Animation anim = turtleObject.updatePosition();
     anim.play();
 
-    //turtleController.parseAndSetCommands(fileContent);
-    //turtleController.getAnimation().play();
+    turtleController.parseAndSetCommands(fileContent);
+    turtleController.getAnimation().play();
 
+  }
+
+  public static Controller getController(){
+    return turtleController;
   }
   
 

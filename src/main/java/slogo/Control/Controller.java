@@ -8,7 +8,7 @@ import slogo.Model.commands.BackwardCommand;
 import slogo.Model.commands.Command;
 import slogo.Model.commands.ForwardCommand;
 import slogo.View.AnimationHandler;
-import slogo.View.Input.TurtleView;
+import slogo.View.Objects.TurtleView;
 
 public class Controller {
   private InputParser parser;
