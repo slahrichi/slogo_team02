@@ -2,7 +2,7 @@ package slogo.Model;
 import java.awt.Dimension;
 import java.util.List;
 import slogo.Main;
-import slogo.Model.commands.Command;
+import slogo.Model.Commands.Command;
 
 /**
  * @author Haris Adnan

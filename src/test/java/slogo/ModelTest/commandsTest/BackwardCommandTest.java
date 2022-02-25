@@ -4,9 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 import slogo.Control.TurtleManager;
+
+import slogo.Model.Commands.Command;
 import slogo.Model.ModelExceptions;
-//import slogo.Model.commands.*;
-import slogo.Model.commands.Command;
+import slogo.Model.Commands.*;
+
 
 class BackwardCommandTest extends CommandTest {
   private double[] input = {50};
@@ -15,7 +17,7 @@ class BackwardCommandTest extends CommandTest {
   @Override
   @Test
   void testExecute() throws ModelExceptions {
-    Command backwardCommand = new slogo.Model.commands.BackwardCommand(input);
+    Command backwardCommand = new BackwardCommand(input);
     double initialX = manager.getCurrentTurtle().getTurtleX();
     double initialY = manager.getCurrentTurtle().getTurtleY();
     backwardCommand.execute(manager.getCurrentTurtle());

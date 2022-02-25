@@ -3,11 +3,10 @@ package slogo.ModelTest.commandsTest;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
-import slogo.Control.InputParser;
 import slogo.Control.TurtleManager;
-import slogo.Model.commands.Command;
+import slogo.Model.Commands.Command;
 import slogo.Model.ModelExceptions;
-import slogo.Model.commands.*;
+import slogo.Model.Commands.*;
 
 class ForwardCommandTest extends CommandTest {
 
