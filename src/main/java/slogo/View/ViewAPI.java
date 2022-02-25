@@ -1,10 +1,10 @@
 package slogo.View;
 
+import java.lang.reflect.InvocationTargetException;
 import slogo.Model.Turtle;
 
 public interface ViewAPI {
 
-  public void updatePosition(Turtle turtle, int xCoord, int yCoord);
 
   public void clearConsole();
 
@@ -19,7 +19,8 @@ public interface ViewAPI {
 
   public void displayException(String errorMsg);
 
-  public void sendFileContents(String fileContent);
+  public void sendFileContents(String fileContent)
+      throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
 
 
 }

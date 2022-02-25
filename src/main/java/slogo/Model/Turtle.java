@@ -29,6 +29,8 @@ public class Turtle {
     this.myXPos = Xpos;
     this.myYPos = Ypos;
     this.myAngle = turtleAngle;
+    this.myPreviousXPos = Xpos;
+    this.myPreviousYPos = Ypos;
     this.myPen = pen;
   }
   public double getAngle() {
@@ -57,12 +59,11 @@ public class Turtle {
     if(newXPos > BOUNDS.width || newYPos > BOUNDS.width){
       throw new ModelExceptions("Error with bounds");
     }
-    theCanvas.createLine(myPen,myXPos, myYPos, newXPos, newYPos);
+   // theCanvas.createLine(myPen,myXPos, myYPos, newXPos, newYPos);
     myPreviousXPos = myXPos;
     myPreviousYPos = myYPos;
     myXPos = newXPos;
     myYPos = newYPos;
-    myAngle = 0.0;
   }
   public boolean isPenDown() {
     return myPen.isMyPenDown();

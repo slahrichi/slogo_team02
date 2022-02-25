@@ -10,7 +10,7 @@ import java.util.*;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import slogo.View.TurtleGUI;
+import slogo.View.slogoGUI;
 
 
 /**
@@ -29,7 +29,7 @@ public class Main extends Application {
   @Override
   public void start(Stage stage) {
 
-    TurtleGUI turtleSim = new TurtleGUI(stage, LANGUAGE);
+    slogoGUI turtleSim = new slogoGUI(stage, LANGUAGE);
     Scene scene = turtleSim.makeScene(DEFAULT_SIZE.width, DEFAULT_SIZE.height);
 
     // give the window a title
