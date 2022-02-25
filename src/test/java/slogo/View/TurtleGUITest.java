@@ -3,12 +3,9 @@ package slogo.View;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.awt.Dimension;
-import java.awt.event.KeyEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
-import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import util.DukeApplicationTest;
 
@@ -27,7 +24,7 @@ class TurtleGUITest extends DukeApplicationTest {
   @Override
   public void start(Stage stage){
 
-    TurtleGUI turtleSim = new TurtleGUI(stage, LANGUAGE);
+    slogoGUI turtleSim = new slogoGUI(stage, LANGUAGE);
     Scene scene = turtleSim.makeScene(DEFAULT_SIZE.width, DEFAULT_SIZE.height);
 
     // give the window a title
