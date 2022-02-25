@@ -1,11 +1,17 @@
 package slogo.Controller;
 
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Queue;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.Stack;
@@ -28,16 +34,20 @@ public class Translater {
   private CommandParser syntaxParser;
   private CommandParser commandParser;
   private ParamParser paramParser;
-  private static Stack<Double> constantStack = new Stack<>();
-  private static Stack<String> commandStack = new Stack<>();
+//  private static Stack<Double> constantStack = new Stack<>();
+//  private static Stack<String> commandStack = new Stack<>();
+
+  private static Queue<Double> constantStack = new LinkedList<Double>();
+  private static Queue<String> commandStack = new LinkedList<>();
 
   public Translater(){
     syntaxParser = new CommandParser();
     commandParser = new CommandParser();
     paramParser = new ParamParser();
-    syntaxParser.addPatterns("Syntax");
-    commandParser.addPatterns("Command");
-    paramParser.addPatterns("Params");
+    syntaxParser.addPatterns(SYNTAX);
+    commandParser.addPatterns(DEFAULT_LANG);
+    commandParser.addPatterns(SYNTAX);
+    paramParser.addPatterns(PARAMS);
   }
 
 
@@ -45,8 +55,8 @@ public class Translater {
   private void parseText(String program)
       throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
     Scanner input = new Scanner(program);
-    Stack<Double > constantStack = new Stack<>();
-    Stack<String> commandStack = new Stack<>();
+//    Stack<Double> constantStack = new Stack<>();
+//    Stack<String> commandStack = new Stack<>();
     while (input.hasNextLine()) {
       String line = input.nextLine();
       Scanner nextLine = new Scanner(line);
@@ -55,15 +65,17 @@ public class Translater {
       }
       while (nextLine.hasNext()) {
         String token = nextLine.next();
+        System.out.println(syntaxParser.getSymbol(token));
+        System.out.println(commandParser.getSymbol(token));
         //later use reflection to do this too
-        if (syntaxParser.getSymbol(token) == "UserCommand") {
+        if (syntaxParser.getSymbol(token).equals("UserCommand")) {
           // add to command stack
-          commandStack.push(commandParser.getSymbol(token));
+          commandStack.add(commandParser.getSymbol(token));
           //  int expectedParameters/reflection
         }
-        else if (syntaxParser.getSymbol(token) == "Constant"){
+        else if (syntaxParser.getSymbol(token).equals("Constant")){
           // add to constant stack
-          constantStack.push(Double.parseDouble(token));
+          constantStack.add(Double.parseDouble(token));
         }
         //System.out.printf("%s : %s%n", token, getSymbol(token));
       }
@@ -71,6 +83,8 @@ public class Translater {
     }
     System.out.println();
     input.close();
+    System.out.println(Arrays.toString(commandStack.toArray()));
+    System.out.print(Arrays.toString(constantStack.toArray()));
     makeValidCommands(constantStack, commandStack);
   }
 
@@ -87,15 +101,16 @@ public class Translater {
     return text != null && regex.matcher(text.trim()).matches();
   }
 
-  private void makeValidCommands(Stack constantStack, Stack commandStack)
+  private void makeValidCommands(Queue constantStack, Queue commandStack)
       throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
     while (!commandStack.isEmpty()){
-      String command = (String) commandStack.peek();
-      ResourceBundle paramsResources = ResourceBundle.getBundle("src/main/resources/Commands/Params.properties");
+      String command = (String) commandStack.poll();
+      ResourceBundle paramsResources = ResourceBundle.getBundle("slogo/languages/Params");
       int numParams = Integer.parseInt(paramsResources.getString(command));
       double[] args = new double[numParams];
       for (int i=0; i<numParams; i++){
-        args[i]=(Double.parseDouble((String) constantStack.peek()));
+        assert constantStack.peek() != null;
+        args[i]= (double) constantStack.peek();
       }
       Class<?> clazz = Class.forName("slogo.Model.commands."+command+"Command");
       Class<?>[] type = {Array.class, TurtleManager.class};
@@ -104,6 +119,17 @@ public class Translater {
       Object newInstance = cons.newInstance(obj);
       validCommands.add(newInstance);
     }
+
+  }
+
+  public static String readFile(String filePath) throws IOException {
+    return Files.readString(Path.of(filePath));
+  }
+
+  public static void main(String[] args)
+      throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, IOException {
+    Translater t = new Translater();
+    t.parseText(readFile("data/examples/simple/square.slogo"));
 
   }
 

@@ -59,7 +59,7 @@ public class InputParser {
           // add to constant stack
           constantStack.push(Integer.parseInt(token));
           }
-          //System.out.printf("%s : %s%n", token, getSymbol(token));
+          System.out.printf("%s : %s%n", token, getSymbol(token));
         }
         nextLine.close();
       }
@@ -152,10 +152,10 @@ public class InputParser {
     m.addSyntaxPatterns("Syntax");
     // set up the parser, which checks for matches in order given
     //ProgramParser parser = new ProgramParser();
-    m.setLanguage("French");
-    m.parseText(readFile("data/examples/simple/square.slogo"));
+    m.setLanguage("English");
+     ;
     // try against an example program
-    //m.parseText(parser, "fd \n 50 \nrt 90 BACK :distance Left :angle");
+    m.parseText("fd \n 50 \nrt 90 BACK :distance Left :angle");
 
 //    m.parseText("# draw a square\n"
 //        + "fd 100\n"
