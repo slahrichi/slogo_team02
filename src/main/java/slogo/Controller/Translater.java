@@ -1,5 +1,6 @@
 package slogo.Controller;
 
+import java.awt.SystemTray;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
@@ -53,7 +54,7 @@ public class Translater {
 
   //this has to be private, made public to test
   private void parseText(String program)
-      throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+      throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, CommandException {
     Scanner input = new Scanner(program);
 //    Stack<Double> constantStack = new Stack<>();
 //    Stack<String> commandStack = new Stack<>();
@@ -65,8 +66,6 @@ public class Translater {
       }
       while (nextLine.hasNext()) {
         String token = nextLine.next();
-        System.out.println(syntaxParser.getSymbol(token));
-        System.out.println(commandParser.getSymbol(token));
         //later use reflection to do this too
         if (syntaxParser.getSymbol(token).equals("UserCommand")) {
           // add to command stack
@@ -83,8 +82,6 @@ public class Translater {
     }
     System.out.println();
     input.close();
-    System.out.println(Arrays.toString(commandStack.toArray()));
-    System.out.print(Arrays.toString(constantStack.toArray()));
     makeValidCommands(constantStack, commandStack);
   }
 
@@ -102,24 +99,28 @@ public class Translater {
   }
 
   private void makeValidCommands(Queue constantStack, Queue commandStack)
-      throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
-    while (!commandStack.isEmpty()){
-      String command = (String) commandStack.poll();
-      ResourceBundle paramsResources = ResourceBundle.getBundle("slogo/languages/Params");
-      int numParams = Integer.parseInt(paramsResources.getString(command));
-      double[] args = new double[numParams];
-      for (int i=0; i<numParams; i++){
-        assert constantStack.peek() != null;
-        args[i]= (double) constantStack.peek();
-      }
-      Class<?> clazz = Class.forName("slogo.Model.commands."+command+"Command");
-      Class<?>[] type = {Array.class, TurtleManager.class};
-      Constructor<?> cons = clazz.getConstructor(type);
-      Object[] obj = {args};
-      Object newInstance = cons.newInstance(obj);
-      validCommands.add(newInstance);
+      throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException, CommandException {
+    while (!commandStack.isEmpty()) {
+      double [] args;
+        String command = (String) commandStack.poll();
+        int numParams = Integer.parseInt(ResourceBundle.getBundle(RESOURCES_PACKAGE+PARAMS).getString(command));
+        args = new double[numParams];
+        try {
+          for (int i = 0; i < numParams; i++) {
+            args[i] = (double) constantStack.poll();
+          }
+          //System.out.println(args[0]);
+          Class<?> clazz = Class.forName("slogo.Model.Commands." + command + "Command");
+          Class<?>[] type = {double[].class};
+          Constructor<?> cons = clazz.getConstructor(type);
+          Object[] obj = {args};
+          Object newInstance = cons.newInstance(obj);
+          validCommands.add(newInstance);
+        }
+        catch(Exception e){
+          throw new CommandException("Not enough constants for the given command: "+ command);
+        }
     }
-
   }
 
   public static String readFile(String filePath) throws IOException {
@@ -127,10 +128,10 @@ public class Translater {
   }
 
   public static void main(String[] args)
-      throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, IOException {
+      throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, IOException, CommandException {
     Translater t = new Translater();
     t.parseText(readFile("data/examples/simple/square.slogo"));
-
+    System.out.println(t.validCommands);
   }
 
 }
