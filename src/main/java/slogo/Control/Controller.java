@@ -3,8 +3,7 @@ package slogo.Control;
 import java.lang.reflect.InvocationTargetException;
 import slogo.Model.ModelExceptions;
 import slogo.View.AnimationHandler;
-import slogo.View.Input.TurtleView;
-import slogo.View.slogoGUI;
+import slogo.View.Objects.TurtleView;
 
 public class Controller {
   private InputParser parser;
