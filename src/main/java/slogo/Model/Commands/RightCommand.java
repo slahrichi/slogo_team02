@@ -12,4 +12,8 @@ public class RightCommand extends Command {
     turtle.setAngle(turtle.getAngle() + getParams()[0]);
     return getParams()[0];
   }
+  @Override
+  public String toString(){
+    return ("Right " + getParams()[0]);
+  }
 }
