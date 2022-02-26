@@ -7,6 +7,7 @@ import slogo.Model.ModelExceptions;
 import slogo.Model.Commands.BackwardCommand;
 import slogo.Model.Commands.Command;
 import slogo.Model.Commands.ForwardCommand;
+import slogo.Model.Turtle;
 import slogo.View.AnimationHandler;
 import slogo.View.Objects.TurtleView;
 
@@ -51,7 +52,7 @@ public class Controller {
   //manager.addCommands(parser.getCommands())
   private void updateStep() throws ModelExceptions {
     manager.step();
-   //turtleView.updatePosition(manager.getCurrentTurtle());
+    turtleView.updatePosition(manager.getCurrentTurtle());
 
   }
 }

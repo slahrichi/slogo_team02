@@ -52,6 +52,7 @@ public class slogoGUI implements ViewAPI {
 
   public slogoGUI(Stage stage, String language) {
 
+
     turtleController = new Controller();
     myStage = stage;
     myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + LANGUAGE_PACKAGE + language);
@@ -237,17 +238,29 @@ public class slogoGUI implements ViewAPI {
   @Override
   public void sendFileContents(String fileContent)
       throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-    Animation anim = turtleObject.updatePosition();
-    anim.play();
 
     turtleController.parseAndSetCommands(fileContent);
     turtleController.getAnimation().play();
 
+
+
   }
+
+  /**
+   *     Animation anim = turtleObject.updatePosition(turtleInput);
+   *     anim.play();
+   */
+
+
+  // super class has an instance of the controller
 
   public static Controller getController(){
     return turtleController;
   }
-  
+
+
+  // main view becomes combine subviews total
+  // singleton design pattern or mediator design pattern possibility to mention on the design analysis
+
 
 }
