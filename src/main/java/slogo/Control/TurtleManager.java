@@ -30,6 +30,12 @@ public class TurtleManager {
     return currentTurtle;
   }
 
+  public TurtleRecord getRecordTurtle(){
+    return new TurtleRecord(currentTurtle.getTurtleX(), currentTurtle.getTurtleY(),
+        currentTurtle.getAngle(), currentTurtle.getPreviousX(), currentTurtle.getPreviousY(),
+        currentTurtle.getPreviousAngle(), currentTurtle.isPenDown());
+  }
+
   public void setCommands(Collection<Command> newCommands){
     commands.addAll(newCommands);
   }

@@ -1,13 +1,7 @@
 package slogo.Control;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.List;
 import slogo.Model.ModelExceptions;
-import slogo.Model.Commands.BackwardCommand;
-import slogo.Model.Commands.Command;
-import slogo.Model.Commands.ForwardCommand;
-import slogo.Model.Turtle;
 import slogo.View.AnimationHandler;
 import slogo.View.Objects.TurtleView;
 
@@ -37,14 +31,7 @@ public class Controller {
       throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
     parser.reset();
     parser.parseText(contents);
-//    List<Command> tempCommandList = new ArrayList<>();
-//    double[] fifty = {50};
-//    double[] hundo = {100};
-//    tempCommandList.add(new ForwardCommand(fifty));
-//    tempCommandList.add(new BackwardCommand(fifty));
-//    tempCommandList.add(new ForwardCommand(fifty));
-//    tempCommandList.add(new ForwardCommand(fifty));
-//    tempCommandList.add(new BackwardCommand(hundo));
+
     manager.setCommands(parser.getCommands());
   }
 
@@ -52,7 +39,7 @@ public class Controller {
   //manager.addCommands(parser.getCommands())
   private void updateStep() throws ModelExceptions {
     manager.step();
-    turtleView.updatePosition(manager.getCurrentTurtle());
+    turtleView.updatePosition(manager.getRecordTurtle());
 
   }
 }

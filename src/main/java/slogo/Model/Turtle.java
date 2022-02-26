@@ -17,6 +17,7 @@ public class Turtle {
   private double myPreviousXPos;
   private double myYPos;
   private double myPreviousYPos;
+  private double myPreviousAngle;
   private double myAngle;
   private Pen myPen;
   List<Command> myCommandList;
@@ -31,13 +32,18 @@ public class Turtle {
     this.myAngle = turtleAngle;
     this.myPreviousXPos = Xpos;
     this.myPreviousYPos = Ypos;
+    this.myPreviousAngle = myAngle;
     this.myPen = pen;
   }
   public double getAngle() {
     return myAngle;
   }
   public void setAngle(double angle){
+    myPreviousAngle = myAngle;
     myAngle = angle;
+  }
+  public double getPreviousAngle(){
+    return myPreviousAngle;
   }
 
   public double getTurtleX(){
@@ -46,9 +52,13 @@ public class Turtle {
   public double getTurtleY(){
     return myYPos;
   }
-//  public void turn(double angle){
-//    myAngle += angle;
-//  }
+  public double getPreviousX(){
+    return myPreviousXPos;
+  }
+  public double getPreviousY(){
+    return myPreviousYPos;
+  }
+
   public void changeTurtleLocation(double newXPos, double newYPos) throws ModelExceptions {
     if(newXPos > BOUNDS.width || newYPos > BOUNDS.width){
       throw new ModelExceptions("Error with bounds");
@@ -59,8 +69,8 @@ public class Turtle {
     myXPos = newXPos;
     myYPos = newYPos;
   }
-  public boolean isPenUp() {
-    return myPen.isMyPenUp();
+  public boolean isPenDown() {
+    return !myPen.isMyPenUp();
   }
 
 
