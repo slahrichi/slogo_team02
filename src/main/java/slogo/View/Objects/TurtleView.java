@@ -21,6 +21,7 @@ public class TurtleView {
 
   private double oldX;
   private double oldY;
+  private double oldAngle;
 
 
   public TurtleView(StackPane outerPane){
@@ -46,12 +47,12 @@ public class TurtleView {
     turtleImage.setFitWidth(turtleSize);
   }
 
-  public PathTransition updatePosition(){
+/*  public PathTransition updatePosition(Turtle turtleInput){
 
     // create something to follow
     Path path = new Path();
     path.getElements().addAll(new MoveTo(oldX, oldY),
-        new LineTo(0, 0 ));
+        new LineTo(0 + turtleSize, 0 + turtleSize));
     // create an animation where the shape follows a path
     PathTransition pt = new PathTransition(
         Duration.seconds(3),
@@ -62,6 +63,23 @@ public class TurtleView {
 
     return pt;
 
+  }*/
+
+  public void updatePosition(Turtle turtleInput){
+    turtleImage.setX(turtleInput.getTurtleX() + turtleSize);
+    turtleImage.setY(turtleInput.getTurtleY() + turtleSize);
+
   }
+
+  public void updateAngle(Turtle turtleInput){
+
+
+  }
+
+  // back end should send something like a turtle info / record object rather than sending the turtle itself
+  // as a barrier from the view being able to edit the turtle
+
+
+
 
 }
