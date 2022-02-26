@@ -16,7 +16,7 @@ public class TurtleTest {
   @Test
   void changeTurtleLocationTestGoodInput() throws ModelExceptions {
     Pen pen = new Pen(Color.BLUE, true, 1, 100.0, 100.0);
-    Turtle testTurtle = new Turtle(100, 100, 0.0, 0.0, 0.0, pen);
+    Turtle testTurtle = new Turtle(100, 100, 0.0, pen);
     double newAngle = 0;
     double changedXPos = 50;
     double changedYPos = 50;
@@ -29,14 +29,14 @@ public class TurtleTest {
   //Test with a location out of bounds, still to implement 
   void changeTurtleLocationTestBadInput(){
     Pen pen = new Pen(Color.BLUE, true, 1, 100.0, 100.0);
-    Turtle testTurtle = new Turtle(100, 100, 0.0, 0.0, 0.0, pen);
+    Turtle testTurtle = new Turtle(100, 100, 0.0, pen);
 
   }
 
   @Test
   void turnTestGoodInput(){
     Pen pen = new Pen(Color.BLUE, true, 1, 100.0, 100.0);
-    Turtle testTurtle = new Turtle(100, 100, 0.0,0.0,0.0, pen);
+    Turtle testTurtle = new Turtle(100, 100, 0.0, pen);
     double changedAngle = 90.0;
     testTurtle.turn(90.1);
     assertEquals(changedAngle, testTurtle.getAngle(), TOLERANCE);
@@ -44,11 +44,10 @@ public class TurtleTest {
   @Test
   void turnTestBadInput(){
     Pen pen = new Pen(Color.BLUE, true, 1, 100.0, 100.0);
-    Turtle testTurtle = new Turtle(100, 100, 0.0,0.0,0.0, pen);
+    Turtle testTurtle = new Turtle(100, 100, 0.0,pen);
     double changedAngle = -90.0;
     testTurtle.turn(- 90);
     assertEquals(changedAngle, testTurtle.getAngle(), TOLERANCE);
   }
-
 
 }

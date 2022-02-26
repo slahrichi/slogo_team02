@@ -46,9 +46,15 @@ public class Turtle {
   public double getTurtleY(){
     return myYPos;
   }
-//  public void turn(double angle){
-//    myAngle += angle;
-//  }
+  public double getTurtlePrevX(){
+    return myPreviousXPos;
+  }
+  public double getTurtlePrevY(){
+    return myPreviousYPos;
+  }
+  public void turn(double angle){
+    myAngle += angle;
+  }
   public void changeTurtleLocation(double newXPos, double newYPos) throws ModelExceptions {
     if(newXPos > BOUNDS.width || newYPos > BOUNDS.width){
       throw new ModelExceptions("Error with bounds");
@@ -59,14 +65,8 @@ public class Turtle {
     myXPos = newXPos;
     myYPos = newYPos;
   }
-  public boolean isPenUp() {
-    return myPen.isMyPenUp();
+  public boolean isPenDown() {
+    return myPen.isMyPenDown();
   }
-
-
-
-
-
-
 
 }

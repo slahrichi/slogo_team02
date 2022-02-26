@@ -1,12 +1,14 @@
 package slogo.ModelTest.commandsTest;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 import slogo.Control.TurtleManager;
+
 import slogo.Model.Commands.Command;
 import slogo.Model.ModelExceptions;
 import slogo.Model.Commands.*;
+
 
 class BackwardCommandTest extends CommandTest {
   private double[] input = {50};
