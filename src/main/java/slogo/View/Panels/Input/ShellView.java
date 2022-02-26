@@ -1,4 +1,4 @@
-package slogo.View.Input;
+package slogo.View.Panels.Input;
 
 
 import java.util.ArrayList;

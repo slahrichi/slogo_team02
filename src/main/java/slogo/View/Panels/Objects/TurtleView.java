@@ -1,4 +1,4 @@
-package slogo.View.Objects;
+package slogo.View.Panels.Objects;
 
 
 import javafx.animation.PathTransition;
