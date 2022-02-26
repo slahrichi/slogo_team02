@@ -51,5 +51,6 @@ public class Controller {
   private void updateStep() throws ModelExceptions {
     manager.step();
     turtleView.updatePosition(manager.getCurrentTurtle());
+
   }
 }
