@@ -1,16 +1,21 @@
 package slogo.View.Panels.Input;
 
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
+import slogo.Control.Controller;
+import slogo.Model.ModelExceptions;
+import slogo.View.ViewController;
 
 
 public class ShellView {
 
+  private Controller shellControllerInstance;
   private TextArea shellArea;
   private Label shellTitle;
   private ArrayList<String> commandHistory;
@@ -23,6 +28,7 @@ public class ShellView {
 
   public ShellView(VBox sidePanel) {
 
+    shellControllerInstance = ViewController.getController();
     shellTitle = new Label("Shell");
     shellArea = new TextArea();
     sidePanel.getChildren().addAll(shellTitle, shellArea);
@@ -38,14 +44,31 @@ public class ShellView {
     shellArea.setPrefRowCount(shellRowSize);
     shellArea.setId("textArea");
 
-    shellArea.setOnKeyPressed(e -> shellKeyPress(e));
+    shellArea.setOnKeyPressed(e -> {
+      try {
+        shellKeyPress(e);
+      } catch (ModelExceptions ex) {
+        ex.printStackTrace();
+      } catch (ClassNotFoundException ex) {
+        ex.printStackTrace();
+      } catch (InvocationTargetException ex) {
+        ex.printStackTrace();
+      } catch (NoSuchMethodException ex) {
+        ex.printStackTrace();
+      } catch (InstantiationException ex) {
+        ex.printStackTrace();
+      } catch (IllegalAccessException ex) {
+        ex.printStackTrace();
+      }
+    });
     shellArea.setOnMouseClicked(e -> shellArea.positionCaret(shellArea.getText().length()));
     shellArea.addEventHandler(KeyEvent.KEY_PRESSED, evt -> backSpacePressed(evt));
     shellArea.appendText(headCode);
 
   }
 
-  private void shellKeyPress(KeyEvent e) {
+  private void shellKeyPress(KeyEvent e)
+      throws ModelExceptions, ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
 
     // need to create key events for left, right, up, down
     // need to connect to the history of commands
@@ -77,7 +100,8 @@ public class ShellView {
   }
 
 
-  private void enterKeyPressed() {
+  private void enterKeyPressed()
+      throws ModelExceptions, ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
     String command = getCommand();
     if(!command.equals("")){
       commandHistory.add(command);
@@ -87,7 +111,7 @@ public class ShellView {
     System.out.println(commandHistory);
 
     // give this string to the parser code here
-
+    shellControllerInstance.parseAndRunCommands(command);
 
   }
 

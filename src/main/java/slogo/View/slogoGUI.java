@@ -2,6 +2,7 @@ package slogo.View;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ResourceBundle;
+import javafx.animation.Animation;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -18,8 +19,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import slogo.Control.Controller;
+import slogo.Model.Canvas;
 import slogo.Model.ModelExceptions;
-import slogo.View.Panels.CanvasView;
+import slogo.View.Panels.Objects.CanvasView;
 import slogo.View.Panels.Objects.TurtleView;
 import slogo.View.Panels.InformationPanel;
 import slogo.View.Panels.InputPanel;
@@ -29,30 +31,24 @@ import slogo.View.Panels.TitlePanel;
 
 public class slogoGUI implements ViewAPI {
 
-  private static Controller turtleController;
 
   private static final String DEFAULT_RESOURCE_PACKAGE = "/";
   private static final String LANGUAGE_PACKAGE = "slogo.languages/";
-
   private String STYLESHEET;
 
+  private Controller viewControlInstance;
   private TitlePanel titlePanel;
   private InputPanel inputPanel;
   private InformationPanel infoPanel;
-
-  private ResourceBundle myResources;
+  private CanvasPanel canvasPanel;
   private BorderPane myRoot;
-
-  private CanvasView turtleCanvas;
+  private ResourceBundle myResources;
   private Stage myStage;
-  private TurtleView turtleObject;
 
 
   public slogoGUI(Stage stage, String language) {
 
-
-    turtleController = new Controller();
-
+    viewControlInstance = ViewController.getController();
     myStage = stage;
     myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + LANGUAGE_PACKAGE + language);
     myRoot = new BorderPane();
@@ -60,7 +56,6 @@ public class slogoGUI implements ViewAPI {
         new Background(new BackgroundFill(Color.LIGHTGRAY, new CornerRadii(0), Insets.EMPTY)));
     STYLESHEET = "stylesheet.css";
     displayApp();
-
 
   }
 
@@ -80,8 +75,8 @@ public class slogoGUI implements ViewAPI {
     myRoot.setCenter(createTurtleCanvas());
     myRoot.setRight(createInformationPanel());
     myRoot.setBottom(createConfigButtons());
-
   }
+
 
   private HBox makeTitle(){
 
@@ -156,15 +151,9 @@ public class slogoGUI implements ViewAPI {
 
   private StackPane createTurtleCanvas() {
 
-    // NEED TO CREATE ITS OWN CLASS FOR THIS - TESTING THINGS AND UI SET UP RIGHT NOW
+    canvasPanel = new CanvasPanel(myStage);
 
-    StackPane canvasPane = new StackPane();
-    turtleCanvas = new CanvasView(canvasPane);
-    turtleObject = new TurtleView(canvasPane);
-    canvasPane.setId("canvasBox");
-    canvasPane.prefWidthProperty().bind(myStage.widthProperty().multiply(0.6));
-
-    return canvasPane;
+    return canvasPanel.getCanvasPanel();
 
   }
 
@@ -206,17 +195,12 @@ public class slogoGUI implements ViewAPI {
   public void sendFileContents(String fileContent)
       throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, ModelExceptions {
 
-    turtleController.parseAndRunCommands(fileContent);
-  //  turtleController.getAnimation().play();
-
+    viewControlInstance.parseAndRunCommands(fileContent);
 
 
   }
 
-  /**
-   *     Animation anim = turtleObject.updatePosition(turtleInput);
-   *     anim.play();
-   */
+
 
 
   // super class has an instance of the controller
