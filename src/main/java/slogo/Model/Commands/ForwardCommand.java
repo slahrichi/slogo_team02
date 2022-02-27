@@ -14,6 +14,10 @@ public class ForwardCommand extends Command {
     double newXpos = turtle.getTurtleX() + getParams()[0] * Math.cos(Math.toRadians(angle));
     double newYpos = turtle.getTurtleY() + getParams()[0] * Math.sin(Math.toRadians(angle));
     turtle.changeTurtleLocation(newXpos, newYpos);
+    return getValue();
+  }
+
+  public double getValue(){
     return getParams()[0];
   }
 

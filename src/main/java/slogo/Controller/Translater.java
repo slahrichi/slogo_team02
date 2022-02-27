@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -18,6 +19,8 @@ import java.util.Scanner;
 import java.util.Stack;
 import java.util.regex.Pattern;
 import slogo.Control.TurtleManager;
+import slogo.Model.Commands.ForwardCommand;
+import slogo.Model.Turtle;
 
 public class Translater {
 
@@ -116,6 +119,11 @@ public class Translater {
           Object[] obj = {args};
           Object newInstance = cons.newInstance(obj);
           validCommands.add(newInstance);
+          // add return of the command to the constant stack
+          // for nested calls (e.g. fd fd 50)
+          Method execute = clazz.getDeclaredMethod("getValue");
+          double value = (double) execute.invoke(newInstance);
+          constantStack.add(value);
         }
         catch(Exception e){
           throw new CommandException("Not enough constants for the given command: "+ command);
@@ -127,10 +135,15 @@ public class Translater {
     return Files.readString(Path.of(filePath));
   }
 
+  public List getCommands(){
+    return validCommands;
+  }
+
   public static void main(String[] args)
       throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, IOException, CommandException {
     Translater t = new Translater();
-    t.parseText(readFile("data/examples/simple/square.slogo"));
+    t.parseText("fd fd 50");
+    //t.parseText(readFile("data/examples/simple/square.slogo"));
     System.out.println(t.validCommands);
   }
 

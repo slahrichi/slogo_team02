@@ -10,6 +10,10 @@ public class RightCommand extends Command {
 
   public double execute(Turtle turtle){
     turtle.setAngle(turtle.getAngle() + getParams()[0]);
+    return getValue();
+  }
+
+  public double getValue(){
     return getParams()[0];
   }
   @Override
