@@ -1,8 +1,6 @@
-package slogo.Controller;
+package slogo.Control;
 
-import java.awt.SystemTray;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -16,11 +14,7 @@ import java.util.Map.Entry;
 import java.util.Queue;
 import java.util.ResourceBundle;
 import java.util.Scanner;
-import java.util.Stack;
 import java.util.regex.Pattern;
-import slogo.Control.TurtleManager;
-import slogo.Model.Commands.ForwardCommand;
-import slogo.Model.Turtle;
 
 public class Translater {
 
@@ -113,7 +107,7 @@ public class Translater {
             args[i] = (double) constantStack.poll();
           }
           //System.out.println(args[0]);
-          Class<?> clazz = Class.forName("slogo.Model.Commands." + command + "Command");
+          Class<?> clazz = Class.forName("slogo.Model.Commands.TurtleCommands." + command + "Command");
           Class<?>[] type = {double[].class};
           Constructor<?> cons = clazz.getConstructor(type);
           Object[] obj = {args};
@@ -124,6 +118,7 @@ public class Translater {
           Method execute = clazz.getDeclaredMethod("getValue");
           double value = (double) execute.invoke(newInstance);
           constantStack.add(value);
+
         }
         catch(Exception e){
           throw new CommandException("Not enough constants for the given command: "+ command);

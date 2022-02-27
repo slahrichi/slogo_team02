@@ -1,4 +1,4 @@
-package slogo.Controller;
+package slogo.Control;
 
 public class CommandException extends Exception{
 

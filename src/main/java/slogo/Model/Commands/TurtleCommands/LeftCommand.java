@@ -1,4 +1,4 @@
-package slogo.Model.Commands.TurtleCommmands;
+package slogo.Model.Commands.TurtleCommands;
 
 import slogo.Model.Commands.Command;
 import slogo.Model.Turtle;

@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import slogo.Control.TurtleManager;
 import slogo.Model.Commands.Command;
-import slogo.Model.Commands.TurtleCommmands.LeftCommand;
+import slogo.Model.Commands.TurtleCommands.LeftCommand;
 import slogo.Model.ModelExceptions;
 
 class LeftCommandTest extends CommandTest {

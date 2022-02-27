@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.Map;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
+import slogo.Control.ControllerExceptions.VariableExceptions;
 
 public class Variable {
   private SimpleStringProperty name;
@@ -35,17 +36,17 @@ public class Variable {
     public VariableManager(){
 
     }
-    public void makeVariable(String name, String value){
+    public void makeVariable(String name, String value) throws VariableExceptions {
       if (!variableMap.containsKey(name)){
         variableMap.put(name, Double.parseDouble(value));
         Variable newVar = new Variable(name, Double.parseDouble(value));
         variableList.add(newVar);
       }
       else{
-        throw new ExceptionVariableAlreadyInUse("This variable name already exists. Use the Set expression instead.");
+        throw new VariableExceptions("This variable name already exists. Use the Set expression instead.");
       }
     }
-    public void setVariable(String name, String value){
+    public void setVariable(String name, String value) throws VariableExceptions {
       Variable thisVariable = null;
       if (variableMap.containsKey(name)){
         for (Variable variable: variableList){
@@ -62,7 +63,7 @@ public class Variable {
       }
 
       else{
-        throw new ExceptionVariableNonexistent("This variable does not exist");
+        throw new VariableExceptions("This variable does not exist");
       }
     }
     public double getVariableValue(String variableName){
