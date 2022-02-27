@@ -24,15 +24,29 @@ public class VariableManager {
       throw new ExceptionVariableAlreadyInUse("This variable name already exists. Use the Set expression instead.");
     }
   }
-  public void setVariable(Variable variable, String value){
-    if(variableList.contains(variable)){
-      variableList.remove(variable);
-      variable.setValue(value);
-      variableList.add(variable);
+  public void setVariable(String name, String value){
+    Variable thisVariable = null;
+    if (variableMap.containsKey(name)){
+      for (Variable variable: variableList){
+        if(variable.getName().equals(name)){
+          thisVariable = variable;
+        }
+      }
+      // update List
+      variableList.remove(thisVariable);
+      thisVariable.setValue(value);
+      variableList.add(thisVariable);
+      //update Map
+      variableMap.put(name, Double.valueOf(value));
     }
+    
     else{
       throw new ExceptionVariableNonexistent("This variable does not exist");
     }
+  }
+  public double getVariableValue(String variableName){
+    double variableVal = Double.parseDouble(String.valueOf(variableMap.get(variableName)));
+    return variableVal;
   }
 
 }
