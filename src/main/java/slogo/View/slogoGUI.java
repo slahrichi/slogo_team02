@@ -217,12 +217,6 @@ public class slogoGUI implements ViewAPI {
 
 
   // super class has an instance of the controller
-
-  public static Controller getController(){
-    return turtleController;
-  }
-
-
   // main view becomes combine subviews total
   // singleton design pattern or mediator design pattern possibility to mention on the design analysis
 
