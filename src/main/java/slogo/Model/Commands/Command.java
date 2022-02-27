@@ -17,4 +17,7 @@ public abstract class Command {
 
   public abstract double execute(Turtle turtle) throws ModelExceptions;
 
+  public double getValue(){
+    return parameters[0];
+  }
 }

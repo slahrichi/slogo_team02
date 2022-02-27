@@ -12,7 +12,13 @@ public class LeftCommand extends Command {
   @Override
   public double execute(Turtle turtle){
     turtle.setAngle(turtle.getAngle() - getParams()[0]);
-    return getParams()[0];
+    return getValue();
   }
+
+  @Override
+  public String toString(){
+    return ("Left " + getValue());
+  }
+
 }
 
