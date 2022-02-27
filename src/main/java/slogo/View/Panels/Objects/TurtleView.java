@@ -29,13 +29,9 @@ public class TurtleView {
     canvasBox = outerPane;
     turtleImage = new ImageView();
     setUpImage();
-    canvasBox.getChildren().addAll(turtleImage);
-
-
 
     oldX = (turtleImage.getLayoutBounds().getWidth() / 2) - turtleImage.getLayoutX();
     oldY = (turtleImage.getLayoutBounds().getHeight() / 2) - turtleImage.getLayoutY();
-
 
   }
 
@@ -45,9 +41,11 @@ public class TurtleView {
         new Image(getClass().getResource("/turtlePictures/turtleImage.png").toString(), true));
     turtleImage.setFitHeight(turtleSize);
     turtleImage.setFitWidth(turtleSize);
+    canvasBox.getChildren().addAll(turtleImage);
+
   }
 
-/*  public PathTransition updatePosition(Turtle turtleInput){
+  public PathTransition updatePosition(Turtle turtleInput){
 
     // create something to follow
     Path path = new Path();
@@ -63,18 +61,37 @@ public class TurtleView {
 
     return pt;
 
-  }*/
-
-  public void updatePosition(Turtle turtleInput){
-    turtleImage.setX(turtleInput.getTurtleX() + turtleSize);
-    turtleImage.setY(turtleInput.getTurtleY() + turtleSize);
-
   }
 
-  public void updateAngle(Turtle turtleInput){
-
-
+  public void setOldX(double input){
+    oldX = input;
   }
+
+  public void setOldY(double input){
+    oldY = input;
+  }
+
+  public void setAngle(double input){
+    oldAngle = input;
+  }
+
+  public double getOldX(){
+    return oldX;
+  }
+
+  public double getOldY(){
+    return oldY;
+  }
+
+  public double getAngle(){
+    return oldAngle;
+  }
+
+  public ImageView getTurtleImage(){
+    return turtleImage;
+  }
+
+
 
   // back end should send something like a turtle info / record object rather than sending the turtle itself
   // as a barrier from the view being able to edit the turtle
