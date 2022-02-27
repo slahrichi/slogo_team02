@@ -11,5 +11,6 @@ open module slogo_app {
     exports slogo;
     exports slogo.Model;
     exports slogo.Model.Commands;
-    
+  exports slogo.Model.Commands.ControlStructures;
+
 }
