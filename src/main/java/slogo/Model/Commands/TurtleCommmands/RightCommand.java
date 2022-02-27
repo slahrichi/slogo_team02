@@ -1,5 +1,6 @@
-package slogo.Model.Commands;
+package slogo.Model.Commands.TurtleCommmands;
 
+import slogo.Model.Commands.Command;
 import slogo.Model.Turtle;
 
 public class RightCommand extends Command {

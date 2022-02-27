@@ -1,32 +1,60 @@
 package slogo.View;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.util.Duration;
+import static slogo.View.Panels.Objects.TurtleView.turtleSize;
 
+import javafx.animation.Animation;
+import javafx.animation.PathTransition;
+import javafx.scene.shape.LineTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
+import javafx.util.Duration;
+import slogo.Control.TurtleRecord;
+import slogo.View.Panels.Objects.TurtleView;
 
 public class AnimationHandler {
-  public final static double ANIMATION_DELAY = 1;
 
-  private Timeline animation;
+  private TurtleView turtleImage;
+  private TurtleRecord turtleRecord;
 
-  public AnimationHandler(){
-    animation = new Timeline();
-    animation.setCycleCount(Timeline.INDEFINITE);
+
+  public AnimationHandler(TurtleView turtleInput){
+
   }
 
-  public void setupAnimation(EventHandler<ActionEvent> updateStep){
-    animation.getKeyFrames().add(new KeyFrame(Duration.seconds(ANIMATION_DELAY), updateStep));
+
+  public void createAnimation(TurtleRecord turtleInput){
+
+    //boolean penDown = turtleRecord.penDown();
+    turtleRecord = turtleInput;
+
+    // create something to follow
+    Path path = new Path();
+    path.getElements().addAll(new MoveTo(turtleImage.getOldX(), turtleImage.getOldY()),
+        new LineTo(turtleRecord.xCord() + turtleSize, turtleRecord.yCord() + turtleSize));
+    // create an animation where the shape follows a path
+    PathTransition pt = new PathTransition(
+        Duration.seconds(3),
+        path, turtleImage.getTurtleImage());
+
+    if(turtleRecord.penDown()){
+      // create a line to the same location code here
+
+    }
+
+    updateOldValues();
+
+    pt.play();
+
+
   }
 
-  public void pause(){
-    animation.pause();
-  }
 
-  public void play(){
-    animation.play();
+  private void updateOldValues(){
+
+    turtleImage.setOldX(turtleRecord.xCord());
+    turtleImage.setOldY(turtleRecord.yCord());
+    turtleImage.setAngle(turtleRecord.angle());
+
   }
 
 

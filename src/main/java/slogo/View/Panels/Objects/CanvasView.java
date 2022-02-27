@@ -1,10 +1,7 @@
-package slogo.View;
+package slogo.View.Panels.Objects;
 
-import java.awt.Graphics;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 

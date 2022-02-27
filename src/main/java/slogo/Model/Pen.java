@@ -12,14 +12,14 @@ import javafx.scene.paint.Color;
 public class Pen {
 
   private Color penColor;
-  private boolean myPenUp = false;
+  private boolean myPenDown = true;
   private int myPenSize = 1;
   private double myPenX;
   private double myPenY;
 
-  public Pen(Color color, boolean penUp, int size, double PenX, double PenY) {
+  public Pen(Color color, boolean penDown, int size, double PenX, double PenY) {
     this.penColor = color;
-    this.myPenUp = penUp;
+    this.myPenDown = penDown;
     this.myPenSize = size;
     this.myPenX = PenX;
     this.myPenY= PenY;
@@ -33,11 +33,11 @@ public class Pen {
     this.penColor = color;
   }
 
-  public boolean isMyPenUp() {
-    return this.myPenUp;
+  public boolean isMyPenDown() {
+    return this.myPenDown;
   }
   public void setPenUpOrDown(boolean penUp) {
-    this.myPenUp = penUp;
+    this.myPenDown = isMyPenDown();
   }
 
   public int getPenSize() {
