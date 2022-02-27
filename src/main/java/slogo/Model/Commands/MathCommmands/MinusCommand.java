@@ -4,19 +4,18 @@ import slogo.Model.Commands.Command;
 import slogo.Model.ModelExceptions;
 import slogo.Model.Turtle;
 
-public class DifferenceCommand extends Command {
-  public DifferenceCommand(double[] params){
-    super(params);
+public class MinusCommand extends Command {
+  public MinusCommand(double[] parameters){
+    super(parameters);
   }
-
 
   @Override
   public double getValue(){
-    return getParams()[0] - getParams()[1];
+    return -1 * getParams()[0];
   }
 
   @Override
   public String toString(){
-    return ("Difference " + getValue());
+    return ("Minus " + getValue());
   }
 }

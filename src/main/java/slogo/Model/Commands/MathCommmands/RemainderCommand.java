@@ -8,9 +8,16 @@ public class RemainderCommand extends Command {
   public RemainderCommand(double[] params){
     super(params);
   }
+
+
   @Override
-  public double execute(Turtle turtle) throws ModelExceptions {
-    return 0;
+  public double getValue(){
+    return getParams()[0] % getParams()[1];
+  }
+
+  @Override
+  public String toString(){
+    return ("Remainder " + getValue());
   }
 }
 
