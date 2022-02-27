@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import slogo.Model.Commands.Command;
 import slogo.Model.ModelExceptions;
+import slogo.View.AnimationHandler;
 
 public class Controller {
   private InputParser parser;

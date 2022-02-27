@@ -18,6 +18,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import slogo.Control.Controller;
+import slogo.Model.ModelExceptions;
 import slogo.View.Panels.CanvasView;
 import slogo.View.Panels.Objects.TurtleView;
 import slogo.View.Panels.InformationPanel;
@@ -128,6 +129,8 @@ public class slogoGUI implements ViewAPI {
             e.printStackTrace();
           } catch (IllegalAccessException e) {
             e.printStackTrace();
+          } catch (ModelExceptions e) {
+            e.printStackTrace();
           }
         }, myResources);
     Button clearHistory = makeButton("ClearHistory", event -> clearHistory(), myResources);
@@ -201,10 +204,10 @@ public class slogoGUI implements ViewAPI {
 
   @Override
   public void sendFileContents(String fileContent)
-      throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+      throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, ModelExceptions {
 
-    turtleController.parseAndSetCommands(fileContent);
-    turtleController.getAnimation().play();
+    turtleController.parseAndRunCommands(fileContent);
+  //  turtleController.getAnimation().play();
 
 
 
