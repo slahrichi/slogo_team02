@@ -1,10 +1,9 @@
-package slogo.Controller;
+package slogo.Control;
 
-import java.awt.SystemTray;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -15,9 +14,7 @@ import java.util.Map.Entry;
 import java.util.Queue;
 import java.util.ResourceBundle;
 import java.util.Scanner;
-import java.util.Stack;
 import java.util.regex.Pattern;
-import slogo.Control.TurtleManager;
 
 public class Translater {
 
@@ -110,12 +107,18 @@ public class Translater {
             args[i] = (double) constantStack.poll();
           }
           //System.out.println(args[0]);
-          Class<?> clazz = Class.forName("slogo.Model.Commands." + command + "Command");
+          Class<?> clazz = Class.forName("slogo.Model.Commands.TurtleCommands." + command + "Command");
           Class<?>[] type = {double[].class};
           Constructor<?> cons = clazz.getConstructor(type);
           Object[] obj = {args};
           Object newInstance = cons.newInstance(obj);
           validCommands.add(newInstance);
+          // add return of the command to the constant stack
+          // for nested calls (e.g. fd fd 50)
+          Method execute = clazz.getDeclaredMethod("getValue");
+          double value = (double) execute.invoke(newInstance);
+          constantStack.add(value);
+
         }
         catch(Exception e){
           throw new CommandException("Not enough constants for the given command: "+ command);
@@ -127,10 +130,15 @@ public class Translater {
     return Files.readString(Path.of(filePath));
   }
 
+  public List getCommands(){
+    return validCommands;
+  }
+
   public static void main(String[] args)
       throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, IOException, CommandException {
     Translater t = new Translater();
-    t.parseText(readFile("data/examples/simple/square.slogo"));
+    t.parseText("fd fd 50");
+    //t.parseText(readFile("data/examples/simple/square.slogo"));
     System.out.println(t.validCommands);
   }
 
