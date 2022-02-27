@@ -51,13 +51,7 @@ public class Turtle {
     myYPos = newYPos;
   }
   public boolean isPenDown() {
-    return !myPen.isMyPenUp();
+    return myPen.isMyPenDown();
   }
-
-
-
-
-
-
 
 }

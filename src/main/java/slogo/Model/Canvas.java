@@ -23,7 +23,7 @@ public class Canvas {
   public void createLine(Pen pen, double xPos, double yPos, double newXPos, double newYPos) {
     Line newLine = new Line(xPos, yPos, newXPos, newYPos);
     //do if isMyPenUp is False
-    if (!pen.isMyPenUp()) {
+    if (!pen.isMyPenDown()) {
       newLine.setStroke(pen.getPenColor());
       newLine.setStrokeWidth(pen.getPenSize());
       allLines.add(newLine);
