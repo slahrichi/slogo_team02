@@ -19,7 +19,13 @@ public class Turtle {
   private Pen myPen;
   List<Command> myCommandList;
   private Canvas theCanvas;
+
+  // Change this to the Bounds of the screen
   public static final Dimension BOUNDS= Main.DEFAULT_SIZE;
+
+  // Initiliaze Centre of Screen Coordinates
+  public static Point CENTER_OF_SCREEN ;
+
 
 //Remove Command list
 
@@ -43,6 +49,31 @@ public class Turtle {
     return myYPos;
   }
 
+  public double getTurtleXFromCenter(){
+    double turtleXCor = getTurtleX();
+    if (turtleXCor < CENTER_OF_SCREEN.getPointX()){
+      return -1 *(CENTER_OF_SCREEN.getPointX() - turtleXCor);
+    }
+    else if(turtleXCor > CENTER_OF_SCREEN.getPointY()) {
+      return turtleXCor - CENTER_OF_SCREEN.getPointY();
+    }
+    else{
+      return 0.0;
+    }
+  }
+  public double getTurtleYFromCenter(){
+    double turtleYCor = getTurtleY();
+    if (turtleYCor < CENTER_OF_SCREEN.getPointY()){
+      return CENTER_OF_SCREEN.getPointY() - turtleYCor;
+    }
+    else if(turtleYCor > CENTER_OF_SCREEN.getPointY()) {
+      return -1 *(turtleYCor - CENTER_OF_SCREEN.getPointY());
+    }
+    else{
+      return 0.0;
+    }
+
+  }
   public void changeTurtleLocation(double newXPos, double newYPos) throws ModelExceptions {
     if(newXPos > BOUNDS.width || newYPos > BOUNDS.width){
       throw new ModelExceptions("Error with bounds");
@@ -52,6 +83,10 @@ public class Turtle {
   }
   public boolean isPenDown() {
     return myPen.isMyPenDown();
+  }
+  //is turtle showing method need to be implemented in GUI
+  public boolean isTurtleShowing(){
+    return true;
   }
 
 }

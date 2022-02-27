@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 import slogo.Control.TurtleManager;
 
 import slogo.Model.Commands.Command;
+import slogo.Model.Commands.TurtleCommmands.BackwardCommand;
 import slogo.Model.ModelExceptions;
-import slogo.Model.Commands.*;
 
 
 class BackwardCommandTest extends CommandTest {
