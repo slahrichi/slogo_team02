@@ -18,13 +18,9 @@ public class ForwardCommand extends Command {
     return getValue();
   }
 
-  public double getValue(){
-    return getParams()[0];
-  }
-
   @Override
   public String toString(){
-    return ("Forward " + getParams()[0]);
+    return ("Forward " + getValue());
   }
 
 }
