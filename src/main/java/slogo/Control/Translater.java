@@ -23,7 +23,7 @@ public class Translater {
   public static final String NO_MATCH = "NO MATCH";
   public static final String SYNTAX = "Syntax";
   public static final String PARAMS = "Params";
-
+  public static final String TYPES = "Types";
   public static final String RESOURCES_PACKAGE = "slogo.languages.";
   public List<Object> validCommands = new ArrayList<>();
   List<Entry<String, Pattern>> mySymbols;
@@ -32,9 +32,6 @@ public class Translater {
   private CommandParser syntaxParser;
   private CommandParser commandParser;
   private ParamParser paramParser;
-//  private static Stack<Double> constantStack = new Stack<>();
-//  private static Stack<String> commandStack = new Stack<>();
-
   private static Queue<Double> constantStack = new LinkedList<Double>();
   private static Queue<String> commandStack = new LinkedList<>();
 
@@ -49,12 +46,9 @@ public class Translater {
   }
 
 
-  //this has to be private, made public to test
   private void parseText(String program)
       throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, CommandException {
     Scanner input = new Scanner(program);
-//    Stack<Double> constantStack = new Stack<>();
-//    Stack<String> commandStack = new Stack<>();
     while (input.hasNextLine()) {
       String line = input.nextLine();
       Scanner nextLine = new Scanner(line);
@@ -67,13 +61,11 @@ public class Translater {
         if (syntaxParser.getSymbol(token).equals("UserCommand")) {
           // add to command stack
           commandStack.add(commandParser.getSymbol(token));
-          //  int expectedParameters/reflection
         }
         else if (syntaxParser.getSymbol(token).equals("Constant")){
           // add to constant stack
           constantStack.add(Double.parseDouble(token));
         }
-        //System.out.printf("%s : %s%n", token, getSymbol(token));
       }
       nextLine.close();
     }
@@ -95,19 +87,27 @@ public class Translater {
     return text != null && regex.matcher(text.trim()).matches();
   }
 
+  private String getCommandType(String command){
+    return ResourceBundle.getBundle(RESOURCES_PACKAGE+TYPES).getString(command);
+  }
+
+  private int getNumParams(String command){
+    return Integer.parseInt(ResourceBundle.getBundle(RESOURCES_PACKAGE+PARAMS).getString(command));
+  }
+
   private void makeValidCommands(Queue constantStack, Queue commandStack)
-      throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException, CommandException {
+      throws CommandException {
     while (!commandStack.isEmpty()) {
       double [] args;
         String command = (String) commandStack.poll();
-        int numParams = Integer.parseInt(ResourceBundle.getBundle(RESOURCES_PACKAGE+PARAMS).getString(command));
+        int numParams = getNumParams(command);
         args = new double[numParams];
         try {
           for (int i = 0; i < numParams; i++) {
             args[i] = (double) constantStack.poll();
           }
-          //System.out.println(args[0]);
-          Class<?> clazz = Class.forName("slogo.Model.Commands.TurtleCommands." + command + "Command");
+          String commandType = getCommandType(command);
+          Class<?> clazz = Class.forName("slogo.Model.Commands." + commandType + "." + command + "Command");
           Class<?>[] type = {double[].class};
           Constructor<?> cons = clazz.getConstructor(type);
           Object[] obj = {args};

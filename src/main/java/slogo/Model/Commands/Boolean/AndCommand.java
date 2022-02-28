@@ -3,13 +3,14 @@ package slogo.Model.Commands.Boolean;
 import slogo.Model.ModelExceptions;
 import slogo.Model.Turtle;
 
-public class And extends BooleanOperation{
+public class AndCommand extends BooleanOperation{
 
-  public And(double[] values) {
+  public AndCommand(double[] values) {
     super(values);
   }
+
   @Override
-  public double execute(Turtle turtle) throws ModelExceptions {
+  public double getValue() {
     return nonZero(getParams()[0]) * nonZero(getParams()[1]);
   }
 }

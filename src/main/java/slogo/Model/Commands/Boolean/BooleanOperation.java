@@ -1,11 +1,17 @@
 package slogo.Model.Commands.Boolean;
 
 import slogo.Model.Commands.Command;
+import slogo.Model.ModelExceptions;
+import slogo.Model.Turtle;
 
 public abstract class BooleanOperation extends Command {
   
   public BooleanOperation(double[] values) {
     super(values);
+  }
+
+  public double execute(Turtle turtle) throws ModelExceptions{
+    return getValue();
   }
 
   protected boolean areSame(double a, double b)

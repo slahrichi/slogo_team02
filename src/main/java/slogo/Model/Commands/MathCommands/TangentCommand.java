@@ -1,4 +1,4 @@
-package slogo.Model.Commands.MathCommmands;
+package slogo.Model.Commands.MathCommands;
 
 
 public class TangentCommand extends MathCommands {
