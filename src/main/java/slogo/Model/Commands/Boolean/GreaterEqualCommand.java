@@ -3,10 +3,9 @@ package slogo.Model.Commands.Boolean;
 import slogo.Model.ModelExceptions;
 import slogo.Model.Turtle;
 
-public class LessThanOrEqual extends BooleanOperation{
+public class GreaterEqualCommand extends BooleanOperation{
 
-
-  public LessThanOrEqual(double[] values) {
+  public GreaterEqualCommand(double[] values) {
     super(values);
   }
 
@@ -15,9 +14,10 @@ public class LessThanOrEqual extends BooleanOperation{
     if(areSame(getParams()[0],getParams()[1])){
       return 1.0;
     }
-    else if (getParams()[0]<getParams()[1]){
+    else if (getParams()[0]>getParams()[1]){
       return 1.0;
     }
     else{return 0.0;}
   }
+
 }
