@@ -75,8 +75,5 @@ public class Variable {
       return variable;
     }
 
-
-
-
   }
 }

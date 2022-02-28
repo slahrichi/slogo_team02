@@ -11,7 +11,7 @@ public class LessThanCommand extends BooleanOperation{
   }
 
   @Override
-  public double execute(Turtle turtle) throws ModelExceptions {
+  public double getValue(){
     if( areSame(getParams()[0], getParams()[1])){
       return 0.0;
     }else if(getParams()[0] < getParams()[1]){

@@ -10,7 +10,7 @@ public class OrCommand extends BooleanOperation{
   }
 
   @Override
-  public double execute(Turtle turtle) throws ModelExceptions {
+  public double getValue() {
     if (nonZero(getParams()[0]) == 1.0 || nonZero(getParams()[1]) == 0.0){
       return 1.0;
     }

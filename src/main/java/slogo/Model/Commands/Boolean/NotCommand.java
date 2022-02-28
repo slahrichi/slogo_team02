@@ -11,7 +11,7 @@ public class NotCommand extends BooleanOperation {
   }
 
   @Override
-  public double execute(Turtle turtle) throws ModelExceptions {
+  public double getValue() {
     if (nonZero(getParams()[0]) == 1.0) {
       return 0.0;
     } else {
