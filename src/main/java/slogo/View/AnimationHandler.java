@@ -20,7 +20,7 @@ public class AnimationHandler {
   }
 
 
-  private void createAnimation(){
+  public void createAnimation(){
 
     // create something to follow
     Path path = new Path();
