@@ -24,4 +24,9 @@ public class RepeatCommand extends LoopAndConditionalCommands{
   public double getValue(){
     return getCommandList1().get(getCommandList1().size()-1).getValue();
   }
+
+  @Override
+  public String toString() {
+    return "Repeat " + getValue();
+  }
 }

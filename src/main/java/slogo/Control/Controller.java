@@ -33,6 +33,30 @@ public class Controller {
     }
   }
 
+  public void parseAndRunCommandsNoView(String contents)
+      throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, ModelExceptions, CommandException {
+    parser.parseText(contents);
+
+    List<Command> commands = parser.getCommands();
+
+  //  animation = new AnimationHandler(panelInput);
+    for (Command command : commands) {
+      manager.stepTurtle(command);
+//      animation.createAnimation(manager.getRecordTurtle());
+    }
+  }
+
+  public List<Command> parseAndGetCommands(String contents)
+      throws CommandException, ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    parser.parseText(contents);
+
+    List<Command> commands = parser.getCommands();
+    return commands;
+  }
+  public TurtleManager getTurtleManager(){
+    return manager;
+  }
+
 //  private void updateStep(Command command) throws ModelExceptions {
 //    manager.stepTurtle(command);
 //    turtleView.updatePosition(manager.getRecordTurtle());

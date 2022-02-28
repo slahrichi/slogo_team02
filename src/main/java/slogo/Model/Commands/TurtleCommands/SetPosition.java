@@ -22,4 +22,9 @@ public class SetPosition extends TurtleCommands {
         Math.pow((getParams()[0] - turtle.getTurtleX()), 2) + Math.pow(
             (getParams()[1] - turtle.getTurtleY()), 2));
   }
+
+  @Override
+  public String toString(){
+    return "SetPos "+ getValue();
+  }
 }
