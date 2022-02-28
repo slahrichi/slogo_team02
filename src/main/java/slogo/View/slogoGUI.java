@@ -196,7 +196,7 @@ public class slogoGUI implements ViewAPI {
       throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, ModelExceptions, CommandException {
 
 
-    viewControlInstance.parseAndRunCommands(fileContent, canvasPanel.getTurtleView());
+    viewControlInstance.parseAndRunCommands(fileContent, canvasPanel);
 
 
   }

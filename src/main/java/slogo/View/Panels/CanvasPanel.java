@@ -38,5 +38,7 @@ public class CanvasPanel {
 
   public TurtleView getTurtleView(){ return turtleView;}
 
+  public CanvasView getCanvasView(){ return canvasView;}
+
 
 }

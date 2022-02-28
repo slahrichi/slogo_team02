@@ -114,7 +114,7 @@ public class ShellView {
     System.out.println(commandHistory);
 
     // give this string to the parser code here
-    shellControllerInstance.parseAndRunCommands(command);
+    //shellControllerInstance.parseAndRunCommands(command);
 
   }
 
