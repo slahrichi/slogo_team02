@@ -84,6 +84,12 @@ public class Turtle {
   public boolean isPenDown() {
     return myPen.isMyPenDown();
   }
+  public void setPenDown(){
+    myPen.setPenDown(true);
+  }
+  public void setPenUp(){
+    myPen.setPenDown(false);
+  }
   //is turtle showing method need to be implemented in GUI
   public boolean isTurtleShowing(){
     return true;
