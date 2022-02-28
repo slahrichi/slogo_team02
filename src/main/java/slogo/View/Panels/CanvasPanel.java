@@ -2,8 +2,8 @@ package slogo.View.Panels;
 
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import slogo.View.Panels.Objects.CanvasView;
-import slogo.View.Panels.Objects.TurtleView;
+import slogo.View.Panels.Canvas.CanvasView;
+import slogo.View.Panels.Canvas.TurtleView;
 
 public class CanvasPanel {
 

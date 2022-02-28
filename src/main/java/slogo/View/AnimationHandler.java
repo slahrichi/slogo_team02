@@ -1,15 +1,14 @@
 package slogo.View;
 
-import static slogo.View.Panels.Objects.TurtleView.turtleSize;
+import static slogo.View.Panels.Canvas.TurtleView.turtleSize;
 
-import javafx.animation.Animation;
 import javafx.animation.PathTransition;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
 import javafx.util.Duration;
 import slogo.Control.TurtleRecord;
-import slogo.View.Panels.Objects.TurtleView;
+import slogo.View.Panels.Canvas.TurtleView;
 
 public class AnimationHandler {
 
@@ -17,7 +16,7 @@ public class AnimationHandler {
   private TurtleRecord turtleRecord;
 
 
-  public AnimationHandler(TurtleView turtleInput){
+  public AnimationHandler(){
 
   }
 

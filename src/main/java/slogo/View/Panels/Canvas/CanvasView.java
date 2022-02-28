@@ -1,4 +1,4 @@
-package slogo.View.Panels.Objects;
+package slogo.View.Panels.Canvas;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
