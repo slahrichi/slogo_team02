@@ -1,4 +1,4 @@
-package slogo.View;
+package slogo.View.Panels;
 
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
