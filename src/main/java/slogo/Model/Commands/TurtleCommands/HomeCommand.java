@@ -4,7 +4,7 @@ import slogo.Model.Commands.Command;
 import slogo.Model.ModelExceptions;
 import slogo.Model.Turtle;
 
-public class HomeCommand extends Command {
+public class HomeCommand extends TurtleCommands {
   public static final double HOME_X = 0;
   public static final double HOME_Y = 0;
 

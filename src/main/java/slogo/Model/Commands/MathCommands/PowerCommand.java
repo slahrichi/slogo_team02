@@ -1,14 +1,14 @@
-package slogo.Model.Commands.MathCommmands;
+package slogo.Model.Commands.MathCommands;
 
-import slogo.Model.Commands.Command;
 
-public class PowerCommand extends Command {
-  public PowerCommand(double[] params){
+public class PowerCommand extends MathCommands {
+
+  public PowerCommand(double[] params) {
     super(params);
   }
 
   @Override
-  public double getValue(){
+  public double getValue() {
     return Math.pow(getParams()[0], getParams()[1]);
   }
 }
