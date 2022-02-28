@@ -8,8 +8,9 @@ public class AndCommand extends BooleanOperation{
   public AndCommand(double[] values) {
     super(values);
   }
+
   @Override
-  public double execute(Turtle turtle) throws ModelExceptions {
+  public double getValue() {
     return nonZero(getParams()[0]) * nonZero(getParams()[1]);
   }
 }

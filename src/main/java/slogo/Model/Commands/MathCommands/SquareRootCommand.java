@@ -1,14 +1,13 @@
-package slogo.Model.Commands.MathCommmands;
+package slogo.Model.Commands.MathCommands;
 
-import slogo.Model.Commands.Command;
+public class SquareRootCommand extends MathCommands {
 
-public class SquareRootCommand extends Command {
-  public SquareRootCommand(double[] params){
+  public SquareRootCommand(double[] params) {
     super(params);
   }
 
   @Override
-  public double getValue(){
+  public double getValue() {
     return Math.sqrt(getParams()[0]);
   }
 }

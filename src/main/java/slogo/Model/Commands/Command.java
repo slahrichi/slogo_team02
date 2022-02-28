@@ -5,21 +5,19 @@ import slogo.Model.ModelExceptions;
 import slogo.Model.Turtle;
 
 public abstract class Command {
+
   private double[] parameters;
 
-  public Command(double[] values){
+  public Command(double[] values) {
     parameters = values;
   }
 
-  protected double[] getParams(){
+  protected double[] getParams() {
     return parameters;
   }
 
-  public double execute(Turtle turtle) throws ModelExceptions{
-    return getValue();
-  }
+  public abstract double execute(Turtle turtle) throws ModelExceptions;
 
-  public double getValue(){
-    return parameters[0];
-  }
+  public abstract double getValue();
 }
+

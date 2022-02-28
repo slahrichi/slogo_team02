@@ -4,7 +4,7 @@ import slogo.Model.Commands.Command;
 import slogo.Model.ModelExceptions;
 import slogo.Model.Turtle;
 
-public class SetPosition extends Command {
+public class SetPosition extends TurtleCommands {
 
   public SetPosition(double[] params) {
     super(params);
