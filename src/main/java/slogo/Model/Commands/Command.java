@@ -1,5 +1,7 @@
 package slogo.Model.Commands;
-
+/**
+ * The abstract class that defines all base methods. All commands extend this class.
+ */
 
 import slogo.Model.ModelExceptions;
 import slogo.Model.Turtle;

@@ -7,6 +7,7 @@ import javafx.scene.paint.Color;
 //The turtle and the pen need to be joint.
 
 /**
+ * Class that defines the Pen and its characteristics
  * @author Haris Adnan
  */
 public class Pen {
@@ -17,6 +18,14 @@ public class Pen {
   private double myPenX;
   private double myPenY;
 
+  /**
+   * Constructor for the pen
+   * @param color : color of pen, the color that the pen draws with
+   * @param penDown : the boolean value of if the pen is down
+   * @param size : size of the pen
+   * @param PenX : Pen's X coordinate
+   * @param PenY : pen's Y coordinate
+   */
   public Pen(Color color, boolean penDown, int size, double PenX, double PenY) {
     this.penColor = color;
     this.myPenDown = penDown;

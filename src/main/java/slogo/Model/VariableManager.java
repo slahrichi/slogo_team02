@@ -5,6 +5,11 @@ import java.util.List;
 import java.util.Map;
 import slogo.Control.ControllerExceptions.VariableExceptions;
 
+/**
+ *
+ * the class that manages and holds all the variables, has method to set the value of a variable and make a new one.
+ * @author Haris Adnan
+ */
 public class VariableManager {
   private Map<String, Double> variableMap;
   private List<Variable> variableList;
@@ -21,6 +26,12 @@ public class VariableManager {
 //      throw new VariableExceptions("This variable name already exists. Use the Set expression instead.");
 //    }
 //  }
+
+  /**
+   * makes new variable if it doesnt exist or sets the value of a variable if it does
+   * @param name : variable name
+   * @param value : value of variable to be set
+   */
   public void setOrMakeVariable(String name, String value) {
     //check if variable exists
     if (!variableMap.containsKey(name)) {
@@ -47,10 +58,22 @@ public class VariableManager {
     }
 
   }
+
+  /**
+   * gets value of variable with the name provided
+   * @param variableName : name of variable
+   * @return return the value of the variable
+   */
   public double getVariableValue(String variableName){
     double variableVal = Double.parseDouble(String.valueOf(variableMap.get(variableName)));
     return variableVal;
   }
+
+  /**
+   * creates dummy variable
+   * @param variableNameUsedByUser
+   * @return
+   */
   public Variable makeVariableForNoValue(String variableNameUsedByUser){
     Variable variable = new Variable(variableNameUsedByUser, 0);
     return variable;
