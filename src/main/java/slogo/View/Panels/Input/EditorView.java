@@ -9,7 +9,7 @@ public class EditorView {
   private TextArea editorArea;
   private Label editorTitle;
   private final int editorColumnSize = 15;
-  private final int editorRowSize = 25;
+  private final int editorRowSize = 20;
 
   public EditorView(VBox sidePanel) {
 
