@@ -3,7 +3,7 @@ package slogo.Model.Commands.TurtleCommands;
 import slogo.Model.Commands.Command;
 import slogo.Model.Turtle;
 
-public class RightCommand extends Command {
+public class RightCommand extends TurtleCommands {
 
   public RightCommand(double[] values){
     super(values);

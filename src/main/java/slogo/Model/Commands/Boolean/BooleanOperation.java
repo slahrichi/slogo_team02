@@ -8,11 +8,11 @@ public abstract class BooleanOperation extends Command {
     super(values);
   }
 
-  boolean areSame(double a, double b)
+  protected boolean areSame(double a, double b)
   {
     return Math.abs(a - b) < 0.0001;
   }
-  double nonZero(double a){
+  protected double nonZero(double a){
     if (areSame(a, 0.000)){
       return 0.0;
     }

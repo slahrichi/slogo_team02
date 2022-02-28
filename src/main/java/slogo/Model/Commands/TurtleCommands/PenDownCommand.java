@@ -3,7 +3,7 @@ package slogo.Model.Commands.TurtleCommands;
 import slogo.Model.Commands.Command;
 import slogo.Model.Turtle;
 
-public class PenDownCommand extends Command {
+public class PenDownCommand extends TurtleCommands {
   public PenDownCommand(double[] empty){
     super(empty);
   }

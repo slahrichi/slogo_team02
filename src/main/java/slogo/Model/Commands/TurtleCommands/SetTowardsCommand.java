@@ -3,7 +3,7 @@ package slogo.Model.Commands.TurtleCommands;
 import slogo.Model.Commands.Command;
 import slogo.Model.Turtle;
 
-public class SetTowardsCommand extends Command {
+public class SetTowardsCommand extends TurtleCommands {
 
   public SetTowardsCommand(double[] params) {
     super(params);

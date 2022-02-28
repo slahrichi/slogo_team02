@@ -3,7 +3,7 @@ package slogo.Model.Commands.TurtleCommands;
 import slogo.Model.Commands.Command;
 import slogo.Model.Turtle;
 
-public class SetHeading extends Command {
+public class SetHeading extends TurtleCommands{
 
   public SetHeading(double[] params){
     super(params);

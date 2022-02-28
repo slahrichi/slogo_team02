@@ -4,7 +4,7 @@ import slogo.Model.Commands.Command;
 import slogo.Model.ModelExceptions;
 import slogo.Model.Turtle;
 
-public class ForwardCommand extends Command {
+public class ForwardCommand extends TurtleCommands {
   public ForwardCommand(double[] values){
     super(values);
   }
