@@ -7,18 +7,17 @@ import slogo.Model.ModelExceptions;
 import slogo.View.AnimationHandler;
 
 public class Controller {
-  private InputParser parser;
+  private Translater parser;
   private TurtleManager manager;
   private AnimationHandler animation;
   public Controller(){
-    parser = new InputParser();
+    parser = new Translater();
     manager = new TurtleManager();
   }
 
 
   public void parseAndRunCommands(String contents)
-      throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, ModelExceptions {
-    parser.reset();
+      throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, ModelExceptions, CommandException {
     parser.parseText(contents);
 
     List<Command> commands = parser.getCommands();

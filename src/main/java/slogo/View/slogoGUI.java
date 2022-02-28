@@ -17,6 +17,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import slogo.Control.CommandException;
 import slogo.Control.Controller;
 import slogo.Model.ModelExceptions;
 import slogo.View.Panels.CanvasPanel;
@@ -123,6 +124,8 @@ public class slogoGUI implements ViewAPI {
             e.printStackTrace();
           } catch (ModelExceptions e) {
             e.printStackTrace();
+          } catch (CommandException e) {
+            e.printStackTrace();
           }
         }, myResources);
     Button clearHistory = makeButton("ClearHistory", event -> clearHistory(), myResources);
@@ -190,7 +193,7 @@ public class slogoGUI implements ViewAPI {
 
   @Override
   public void sendFileContents(String fileContent)
-      throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, ModelExceptions {
+      throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, ModelExceptions, CommandException {
 
     viewControlInstance.parseAndRunCommands(fileContent);
 

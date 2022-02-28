@@ -1,7 +1,6 @@
 package slogo.Model.Commands.MathCommands;
 
 import java.util.Random;
-
 public class RandomCommand extends MathCommands {
 
   public RandomCommand(double[] params) {

@@ -8,6 +8,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
+import slogo.Control.CommandException;
 import slogo.Control.Controller;
 import slogo.Model.ModelExceptions;
 import slogo.View.ViewController;
@@ -59,6 +60,8 @@ public class ShellView {
         ex.printStackTrace();
       } catch (IllegalAccessException ex) {
         ex.printStackTrace();
+      } catch (CommandException ex) {
+        ex.printStackTrace();
       }
     });
     shellArea.setOnMouseClicked(e -> shellArea.positionCaret(shellArea.getText().length()));
@@ -68,7 +71,7 @@ public class ShellView {
   }
 
   private void shellKeyPress(KeyEvent e)
-      throws ModelExceptions, ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+      throws ModelExceptions, ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, CommandException {
 
     // need to create key events for left, right, up, down
     // need to connect to the history of commands
@@ -101,7 +104,7 @@ public class ShellView {
 
 
   private void enterKeyPressed()
-      throws ModelExceptions, ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+      throws ModelExceptions, ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, CommandException {
     String command = getCommand();
     if(!command.equals("")){
       commandHistory.add(command);
