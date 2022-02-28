@@ -5,7 +5,7 @@ import java.util.List;
 import slogo.Model.Commands.Command;
 import slogo.Model.ModelExceptions;
 import slogo.View.AnimationHandler;
-import slogo.View.Panels.Objects.TurtleView;
+import slogo.View.Panels.Canvas.TurtleView;
 
 public class Controller {
   private Translater parser;
