@@ -3,6 +3,8 @@ package slogo.View;
 import static slogo.View.Panels.Canvas.TurtleView.TURTLE_OFFSET;
 
 import javafx.animation.PathTransition;
+import javafx.animation.RotateTransition;
+import javafx.animation.SequentialTransition;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.shape.LineTo;
@@ -44,19 +46,28 @@ public class AnimationHandler {
 
     double CANVAS_OFFSET =  (turtleCanvas.getHeight() - TURTLE_OFFSET)/ 2;
 
-    // create something to follow
-    Path path = new Path();
-    path.getElements().addAll(new MoveTo(oldX, oldY),
-        new LineTo(newX, newY));
-    // create an animation where the shape follows a path
-    PathTransition pt = new PathTransition(
-        Duration.seconds(3),
-        path, turtleView.getTurtleImage());
+
 
     if(turtleRecord.penDown()){
       // create a line to the same location code here
       gc.strokeLine(oldX + CANVAS_OFFSET, oldY + CANVAS_OFFSET, newX + CANVAS_OFFSET, newY + CANVAS_OFFSET);
+    }
 
+    RotateTransition rt = new RotateTransition(Duration.seconds(3), turtleView.getTurtleImage());
+    if(turtleRecord.oldAngle() != turtleRecord.angle()){
+      rt.setByAngle(turtleRecord.angle());
+      rt.play();
+    }
+    if(oldX != newX || oldY != newY){
+      // create something to follow
+      Path path = new Path();
+      path.getElements().addAll(new MoveTo(oldX, oldY),
+          new LineTo(newX, newY));
+      // create an animation where the shape follows a path
+      PathTransition pt = new PathTransition(
+          Duration.seconds(3),
+          path, turtleView.getTurtleImage());
+      pt.play();
     }
 
     System.out.println("Old X: " + turtleRecord.oldX());
@@ -65,7 +76,7 @@ public class AnimationHandler {
     System.out.println("new Y: " + turtleRecord.yCord());
 
 
-    pt.play();
+
   }
 
 
