@@ -13,6 +13,7 @@ public class Controller {
   public Controller(){
     parser = new Translater();
     manager = new TurtleManager();
+    animation = new AnimationHandler();
   }
 
 
