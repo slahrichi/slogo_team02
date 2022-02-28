@@ -3,22 +3,19 @@ package slogo.Model.Commands.Boolean;
 import slogo.Model.ModelExceptions;
 import slogo.Model.Turtle;
 
-public class LessThan extends BooleanOperation{
+public class NotCommand extends BooleanOperation {
 
 
-  public LessThan(double[] values) {
+  public NotCommand(double[] values) {
     super(values);
   }
 
   @Override
   public double execute(Turtle turtle) throws ModelExceptions {
-    if( areSame(getParams()[0], getParams()[1])){
+    if (nonZero(getParams()[0]) == 1.0) {
       return 0.0;
-    }else if(getParams()[0] < getParams()[1]){
+    } else {
       return 1.0;
-    }
-    else{
-      return 0.0;
     }
   }
 }
