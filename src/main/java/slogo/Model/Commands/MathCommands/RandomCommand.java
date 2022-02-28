@@ -1,9 +1,7 @@
-package slogo.Model.Commands.MathCommmands;
+package slogo.Model.Commands.MathCommands;
 
 import java.util.Random;
 import slogo.Model.Commands.Command;
-import slogo.Model.ModelExceptions;
-import slogo.Model.Turtle;
 
 public class RandomCommand extends Command {
   public RandomCommand(double[] params) {
