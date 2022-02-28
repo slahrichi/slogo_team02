@@ -14,6 +14,7 @@ import java.util.Map.Entry;
 import java.util.Queue;
 import java.util.ResourceBundle;
 import java.util.Scanner;
+import java.util.Stack;
 import java.util.regex.Pattern;
 
 public class Translater {
@@ -32,8 +33,8 @@ public class Translater {
   private CommandParser syntaxParser;
   private CommandParser commandParser;
   private ParamParser paramParser;
-  private static Queue<Double> constantStack = new LinkedList<Double>();
-  private static Queue<String> commandStack = new LinkedList<>();
+  private static Stack<Double> constantStack = new Stack<Double>();
+  private static Stack<String> commandStack = new Stack<>();
 
   public Translater(){
     syntaxParser = new CommandParser();
@@ -95,16 +96,16 @@ public class Translater {
     return Integer.parseInt(ResourceBundle.getBundle(RESOURCES_PACKAGE+PARAMS).getString(command));
   }
 
-  private void makeValidCommands(Queue constantStack, Queue commandStack)
+  private void makeValidCommands(Stack constantStack, Stack commandStack)
       throws CommandException {
     while (!commandStack.isEmpty()) {
       double [] args;
-        String command = (String) commandStack.poll();
+        String command = (String) commandStack.pop();
         int numParams = getNumParams(command);
         args = new double[numParams];
         try {
-          for (int i = 0; i < numParams; i++) {
-            args[i] = (double) constantStack.poll();
+          for (int i = numParams-1; i >=0 ; i--) {
+            args[i] = (double) constantStack.pop();
           }
           String commandType = getCommandType(command);
           Class<?> clazz = Class.forName("slogo.Model.Commands." + commandType + "." + command + "Command");
@@ -115,7 +116,7 @@ public class Translater {
           validCommands.add(newInstance);
           // add return of the command to the constant stack
           // for nested calls (e.g. fd fd 50)
-          Method execute = clazz.getDeclaredMethod("getValue");
+          Method execute = clazz.getMethod("getValue");
           double value = (double) execute.invoke(newInstance);
           constantStack.add(value);
 
@@ -138,8 +139,8 @@ public class Translater {
   public static void main(String[] args)
       throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, IOException, CommandException {
     Translater t = new Translater();
-    t.parseText("fd fd 50");
-    //t.parseText(readFile("data/examples/simple/square.slogo"));
+    //t.parseText("fd rt 20 ");
+    t.parseText(readFile("data/examples/simple/square.slogo"));
     System.out.println(t.validCommands);
   }
 
