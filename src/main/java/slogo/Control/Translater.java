@@ -46,7 +46,7 @@ public class Translater {
   }
 
 
-  private void parseText(String program)
+  void parseText(String program)
       throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, CommandException {
     Scanner input = new Scanner(program);
     while (input.hasNextLine()) {
@@ -121,7 +121,8 @@ public class Translater {
 
         }
         catch(Exception e){
-          throw new CommandException("Not enough constants for the given command: "+ command);
+          System.out.println(e.getMessage());
+          // throw new CommandException("Not enough constants for the given command: "+ command);
         }
     }
   }

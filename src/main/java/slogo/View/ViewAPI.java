@@ -1,6 +1,7 @@
 package slogo.View;
 
 import java.lang.reflect.InvocationTargetException;
+import slogo.Control.CommandException;
 import slogo.Model.ModelExceptions;
 import slogo.Model.Turtle;
 
@@ -21,7 +22,7 @@ public interface ViewAPI {
   public void displayException(String errorMsg);
 
   public void sendFileContents(String fileContent)
-      throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, ModelExceptions;
+      throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, ModelExceptions, CommandException;
 
 
 }
