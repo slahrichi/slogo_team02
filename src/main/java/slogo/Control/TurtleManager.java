@@ -28,7 +28,8 @@ public class TurtleManager {
 
   public TurtleRecord getRecordTurtle(){
     return new TurtleRecord(currentTurtle.getTurtleX(), currentTurtle.getTurtleY(),
-        currentTurtle.getAngle(), currentTurtle.isPenDown());
+        currentTurtle.getAngle(), currentTurtle.isPenDown(), currentTurtle.getOldX(),
+        currentTurtle.getOldY(), currentTurtle.getOldAngle());
   }
 
  // public void setCommands(Collection<Command> newCommands){

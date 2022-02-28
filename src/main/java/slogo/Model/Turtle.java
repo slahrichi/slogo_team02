@@ -16,6 +16,9 @@ public class Turtle {
   private double myXPos;
   private double myYPos;
   private double myAngle;
+  private double myOldXPos;
+  private double myOldYPos;
+  private double myOldAngle;
   private Pen myPen;
   List<Command> myCommandList;
   private Canvas theCanvas;
@@ -33,13 +36,20 @@ public class Turtle {
     this.myXPos = Xpos;
     this.myYPos = Ypos;
     this.myAngle = turtleAngle;
+    this.myOldXPos = Xpos;
+    this.myOldYPos = Ypos;
+    this.myOldAngle = turtleAngle;
     this.myPen = pen;
   }
   public double getAngle() {
     return myAngle;
   }
   public void setAngle(double angle){
+    myOldAngle = myAngle;
     myAngle = angle;
+  }
+  public double getOldAngle(){
+    return myOldAngle;
   }
 
   public double getTurtleX(){
@@ -47,6 +57,12 @@ public class Turtle {
   }
   public double getTurtleY(){
     return myYPos;
+  }
+  public double getOldX(){
+    return myOldXPos;
+  }
+  public double getOldY(){
+    return myOldYPos;
   }
 
   public double getTurtleXFromCenter(){
@@ -78,6 +94,8 @@ public class Turtle {
     if(newXPos > BOUNDS.width || newYPos > BOUNDS.width){
       throw new ModelExceptions("Error with bounds");
     }
+    myOldXPos = myXPos;
+    myOldYPos = myYPos;
     myXPos = newXPos;
     myYPos = newYPos;
   }
