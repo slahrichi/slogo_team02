@@ -36,8 +36,8 @@ public class Pen {
   public boolean isMyPenDown() {
     return this.myPenDown;
   }
-  public void setPenUpOrDown(boolean penUp) {
-    this.myPenDown = isMyPenDown();
+  public void setPenDown(boolean penDown) {
+    this.myPenDown = penDown;
   }
 
   public int getPenSize() {
