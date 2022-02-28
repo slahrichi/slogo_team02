@@ -5,6 +5,7 @@ import java.util.List;
 import slogo.Model.Commands.Command;
 import slogo.Model.ModelExceptions;
 import slogo.View.AnimationHandler;
+import slogo.View.Panels.Objects.TurtleView;
 
 public class Controller {
   private Translater parser;
@@ -13,16 +14,17 @@ public class Controller {
   public Controller(){
     parser = new Translater();
     manager = new TurtleManager();
-    animation = new AnimationHandler();
+    //animation = new AnimationHandler();
   }
 
 
-  public void parseAndRunCommands(String contents)
+  public void parseAndRunCommands(String contents, TurtleView viewTurtle)
       throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, ModelExceptions, CommandException {
     parser.parseText(contents);
 
     List<Command> commands = parser.getCommands();
 
+    animation = new AnimationHandler(viewTurtle);
     for (Command command : commands){
       manager.stepTurtle(command);
       animation.createAnimation(manager.getRecordTurtle());
