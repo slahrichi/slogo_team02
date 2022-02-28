@@ -9,7 +9,7 @@ public class TitlePanel {
 
   private static final String DEFAULT_RESOURCE_PACKAGE = "/";
   private static final String TURTLE_TITLE_IMAGE = "turtlePictures/turtleTitleImage.png";
-  private static final String APPLICATION_TITLE = "Team 9 SLogo Application";
+  private static final String APPLICATION_TITLE = "Team 2 SLogo Application";
 
   private HBox titleBox;
   private ImageView titleImage;
