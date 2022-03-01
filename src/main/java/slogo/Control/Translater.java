@@ -33,7 +33,7 @@ public class Translater {
   private CommandParser syntaxParser;
   private CommandParser commandParser;
   private ParamParser paramParser;
-  private static Stack<Double> constantStack = new Stack<Double>();
+  private static Stack<Double> constantStack = new Stack<>();
   private static Stack<String> commandStack = new Stack<>();
 
   public Translater(){
@@ -48,7 +48,7 @@ public class Translater {
 
 
   void parseText(String program)
-      throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, CommandException {
+      throws CommandException {
     Scanner input = new Scanner(program);
     while (input.hasNextLine()) {
       String line = input.nextLine();
@@ -116,9 +116,14 @@ public class Translater {
           validCommands.add(newInstance);
           // add return of the command to the constant stack
           // for nested calls (e.g. fd fd 50)
-          Method execute = clazz.getMethod("getValue");
-          double value = (double) execute.invoke(newInstance);
-          constantStack.add(value);
+          if(commandStack.size() == 1){
+            continue;
+          }
+          else{
+            Method execute = clazz.getMethod("getValue");
+            double value = (double) execute.invoke(newInstance);
+            constantStack.add(value);
+          }
 
         }
         catch(Exception e){
