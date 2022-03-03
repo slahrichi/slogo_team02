@@ -57,38 +57,6 @@ class TurtleGUITest extends DukeApplicationTest {
 
   }
 
-  @Test
-  void testSave(){
-
-    clickOn(lookup("#saveFile").query());
-    assertEquals(myScriptEditor.getText(), textTest);
-
-
-  }
-  @Test
-  void testLoad(){
-
-    clickOn(lookup("#loadFile").query());
-    assertEquals(myScriptEditor.getText(), textTest);
-
-  }
-  @Test
-  void testClear(){
-
-    clickOn(lookup("#clearHistory").query());
-    assertEquals(myScriptEditor.getText(), textTest);
-
-
-  }
-  @Test
-  void testRun(){
-
-    clickOn(lookup("#playButton").query());
-    assertEquals(myScriptEditor.getText(), textTest);
-
-
-  }
-
 
 
 
