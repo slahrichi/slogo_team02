@@ -19,6 +19,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import slogo.Control.CommandException;
 import slogo.Control.Controller;
+import slogo.Control.ControllerAPI;
 import slogo.Model.ModelExceptions;
 import slogo.View.Panels.CanvasPanel;
 import slogo.View.Panels.InformationPanel;
@@ -34,7 +35,8 @@ public class slogoGUI implements ViewAPI {
   private static final String LANGUAGE_PACKAGE = "slogo.languages/";
   private String STYLESHEET;
 
-  private Controller viewControlInstance;
+
+  private ControllerAPI control;
   private TitlePanel titlePanel;
   private InputPanel inputPanel;
   private InformationPanel infoPanel;
@@ -42,12 +44,13 @@ public class slogoGUI implements ViewAPI {
   private BorderPane myRoot;
   private ResourceBundle myResources;
   private Stage myStage;
-  private Node[] subscriberList;
 
 
   public slogoGUI(Stage stage, String language) {
 
-    viewControlInstance = ViewController.getController();
+    control = new Controller(this);
+
+    //viewControlInstance = ViewController.getController();
     myStage = stage;
     myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + LANGUAGE_PACKAGE + language);
     myRoot = new BorderPane();
@@ -73,7 +76,7 @@ public class slogoGUI implements ViewAPI {
     myRoot.setTop(makeTitle());
     myRoot.setLeft(createInputPanel());
     myRoot.setCenter(createTurtleCanvas());
-    myRoot.setRight(createInformationPanel());
+    myRoot.setRight(createInformationPanel(control));
     myRoot.setBottom(createConfigButtons());
   }
 
@@ -159,9 +162,9 @@ public class slogoGUI implements ViewAPI {
 
   }
 
-  private VBox createInformationPanel() {
+  private VBox createInformationPanel(ControllerAPI control) {
 
-    infoPanel = new InformationPanel(myStage);
+    infoPanel = new InformationPanel(myStage, control);
 
     return infoPanel.getInfoBox();
 
@@ -198,14 +201,14 @@ public class slogoGUI implements ViewAPI {
       throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, ModelExceptions, CommandException {
 
 
-    viewControlInstance.parseAndRunCommands(fileContent, canvasPanel);
+    control.parseAndRunCommands(fileContent);
 
 
   }
 
   @Override
   public void notifyHistory() {
-    infoPanel.getHistoryText().setText(viewControlInstance.getHistory());
+    infoPanel.getHistoryText().setText(control.getHistory().get(0));
   }
 
   // list of subviews notified each time this command is run

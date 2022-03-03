@@ -1,5 +1,6 @@
 package slogo.Control;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -20,6 +21,7 @@ public class Controller implements ControllerAPI{
     parser = new Translater();
     manager = new TurtleManager();
     //animation = new AnimationHandler();
+    history = new ArrayList<>();
     view = gui;
   }
 
