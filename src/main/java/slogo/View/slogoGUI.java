@@ -197,11 +197,16 @@ public class slogoGUI implements ViewAPI {
 
   @Override
   public void notifyHistory() {
+    StringBuilder sb = new StringBuilder();
     for (String history : control.getHistory()){
-      infoPanel.getHistoryText().setText(history);
+      sb.append(history + "\n");
     }
+
+    infoPanel.getHistoryText().setText(sb.toString());
+
   }
 
+  @Override
   public void notifyAnimation(){
     animationHandler.createAnimation(control.getRecordTurtle());
   }
