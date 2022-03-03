@@ -13,10 +13,12 @@ public class CanvasView {
   private Canvas turtleCanvas;
   private GraphicsContext gc;
 
+  private static final int CANVAS_DIMENSIONS = 800;
+
   public CanvasView(StackPane outerPane) {
 
     canvasBox = outerPane;
-    turtleCanvas = new Canvas(800, 800);
+    turtleCanvas = new Canvas(CANVAS_DIMENSIONS, CANVAS_DIMENSIONS);
     gc = turtleCanvas.getGraphicsContext2D();
     setupCanvas(gc);
     canvasBox.getChildren().addAll(turtleCanvas);
@@ -25,7 +27,7 @@ public class CanvasView {
 
   private void setupCanvas(GraphicsContext gc){
     gc.setFill(Color.WHITE);
-    gc.fillRect(0, 0, 800, 800);
+    gc.fillRect(0, 0, CANVAS_DIMENSIONS, CANVAS_DIMENSIONS);
 
   }
 

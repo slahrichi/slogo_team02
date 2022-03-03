@@ -12,6 +12,8 @@ public class InputPanel {
   private ShellView shellView;
   private EditorView editorView;
 
+  private static final double INPUT_PROPORTION = 0.2;
+
   public InputPanel(Stage stageInput){
 
     myStage = stageInput;
@@ -24,7 +26,7 @@ public class InputPanel {
   private void setUpPanel(){
     shellView = new ShellView(sidePanel);
     editorView = new EditorView(sidePanel);
-    sidePanel.prefWidthProperty().bind(myStage.widthProperty().multiply(0.2));
+    sidePanel.prefWidthProperty().bind(myStage.widthProperty().multiply(INPUT_PROPORTION));
   }
 
   public VBox getSidePanel(){
