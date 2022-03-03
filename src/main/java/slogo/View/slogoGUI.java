@@ -157,6 +157,7 @@ public class slogoGUI implements ViewAPI {
         FileReader initial = new FileReader(fileInput.getCanonicalPath());
         String fileContents = initial.getString();
         inputPanel.getEditorView().getTextArea().setText(fileContents);
+        showMessage(AlertType.ERROR, fileContents);
       }
     } catch (SlogoException | IOException e) {
       showMessage(AlertType.ERROR, e.getMessage());
