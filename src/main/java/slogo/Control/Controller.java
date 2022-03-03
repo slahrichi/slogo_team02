@@ -21,7 +21,7 @@ public class Controller {
 
 
   public void parseAndRunCommands(String contents, CanvasPanel panelInput)
-      throws Exception {
+      throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, ModelExceptions, CommandException {
     parser.parseText(contents);
 
     List<Command> commands = parser.getCommands();
@@ -34,7 +34,7 @@ public class Controller {
   }
 
   public void parseAndRunCommandsNoView(String contents)
-      throws Exception {
+      throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, ModelExceptions, CommandException {
     parser.parseText(contents);
 
     List<Command> commands = parser.getCommands();
@@ -47,7 +47,7 @@ public class Controller {
   }
 
   public List<Command> parseAndGetCommands(String contents)
-      throws Exception {
+      throws CommandException, ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
     parser.parseText(contents);
 
     List<Command> commands = parser.getCommands();

@@ -1,7 +1,11 @@
 package slogo.View.Panels;
 
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import slogo.View.Panels.Info.BackgroundColorPane;
+import slogo.View.Panels.Info.CommandHistoryPane;
 import slogo.View.Panels.Info.VariableTitledPane;
 
 public class InformationPanel {
@@ -11,22 +15,26 @@ public class InformationPanel {
   private Stage myStage;
   private VBox infoBox;
   private VariableTitledPane variablePane;
+  private BackgroundColorPane colorPane;
+  private CommandHistoryPane historyPane;
 
 
   public InformationPanel(Stage stageInput){
 
     myStage = stageInput;
     infoBox = new VBox();
-    setUpPanel();
+    setUpPanels();
 
   }
 
-  private void setUpPanel(){
+  private void setUpPanels(){
 
-    variablePane = new VariableTitledPane(infoBox);
     infoBox.setId("infoPanel");
 
-    infoBox.getChildren().add(variablePane.getVariablePane());
+    variablePane = new VariableTitledPane(infoBox);
+    historyPane = new CommandHistoryPane(infoBox);
+    colorPane = new BackgroundColorPane(infoBox);
+
     infoBox.prefWidthProperty().bind(myStage.widthProperty().multiply(STAGE_WIDTH_PROPORTION));
 
   }
@@ -34,5 +42,7 @@ public class InformationPanel {
   public VBox getInfoBox(){
     return infoBox;
   }
+
+  public Text getHistoryText() { return historyPane.getText();}
 
 }

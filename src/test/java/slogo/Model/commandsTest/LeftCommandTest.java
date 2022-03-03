@@ -1,4 +1,4 @@
-package slogo.ModelTest.commandsTest;
+package slogo.Model.commandsTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 

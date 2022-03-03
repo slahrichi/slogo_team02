@@ -13,5 +13,6 @@ open module slogo_app {
     exports slogo.Model.Commands;
   exports slogo.Model.Commands.ControlStructures;
   exports slogo.Model.Commands.TurtleCommands;
+  exports slogo.Control;
 
 }

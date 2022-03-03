@@ -6,7 +6,7 @@ package slogo.Model.Commands;
 import slogo.Model.ModelExceptions;
 import slogo.Model.Turtle;
 
-public abstract class Command {
+public abstract class Command implements CommandAPI{
 
   private double[] parameters;
 
