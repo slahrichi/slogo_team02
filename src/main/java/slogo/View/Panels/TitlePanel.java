@@ -10,6 +10,7 @@ public class TitlePanel {
   private static final String DEFAULT_RESOURCE_PACKAGE = "/";
   private static final String TURTLE_TITLE_IMAGE = "turtlePictures/turtleTitleImage.png";
   private static final String APPLICATION_TITLE = "Team 2 SLogo Application";
+  private static final int IMAGE_DIMENSIONS = 100;
 
   private HBox titleBox;
   private ImageView titleImage;
@@ -42,8 +43,8 @@ public class TitlePanel {
 
     titleImage.setImage(
         new Image(getClass().getResource(DEFAULT_RESOURCE_PACKAGE + TURTLE_TITLE_IMAGE).toString(), true));
-    titleImage.setFitHeight(100);
-    titleImage.setFitWidth(100);
+    titleImage.setFitHeight(IMAGE_DIMENSIONS);
+    titleImage.setFitWidth(IMAGE_DIMENSIONS);
 
 
   }
