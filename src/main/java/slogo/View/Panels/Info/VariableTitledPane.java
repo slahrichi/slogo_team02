@@ -35,6 +35,7 @@ public class VariableTitledPane extends SideTitledPane {
   }
 
 
+
   @Override
   protected void addPane() {
 
@@ -45,6 +46,7 @@ public class VariableTitledPane extends SideTitledPane {
   protected void addVariable(int variable) {
 
   }
+
 
 
 

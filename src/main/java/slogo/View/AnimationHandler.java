@@ -4,7 +4,6 @@ import static slogo.View.Panels.Canvas.TurtleView.TURTLE_OFFSET;
 
 import javafx.animation.PathTransition;
 import javafx.animation.RotateTransition;
-import javafx.animation.SequentialTransition;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.shape.LineTo;
@@ -24,6 +23,8 @@ public class AnimationHandler {
   private CanvasView canvasView;
   private GraphicsContext gc;
   private Canvas turtleCanvas;
+
+  private static final int ANIMATION_DURATION = 3;
 
 
   public AnimationHandler(CanvasPanel panelInput){
@@ -53,7 +54,7 @@ public class AnimationHandler {
       gc.strokeLine(oldX + CANVAS_OFFSET, oldY + CANVAS_OFFSET, newX + CANVAS_OFFSET, newY + CANVAS_OFFSET);
     }
 
-    RotateTransition rt = new RotateTransition(Duration.seconds(3), turtleView.getTurtleImage());
+    RotateTransition rt = new RotateTransition(Duration.seconds(ANIMATION_DURATION), turtleView.getTurtleImage());
     if(turtleRecord.oldAngle() != turtleRecord.angle()){
       rt.setByAngle(turtleRecord.angle());
       rt.play();
@@ -65,7 +66,7 @@ public class AnimationHandler {
           new LineTo(newX, newY));
       // create an animation where the shape follows a path
       PathTransition pt = new PathTransition(
-          Duration.seconds(3),
+          Duration.seconds(ANIMATION_DURATION),
           path, turtleView.getTurtleImage());
       pt.play();
     }

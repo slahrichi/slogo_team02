@@ -58,4 +58,10 @@ public interface Object {
    */
   public void setColor(Paint Color);
 
+  /**
+   * Changes th e location of the object in the back end to the new location given
+   * @param newPoint
+   */
+  public void changeObjectLocation(Point newPoint)
+
 }
