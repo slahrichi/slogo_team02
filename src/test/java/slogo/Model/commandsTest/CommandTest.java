@@ -1,7 +1,6 @@
-package slogo.ModelTest.commandsTest;
+package slogo.Model.commandsTest;
 
 import slogo.Model.ModelExceptions;
-import slogo.Model.Turtle;
 
 abstract class CommandTest {
 

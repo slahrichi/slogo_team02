@@ -1,16 +1,10 @@
-package slogo.ModelTest;
+package slogo.Model;
 
-import static java.awt.Color.BLACK;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-import java.util.ArrayList;
-import java.util.List;
 import javafx.scene.shape.Line;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import slogo.Model.Canvas;
-import slogo.Model.Pen;
 import javafx.scene.paint.Color;
 
 class CanvasTest {

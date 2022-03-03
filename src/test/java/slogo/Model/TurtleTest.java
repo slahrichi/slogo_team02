@@ -1,10 +1,7 @@
-package slogo.ModelTest;
+package slogo.Model;
 
 import javafx.scene.paint.Color;
 import org.junit.jupiter.api.Test;
-import slogo.Model.ModelExceptions;
-import slogo.Model.Pen;
-import slogo.Model.Turtle;
 
 import static org.junit.jupiter.api.Assertions.*;
 
