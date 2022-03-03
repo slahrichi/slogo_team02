@@ -19,7 +19,6 @@ import util.DukeApplicationTest;
 
 class ParseAndRunTest extends DukeApplicationTest {
   private Controller controller;
-  private TurtleManager manager;
 //  private void setupTest(){
 //    controller = new Controller();
 //    manager = controller.getTurtleManager();
@@ -28,45 +27,44 @@ class ParseAndRunTest extends DukeApplicationTest {
   public void start(Stage stage){
     ViewAPI view = new slogoGUI(stage, "English");
     controller = new Controller(view);
-    manager = controller.getTurtleManager();
   }
 
   @Test
   void forwardFifty()
-      throws ModelExceptions, CommandException{
+      throws Exception {
     String inputs = "fd 50";
-    double initialX = manager.getRecordTurtle().xCord();
-    double initialY = manager.getRecordTurtle().yCord();
+    double initialX = controller.getRecordTurtle().xCord();
+    double initialY = controller.getRecordTurtle().yCord();
     controller.parseAndRunCommands(inputs);
-    assertEquals(initialX + 50 * Math.cos(Math.toRadians(manager.getRecordTurtle().angle())), manager.getRecordTurtle().xCord());
-    assertEquals(initialY + 50 * Math.sin(Math.toRadians(manager.getRecordTurtle().angle())), manager.getRecordTurtle().yCord());
+    assertEquals(initialX + 50 * Math.cos(Math.toRadians(controller.getRecordTurtle().angle())), controller.getRecordTurtle().xCord());
+    assertEquals(initialY + 50 * Math.sin(Math.toRadians(controller.getRecordTurtle().angle())), controller.getRecordTurtle().yCord());
   }
 
   @Test
   void forwardFiftyRightNinetyForwardFifty()
-      throws ModelExceptions, CommandException{
+      throws Exception {
     String inputs = "fd 50 \n rt 90 \n fd 50";
-    double initialX = manager.getRecordTurtle().xCord();
-    double initialY = manager.getRecordTurtle().yCord();
-    double initialAngle = manager.getRecordTurtle().angle();
+    double initialX = controller.getRecordTurtle().xCord();
+    double initialY = controller.getRecordTurtle().yCord();
+    double initialAngle = controller.getRecordTurtle().angle();
     controller.parseAndRunCommands(inputs);
-    assertEquals(initialAngle + 90, manager.getRecordTurtle().angle());
-    assertEquals(initialX + 50, manager.getRecordTurtle().xCord());
-    assertEquals(initialY + 50, manager.getRecordTurtle().yCord());
+    assertEquals(initialAngle + 90, controller.getRecordTurtle().angle());
+    assertEquals(initialX + 50, controller.getRecordTurtle().xCord());
+    assertEquals(initialY + 50, controller.getRecordTurtle().yCord());
   }
 
   @Test
   void forwardSumFiftyTwenty()
-      throws ModelExceptions, CommandException{
+      throws Exception {
     //setupTest();
     String inputs = "fd sum 50 20";
-    double initialX = manager.getRecordTurtle().xCord();
-    double initialY = manager.getRecordTurtle().yCord();
-    double initialAngle = manager.getRecordTurtle().angle();
+    double initialX = controller.getRecordTurtle().xCord();
+    double initialY = controller.getRecordTurtle().yCord();
+    double initialAngle = controller.getRecordTurtle().angle();
     controller.parseAndRunCommands(inputs);
-    assertEquals(initialAngle, manager.getRecordTurtle().angle());
-    assertEquals(initialX + 70 * Math.cos(Math.toRadians(manager.getRecordTurtle().angle())), manager.getRecordTurtle().xCord());
-    assertEquals(initialY + 70 * Math.sin(Math.toRadians(manager.getRecordTurtle().angle())), manager.getRecordTurtle().yCord());
+    assertEquals(initialAngle, controller.getRecordTurtle().angle());
+    assertEquals(initialX + 70 * Math.cos(Math.toRadians(controller.getRecordTurtle().angle())), controller.getRecordTurtle().xCord());
+    assertEquals(initialY + 70 * Math.sin(Math.toRadians(controller.getRecordTurtle().angle())), controller.getRecordTurtle().yCord());
   }
 
   @Test
@@ -81,7 +79,7 @@ class ParseAndRunTest extends DukeApplicationTest {
 
   @Test
   void goToXY()
-      throws ModelExceptions, CommandException, ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+      throws Exception {
    // setupTest();
     String inputs = "goto 8 6";
     controller.parseAndRunCommands(inputs);
@@ -89,8 +87,8 @@ class ParseAndRunTest extends DukeApplicationTest {
    // List<Command> commands = controller.parseAndGetCommands(inputs);
    // System.out.println(commands.get(0).toString());
 
-    assertEquals(8, manager.getRecordTurtle().xCord());
-    assertEquals(6, manager.getRecordTurtle().yCord());
+    assertEquals(8, controller.getRecordTurtle().xCord());
+    assertEquals(6, controller.getRecordTurtle().yCord());
 
   }
 
@@ -116,7 +114,7 @@ class ParseAndRunTest extends DukeApplicationTest {
     double[] testFive = {5};
     String inputs = "fd 50";
     // controller.parseAndRunCommandsNoView(inputs);
-    double initialX = manager.getRecordTurtle().xCord();
+    double initialX = controller.getRecordTurtle().xCord();
 
    // List<Command> commands = controller.parseAndGetCommands(inputs);
  //   System.out.println(commands.get(0).toString());
@@ -125,7 +123,7 @@ class ParseAndRunTest extends DukeApplicationTest {
     //Command repeatCommand = new RepeatCommand(testFive, commands);
     //repeatCommand.execute(manager.getCurrentTurtle());
 
-     assertEquals(initialX + 5*50, manager.getRecordTurtle().xCord());
+     assertEquals(initialX + 5*50, controller.getRecordTurtle().xCord());
 //    assertEquals(6, manager.getRecordTurtle().yCord());
 
   }
