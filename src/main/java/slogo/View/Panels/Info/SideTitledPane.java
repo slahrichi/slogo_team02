@@ -1,29 +1,67 @@
 package slogo.View.Panels.Info;
 
 
+import javafx.geometry.Insets;
+import javafx.scene.control.TitledPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 // will be super class for the informational titled panes
 public abstract class SideTitledPane {
 
-  private GridPane variableGrid;
+  protected static final int PANE_PADDING = 10;
+  protected static final int PANE_GAP = PANE_PADDING / 2;
+
+  private VBox sidePanel;
+  private GridPane titledGrid;
+  private TitledPane titledPane;
 
 
-    public SideTitledPane(VBox sidePanel){
+  public SideTitledPane(VBox sideInput){
+
+      sidePanel = sideInput;
+      titledPane = new TitledPane();
+      titledGrid = new GridPane();
+
+      setUpPane();
+      setUpGrid();
+
+      sidePanel.getChildren().add(titledPane);
+
+
+  }
+
+  private void setUpPane(){
+
+    titledPane.setExpanded(false);
+    titledPane.setContent(titledGrid);
+
+  }
+
+  private void setUpGrid(){
+
+    titledGrid.setPadding(new Insets(PANE_PADDING));
+    titledGrid.setHgap(PANE_GAP);
+    titledGrid.setVgap(PANE_GAP);
+
+  }
 
 
 
-
-    }
-
-  // add element method
-
-  public abstract void addPane();
+  protected abstract void addPane();
 
 
-  public abstract void addVariable(int variable);
+  protected abstract void addVariable(int variable);
 
+
+  protected TitledPane getPane(){
+    return titledPane;
+  }
+
+  protected GridPane getGridPane(){
+    return titledGrid;
+  }
 
 
 }
