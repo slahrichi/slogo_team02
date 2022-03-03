@@ -1,22 +1,20 @@
 package slogo.Control;
 
-import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
-import javafx.stage.Stage;
-import slogo.Model.Commands.Command;
+import slogo.Model.Commands.CommandAPI;
 import slogo.Model.ModelExceptions;
 import slogo.View.AnimationHandler;
-import slogo.View.Panels.Canvas.CanvasView;
-import slogo.View.Panels.Canvas.TurtleView;
-import slogo.View.Panels.CanvasPanel;
 import slogo.View.ViewAPI;
-import slogo.View.slogoGUI;
+
 
 public class Controller implements ControllerAPI{
   private Translater parser;
-  private TurtleManager manager;
+  private TurtleManagerAPI manager;
   private AnimationHandler animation;
   private ViewAPI view;
+  private List<String> history;
   public Controller(ViewAPI gui){
     parser = new Translater();
     parser = new Translater();
@@ -27,20 +25,44 @@ public class Controller implements ControllerAPI{
 
   public void parseAndRunCommands(String contents)
       throws ModelExceptions, CommandException {
+
+    updateHistory(contents);
     parser.parseText(contents);
 
-    List<Command> commands = parser.getCommands();
+    List<CommandAPI> commands = parser.getCommands();
 
+    runCommands(commands);
 
-    for (Command command : commands){
+  }
+
+  public List<String> getHistory(){
+    return history;
+  }
+
+  private List<String> makeStringList(String string){
+    return Arrays.asList(string.split("\n"));
+  }
+  private void updateHistory(String contents){
+    history.addAll(makeStringList(contents));
+  }
+
+  public TurtleRecord getRecordTurtle(){
+    return manager.getRecordTurtle();
+  }
+
+  private void runCommands(List<CommandAPI> commands) throws ModelExceptions {
+    for (CommandAPI command : commands){
       manager.stepTurtle(command);
-      view.createAnimation(manager.getRecordTurtle());
+     // view.notifyTurtle();
+//      view.createAnimation(manager.getRecordTurtle());
+
     }
   }
 
-  public TurtleManager getTurtleManager(){
-    return manager;
-  }
+
+//  public TurtleManager getTurtleManager(){
+//    return manager;
+//  }
 
 //  private void updateStep(Command command) throws ModelExceptions {
 //    manager.stepTurtle(command);

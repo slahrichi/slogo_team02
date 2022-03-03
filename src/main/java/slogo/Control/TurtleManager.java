@@ -3,12 +3,13 @@ package slogo.Control;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.paint.Color;
+import slogo.Model.Commands.CommandAPI;
 import slogo.Model.Pen;
 import slogo.Model.Commands.Command;
 import slogo.Model.ModelExceptions;
 import slogo.Model.Turtle;
 
-public class TurtleManager {
+public class TurtleManager implements TurtleManagerAPI {
   // Can make into list if we have multiple turtles
  // List<Turtle> turtles;
   Turtle currentTurtle;
@@ -22,9 +23,9 @@ public class TurtleManager {
 //    this.currentTurtle = currentTurtle;
 //  }
 
-  public Turtle getCurrentTurtle(){
-    return currentTurtle;
-  }
+  //public Turtle getCurrentTurtle(){
+  //  return currentTurtle;
+  //}
 
   public TurtleRecord getRecordTurtle(){
     return new TurtleRecord(currentTurtle.getTurtleX(), currentTurtle.getTurtleY(),
@@ -36,7 +37,7 @@ public class TurtleManager {
  //   commands.addAll(newCommands);
 //  }
 
-  public void stepTurtle(Command command) throws ModelExceptions {
+  public void stepTurtle(CommandAPI command) throws ModelExceptions {
     command.execute(currentTurtle);
   }
 }
