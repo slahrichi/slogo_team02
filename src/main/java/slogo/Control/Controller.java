@@ -1,61 +1,67 @@
 package slogo.Control;
 
-import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
-import slogo.Model.Commands.Command;
+import slogo.Model.Commands.CommandAPI;
 import slogo.Model.ModelExceptions;
 import slogo.View.AnimationHandler;
-import slogo.View.Panels.Canvas.CanvasView;
-import slogo.View.Panels.Canvas.TurtleView;
-import slogo.View.Panels.CanvasPanel;
+import slogo.View.ViewAPI;
 
-public class Controller {
+
+public class Controller implements ControllerAPI{
   private Translater parser;
-  private TurtleManager manager;
+  private TurtleManagerAPI manager;
   private AnimationHandler animation;
-  public Controller(){
+  private ViewAPI view;
+  private List<String> history;
+  public Controller(ViewAPI gui){
+    parser = new Translater();
     parser = new Translater();
     manager = new TurtleManager();
     //animation = new AnimationHandler();
+    view = gui;
+  }
+
+  public void parseAndRunCommands(String contents)
+      throws ModelExceptions, CommandException {
+
+    updateHistory(contents);
+    parser.parseText(contents);
+
+    List<CommandAPI> commands = parser.getCommands();
+
+    runCommands(commands);
+
+  }
+
+  public List<String> getHistory(){
+    return history;
   }
 
 
-  public void parseAndRunCommands(String contents, CanvasPanel panelInput)
-      throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, ModelExceptions, CommandException {
-    parser.parseText(contents);
+  private void updateHistory(String contents){
+    history.addAll(Arrays.asList(contents.split("\n")));
+    view.notifyHistory();
+  }
 
-    List<Command> commands = parser.getCommands();
+  public TurtleRecord getRecordTurtle(){
+    return manager.getRecordTurtle();
+  }
 
-    animation = new AnimationHandler(panelInput);
-    for (Command command : commands){
+  private void runCommands(List<CommandAPI> commands) throws ModelExceptions {
+    for (CommandAPI command : commands){
       manager.stepTurtle(command);
-      animation.createAnimation(manager.getRecordTurtle());
+      // view.notifyTurtle();
+//      view.createAnimation(manager.getRecordTurtle());
+
     }
   }
 
-  public void parseAndRunCommandsNoView(String contents)
-      throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, ModelExceptions, CommandException {
-    parser.parseText(contents);
 
-    List<Command> commands = parser.getCommands();
-
-  //  animation = new AnimationHandler(panelInput);
-    for (Command command : commands) {
-      manager.stepTurtle(command);
-//      animation.createAnimation(manager.getRecordTurtle());
-    }
-  }
-
-  public List<Command> parseAndGetCommands(String contents)
-      throws CommandException, ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-    parser.parseText(contents);
-
-    List<Command> commands = parser.getCommands();
-    return commands;
-  }
-  public TurtleManager getTurtleManager(){
-    return manager;
-  }
+//  public TurtleManager getTurtleManager(){
+//    return manager;
+//  }
 
 //  private void updateStep(Command command) throws ModelExceptions {
 //    manager.stepTurtle(command);
