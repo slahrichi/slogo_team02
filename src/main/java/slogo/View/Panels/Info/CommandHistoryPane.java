@@ -3,12 +3,13 @@ package slogo.View.Panels.Info;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import slogo.Control.ControllerAPI;
 
 public class CommandHistoryPane extends SideTitledPane {
 
   private Text commandHistory;
 
-  public CommandHistoryPane(VBox sideInput) {
+  public CommandHistoryPane(VBox sideInput, ControllerAPI control) {
 
     super(sideInput);
 

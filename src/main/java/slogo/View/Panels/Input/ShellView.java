@@ -11,7 +11,7 @@ import javafx.scene.layout.VBox;
 import slogo.Control.CommandException;
 import slogo.Control.Controller;
 import slogo.Model.ModelExceptions;
-import slogo.View.ViewController;
+//import slogo.View.ViewController;
 
 
 public class ShellView {
@@ -29,7 +29,7 @@ public class ShellView {
 
   public ShellView(VBox sidePanel) {
 
-    shellControllerInstance = ViewController.getController();
+    //shellControllerInstance = ViewController.getController();
     shellTitle = new Label("Shell");
     shellArea = new TextArea();
     sidePanel.getChildren().addAll(shellTitle, shellArea);
