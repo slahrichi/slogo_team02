@@ -2,11 +2,11 @@ package slogo.Control;
 
 import java.util.List;
 import slogo.Model.ModelExceptions;
-import slogo.View.Panels.CanvasPanel;
 
-public interface ControllerAPI {
+public interface ControllerViewAPI {
 
-  void parseAndRunCommands(String contents) throws ModelExceptions, CommandException ;
-  List<String> getHistory();
+  void parseAndRunCommands(String contents) throws Exception;
   TurtleRecord getRecordTurtle();
+  List<String> getHistory();
+  void resetHistory();
 }
