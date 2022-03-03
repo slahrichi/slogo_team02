@@ -19,6 +19,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import slogo.Control.CommandException;
 import slogo.Control.Controller;
+import slogo.Control.ControllerViewAPI;
+import slogo.Control.TurtleRecord;
 import slogo.Model.ModelExceptions;
 import slogo.View.Panels.CanvasPanel;
 import slogo.View.Panels.InformationPanel;
@@ -34,7 +36,8 @@ public class slogoGUI implements ViewAPI {
   private static final String LANGUAGE_PACKAGE = "slogo.languages/";
   private String STYLESHEET;
 
-  private Controller viewControlInstance;
+
+  private ControllerViewAPI control;
   private TitlePanel titlePanel;
   private InputPanel inputPanel;
   private InformationPanel infoPanel;
@@ -42,12 +45,14 @@ public class slogoGUI implements ViewAPI {
   private BorderPane myRoot;
   private ResourceBundle myResources;
   private Stage myStage;
-  private Node[] subscriberList;
+  private AnimationHandler animationHandler;
 
 
   public slogoGUI(Stage stage, String language) {
 
-    viewControlInstance = ViewController.getController();
+    control = new Controller(this);
+
+    //viewControlInstance = ViewController.getController();
     myStage = stage;
     myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + LANGUAGE_PACKAGE + language);
     myRoot = new BorderPane();
@@ -55,8 +60,7 @@ public class slogoGUI implements ViewAPI {
         new Background(new BackgroundFill(Color.LIGHTGRAY, new CornerRadii(0), Insets.EMPTY)));
     STYLESHEET = "stylesheet.css";
     displayApp();
-
-
+    animationHandler = new AnimationHandler(canvasPanel);
   }
 
   public Scene makeScene(int width, int height) {
@@ -73,7 +77,7 @@ public class slogoGUI implements ViewAPI {
     myRoot.setTop(makeTitle());
     myRoot.setLeft(createInputPanel());
     myRoot.setCenter(createTurtleCanvas());
-    myRoot.setRight(createInformationPanel());
+    myRoot.setRight(createInformationPanel(control));
     myRoot.setBottom(createConfigButtons());
   }
 
@@ -114,19 +118,7 @@ public class slogoGUI implements ViewAPI {
         event -> {
           try {
             sendFileContents(inputPanel.getEditorView().getContents());
-          } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-          } catch (InvocationTargetException e) {
-            e.printStackTrace();
-          } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-          } catch (InstantiationException e) {
-            e.printStackTrace();
-          } catch (IllegalAccessException e) {
-            e.printStackTrace();
-          } catch (ModelExceptions e) {
-            e.printStackTrace();
-          } catch (CommandException e) {
+          } catch (Exception e) {
             e.printStackTrace();
           }
         }, myResources);
@@ -159,9 +151,9 @@ public class slogoGUI implements ViewAPI {
 
   }
 
-  private VBox createInformationPanel() {
+  private VBox createInformationPanel(ControllerViewAPI control) {
 
-    infoPanel = new InformationPanel(myStage);
+    infoPanel = new InformationPanel(myStage, control);
 
     return infoPanel.getInfoBox();
 
@@ -195,17 +187,23 @@ public class slogoGUI implements ViewAPI {
 
   @Override
   public void sendFileContents(String fileContent)
-      throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, ModelExceptions, CommandException {
+      throws Exception {
 
 
-    viewControlInstance.parseAndRunCommands(fileContent, canvasPanel);
+    control.parseAndRunCommands(fileContent);
 
 
   }
 
   @Override
   public void notifyHistory() {
-    infoPanel.getHistoryText().setText(viewControlInstance.getHistory());
+    for (String history : control.getHistory()){
+      infoPanel.getHistoryText().setText(history);
+    }
+  }
+
+  public void notifyAnimation(){
+    animationHandler.createAnimation(control.getRecordTurtle());
   }
 
   // list of subviews notified each time this command is run

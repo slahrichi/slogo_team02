@@ -1,6 +1,5 @@
 package slogo.View.Panels.Info;
 
-import javafx.scene.control.TitledPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 

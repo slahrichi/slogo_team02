@@ -1,9 +1,9 @@
 package slogo.View.Panels;
 
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import slogo.Control.ControllerViewAPI;
 import slogo.View.Panels.Info.BackgroundColorPane;
 import slogo.View.Panels.Info.CommandHistoryPane;
 import slogo.View.Panels.Info.VariableTitledPane;
@@ -17,13 +17,15 @@ public class InformationPanel {
   private VariableTitledPane variablePane;
   private BackgroundColorPane colorPane;
   private CommandHistoryPane historyPane;
+  private ControllerViewAPI control;
 
 
-  public InformationPanel(Stage stageInput){
+  public InformationPanel(Stage stageInput, ControllerViewAPI controlInput){
 
     myStage = stageInput;
     infoBox = new VBox();
     setUpPanels();
+    control = controlInput;
 
   }
 

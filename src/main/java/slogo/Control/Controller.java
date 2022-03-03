@@ -1,30 +1,28 @@
 package slogo.Control;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import slogo.Model.Commands.CommandAPI;
 import slogo.Model.ModelExceptions;
-import slogo.View.AnimationHandler;
 import slogo.View.ViewAPI;
 
 
-public class Controller implements ControllerAPI{
+public class Controller implements ControllerViewAPI {
   private Translater parser;
   private TurtleManagerAPI manager;
-  private AnimationHandler animation;
   private ViewAPI view;
   private List<String> history;
   public Controller(ViewAPI gui){
     parser = new Translater();
     parser = new Translater();
     manager = new TurtleManager();
-    //animation = new AnimationHandler();
+    resetHistory();
     view = gui;
   }
 
   public void parseAndRunCommands(String contents)
-      throws ModelExceptions, CommandException {
+      throws Exception {
 
     updateHistory(contents);
     parser.parseText(contents);
@@ -37,6 +35,9 @@ public class Controller implements ControllerAPI{
 
   public List<String> getHistory(){
     return history;
+  }
+  public void resetHistory(){
+    history = new ArrayList<>();
   }
 
 
@@ -53,8 +54,7 @@ public class Controller implements ControllerAPI{
     for (CommandAPI command : commands){
       manager.stepTurtle(command);
       // view.notifyTurtle();
-//      view.createAnimation(manager.getRecordTurtle());
-
+      view.notifyAnimation();
     }
   }
 
