@@ -1,7 +1,6 @@
 package slogo.Control;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import slogo.Model.Commands.CommandAPI;
 import slogo.Model.ModelExceptions;
