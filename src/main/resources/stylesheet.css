@@ -54,7 +54,8 @@
   -fx-font-family: Consolas;
 }
 
-#variablePane {
+
+#infoPanel {
   -fx-font-size: 14pt;
 }
 
