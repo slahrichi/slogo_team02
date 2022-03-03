@@ -1,5 +1,7 @@
 package slogo.View;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -7,6 +9,8 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -16,12 +20,16 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import slogo.Control.CommandException;
 import slogo.Control.Controller;
 import slogo.Control.ControllerViewAPI;
 import slogo.Control.TurtleRecord;
 import slogo.Model.ModelExceptions;
+import slogo.View.Configuration.FileReader;
+import slogo.View.Exceptions.SlogoException;
 import slogo.View.Panels.CanvasPanel;
 import slogo.View.Panels.InformationPanel;
 import slogo.View.Panels.InputPanel;
@@ -36,7 +44,7 @@ public class slogoGUI implements ViewAPI {
   private static final String LANGUAGE_PACKAGE = "slogo.languages/";
   private String STYLESHEET;
 
-
+  public  final FileChooser FILE_CHOOSER = createChooser("*.slogo");
   private ControllerViewAPI control;
   private TitlePanel titlePanel;
   private InputPanel inputPanel;
@@ -140,6 +148,18 @@ public class slogoGUI implements ViewAPI {
   }
 
   private void loadFilePressed() {
+
+    try {
+      File fileInput = FILE_CHOOSER.showOpenDialog(new Stage());
+      if (fileInput != null) {
+        FileReader initial = new FileReader(fileInput.getCanonicalPath());
+        String fileContents = initial.getString();
+        inputPanel.getEditorView().getTextArea().setText(fileContents);
+      }
+    } catch (SlogoException | IOException e) {
+      showMessage(AlertType.ERROR, e.getMessage());
+    }
+
   }
 
 
@@ -156,6 +176,17 @@ public class slogoGUI implements ViewAPI {
     infoPanel = new InformationPanel(myStage, control);
 
     return infoPanel.getInfoBox();
+
+  }
+
+  private FileChooser createChooser(String extension){
+    FileChooser fileChooser = new FileChooser();
+    fileChooser.setTitle("Open Data File");
+    fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
+    fileChooser.getExtensionFilters().setAll(
+        new ExtensionFilter("Text Files", extension));
+
+    return fileChooser;
 
   }
 
@@ -211,12 +242,13 @@ public class slogoGUI implements ViewAPI {
     animationHandler.createAnimation(control.getRecordTurtle());
   }
 
-  // list of subviews notified each time this command is run
+  @Override
+  public void showMessage(AlertType type, String msg){
 
 
-  // super class has an instance of the controller
-  // main view becomes combine subviews total
-  // singleton design pattern or mediator design pattern possibility to mention on the design analysis
+  }
+
+
 
 
 }
