@@ -10,10 +10,6 @@ import slogo.Model.Commands.Command;
  */
 public class Turtle {
 
-  private String DEFAULT_IMAGE;
-  private int TURTLE_SIZE;
-  //public double STARTING_TURTLE_ANGLE;
-
   private double myXPos;
   private double myYPos;
   private double myAngle;
@@ -21,14 +17,13 @@ public class Turtle {
   private double myOldYPos;
   private double myOldAngle;
   private Pen myPen;
-  List<Command> myCommandList;
 
 
   // Change this to the Bounds of the screen, get from a resource file
-  public static final Dimension BOUNDS= Main.DEFAULT_SIZE;
+  public Dimension BOUNDS= Main.DEFAULT_SIZE;
 
   // Initiliaze Centre of Screen Coordinates, get from a resource file.
-  public static Point CENTER_OF_SCREEN ;
+  public final Point CENTER_OF_SCREEN = new Point(500, 600);
 
 
 
@@ -185,5 +180,13 @@ public class Turtle {
   public boolean isTurtleShowing(){
     return true;
   }
+
+  //for testing purposes=
+  /**
+   * turns the turtle by the amount in parameter
+   * @param angle
+   */
+  public void turn(double angle){myAngle += angle;}
+
 
 }

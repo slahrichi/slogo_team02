@@ -55,11 +55,11 @@ public abstract class SideTitledPane {
   protected abstract void addVariable(int variable);
 
 
-  protected TitledPane getPane(){
+  public TitledPane getPane(){
     return titledPane;
   }
 
-  protected GridPane getGridPane(){
+  public GridPane getGridPane(){
     return titledGrid;
   }
 

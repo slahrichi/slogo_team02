@@ -23,15 +23,11 @@ public class Pen {
    * @param color : color of pen, the color that the pen draws with
    * @param penDown : the boolean value of if the pen is down
    * @param size : size of the pen
-   * @param PenX : Pen's X coordinate
-   * @param PenY : pen's Y coordinate
    */
-  public Pen(Color color, boolean penDown, int size, double PenX, double PenY) {
+  public Pen(Color color, boolean penDown, int size) {
     this.penColor = color;
     this.myPenDown = penDown;
-    this.myPenSize = size;
-    this.myPenX = PenX;
-    this.myPenY= PenY;
+    this.myPenSize = size;;
 
   }
 
@@ -55,22 +51,6 @@ public class Pen {
   public void setPenSize(int writingSize) {
     this.myPenSize = writingSize;
   }
-
-//  public void changePenLocation(double newX,double newY){
-//    this.myPenX = newX;
-//    this.myPenY = newY;
-//
-//  }
-
-//  private void draw(Command givenCommand){
-//    setPenUpOrDown(false);
-//    //move the pen so that it draws a line
-//
-//    setPenUpOrDown(true);
-//
-//
-//  }
-
 
 
 }
