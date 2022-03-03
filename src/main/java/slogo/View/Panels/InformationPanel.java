@@ -2,6 +2,7 @@ package slogo.View.Panels;
 
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import slogo.View.Panels.Info.BackgroundColorPane;
 import slogo.View.Panels.Info.CommandHistoryPane;
@@ -41,5 +42,7 @@ public class InformationPanel {
   public VBox getInfoBox(){
     return infoBox;
   }
+
+  public Text getHistoryText() { return historyPane.getText();}
 
 }

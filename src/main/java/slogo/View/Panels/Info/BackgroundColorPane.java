@@ -1,7 +1,9 @@
 package slogo.View.Panels.Info;
 
+import java.awt.Color;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.GridPane;
@@ -9,9 +11,12 @@ import javafx.scene.layout.VBox;
 
 public class BackgroundColorPane extends SideTitledPane{
 
+  ColorPicker colorPicker;
+
   public BackgroundColorPane(VBox sideInput){
     super(sideInput);
 
+    colorPicker = new ColorPicker();
 
     setUpColorPane();
     setUpColorGrid();
