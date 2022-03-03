@@ -36,8 +36,8 @@ public class CommandHistoryPane extends SideTitledPane {
 
   }
 
-  public void updateHistory(String history) {
-
+  public Text getText() {
+    return commandHistory;
   }
 
   @Override
@@ -49,5 +49,6 @@ public class CommandHistoryPane extends SideTitledPane {
   protected void addVariable(int variable) {
 
   }
+
 }
 

@@ -203,6 +203,11 @@ public class slogoGUI implements ViewAPI {
 
   }
 
+  @Override
+  public void notifyHistory() {
+    infoPanel.getHistoryText().setText(viewControlInstance.getHistory());
+  }
+
   // list of subviews notified each time this command is run
 
 

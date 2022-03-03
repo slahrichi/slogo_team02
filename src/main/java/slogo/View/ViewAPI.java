@@ -24,5 +24,6 @@ public interface ViewAPI {
   public void sendFileContents(String fileContent)
       throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, ModelExceptions, CommandException;
 
+  public void notifyHistory();
 
 }
