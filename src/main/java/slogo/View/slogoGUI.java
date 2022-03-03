@@ -42,6 +42,7 @@ public class slogoGUI implements ViewAPI {
   private BorderPane myRoot;
   private ResourceBundle myResources;
   private Stage myStage;
+  private Node[] subscriberList;
 
 
   public slogoGUI(Stage stage, String language) {
@@ -54,6 +55,7 @@ public class slogoGUI implements ViewAPI {
         new Background(new BackgroundFill(Color.LIGHTGRAY, new CornerRadii(0), Insets.EMPTY)));
     STYLESHEET = "stylesheet.css";
     displayApp();
+
 
   }
 
@@ -201,7 +203,12 @@ public class slogoGUI implements ViewAPI {
 
   }
 
+  @Override
+  public void notifyHistory() {
+    infoPanel.getHistoryText().setText(viewControlInstance.getHistory());
+  }
 
+  // list of subviews notified each time this command is run
 
 
   // super class has an instance of the controller
