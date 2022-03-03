@@ -39,11 +39,10 @@ public class Controller implements ControllerAPI{
     return history;
   }
 
-  private List<String> makeStringList(String string){
-    return Arrays.asList(string.split("\n"));
-  }
+
   private void updateHistory(String contents){
-    history.addAll(makeStringList(contents));
+    history.addAll(Arrays.asList(contents.split("\n")));
+    view.notifyHistory();
   }
 
   public TurtleRecord getRecordTurtle(){
