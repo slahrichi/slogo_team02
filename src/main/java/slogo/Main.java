@@ -21,7 +21,7 @@ public class Main extends Application {
   // useful names for constant values used
   public static final String TITLE = "Slogo Application";
   public static final String LANGUAGE = "English";
-  public static final Dimension DEFAULT_SIZE = new Dimension(1000, 800);
+  public static final Dimension DEFAULT_SIZE = new Dimension(3000, 2000);
   private static final String LANGUAGE_RESOURCE_PATH = "slogo.languages.";
   private static final String EXAMPLE_PROGRAMS_PATH = "/examples";
   public static final String INITIAL_SIMULATION = "data/testSimulations/spreadingFireEDGE4.xml";
@@ -36,7 +36,7 @@ public class Main extends Application {
     stage.setTitle(TITLE);
     // add our user interface components to Frame and show it
     stage.setScene(scene);
-    stage.setFullScreen(true);
+    //stage.setFullScreen(true);
     stage.show();
 
   }
