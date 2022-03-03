@@ -8,22 +8,23 @@ import slogo.Model.Turtle;
 public interface ViewAPI {
 
 
-  public void clearConsole();
+  void clearConsole();
 
 
-  public void clearDisplay();
+  void clearDisplay();
 
-  public void clearHistory();
-
-
-  public void changeBackgroundColor();
+  void clearHistory();
 
 
-  public void displayException(String errorMsg);
+  void changeBackgroundColor();
 
-  public void sendFileContents(String fileContent)
-      throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, ModelExceptions, CommandException;
 
-  public void notifyHistory();
+  void displayException(String errorMsg);
 
+  void sendFileContents(String fileContent)
+      throws Exception;
+
+  void notifyHistory();
+
+  void notifyAnimation();
 }
