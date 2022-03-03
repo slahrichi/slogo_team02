@@ -12,7 +12,7 @@ class CanvasTest {
 
   @Test
   void createLineTest() {
-    Pen testPen = new Pen(Color.BLACK,false, 1, 50.0, 50.0);
+    Pen testPen = new Pen(Color.BLACK,false, 1);
     Canvas testCanvas = new Canvas(100.0, 100.0, Color.WHITE);
     testCanvas.createLine(testPen, 50.0, 50.0, 75.0, 75.0);
     Line lineCreated = testCanvas.allLines.get(0);
@@ -24,7 +24,7 @@ class CanvasTest {
 
   @Test
   void removeLinesTest() {
-    Pen testPen = new Pen(Color.BLACK,false, 1, 50.0, 50.0);
+    Pen testPen = new Pen(Color.BLACK,false, 1);
     Canvas testCanvas = new Canvas(100.0, 100.0, Color.WHITE);
     testCanvas.createLine(testPen, 50.0, 50.0, 75.0, 75.0);
     testCanvas.createLine(testPen, 60.0, 60.0, 75.0, 75.0);
