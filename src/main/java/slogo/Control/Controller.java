@@ -2,57 +2,42 @@ package slogo.Control;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import javafx.stage.Stage;
 import slogo.Model.Commands.Command;
 import slogo.Model.ModelExceptions;
 import slogo.View.AnimationHandler;
 import slogo.View.Panels.Canvas.CanvasView;
 import slogo.View.Panels.Canvas.TurtleView;
 import slogo.View.Panels.CanvasPanel;
+import slogo.View.ViewAPI;
+import slogo.View.slogoGUI;
 
-public class Controller {
+public class Controller implements ControllerAPI{
   private Translater parser;
   private TurtleManager manager;
   private AnimationHandler animation;
-  public Controller(){
+  private ViewAPI view;
+  public Controller(ViewAPI gui){
+    parser = new Translater();
     parser = new Translater();
     manager = new TurtleManager();
     //animation = new AnimationHandler();
+    view = gui;
   }
 
-
-  public void parseAndRunCommands(String contents, CanvasPanel panelInput)
-      throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, ModelExceptions, CommandException {
+  public void parseAndRunCommands(String contents)
+      throws ModelExceptions, CommandException {
     parser.parseText(contents);
 
     List<Command> commands = parser.getCommands();
 
-    animation = new AnimationHandler(panelInput);
+
     for (Command command : commands){
       manager.stepTurtle(command);
-      animation.createAnimation(manager.getRecordTurtle());
+      view.createAnimation(manager.getRecordTurtle());
     }
   }
 
-  public void parseAndRunCommandsNoView(String contents)
-      throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, ModelExceptions, CommandException {
-    parser.parseText(contents);
-
-    List<Command> commands = parser.getCommands();
-
-  //  animation = new AnimationHandler(panelInput);
-    for (Command command : commands) {
-      manager.stepTurtle(command);
-//      animation.createAnimation(manager.getRecordTurtle());
-    }
-  }
-
-  public List<Command> parseAndGetCommands(String contents)
-      throws CommandException, ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-    parser.parseText(contents);
-
-    List<Command> commands = parser.getCommands();
-    return commands;
-  }
   public TurtleManager getTurtleManager(){
     return manager;
   }
