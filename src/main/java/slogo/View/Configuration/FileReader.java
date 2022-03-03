@@ -1,23 +1,26 @@
 package slogo.View.Configuration;
 
-import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class FileReader {
 
-  private File myFile;
   private String fileContents;
+  private Path fileName;
 
-  public FileReader(String file){
+  public FileReader(String file) throws IOException {
 
-    myFile = new File(file);
+    fileName = Path.of(file);
     parseFile();
 
   }
 
-  private void parseFile(){
+  private void parseFile() throws IOException {
 
-    fileContents = myFile.toString();
+    fileContents = Files.readString(fileName);
     System.out.println(fileContents);
+    ;
 
   }
 

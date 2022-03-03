@@ -23,8 +23,8 @@ public class ShellView {
   private int currentCommandIndex = -1;
 
   private final String headCode = "slogo_team02 % ";
-  private final int shellColumnSize = 15;
-  private final int shellRowSize = 10;
+  private static final int shellColumnSize = 15;
+  private static final int shellRowSize = 10;
 
 
   public ShellView(VBox sidePanel) {
@@ -45,33 +45,14 @@ public class ShellView {
     shellArea.setPrefRowCount(shellRowSize);
     shellArea.setId("textArea");
 
-    shellArea.setOnKeyPressed(e -> {
-      try {
-        shellKeyPress(e);
-      } catch (ModelExceptions ex) {
-        ex.printStackTrace();
-      } catch (ClassNotFoundException ex) {
-        ex.printStackTrace();
-      } catch (InvocationTargetException ex) {
-        ex.printStackTrace();
-      } catch (NoSuchMethodException ex) {
-        ex.printStackTrace();
-      } catch (InstantiationException ex) {
-        ex.printStackTrace();
-      } catch (IllegalAccessException ex) {
-        ex.printStackTrace();
-      } catch (CommandException ex) {
-        ex.printStackTrace();
-      }
-    });
+    shellArea.setOnKeyPressed(e -> shellKeyPress(e));
     shellArea.setOnMouseClicked(e -> shellArea.positionCaret(shellArea.getText().length()));
     shellArea.addEventHandler(KeyEvent.KEY_PRESSED, evt -> backSpacePressed(evt));
     shellArea.appendText(headCode);
 
   }
 
-  private void shellKeyPress(KeyEvent e)
-      throws ModelExceptions, ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, CommandException {
+  private void shellKeyPress(KeyEvent e){
 
     // need to create key events for left, right, up, down
     // need to connect to the history of commands
@@ -103,8 +84,7 @@ public class ShellView {
   }
 
 
-  private void enterKeyPressed()
-      throws ModelExceptions, ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, CommandException {
+  private void enterKeyPressed(){
     String command = getCommand();
     if(!command.equals("")){
       commandHistory.add(command);
@@ -113,7 +93,6 @@ public class ShellView {
     shellArea.appendText(headCode);
     System.out.println(commandHistory);
 
-    // give this string to the parser code here
     //shellControllerInstance.parseAndRunCommands(command);
 
   }

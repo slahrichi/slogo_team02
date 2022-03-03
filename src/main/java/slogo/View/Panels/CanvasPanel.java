@@ -7,10 +7,12 @@ import slogo.View.Panels.Canvas.TurtleView;
 
 public class CanvasPanel {
 
-  StackPane canvasPane;
-  TurtleView turtleView;
-  CanvasView canvasView;
-  Stage myStage;
+  private StackPane canvasPane;
+  private TurtleView turtleView;
+  private CanvasView canvasView;
+  private Stage myStage;
+
+  private static final double WIDTH_PROPORTION = 0.6;
 
   public CanvasPanel(Stage stageInput){
 
@@ -27,7 +29,7 @@ public class CanvasPanel {
   private void setUpCanvasPanel(){
 
     canvasPane.setId("canvasBox");
-    canvasPane.prefWidthProperty().bind(myStage.widthProperty().multiply(0.6));
+    canvasPane.prefWidthProperty().bind(myStage.widthProperty().multiply(WIDTH_PROPORTION));
 
 
   }
