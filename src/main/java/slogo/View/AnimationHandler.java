@@ -4,7 +4,6 @@ import static slogo.View.Panels.Canvas.TurtleView.TURTLE_OFFSET;
 
 import javafx.animation.PathTransition;
 import javafx.animation.RotateTransition;
-import javafx.animation.SequentialTransition;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.shape.LineTo;

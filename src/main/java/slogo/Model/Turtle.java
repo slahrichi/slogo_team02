@@ -22,7 +22,7 @@ public class Turtle {
   private double myOldAngle;
   private Pen myPen;
   List<Command> myCommandList;
-  private Canvas theCanvas;
+
 
   // Change this to the Bounds of the screen, get from a resource file
   public static final Dimension BOUNDS= Main.DEFAULT_SIZE;
