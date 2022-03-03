@@ -7,16 +7,12 @@ import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
-import java.util.Queue;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.Stack;
 import java.util.regex.Pattern;
-import slogo.Model.Commands.Command;
 
 public class Translater {
 
@@ -88,77 +84,6 @@ public class Translater {
     }
   }
 
-//  void parseParamsTest(Object [] args)
-//      throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException, ClassNotFoundException {
-//    for (int i = 0; i < args.length; i++) {
-//      Object[] params;
-//      String token = (String) args[i];
-//      if (syntaxParser.getSymbol(token).equals("UserCommand")) {
-//        String commandType = getCommandType(token);
-//        int numParams = getNumParams(token);
-//        params = new Object[numParams];
-//        for (int j = 0; j < numParams; j++) {
-//          params[j] = (double) args[i + j + 1];
-//          Class<?> clazz = Class.forName(
-//              "slogo.Model.Commands." + commandType + "." + token + "Command");
-//          Class<?>[] type = {double[].class};
-//          Constructor<?> cons = clazz.getConstructor(type);
-//          Object[] obj = {args[i + 1]};
-//          Object newInstance = cons.newInstance(obj);
-//          Method execute = clazz.getMethod("getValue");
-//          double value = (double) execute.invoke(newInstance);
-//          if (args[i + 1]
-//              != null) { //if there is no other command coming up, replace the command with its return for the next one to consume
-//            args[i] = value;
-//          }
-//
-//        }
-//      }
-//      else if (syntaxParser.getSymbol(token).equals("Constant")) {
-//        continue;
-//      }
-//      }
-//    }
-
-
-//  void makeValidCommandsTest(List<String> allCommands) {
-//    for (String token : allCommands) {
-//      if (syntaxParser.getSymbol(token).equals("UserCommand")) {
-//        double[] args;
-//        int numParams = getNumParams(token);
-//        args = new double[numParams];
-//        try {
-//          for (int i = 0; i < numParams; i++) {
-//            args[i] = allCommands.next//next
-//            parseParams(args);
-//          }
-//          String commandType = getCommandType(command);
-//          Class<?> clazz = Class.forName(
-//              "slogo.Model.Commands." + commandType + "." + command + "Command");
-//          Class<?>[] type = {double[].class};
-//          Constructor<?> cons = clazz.getConstructor(type);
-//          Object[] obj = {args};
-//          Object newInstance = cons.newInstance(obj);
-//          validCommands.add(newInstance);
-//          // add return of the command to the constant stack
-//          // for nested calls (e.g. fd fd 50)
-//          if (commandStack.size() == 1) {
-//            continue;
-//          } else {
-//            Method execute = clazz.getMethod("getValue");
-//            double value = (double) execute.invoke(newInstance);
-//            constantStack.add(value);
-//          }
-//
-//        } else if (syntaxParser.getSymbol(token).equals("Constant")) {
-//          // add to constant stack
-//          constantStack.add(Double.parseDouble(token));
-//        }
-//      }
-//    }
-//  }
-
-
   /**
    * @param userCommands a String of the commands the user passes
    * @return a comment-free version of the same String
@@ -191,23 +116,16 @@ public class Translater {
   void parseText(String program) throws Exception {
     program = removeComments(program);
     for (String token : program.split(WHITESPACE)) {
-      //later use reflection to do this too
       if (syntaxParser.getSymbol(token).equals("UserCommand")) {
-        // add to command stack
         String currentCommand = commandParser.getSymbol(token);
         int numParams = getNumParams(currentCommand);
-        if (constantStack.peek() == null) { // no parameters in stack waiting
-          continue;
+        if (constantStack.peek() == null || constantStack.size() < numParams) { // no/not enough parameters in stack waiting
+          commandStack.add(currentCommand);
+          continue; //does this go out of everything and advance the for String token loop?
         }
-        double[] args = new double[numParams];
-        try {
-          for (int i = 0; i < numParams; i++) {
-            args[i] = constantStack.pop().getValue();
-          }
-        } catch (Exception e) {
-          continue; // didnt find enough constants in the constantStack
+        else if (constantStack.size() == numParams){
+          makeCommandAndPopFromStack(currentCommand, numParams);
         }
-        commandStack.add(currentCommand);
         //new CommandMaker(currentCommand).makeCommand(validCommands);
       }
       // if there are constants, what do I do?
@@ -220,69 +138,92 @@ public class Translater {
       else if (syntaxParser.getSymbol(token).equals("Constant")) {
         // check if command waiting
         if (commandStack.isEmpty()) {
-          continue;
+          constantStack.add(new Argument(token, Double.parseDouble(token)));
         }
         else {
           String previousCommand = commandStack.peek();
           Argument currentConstant = constantStack.peek();
           int numParams = getNumParams(previousCommand);
           if (numParams == 1) {
-            double[] args;
-            args = new double[numParams];
-            try {
-              for (int i = 0; i < numParams; i++) {
-                args[i] = constantStack.pop().getValue();
-              }
-              addToCommandStack(previousCommand, args);
-            }
-            catch (Exception e) {
-              System.out.println(e.getMessage());
-              // throw new CommandException("Not enough constants for the given command: "+ command);
-            }
+            makeCommandAndPopFromStack(previousCommand, numParams);
           }
-          // add to constant stack
-          constantStack.add(new Argument(previousCommand, currentConstant.getValue()));
+          else{
+            constantStack.add(new Argument(previousCommand, currentConstant.getValue()));
+          }
         }
       }
     }
   }
 
-  private void addToCommandStack(String previousCommand, double[] args)
+  /**
+   * creates command object using the double[] args
+   * adds it to validCommands list and constantStack
+   * @param command command that hasn't been created
+   * @param args
+   * @throws ClassNotFoundException
+   * @throws NoSuchMethodException
+   * @throws InvocationTargetException
+   * @throws InstantiationException
+   * @throws IllegalAccessException
+   */
+  private void addToConstantStack(String command, double[] args)
       throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
-    String commandType = getCommandType(previousCommand);
+    double value = addToValidCommandsListAndReturnValue(command, args);
+    constantStack.add(new Argument(command, value));
+  }
+
+  private double addToValidCommandsListAndReturnValue(String command, double[] args)
+      throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException{
+    String commandType = getCommandType(command);
     Class<?> clazz = Class.forName(
-        "slogo.Model.Commands." + commandType + "." + previousCommand + "Command");
+        "slogo.Model.Commands." + commandType + "." + command + "Command");
     Class<?>[] type = {double[].class};
     Constructor<?> cons = clazz.getConstructor(type);
     Object[] obj = {args};
     Object newInstance = cons.newInstance(obj);
     validCommands.add(newInstance);
-    // add return of the command to the constant stack
-    // for nested calls (e.g. fd fd 50)
     Method execute = clazz.getMethod("getValue");
     double value = (double) execute.invoke(newInstance);
-    constantStack.add(new Argument(previousCommand, value));
+    return value;
   }
 
-
-  private void makeCommand(String command){
-
-  }
-
-  /**
-   * using the Decorator pattern to hide the instanceOf from the main code and improve readability
-   */
-  private class CommandMaker {
-
-    private String currentCommand;
-
-    public CommandMaker(String currentCommand) {
-      this.currentCommand = currentCommand;
+  private void makeCommandAndPopFromStack(String currentCommand, int numParams)
+      throws CommandException {
+    double[] args;
+    args = new double[numParams];
+    try {
+      for (int i = 0; i < numParams; i++) {
+        args[i] = constantStack.pop().getValue();
+      }
+      addToConstantStack(currentCommand, args);
+      commandStack.pop();
     }
-    private void makeCommand(List<Argument> validCommands) {
-
+    catch (Exception e) {
+      System.out.println(e.getMessage());
+      throw new CommandException("Not enough constants for the given command: "+ currentCommand);
     }
   }
+
+//
+//  /**
+//   * using the Decorator pattern to hide the instanceOf from the main code and improve readability
+//   */
+//  private class CommandMaker {
+//
+//    private String currentCommand;
+//
+//    public CommandMaker(String currentCommand) {
+//      this.currentCommand = currentCommand;
+//    }
+//    private void makeCommand(List<Argument> validCommands) {
+//      if (currentCommand instanceof MathCommands){
+//
+//      }
+//      elif (currentCommand instanceof TurtleCommands){
+//
+//      }
+//    }
+//  }
 
 //    public String getSymbol(String text){
 //      for (Entry<String, Pattern> e: syntaxParser.mySymbols){
@@ -310,37 +251,6 @@ public class Translater {
     }
   }
 
-  private void makeValidCommands(Stack constantStack, Stack commandStack)
-      throws Exception {
-    while (!commandStack.isEmpty()) {
-      double [] args;
-        String command = (String) commandStack.pop();
-        int numParams = getNumParams(command);
-        args = new double[numParams];
-        try {
-          for (int i = 0; i <numParams ; i++) {
-            args[i] = (double) constantStack.pop();
-          }
-          String commandType = getCommandType(command);
-          Class<?> clazz = Class.forName("slogo.Model.Commands." + commandType + "." + command + "Command");
-          Class<?>[] type = {double[].class};
-          Constructor<?> cons = clazz.getConstructor(type);
-          Object[] obj = {args};
-          Object newInstance = cons.newInstance(obj);
-          validCommands.add(newInstance);
-          // add return of the command to the constant stack
-          // for nested calls (e.g. fd fd 50)
-            Method execute = clazz.getMethod("getValue");
-            double value = (double) execute.invoke(newInstance);
-            constantStack.add(value);
-        }
-        catch(Exception e){
-          System.out.println(e.getMessage());
-          // throw new CommandException("Not enough constants for the given command: "+ command);
-        }
-    }
-  }
-
   public static String readFile(String filePath) throws IOException {
     return Files.readString(Path.of(filePath));
   }
@@ -356,5 +266,4 @@ public class Translater {
     t.parseText(readFile("data/examples/simple/square.slogo"));
     System.out.println(t.validCommands);
   }
-
 }
