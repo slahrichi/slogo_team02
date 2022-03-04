@@ -30,5 +30,7 @@ public interface ViewAPI {
 
   void notifyAnimation();
 
+  void animationComplete();
+
   void showMessage(AlertType type, String msg);
 }

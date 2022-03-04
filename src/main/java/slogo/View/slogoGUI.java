@@ -136,13 +136,15 @@ public class slogoGUI implements ViewAPI {
     Button clearHistory = makeButton("ClearHistory", event -> clearHistory(), myResources);
     Button loadFile = makeButton("LoadFile", event -> loadFilePressed(), myResources);
     Button saveFile = makeButton("SaveFile", event -> saveFilePressed(), myResources);
+    Button resetCanvas = makeButton("ResetCanvas", event -> resetCanvas(), myResources);
 
     playButton.setId("playButton");
     clearHistory.setId("clearHistory");
     loadFile.setId("loadFile");
     saveFile.setId("saveFile");
+    resetCanvas.setId("resetCanvas");
 
-    configBox.getChildren().addAll(playButton, clearHistory, loadFile, saveFile);
+    configBox.getChildren().addAll(playButton, clearHistory, loadFile, saveFile, resetCanvas);
     return configBox;
 
   }
@@ -162,6 +164,11 @@ public class slogoGUI implements ViewAPI {
     } catch (SlogoException | IOException e) {
       showMessage(AlertType.ERROR, e.getMessage());
     }
+
+  }
+
+  private void resetCanvas(){
+    canvasPanel.getCanvasView().clearCanvas();
 
   }
 
@@ -223,8 +230,13 @@ public class slogoGUI implements ViewAPI {
   public void sendFileContents(String fileContent)
       throws Exception {
 
+    try{
+      control.parseAndRunCommands(fileContent);
 
-    control.parseAndRunCommands(fileContent);
+    }
+    catch(CommandException e){
+      showMessage(AlertType.ERROR, e.getMessage());
+    }
 
 
   }
@@ -244,6 +256,9 @@ public class slogoGUI implements ViewAPI {
   public void notifyAnimation(){
     animationHandler.createAnimation(control.getRecordTurtle());
   }
+
+  @Override
+  public void animationComplete() { animationHandler.playEntireAnimation();}
 
   @Override
   public void showMessage(AlertType type, String msg){

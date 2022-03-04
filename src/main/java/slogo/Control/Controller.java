@@ -56,6 +56,7 @@ public class Controller implements ControllerViewAPI {
       // view.notifyTurtle();
       view.notifyAnimation();
     }
+    view.animationComplete();
   }
 
 

@@ -11,6 +11,7 @@ import slogo.View.AnimationHandler;
 public class TurtleView {
   public final static double TURTLE_SIZE = 50;
   public final static double TURTLE_OFFSET = TURTLE_SIZE / 2;
+  private static final int LINE_OFFSET = -10;
 
   private AnimationHandler anim;
   private StackPane canvasBox;
@@ -38,6 +39,8 @@ public class TurtleView {
         new Image(getClass().getResource("/turtlePictures/turtleImage.png").toString(), true));
     turtleImage.setFitHeight(TURTLE_SIZE);
     turtleImage.setFitWidth(TURTLE_SIZE);
+    turtleImage.setX(LINE_OFFSET);
+    turtleImage.setY(LINE_OFFSET);
     canvasBox.getChildren().addAll(turtleImage);
 
   }
