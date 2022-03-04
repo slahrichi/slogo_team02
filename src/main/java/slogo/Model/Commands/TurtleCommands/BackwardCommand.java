@@ -18,9 +18,9 @@ public class BackwardCommand extends TurtleCommands {
     return getValue();
   }
 
-  @Override
-  public String toString(){
-    return ("Backward " + getValue());
-  }
+//  @Override
+//  public String toString(){
+//    return ("Backward " + getValue());
+//  }
 
 }

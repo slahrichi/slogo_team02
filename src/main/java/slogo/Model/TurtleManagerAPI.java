@@ -1,5 +1,6 @@
-package slogo.Control;
+package slogo.Model;
 
+import slogo.Control.TurtleRecord;
 import slogo.Model.Commands.CommandAPI;
 import slogo.Model.ModelExceptions;
 

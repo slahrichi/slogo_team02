@@ -1,13 +1,8 @@
-package slogo.Control;
+package slogo.Model;
 
-import java.util.ArrayList;
-import java.util.List;
 import javafx.scene.paint.Color;
+import slogo.Control.TurtleRecord;
 import slogo.Model.Commands.CommandAPI;
-import slogo.Model.Pen;
-import slogo.Model.Commands.Command;
-import slogo.Model.ModelExceptions;
-import slogo.Model.Turtle;
 
 public class TurtleManager implements TurtleManagerAPI {
   // Can make into list if we have multiple turtles

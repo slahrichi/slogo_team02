@@ -3,16 +3,9 @@ package slogo.Control;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.List;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.Test;
-import slogo.Control.CommandException;
-import slogo.Control.Controller;
-import slogo.Control.TurtleManager;
-import slogo.Model.Commands.Command;
-import slogo.Model.Commands.ControlCommands.RepeatCommand;
 import slogo.Model.ModelExceptions;
-import slogo.View.Panels.CanvasPanel;
 import slogo.View.ViewAPI;
 import slogo.View.slogoGUI;
 import util.DukeApplicationTest;
