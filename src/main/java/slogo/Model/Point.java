@@ -35,10 +35,10 @@ public class Point {
    * @param b : Point number 2
    * @return : distance between point 1 and 2
    */
-  public double distanceBetweenPoints(Point a, Point b){
-    double deltaX = Math.abs(a.getPointX() - b.getPointX());
-    double deltaY = Math.abs(a.getPointY() - b.getPointY());
-    return Math.pow(Math.pow(deltaX, 2.0) + Math.pow(deltaY, 2.0), 0.5);
-  }
+//  public double distanceBetweenPoints(Point a, Point b){
+//    double deltaX = Math.abs(a.getPointX() - b.getPointX());
+//    double deltaY = Math.abs(a.getPointY() - b.getPointY());
+//    return Math.pow(Math.pow(deltaX, 2.0) + Math.pow(deltaY, 2.0), 0.5);
+//  }
 
 }

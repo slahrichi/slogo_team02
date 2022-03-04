@@ -1,23 +1,23 @@
 package slogo.Model.Commands.TurtleCommands;
 
-import slogo.Model.Commands.Command;
 import slogo.Model.Turtle;
 
-public class SetHeading extends TurtleCommands{
+public class SetHeadingCommand extends TurtleCommands{
 
-  public SetHeading(double[] params){
+  public SetHeadingCommand(double[] params){
     super(params);
   }
 
+  private double ret;
   @Override
   public double execute(Turtle turtle){
-    double ret = Math.abs(getParams()[0] - turtle.getAngle());
+    ret = Math.abs(getParams()[0] - turtle.getAngle());
     turtle.setAngle(getParams()[0]);
     return ret;
   }
 
-//  @Override
-//  public double getValue(){
-//    return getParams()[0] - turt.getAngle();
-//  }
+  @Override
+  public double getValue(){
+   return ret;
+  }
 }

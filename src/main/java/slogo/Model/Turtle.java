@@ -181,12 +181,12 @@ public class Turtle {
     return true;
   }
 
-  //for testing purposes=
-  /**
-   * turns the turtle by the amount in parameter
-   * @param angle
-   */
-  public void turn(double angle){myAngle += angle;}
-
+//  //for testing purposes=
+//  /**
+//   * turns the turtle by the amount in parameter
+//   * @param angle
+//   */
+//  public void turn(double angle){myAngle += angle;}
+//
 
 }

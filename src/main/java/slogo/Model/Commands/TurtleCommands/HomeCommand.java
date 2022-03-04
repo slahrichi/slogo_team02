@@ -11,7 +11,7 @@ public class HomeCommand extends TurtleCommands {
   public HomeCommand(double[] empty){
     super(empty);
   }
-
+  private double ret;
   @Override
   public double execute(Turtle turtle) throws ModelExceptions {
     double ret = calcDistance(turtle);
@@ -23,6 +23,10 @@ public class HomeCommand extends TurtleCommands {
     return Math.sqrt(
         Math.pow((HOME_X - turtle.getTurtleX()), 2) + Math.pow(
             (HOME_Y - turtle.getTurtleY()), 2));
+  }
+  @Override
+  public double getValue(){
+    return ret;
   }
 }
 
