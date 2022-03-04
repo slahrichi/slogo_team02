@@ -7,15 +7,15 @@ import slogo.Model.Commands.CommandAPI;
 import slogo.Model.ModelExceptions;
 import slogo.Model.TurtleManager;
 import slogo.Model.TurtleManagerAPI;
-import slogo.View.ViewAPI;
+import slogo.View.ObserverViewAPI;
 
 
 public class Controller implements ControllerViewAPI {
   private Translater parser;
   private TurtleManagerAPI manager;
-  private ViewAPI view;
+  private ObserverViewAPI view;
   private List<String> history;
-  public Controller(ViewAPI gui){
+  public Controller(ObserverViewAPI gui){
     parser = new Translater();
     parser = new Translater();
     manager = new TurtleManager();
@@ -28,6 +28,7 @@ public class Controller implements ControllerViewAPI {
 
     updateHistory(contents);
     parser.parseText(contents);
+
 
     List<CommandAPI> commands = parser.getCommands();
 
@@ -60,15 +61,5 @@ public class Controller implements ControllerViewAPI {
     }
   }
 
-
-//  public TurtleManager getTurtleManager(){
-//    return manager;
-//  }
-
-//  private void updateStep(Command command) throws ModelExceptions {
-//    manager.stepTurtle(command);
-//    turtleView.updatePosition(manager.getRecordTurtle());
-//
-//  }
 
 }
