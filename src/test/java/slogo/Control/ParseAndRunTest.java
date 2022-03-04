@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import javafx.stage.Stage;
 import org.junit.jupiter.api.Test;
-import slogo.Model.ModelExceptions;
 import slogo.View.slogoGUI;
 import util.DukeApplicationTest;
 

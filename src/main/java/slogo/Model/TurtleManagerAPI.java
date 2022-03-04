@@ -1,10 +1,13 @@
 package slogo.Model;
 
-import slogo.Control.TurtleRecord;
+import java.util.List;
 import slogo.Model.Commands.CommandAPI;
-import slogo.Model.ModelExceptions;
 
 public interface TurtleManagerAPI {
-  TurtleRecord getRecordTurtle();
+  TurtleRecord getRecordTurtle(int turtleID) throws TurtleManagerException;
   void stepTurtle(CommandAPI command) throws ModelExceptions;
+  void addNewTurtle(int turtleID);
+  void changeActiveTurtle(int turtleId) throws TurtleManagerException;
+  int getLatestTurtleAddedId();
+  void addMultipleTurtles(List<Integer> turtleIds);
 }

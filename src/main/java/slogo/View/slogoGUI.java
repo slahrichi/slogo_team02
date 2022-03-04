@@ -2,9 +2,7 @@ package slogo.View;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ResourceBundle;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -13,7 +11,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
@@ -28,8 +25,7 @@ import javafx.stage.Stage;
 import slogo.Control.CommandException;
 import slogo.Control.Controller;
 import slogo.Control.ControllerViewAPI;
-import slogo.Control.TurtleRecord;
-import slogo.Model.ModelExceptions;
+import slogo.Model.TurtleManagerException;
 import slogo.View.Configuration.FileReader;
 import slogo.View.Exceptions.SlogoException;
 import slogo.View.Panels.CanvasPanel;
@@ -252,7 +248,7 @@ public class slogoGUI implements ViewAPI, ObserverViewAPI {
   }
 
   @Override
-  public void notifyAnimation(){
+  public void notifyAnimation() throws TurtleManagerException {
     animationHandler.createAnimation(control.getRecordTurtle());
   }
 

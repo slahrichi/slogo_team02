@@ -7,6 +7,8 @@ import slogo.Model.Commands.CommandAPI;
 import slogo.Model.ModelExceptions;
 import slogo.Model.TurtleManager;
 import slogo.Model.TurtleManagerAPI;
+import slogo.Model.TurtleManagerException;
+import slogo.Model.TurtleRecord;
 import slogo.View.ObserverViewAPI;
 
 
@@ -15,17 +17,18 @@ public class Controller implements ControllerViewAPI {
   private TurtleManagerAPI manager;
   private ObserverViewAPI view;
   private List<String> history;
+  private int currentTurtleID;
   public Controller(ObserverViewAPI gui){
     parser = new Translater();
     parser = new Translater();
     manager = new TurtleManager();
     resetHistory();
     view = gui;
+    currentTurtleID = 0;
   }
 
   public void parseAndRunCommands(String contents)
       throws Exception {
-
     updateHistory(contents);
     parser.parseText(contents);
 
@@ -49,14 +52,17 @@ public class Controller implements ControllerViewAPI {
     view.notifyHistory();
   }
 
-  public TurtleRecord getRecordTurtle(){
-    return manager.getRecordTurtle();
+  public void changeActiveTurtle(int turtleId) throws TurtleManagerException {
+    currentTurtleID = turtleId;
+    manager.changeActiveTurtle(turtleId);
+  }
+  public TurtleRecord getRecordTurtle() throws TurtleManagerException {
+    return manager.getRecordTurtle(currentTurtleID);
   }
 
-  private void runCommands(List<CommandAPI> commands) throws ModelExceptions {
+  private void runCommands(List<CommandAPI> commands) throws ModelExceptions, TurtleManagerException {
     for (CommandAPI command : commands){
       manager.stepTurtle(command);
-      // view.notifyTurtle();
       view.notifyAnimation();
     }
     view.animationComplete();

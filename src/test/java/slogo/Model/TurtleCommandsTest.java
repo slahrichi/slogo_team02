@@ -3,7 +3,6 @@ package slogo.Model;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
-import slogo.Control.TurtleRecord;
 import slogo.Model.Commands.Command;
 import slogo.Model.Commands.TurtleCommands.*;
 
@@ -28,14 +27,14 @@ class TurtleCommandsTest {
   void testBackwardsExecute() throws ModelExceptions {
     setupTest(new double[]{50});
     Command backwardCommand = new BackwardCommand(input);
-    double initialX = manager.getRecordTurtle().xCord();
-    double initialY = manager.getRecordTurtle().yCord();
+    double initialX = manager.getRecordTurtle(0).xCord();
+    double initialY = manager.getRecordTurtle(0).yCord();
     manager.stepTurtle(backwardCommand);
-    double finalX = manager.getRecordTurtle().xCord();
-    assertEquals(initialX - input[0] * Math.cos(Math.toRadians(manager.getRecordTurtle().angle())),
+    double finalX = manager.getRecordTurtle(0).xCord();
+    assertEquals(initialX - input[0] * Math.cos(Math.toRadians(manager.getRecordTurtle(0).angle())),
         finalX);
-    double finalY = manager.getRecordTurtle().yCord();
-    assertEquals(initialY - input[0] * Math.sin(Math.toRadians(manager.getRecordTurtle().angle())),
+    double finalY = manager.getRecordTurtle(0).yCord();
+    assertEquals(initialY - input[0] * Math.sin(Math.toRadians(manager.getRecordTurtle(0).angle())),
         finalY);
     assertEquals(backwardCommand.getValue(), input[0]);
   }
@@ -47,14 +46,14 @@ class TurtleCommandsTest {
   void testForwardExecute() throws ModelExceptions {
     setupTest(new double[]{50});
     Command forwardCommand = new ForwardCommand(input);
-    double initialX = manager.getRecordTurtle().xCord();
-    double initialY = manager.getRecordTurtle().yCord();
+    double initialX = manager.getRecordTurtle(0).xCord();
+    double initialY = manager.getRecordTurtle(0).yCord();
     manager.stepTurtle(forwardCommand);
-    double finalX = manager.getRecordTurtle().xCord();
-    assertEquals(initialX + input[0] * Math.cos(Math.toRadians(manager.getRecordTurtle().angle())),
+    double finalX = manager.getRecordTurtle(0).xCord();
+    assertEquals(initialX + input[0] * Math.cos(Math.toRadians(manager.getRecordTurtle(0).angle())),
         finalX);
-    double finalY = manager.getRecordTurtle().yCord();
-    assertEquals(initialY + input[0] * Math.sin(Math.toRadians(manager.getRecordTurtle().angle())),
+    double finalY = manager.getRecordTurtle(0).yCord();
+    assertEquals(initialY + input[0] * Math.sin(Math.toRadians(manager.getRecordTurtle(0).angle())),
         finalY);
     assertEquals(forwardCommand.getValue(), input[0]);
   }
@@ -79,9 +78,9 @@ class TurtleCommandsTest {
   void testRightExecute() throws ModelExceptions {
     setupTest(new double[]{90});
     Command rightCommand = new RightCommand(input);
-    double initialAngle = manager.getRecordTurtle().angle();
+    double initialAngle = manager.getRecordTurtle(0).angle();
     manager.stepTurtle(rightCommand);
-    double finalAngle = manager.getRecordTurtle().angle();
+    double finalAngle = manager.getRecordTurtle(0).angle();
     assertEquals(initialAngle + input[0], finalAngle);
     assertEquals(rightCommand.getValue(), input[0]);
   }
@@ -93,9 +92,9 @@ class TurtleCommandsTest {
   void testLeftExecute() throws ModelExceptions {
     setupTest(new double[]{90});
     Command leftCommand = new LeftCommand(input);
-    double initialAngle = manager.getRecordTurtle().angle();
+    double initialAngle = manager.getRecordTurtle(0).angle();
     manager.stepTurtle(leftCommand);
-    double finalAngle = manager.getRecordTurtle().angle();
+    double finalAngle = manager.getRecordTurtle(0).angle();
     assertEquals(initialAngle - input[0], finalAngle);
     assertEquals(leftCommand.getValue(), input[0]);
   }
@@ -107,11 +106,11 @@ class TurtleCommandsTest {
   void testHomeCommand() throws ModelExceptions {
     setupTest(new double[]{});
     Command homeCommand = new HomeCommand(input);
-    double initialX = manager.getRecordTurtle().xCord();
-    double initialY = manager.getRecordTurtle().yCord();
+    double initialX = manager.getRecordTurtle(0).xCord();
+    double initialY = manager.getRecordTurtle(0).yCord();
     manager.stepTurtle(homeCommand);
-    double finalX = manager.getRecordTurtle().xCord();
-    double finalY = manager.getRecordTurtle().yCord();
+    double finalX = manager.getRecordTurtle(0).xCord();
+    double finalY = manager.getRecordTurtle(0).yCord();
     assertEquals(finalX, finalY, 0);
     assertEquals(homeCommand.getValue(),
         Math.sqrt(Math.pow((finalX - initialX), 2) + Math.pow((finalY - initialY), 2)));
@@ -126,7 +125,7 @@ class TurtleCommandsTest {
     Command penDown = new PenDownCommand(input);
     manager.stepTurtle(penDown);
     assertEquals(penDown.getValue(), 1);
-    assertTrue(manager.getRecordTurtle().penDown());
+    assertTrue(manager.getRecordTurtle(0).penDown());
   }
 
   /*
@@ -138,7 +137,7 @@ class TurtleCommandsTest {
     Command penUp = new PenUpCommand(input);
     manager.stepTurtle(penUp);
     assertEquals(penUp.getValue(), 0);
-    assertFalse(manager.getRecordTurtle().penDown());
+    assertFalse(manager.getRecordTurtle(0).penDown());
   }
 
   /*
@@ -148,9 +147,9 @@ class TurtleCommandsTest {
   void testSetHeading() throws ModelExceptions {
     setupTest(new double[]{180});
     Command setHeading = new SetHeadingCommand(input);
-    double initialAngle = manager.getRecordTurtle().angle();
+    double initialAngle = manager.getRecordTurtle(0).angle();
     manager.stepTurtle(setHeading);
-    double finalAngle = manager.getRecordTurtle().angle();
+    double finalAngle = manager.getRecordTurtle(0).angle();
     assertEquals(finalAngle, input[0]);
     assertEquals(setHeading.getValue(), input[0] - initialAngle);
   }
@@ -162,11 +161,11 @@ class TurtleCommandsTest {
   void testSetPosition() throws ModelExceptions {
     setupTest(new double[]{50, 50});
     Command setPosition = new SetPositionCommand(input);
-    double initialX = manager.getRecordTurtle().xCord();
-    double initialY = manager.getRecordTurtle().yCord();
+    double initialX = manager.getRecordTurtle(0).xCord();
+    double initialY = manager.getRecordTurtle(0).yCord();
     manager.stepTurtle(setPosition);
-    double finalX = manager.getRecordTurtle().xCord();
-    double finalY = manager.getRecordTurtle().yCord();
+    double finalX = manager.getRecordTurtle(0).xCord();
+    double finalY = manager.getRecordTurtle(0).yCord();
     assertEquals(finalX, input[0]);
     assertEquals(finalY, input[1]);
     assertEquals(setPosition.getValue(),
@@ -180,11 +179,11 @@ Test setTowards but isn't good because in order for getValue() to work, it needs
   void testSetTowards() throws ModelExceptions {
     setupTest(new double[]{50, 50});
     Command setTowards = new SetTowardsCommand(input);
-    double initialAngle = manager.getRecordTurtle().angle();
+    double initialAngle = manager.getRecordTurtle(0).angle();
     manager.stepTurtle(setTowards);
-    double finalAngle = manager.getRecordTurtle().angle();
-    assertEquals(finalAngle, calcAngle(manager.getRecordTurtle(), input));
-    assertEquals(setTowards.getValue(),calcAngle(manager.getRecordTurtle(),input) -initialAngle);
+    double finalAngle = manager.getRecordTurtle(0).angle();
+    assertEquals(finalAngle, calcAngle(manager.getRecordTurtle(0), input));
+    assertEquals(setTowards.getValue(),calcAngle(manager.getRecordTurtle(0),input) -initialAngle);
   }
 
   private double calcAngle(TurtleRecord turtle, double[] input) {
