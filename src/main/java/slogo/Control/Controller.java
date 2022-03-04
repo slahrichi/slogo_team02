@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import slogo.Model.Commands.CommandAPI;
 import slogo.Model.ModelExceptions;
+import slogo.Model.Turtle;
 import slogo.View.ViewAPI;
 
 
@@ -16,7 +17,8 @@ public class Controller implements ControllerViewAPI {
   public Controller(ViewAPI gui){
     parser = new Translater();
     parser = new Translater();
-    manager = new TurtleManager();
+    List<Turtle> turtleList = new ArrayList<Turtle>();
+    manager = new TurtleManager(turtleList);
     resetHistory();
     view = gui;
   }
@@ -52,7 +54,7 @@ public class Controller implements ControllerViewAPI {
 
   private void runCommands(List<CommandAPI> commands) throws ModelExceptions {
     for (CommandAPI command : commands){
-      manager.stepTurtle(command);
+      manager.stepTurtle(command, );
       // view.notifyTurtle();
       view.notifyAnimation();
     }

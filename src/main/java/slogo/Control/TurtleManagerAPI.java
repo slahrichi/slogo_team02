@@ -4,6 +4,6 @@ import slogo.Model.Commands.CommandAPI;
 import slogo.Model.ModelExceptions;
 
 public interface TurtleManagerAPI {
-  TurtleRecord getRecordTurtle();
-  void stepTurtle(CommandAPI command) throws ModelExceptions;
+  TurtleRecord getRecordTurtle(int turtleID);
+  void stepTurtle(CommandAPI command, int turtleID) throws ModelExceptions;
 }
