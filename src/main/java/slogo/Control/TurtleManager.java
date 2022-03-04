@@ -9,6 +9,10 @@ import slogo.Model.Commands.Command;
 import slogo.Model.ModelExceptions;
 import slogo.Model.Turtle;
 
+/**
+ * This class keeps record of all turtles and executes stepTurtle function on them
+ *
+ */
 public class TurtleManager implements TurtleManagerAPI {
   // Can make into list if we have multiple turtles
  // List<Turtle> turtles;

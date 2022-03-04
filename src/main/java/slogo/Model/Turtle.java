@@ -17,6 +17,7 @@ public class Turtle {
   private double myOldYPos;
   private double myOldAngle;
   private Pen myPen;
+  private int myID;
 
 
   // Change this to the Bounds of the screen, get from a resource file
@@ -35,7 +36,7 @@ public class Turtle {
    * @param turtleAngle : the heading / angle that the turtle points towards
    * @param pen : the pen associated with the turtle
    */
-  public Turtle(double Xpos, double Ypos, double turtleAngle, Pen pen){
+  public Turtle(double Xpos, double Ypos, double turtleAngle, Pen pen, int turtleID){
     this.myXPos = Xpos;
     this.myYPos = Ypos;
     this.myAngle = turtleAngle;
@@ -43,6 +44,7 @@ public class Turtle {
     this.myOldYPos = Ypos;
     this.myOldAngle = turtleAngle;
     this.myPen = pen;
+    this.myID = turtleID;
   }
 
   /**
@@ -187,6 +189,11 @@ public class Turtle {
    * @param angle
    */
   public void turn(double angle){myAngle += angle;}
+
+  public int getTurtleID(){
+    return myID;
+  }
+
 
 
 }
