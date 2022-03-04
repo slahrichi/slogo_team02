@@ -4,14 +4,19 @@ import javafx.scene.paint.Color;
 import slogo.Control.TurtleRecord;
 import slogo.Model.Commands.CommandAPI;
 
+/**
+ * @author Mike Keohane
+ **/
 public class TurtleManager implements TurtleManagerAPI {
+
   // Can make into list if we have multiple turtles
- // List<Turtle> turtles;
+  // List<Turtle> turtles;
   Turtle currentTurtle;
 
-  public TurtleManager(){
-    Pen pen = new Pen(Color.BLUE, true, 1);
-    currentTurtle = new Turtle(0, 0, 0, pen);
+
+  public TurtleManager() {
+    Pen pen = new Pen(Color.BLUE, false, 1);
+    currentTurtle = new Turtle(0, 0, -90, pen);
   }
 
 //  public void setCurrentTurtle(Turtle currentTurtle) {
@@ -22,14 +27,14 @@ public class TurtleManager implements TurtleManagerAPI {
   //  return currentTurtle;
   //}
 
-  public TurtleRecord getRecordTurtle(){
+  public TurtleRecord getRecordTurtle() {
     return new TurtleRecord(currentTurtle.getTurtleX(), currentTurtle.getTurtleY(),
         currentTurtle.getAngle(), currentTurtle.isPenDown(), currentTurtle.getOldX(),
         currentTurtle.getOldY(), currentTurtle.getOldAngle());
   }
 
- // public void setCommands(Collection<Command> newCommands){
- //   commands.addAll(newCommands);
+  // public void setCommands(Collection<Command> newCommands){
+  //   commands.addAll(newCommands);
 //  }
 
   public void stepTurtle(CommandAPI command) throws ModelExceptions {
