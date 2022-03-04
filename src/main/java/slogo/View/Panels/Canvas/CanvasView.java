@@ -39,5 +39,11 @@ public class CanvasView {
     return gc;
   }
 
+  public void clearCanvas(){
+    gc.clearRect(0, 0, getTurtleCanvas().getHeight(), getTurtleCanvas().getWidth());
+    gc.setFill(Color.WHITE);
+    gc.fillRect(0, 0, CANVAS_DIMENSIONS, CANVAS_DIMENSIONS);
+  }
+
 
 }

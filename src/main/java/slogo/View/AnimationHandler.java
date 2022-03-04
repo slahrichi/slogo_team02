@@ -4,6 +4,7 @@ import static slogo.View.Panels.Canvas.TurtleView.TURTLE_OFFSET;
 
 import javafx.animation.PathTransition;
 import javafx.animation.RotateTransition;
+import javafx.animation.SequentialTransition;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.shape.LineTo;
@@ -24,6 +25,8 @@ public class AnimationHandler {
   private GraphicsContext gc;
   private Canvas turtleCanvas;
 
+  private SequentialTransition sq;
+
   private static final int ANIMATION_DURATION = 3;
 
 
@@ -33,6 +36,7 @@ public class AnimationHandler {
     canvasView = canvasPanel.getCanvasView();
     turtleCanvas = canvasView.getTurtleCanvas();
     gc = canvasView.getContext();
+    sq = new SequentialTransition();
 
   }
 
@@ -56,8 +60,8 @@ public class AnimationHandler {
 
     RotateTransition rt = new RotateTransition(Duration.seconds(ANIMATION_DURATION), turtleView.getTurtleImage());
     if(turtleRecord.oldAngle() != turtleRecord.angle()){
-      rt.setByAngle(turtleRecord.angle());
-      rt.play();
+      rt.setByAngle(turtleRecord.angle() + 90);
+      sq.getChildren().add(rt);
     }
     if(oldX != newX || oldY != newY){
       // create something to follow
@@ -68,16 +72,26 @@ public class AnimationHandler {
       PathTransition pt = new PathTransition(
           Duration.seconds(ANIMATION_DURATION),
           path, turtleView.getTurtleImage());
-      pt.play();
+          sq.getChildren().add(pt);
+
     }
 
-    System.out.println("Old X: " + turtleRecord.oldX());
-    System.out.println("Old Y: " + turtleRecord.oldY());
-    System.out.println("new X: " + turtleRecord.xCord());
-    System.out.println("new Y: " + turtleRecord.yCord());
+
+    System.out.println(turtleView.getTurtleImage().getX() + " " + turtleView.getTurtleImage().getY());
+
+//    System.out.println("Old X: " + turtleRecord.oldX());
+//    System.out.println("Old Y: " + turtleRecord.oldY());
+//    System.out.println("new X: " + turtleRecord.xCord());
+//    System.out.println("new Y: " + turtleRecord.yCord());
 
 
 
+  }
+
+  public void playEntireAnimation(){
+
+    sq.play();
+    sq.getChildren().clear();
   }
 
 

@@ -13,10 +13,9 @@ public class TurtleManager implements TurtleManagerAPI {
   // List<Turtle> turtles;
   Turtle currentTurtle;
 
-
-  public TurtleManager() {
-    Pen pen = new Pen(Color.BLUE, false, 1);
-    currentTurtle = new Turtle(0, 0, -90, pen);
+  public TurtleManager(){
+    Pen pen = new Pen(Color.BLUE, true, 1);
+    currentTurtle = new Turtle(0, 0, 270, pen);
   }
 
 //  public void setCurrentTurtle(Turtle currentTurtle) {
