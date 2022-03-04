@@ -41,7 +41,11 @@ public class TurtleManager implements TurtleManagerAPI {
 //    indexInTurtleList +=1;
   }
   public void changeActiveTurtle(int newTurtleId){
-    this.myActiveTurtle = getTurtle(newTurtleId);
+    try {
+      this.myActiveTurtle = getTurtle(newTurtleId);
+    } catch (TurtleManagerException e) {
+      e.printStackTrace();
+    }
   }
 
   public void addMultipleTurtles(List<Integer> turtleIds){
@@ -50,25 +54,23 @@ public class TurtleManager implements TurtleManagerAPI {
     }
   }
 
-  public Turtle getActiveTurtle() throws TurtleExceptions{
+  public Turtle getActiveTurtle() throws TurtleManagerException {
     for(Turtle loopTurtle : myTurtleList){
-      if(loopTurtle.equals(this.myActiveTurtle)){
+      if(loopTurtle.getTurtleID()== myActiveTurtle.getTurtleID()){
         return loopTurtle;
       }
     }
-    throw TurtleException("Could not find active turtle");
-    return null;
+    throw new TurtleManagerException("Could not find active turtle");
   }
 
-  public Turtle getTurtle(int idOfTurtle) {
+  public Turtle getTurtle(int idOfTurtle) throws TurtleManagerException {
     //use lambda expression here
     for (Turtle loopTurtle : myTurtleList) {
       if (loopTurtle.getTurtleID() == idOfTurtle) {
         return loopTurtle;
       }
     }
-    throw TurtleException("Could not find requested turtle");
-    return null;
+    throw new TurtleManagerException("Could not find requested turtle");
   }
 
   public Turtle getLatestTurtleAdded(){
@@ -76,9 +78,14 @@ public class TurtleManager implements TurtleManagerAPI {
 
   }
 
-  public TurtleRecord getTurtleRecord(int id){
-      Turtle currentTurtle = getTurtle(id);
-      return new TurtleRecord(currentTurtle.getTurtleX(), currentTurtle.getTurtleY(),
+  public TurtleRecord getTurtleRecord(int id) {
+    Turtle currentTurtle = null;
+    try {
+      currentTurtle = getTurtle(id);
+    } catch (TurtleManagerException e) {
+      e.printStackTrace();
+    }
+    return new TurtleRecord(currentTurtle.getTurtleX(), currentTurtle.getTurtleY(),
           currentTurtle.getAngle(), currentTurtle.isPenDown(), currentTurtle.getOldX(),
           currentTurtle.getOldY()
           , currentTurtle.getOldAngle());
