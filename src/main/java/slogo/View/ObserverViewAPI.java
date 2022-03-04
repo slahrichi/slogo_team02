@@ -4,4 +4,5 @@ public interface ObserverViewAPI {
   void notifyHistory();
   void notifyAnimation();
 
+  void animationComplete();
 }
