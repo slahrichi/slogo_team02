@@ -130,6 +130,7 @@ public class slogoGUI implements ViewAPI {
             sendFileContents(inputPanel.getEditorView().getContents());
           } catch (Exception e) {
             e.printStackTrace();
+            showMessage(AlertType.ERROR, e.getMessage());
           }
         }, myResources);
     Button clearHistory = makeButton("ClearHistory", event -> clearHistory(), myResources);
@@ -157,7 +158,6 @@ public class slogoGUI implements ViewAPI {
         FileReader initial = new FileReader(fileInput.getCanonicalPath());
         String fileContents = initial.getString();
         inputPanel.getEditorView().getTextArea().setText(fileContents);
-        showMessage(AlertType.ERROR, fileContents);
       }
     } catch (SlogoException | IOException e) {
       showMessage(AlertType.ERROR, e.getMessage());

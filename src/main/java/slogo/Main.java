@@ -21,7 +21,7 @@ public class Main extends Application {
   // useful names for constant values used
   public static final String TITLE = "Slogo Application";
   public static final String LANGUAGE = "English";
-  public static final Dimension DEFAULT_SIZE = new Dimension(3000, 2000);
+  public static final Dimension DEFAULT_SIZE = new Dimension(1500, 1000);
   private static final String LANGUAGE_RESOURCE_PATH = "slogo.languages.";
   private static final String EXAMPLE_PROGRAMS_PATH = "/examples";
   public static final String INITIAL_SIMULATION = "data/testSimulations/spreadingFireEDGE4.xml";
