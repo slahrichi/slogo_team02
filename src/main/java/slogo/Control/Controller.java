@@ -10,55 +10,52 @@ import slogo.View.ViewAPI;
 
 
 public class Controller implements ControllerViewAPI {
-  private Translater parser;
-  private TurtleManagerAPI manager;
-  private ViewAPI view;
-  private List<String> history;
+  private Translater myParser;
+  private TurtleManagerAPI myManager;
+  private ViewAPI myView;
+  private List<String> myHistory;
   public Controller(ViewAPI gui){
-    parser = new Translater();
-    parser = new Translater();
+//    myParser = new Translater();
+    myParser = new Translater();
     List<Turtle> turtleList = new ArrayList<Turtle>();
-    manager = new TurtleManager(turtleList);
+    myManager = new TurtleManager(turtleList);
     resetHistory();
-    view = gui;
+    myView = gui;
   }
 
   public void parseAndRunCommands(String contents)
       throws Exception {
-
     updateHistory(contents);
-    parser.parseText(contents);
-
-    List<CommandAPI> commands = parser.getCommands();
-
+    myParser.parseText(contents);
+    List<CommandAPI> commands = myParser.getCommands();
     runCommands(commands);
 
   }
 
   public List<String> getHistory(){
-    return history;
+    return myHistory;
   }
   public void resetHistory(){
-    history = new ArrayList<>();
+    myHistory = new ArrayList<>();
   }
 
 
   private void updateHistory(String contents){
-    history.addAll(Arrays.asList(contents.split("\n")));
-    view.notifyHistory();
+    myHistory.addAll(Arrays.asList(contents.split("\n")));
+    myView.notifyHistory();
   }
 
   public TurtleRecord getRecordTurtle(int turtleID){
-    return manager.getTurtleRecord(turtleID);
+    return myManager.getTurtleRecord(turtleID);
   }
-
+  //the commands themselves contain information aout whether to change the active turtle or not and to actualluy
+  //chnge the active turtle
   private void runCommands(List<CommandAPI> commands) throws ModelExceptions {
     for (CommandAPI command : commands){
-      manager.stepTurtle(command, );
-      // view.notifyTurtle();
-      view.notifyAnimation();
+      myManager.stepTurtle(command);
+      myView.notifyAnimation();
     }
-    view.animationComplete();
+    myView.animationComplete();
   }
 
 

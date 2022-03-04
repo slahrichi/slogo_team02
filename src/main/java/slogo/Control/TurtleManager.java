@@ -50,9 +50,15 @@ public class TurtleManager implements TurtleManagerAPI {
     }
   }
 
-  public Turtle getActiveTurtle(int idOfActiveTurtle){
-    return myTurtleList.get(idOfActiveTurtle);}
-
+  public Turtle getActiveTurtle() throws TurtleExceptions{
+    for(Turtle loopTurtle : myTurtleList){
+      if(loopTurtle.equals(this.myActiveTurtle)){
+        return loopTurtle;
+      }
+    }
+    throw TurtleException("Could not find active turtle");
+    return null;
+  }
 
   public Turtle getTurtle(int idOfTurtle) {
     //use lambda expression here
@@ -61,6 +67,7 @@ public class TurtleManager implements TurtleManagerAPI {
         return loopTurtle;
       }
     }
+    throw TurtleException("Could not find requested turtle");
     return null;
   }
 
@@ -69,10 +76,6 @@ public class TurtleManager implements TurtleManagerAPI {
 
   }
 
-
-
-
-
   public TurtleRecord getTurtleRecord(int id){
       Turtle currentTurtle = getTurtle(id);
       return new TurtleRecord(currentTurtle.getTurtleX(), currentTurtle.getTurtleY(),
@@ -80,7 +83,6 @@ public class TurtleManager implements TurtleManagerAPI {
           currentTurtle.getOldY()
           , currentTurtle.getOldAngle());
     }
-
 
   public void stepTurtle(CommandAPI command) throws ModelExceptions {
     command.execute(this.myActiveTurtle);
