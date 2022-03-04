@@ -6,7 +6,7 @@ import slogo.Model.ModelExceptions;
 public interface ControllerViewAPI {
 
   void parseAndRunCommands(String contents) throws Exception;
-  TurtleRecord getRecordTurtle();
+  TurtleRecord getRecordTurtle(int turtleId);
   List<String> getHistory();
   void resetHistory();
 }

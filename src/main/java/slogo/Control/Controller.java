@@ -48,8 +48,8 @@ public class Controller implements ControllerViewAPI {
     view.notifyHistory();
   }
 
-  public TurtleRecord getRecordTurtle(){
-    return manager.getRecordTurtle();
+  public TurtleRecord getRecordTurtle(int turtleID){
+    return manager.getTurtleRecord(turtleID);
   }
 
   private void runCommands(List<CommandAPI> commands) throws ModelExceptions {

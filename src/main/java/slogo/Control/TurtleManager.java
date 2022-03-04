@@ -17,44 +17,63 @@ import slogo.Model.Turtle;
 
 public class TurtleManager implements TurtleManagerAPI {
   // Can make into list if we have multiple turtles
-  List<Turtle> turtleList;
-  int indexInTurtleList =0;
+  private List<Turtle> myTurtleList;
+//  int indexInTurtleList =0;
+
+  //DECIDE ON WHAT TO DO FOR INITIAL CONDITION WHEN myTurtleList IS EMPTY.
+  Turtle myActiveTurtle;
 
   public TurtleManager(List<Turtle> turtleList){
-      this.turtleList = turtleList;
+      this.myTurtleList = turtleList;
+      this.myActiveTurtle = turtleList.get(turtleList.size()-1);
 
   }
   //function assumes all turtles spawn from (0, 0 ), with angle of 270 and with their own down pen.
-  public void addTurtle(){
+  public void addTurtle(int newTurtleID){
     Pen turtlePen = new Pen(Color.BLUE, true, 1);
-    Turtle newTurtle = new Turtle(0, 0, 270, turtlePen, indexInTurtleList);
-    turtleList.add(newTurtle);
-    indexInTurtleList +=1;
+    Turtle newTurtle = new Turtle(0, 0, 270, turtlePen, newTurtleID);
+    myTurtleList.add(newTurtle);
+//    indexInTurtleList +=1;
+  }
+  public void changeActiveTurtle(int newTurtleId){
+    this.myActiveTurtle = getTurtle(newTurtleId);
   }
 
-  public void addMultipleTurtles(int numberOfTurtlesToAdd){
-
-    Collections.nCopies(numberOfTurtlesToAdd, 1)
-        .stream()
-        .forEach(i -> addTurtle());
+  public void addMultipleTurtles(List<Integer> turtleIds){
+    for (int id : turtleIds){
+      addTurtle(id);
+    }
   }
+
+  public Turtle getActiveTurtle(int idOfActiveTurtle){
+    return turtleList.get(idOfActiveTurtle);}
 
 
   public Turtle getTurtle(int idOfTurtle){
-    Turtle returnTurtle = turtleList.get(idOfTurtle);
-    return returnTurtle;
-  }
-  
+    //use lambda expression here
+    for (Turtle loopTurtle: myTurtleList){
+      if (loopTurtle.getTurtleID() == idOfTurtle){
+        return loopTurtle;
+      }
+    }
 
-  public TurtleRecord getTurtleRecord(int turtleID){
-      Turtle currentTurtle = turtleList.get(turtleID);
-    return new TurtleRecord(currentTurtle.getTurtleX(), currentTurtle.getTurtleY(),
-        currentTurtle.getAngle(), currentTurtle.isPenDown(), currentTurtle.getOldX(),
-        currentTurtle.getOldY(), currentTurtle.getOldAngle());
+  public Turtle getLatestTurtleAdded(){
+    return myTurtleList.get(myTurtleList.size() - 1);
   }
 
-  public void stepTurtle(CommandAPI command, int turtleId) throws ModelExceptions {
-    Turtle turtleToExecute = turtleList.get(turtleId);
-    command.execute(turtleToExecute);
+
+
+
+  public TurtleRecord getTurtleRecord(int id){
+      Turtle currentTurtle = getTurtle(id);
+      return new TurtleRecord(currentTurtle.getTurtleX(), currentTurtle.getTurtleY()
+          currentTurtle.getAngle(), currentTurtle.isPenDown(), currentTurtle.getOldX(),
+          currentTurtle.getOldY()
+          , currentTurtle.getOldAngle());
+    }
+
+
+  public void stepTurtle(CommandAPI command) throws ModelExceptions {
+    command.execute(this.myActiveTurtle);
   }
 }
