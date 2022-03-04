@@ -17,10 +17,10 @@ public class ForwardCommand extends TurtleCommands {
     turtle.changeTurtleLocation(newXpos, newYpos);
     return getValue();
   }
-
-  @Override
-  public String toString(){
-    return ("Forward " + getValue());
-  }
+//
+//  @Override
+//  public String toString(){
+//    return ("Forward " + getValue());
+//  }
 
 }

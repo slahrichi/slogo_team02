@@ -61,7 +61,7 @@ public class Turtle {
    */
   public void setAngle(double angle){
     myOldAngle = myAngle;
-    myAngle = angle;
+    myAngle = angle % 360;
   }
 
   /**
@@ -183,17 +183,10 @@ public class Turtle {
     return true;
   }
 
-  //for testing purposes=
-  /**
-   * turns the turtle by the amount in parameter
-   * @param angle
-   */
-  public void turn(double angle){myAngle += angle;}
 
   public int getTurtleID(){
     return myID;
   }
-
 
 
 }

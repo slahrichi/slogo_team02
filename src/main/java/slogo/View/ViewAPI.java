@@ -26,11 +26,11 @@ public interface ViewAPI {
   void sendFileContents(String fileContent)
       throws Exception;
 
-  void notifyHistory();
+//  void notifyHistory();
 
-  void notifyAnimation();
+//  void notifyAnimation();
 
-  void animationComplete();
+// void animationComplete();
 
   void showMessage(AlertType type, String msg);
 }

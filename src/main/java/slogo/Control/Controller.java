@@ -5,68 +5,68 @@ import java.util.Arrays;
 import java.util.List;
 import slogo.Model.Commands.CommandAPI;
 import slogo.Model.ModelExceptions;
-import slogo.Model.Turtle;
-import slogo.View.ViewAPI;
+import slogo.Model.TurtleManager;
+import slogo.Model.TurtleManagerAPI;
+import slogo.Model.TurtleManagerException;
+import slogo.Model.TurtleRecord;
+import slogo.View.ObserverViewAPI;
 
 
 public class Controller implements ControllerViewAPI {
-  private Translater myParser;
-  private TurtleManagerAPI myManager;
-  private ViewAPI myView;
-  private List<String> myHistory;
-  public Controller(ViewAPI gui){
-//    myParser = new Translater();
-    myParser = new Translater();
-    List<Turtle> turtleList = new ArrayList<Turtle>();
-    myManager = new TurtleManager(turtleList);
+  private Translater parser;
+  private TurtleManagerAPI manager;
+  private ObserverViewAPI view;
+  private List<String> history;
+  private int currentTurtleID;
+  public Controller(ObserverViewAPI gui){
+    parser = new Translater();
+    parser = new Translater();
+    manager = new TurtleManager();
     resetHistory();
-    myView = gui;
+    view = gui;
+    currentTurtleID = 0;
   }
 
   public void parseAndRunCommands(String contents)
       throws Exception {
     updateHistory(contents);
-    myParser.parseText(contents);
-    List<CommandAPI> commands = myParser.getCommands();
+    parser.parseText(contents);
+
+
+    List<CommandAPI> commands = parser.getCommands();
+
     runCommands(commands);
 
   }
 
   public List<String> getHistory(){
-    return myHistory;
+    return history;
   }
   public void resetHistory(){
-    myHistory = new ArrayList<>();
+    history = new ArrayList<>();
   }
 
 
   private void updateHistory(String contents){
-    myHistory.addAll(Arrays.asList(contents.split("\n")));
-    myView.notifyHistory();
+    history.addAll(Arrays.asList(contents.split("\n")));
+    view.notifyHistory();
   }
 
-  public TurtleRecord getRecordTurtle(int turtleID){
-    return myManager.getTurtleRecord(turtleID);
+  public void changeActiveTurtle(int turtleId) throws TurtleManagerException {
+    currentTurtleID = turtleId;
+    manager.changeActiveTurtle(turtleId);
   }
-  //the commands themselves contain information aout whether to change the active turtle or not and to actualluy
-  //chnge the active turtle
-  private void runCommands(List<CommandAPI> commands) throws ModelExceptions {
+  public TurtleRecord getRecordTurtle() throws TurtleManagerException {
+    return manager.getRecordTurtle(currentTurtleID);
+  }
+
+  private void runCommands(List<CommandAPI> commands) throws ModelExceptions, TurtleManagerException {
     for (CommandAPI command : commands){
-      myManager.stepTurtle(command);
-      myView.notifyAnimation();
+      manager.stepTurtle(command);
+      view.notifyAnimation();
     }
-    myView.animationComplete();
+    view.animationComplete();
   }
 
-
-//  public TurtleManager getTurtleManager(){
-//    return manager;
-//  }
-
-//  private void updateStep(Command command) throws ModelExceptions {
-//    manager.stepTurtle(command);
-//    turtleView.updatePosition(manager.getRecordTurtle());
-//
-//  }
 
 }

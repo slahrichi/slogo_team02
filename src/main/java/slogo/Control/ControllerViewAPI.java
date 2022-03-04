@@ -1,12 +1,13 @@
 package slogo.Control;
 
 import java.util.List;
-import slogo.Model.ModelExceptions;
+import slogo.Model.TurtleManagerException;
+import slogo.Model.TurtleRecord;
 
 public interface ControllerViewAPI {
 
   void parseAndRunCommands(String contents) throws Exception;
-  TurtleRecord getRecordTurtle(int turtleId);
+  TurtleRecord getRecordTurtle() throws TurtleManagerException;
   List<String> getHistory();
   void resetHistory();
 }

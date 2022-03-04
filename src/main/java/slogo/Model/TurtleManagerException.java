@@ -1,4 +1,4 @@
-package slogo.Control;
+package slogo.Model;
 
 public class TurtleManagerException extends Exception {
   public TurtleManagerException(String message) {
