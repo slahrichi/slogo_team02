@@ -24,9 +24,14 @@ public class TurtleManager implements TurtleManagerAPI {
   Turtle myActiveTurtle;
 
   public TurtleManager(List<Turtle> turtleList){
-      this.myTurtleList = turtleList;
-      this.myActiveTurtle = turtleList.get(turtleList.size()-1);
-
+    this.myTurtleList = turtleList;
+    if(turtleList.isEmpty()){
+      addTurtle(0);
+      this.myActiveTurtle = getLatestTurtleAdded();
+    }
+    else{
+      this.myActiveTurtle = getLatestTurtleAdded();
+    }
   }
   //function assumes all turtles spawn from (0, 0 ), with angle of 270 and with their own down pen.
   public void addTurtle(int newTurtleID){
@@ -46,27 +51,31 @@ public class TurtleManager implements TurtleManagerAPI {
   }
 
   public Turtle getActiveTurtle(int idOfActiveTurtle){
-    return turtleList.get(idOfActiveTurtle);}
+    return myTurtleList.get(idOfActiveTurtle);}
 
 
-  public Turtle getTurtle(int idOfTurtle){
+  public Turtle getTurtle(int idOfTurtle) {
     //use lambda expression here
-    for (Turtle loopTurtle: myTurtleList){
-      if (loopTurtle.getTurtleID() == idOfTurtle){
+    for (Turtle loopTurtle : myTurtleList) {
+      if (loopTurtle.getTurtleID() == idOfTurtle) {
         return loopTurtle;
       }
     }
+    return null;
+  }
 
   public Turtle getLatestTurtleAdded(){
     return myTurtleList.get(myTurtleList.size() - 1);
+
   }
+
 
 
 
 
   public TurtleRecord getTurtleRecord(int id){
       Turtle currentTurtle = getTurtle(id);
-      return new TurtleRecord(currentTurtle.getTurtleX(), currentTurtle.getTurtleY()
+      return new TurtleRecord(currentTurtle.getTurtleX(), currentTurtle.getTurtleY(),
           currentTurtle.getAngle(), currentTurtle.isPenDown(), currentTurtle.getOldX(),
           currentTurtle.getOldY()
           , currentTurtle.getOldAngle());
