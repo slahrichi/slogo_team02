@@ -68,6 +68,11 @@ class TurtleGUITest extends DukeApplicationTest {
 
   }
 
+  /**
+   * Tests to see if the view can take an input of fd 50 and move the turtle accordingly
+   *
+   * @throws InterruptedException
+   */
   @Test
   void testFd50() throws InterruptedException {
     String fd50 = "fd 50";
@@ -80,6 +85,11 @@ class TurtleGUITest extends DukeApplicationTest {
 
   }
 
+  /**
+   * Tests the shells functionality (the press command is not working which limits our coverage)
+   *
+   * @throws InterruptedException
+   */
   @Test
   void shellTesting() throws InterruptedException {
     String initShell = "slogo_team02 % ";
@@ -100,6 +110,11 @@ class TurtleGUITest extends DukeApplicationTest {
 
   }
 
+  /**
+   * Tests to see if an exception is thrown when there are too many inputs
+   *
+   * @throws InterruptedException
+   */
   @Test
   void showException() throws InterruptedException {
     writeTo(myScriptEditor, "fd 50 50 50 50");
