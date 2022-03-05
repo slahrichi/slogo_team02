@@ -35,7 +35,7 @@ import slogo.View.Panels.TitlePanel;
 
 // class for creating the elements
 
-public class slogoGUI implements ViewAPI {
+public class slogoGUI implements ViewAPI, ObserverViewAPI {
 
 
   private static final String DEFAULT_RESOURCE_PACKAGE = "/";
@@ -130,7 +130,6 @@ public class slogoGUI implements ViewAPI {
           try {
             sendFileContents(inputPanel.getEditorView().getContents());
           } catch (Exception e) {
-            e.printStackTrace();
             showMessage(AlertType.ERROR, e.getMessage());
           }
         }, myResources);
@@ -243,7 +242,7 @@ public class slogoGUI implements ViewAPI {
   }
 
   @Override
-  public void notifyAnimation(){
+  public void notifyAnimation() throws TurtleManagerException {
     animationHandler.createAnimation(control.getRecordTurtle());
   }
 

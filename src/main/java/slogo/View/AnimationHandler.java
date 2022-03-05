@@ -12,7 +12,7 @@ import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
 import javafx.util.Duration;
-import slogo.Control.TurtleRecord;
+import slogo.Model.TurtleRecord;
 import slogo.View.Panels.Canvas.CanvasView;
 import slogo.View.Panels.Canvas.TurtleView;
 import slogo.View.Panels.CanvasPanel;

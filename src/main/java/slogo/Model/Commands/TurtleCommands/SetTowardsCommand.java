@@ -9,10 +9,10 @@ public class SetTowardsCommand extends TurtleCommands {
     super(params);
   }
 
-
+  private double ret;
   @Override
   public double execute(Turtle turtle) {
-    double ret = Math.abs(calcAngle(turtle) - turtle.getAngle());
+    ret = Math.abs(calcAngle(turtle) - turtle.getAngle());
     turtle.setAngle(calcAngle(turtle));
     return ret;
   }
@@ -20,9 +20,8 @@ public class SetTowardsCommand extends TurtleCommands {
   private double calcAngle(Turtle turtle) {
     return Math.toDegrees(Math.atan((getParams()[1] - turtle.getTurtleY())/(getParams()[0] - turtle.getTurtleX())));
   }
-//  @Override
-//  public double getValue(){
-//    return getParams()[0] - turt.getAngle();
-//  }
-
+  @Override
+  public double getValue(){
+    return ret;
+  }
 }
