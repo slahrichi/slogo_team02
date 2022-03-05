@@ -20,4 +20,5 @@ public interface TurtleManagerAPI {
   int getLatestTurtleAddedId();
 
   void addMultipleTurtles(List<Integer> turtleIds);
+  int numberOfTurtlesInList();
 }

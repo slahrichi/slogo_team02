@@ -24,8 +24,4 @@ public class RightCommand extends TurtleCommands {
     return getValue();
   }
 
-//  @Override
-//  public String toString(){
-//    return ("Right " + getParams()[0]);
-//  }
 }

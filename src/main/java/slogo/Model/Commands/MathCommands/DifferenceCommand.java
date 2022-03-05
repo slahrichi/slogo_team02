@@ -21,6 +21,7 @@ public class DifferenceCommand extends MathCommands {
     return getParams()[0] - getParams()[1];
   }
 
+
 //  @Override
 //  public String toString() {
 //    return ("Difference " + getValue());

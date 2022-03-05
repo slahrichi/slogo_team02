@@ -25,6 +25,7 @@ import javafx.stage.Stage;
 import slogo.Control.CommandException;
 import slogo.Control.Controller;
 import slogo.Control.ControllerViewAPI;
+import slogo.Main;
 import slogo.Model.TurtleManagerException;
 import slogo.View.Configuration.SlogoReader;
 import slogo.View.Configuration.SlogoWriter;
@@ -40,7 +41,7 @@ public class slogoGUI implements ViewAPI, ObserverViewAPI {
 
 
   private static final String DEFAULT_RESOURCE_PACKAGE = "/";
-  private static final String LANGUAGE_PACKAGE = "slogo.languages/";
+  private static final String VIEW_RESOURCE_PACKAGE = "view/";
   private String STYLESHEET;
 
   public  final FileChooser FILE_CHOOSER = createChooser("*.slogo");
@@ -61,7 +62,7 @@ public class slogoGUI implements ViewAPI, ObserverViewAPI {
 
     //viewControlInstance = ViewController.getController();
     myStage = stage;
-    myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + LANGUAGE_PACKAGE + language);
+    myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + VIEW_RESOURCE_PACKAGE + language);
     myRoot = new BorderPane();
     myRoot.setBackground(
         new Background(new BackgroundFill(Color.LIGHTGRAY, new CornerRadii(0), Insets.EMPTY)));
@@ -117,6 +118,7 @@ public class slogoGUI implements ViewAPI, ObserverViewAPI {
 
     buttonCreated.setText(buttonLabel);
     buttonCreated.setOnAction(handler);
+    buttonCreated.setId(labelName);
 
     return buttonCreated;
 
@@ -138,14 +140,10 @@ public class slogoGUI implements ViewAPI, ObserverViewAPI {
     Button loadFile = makeButton("LoadFile", event -> loadFilePressed(), myResources);
     Button saveFile = makeButton("SaveFile", event -> saveFilePressed(), myResources);
     Button resetCanvas = makeButton("ResetCanvas", event -> resetCanvas(), myResources);
+    Button resetSlogo = makeButton("resetSlogo", event -> Main.resetSlogo(myStage), myResources);
+    Button addSlogo = makeButton("addSlogo", event -> Main.addSlogo(), myResources);
 
-    playButton.setId("playButton");
-    clearHistory.setId("clearHistory");
-    loadFile.setId("loadFile");
-    saveFile.setId("saveFile");
-    resetCanvas.setId("resetCanvas");
-
-    configBox.getChildren().addAll(playButton, clearHistory, loadFile, saveFile, resetCanvas);
+    configBox.getChildren().addAll(playButton, clearHistory, loadFile, saveFile, resetCanvas, resetSlogo, addSlogo);
     return configBox;
 
   }

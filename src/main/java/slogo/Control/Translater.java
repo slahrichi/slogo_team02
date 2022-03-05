@@ -2,13 +2,14 @@ package slogo.Control;
 
 import java.io.IOException;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Queue;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.Stack;
@@ -18,72 +19,45 @@ public class Translater {
 
   public static final String WHITESPACE = "\\s+";
   public static final char HASHTAG = '#';
+  public static final char LIST_LEFT = '[';
   public static final String NO_MATCH = "NO MATCH";
   public static final String SYNTAX = "Syntax";
   public static final String PARAMS = "Params";
   public static final String TYPES = "Types";
   public static final String RESOURCES_PACKAGE = "slogo.languages.";
+  public static final String EXCEPTIONS = "ParserExceptions";
+  public static final String EVALUATE_COMMAND = "getValue";
+  public static final String SPACE = " ";
   public List<Object> validCommands = new ArrayList<>();
   List<Entry<String, Pattern>> mySymbols;
 
   private static final String DEFAULT_LANG = "English";
-  private CommandParser syntaxParser;
-  private CommandParser commandParser;
-  private ParamParser paramParser;
-  private static Stack<Argument> constantStack = new Stack<>();
-  private static Stack<String> commandStack = new Stack<>();
+  private final CommandParser syntaxParser;
+  private final CommandParser commandParser;
+  private static final Stack<Argument> constantStack = new Stack<>();
+  private static final Stack<String> commandStack = new Stack<>();
 
+  /**
+   * this is the main class that's responsible for parsing
+   * it initializes a syntaxParser, a commandParser, and a parameterParser
+   */
   public Translater() {
     syntaxParser = new CommandParser();
     commandParser = new CommandParser();
-    paramParser = new ParamParser();
     syntaxParser.addPatterns(SYNTAX);
     commandParser.addPatterns(DEFAULT_LANG);
     commandParser.addPatterns(SYNTAX);
-    paramParser.addPatterns(PARAMS);
   }
 
 
-  void parseTextTest(String program) throws Exception {
-    Scanner input = new Scanner(program);
-    List<String> allCommands = new ArrayList<>();
-    while (input.hasNextLine()) {
-      String line = input.nextLine();
-      Scanner nextLine = new Scanner(line);
-      if (!line.isEmpty() && line.charAt(0) == HASHTAG) {
-        continue;
-      }
-      while (nextLine.hasNext()) {
-        String token = nextLine.next();
-        allCommands.add(token);
-      }
-      nextLine.close();
-    }
-    input.close();
-    handle(allCommands);
+  /**
+   * @param language String name of the language we want to parse in
+   */
+  public void setLanguage(String language){
+    commandParser.reset();
+    commandParser.addPatterns(language);
+    commandParser.addPatterns(SYNTAX);
   }
-
-  void handle(List<String> allCommands) throws Exception {
-    for (String command : allCommands) {
-      if (syntaxParser.getSymbol(command).equals("UserCommand")) {
-        handleCommand(allCommands, command);
-      }
-    }
-  }
-
-  void handleCommand(List<String> allCommands, String command) throws Exception {
-    Object[] params;
-    String commandType = getCommandType(command);
-    int numParams = getNumParams(command);
-    params = new Object[numParams];
-    for (int i = 0; i < numParams; i++) {
-      params[i] = allCommands.get(allCommands.indexOf(command) + i + 1);
-      if (syntaxParser.getSymbol((String) params[i]).equals("UserCommand")) {
-        handleCommand(allCommands.subList(i, allCommands.size()), (String) params[i]);
-      }
-    }
-  }
-
   /**
    * @param userCommands a String of the commands the user passes
    * @return a comment-free version of the same String
@@ -99,173 +73,205 @@ public class Translater {
       }
       while (nextLine.hasNext()) {
         String token = nextLine.next();
-        commentFreeCommands.append(token + " ");
+        commentFreeCommands.append(token).append(SPACE);
       }
     }
     return commentFreeCommands.toString();
   }
 
-  private boolean checkIfParamExists(String currentCommand) {
-
-    return false;
-  }
-
-
-  // only add results of commands to constant stack if command stack . size > 0
-  // commands dont look t the constnay stack
-  // constants look at the command stakc and comapre numParams to comstant stac ,size
 
   /**
-   * @param program String of the commands
-   * @throws CommandException
+   * @param token String in the user-passed string
+   * @return the type of the token (List Start, Constant, ...)
+   */
+  private String getTokenType(String token){
+    return syntaxParser.getSymbol(token);
+  }
+
+  /**
+   * main parsing algorithm
+   * @param program String of the commands the user passes
+   * @throws CommandException depdening on the situation (wrong token, too many constants)
    */
   void parseText(String program) throws Exception {
     program = removeComments(program);
+    boolean openBracket = false;
+    LinkedList group = null;
     for (String token : program.split(WHITESPACE)) {
+      if (syntaxParser.getSymbol(token).equals(NO_MATCH)){
+        throw new CommandException(getCommandException("wrongToken").formatted(token));
+      }
       if (syntaxParser.getSymbol(token).equals("UserCommand")) {
         String currentCommand = commandParser.getSymbol(token);
-//        int numParams = getNumParams(currentCommand);
-//        if (constantStack.size() == 0
-//            || constantStack.size() < numParams) { // no/not enough parameters in stack waiting
           commandStack.add(currentCommand);
-          continue;
-//        } else if (constantStack.size() == numParams) {
-//          makeCommandAndPopFromStack(currentCommand, numParams);
-//        }
-        //new CommandMaker(currentCommand).makeCommand(validCommands);
-      } else if (syntaxParser.getSymbol(token).equals("Constant")) {
+      }
+      else if (syntaxParser.getSymbol(token).equals("Constant")) {
         constantStack.add(new Argument(token, Double.parseDouble(token)));
-        // check if command waiting
-
-        if (commandStack.isEmpty()) {
-          continue;
-        }
-        else {
+        if (!commandStack.isEmpty()) {
           String previousCommand = commandStack.peek();
-          //Argument currentConstant = constantStack.peek();
           int numParams = getNumParams(previousCommand);
-          if (numParams > constantStack.size()) {
-            continue;
-          }
-          else {
-            makeCommandAndPopFromStack(previousCommand, numParams);
+          if (numParams <= constantStack.size()) {
+            makeCommandAndPopFromStack(previousCommand, numParams, openBracket, group);
           }
         }
       }
-    }
+      else if (syntaxParser.getSymbol(token).equals("ListStart")){
+        openBracket = true;
+        constantStack.add(new Argument(token, 0.0));
+        group = new LinkedList();
+      }
 
+      else if (syntaxParser.getSymbol(token).equals("ListEnd")) {
+        constantStack.add(new Argument(token, 0.0));
+        popList(constantStack);
+        //constantStack now should only have number of repeats
+        String repeatCommand = commandStack.peek();
+        assert group != null;
+        Argument arg = (Argument) group.getLast();
+        constantStack.add(new RepeatArgument(group, arg.getValue()));
+        makeCommandAndPopFromStack(repeatCommand, getNumParams(repeatCommand), false, group);
+      }
+    }
+    // reached the end of the String, checks if commands are waiting
     while (commandStack.size() > 0) {
       String currentCommand = commandStack.peek();
-      makeCommandAndPopFromStack(currentCommand, getNumParams(currentCommand));
+      makeCommandAndPopFromStack(currentCommand, getNumParams(currentCommand), openBracket, group);
     }
+    // no commands are waiting but there are constants left: error!
     if (constantStack.size() > 0) {
-      throw new CommandException("there are more constants than needed!");
+      throw new CommandException(getCommandException("tooManyConstants"));
       }
-//    else {
-//      return constantStack.peek().getValue();
-//      }
     }
 
-
-
+    private void popList(Stack constantStack) {
+      Argument currentArgument = (Argument) constantStack.peek();
+      while (!currentArgument.getName().equals(LIST_LEFT)) {
+        constantStack.pop();
+      }
+      constantStack.pop(); // the LIST_LEFT that remains
+    }
   /**
-   * creates command object using the double[] args
-   * adds it to validCommands list and constantStack
-   * @param command command that hasn't been created
-   * @param args
-   * @throws ClassNotFoundException
-   * @throws NoSuchMethodException
-   * @throws InvocationTargetException
-   * @throws InstantiationException
-   * @throws IllegalAccessException
+   * @param command the name of the command we are trying to create
+   * @param args the double[] passed to create the command
+   * @param openBracket tells if a bracket is open (making a list of repeating commands)
+   * @param group the group of commands inside the bracket
+   * @throws CommandException generic error thrown if the reflection makes and exception
    */
-  private void addToValidCommandsAndConstantStack(String command, double[] args)
-      throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
-    String commandType = getCommandType(command);
-    Class<?> clazz = Class.forName(
-        "slogo.Model.Commands." + commandType + "." + command + "Command");
-    Class<?>[] type = {double[].class};
-    Constructor<?> cons = clazz.getConstructor(type);
-    Object[] obj = {args};
-    Object newInstance = cons.newInstance(obj);
-    validCommands.add(newInstance);
+  private void addToValidCommandsAndConstantStack(String command, double[] args, boolean openBracket, Queue group)
+      throws CommandException {
+    try {
+      String commandType = getCommandType(command);
+      Class<?> clazz = Class.forName(
+          "slogo.Model.Commands." + commandType + "." + command + "Command");
+      Class<?>[] type = {double[].class};
+      Constructor<?> cons = clazz.getConstructor(type);
+      Object[] obj = {args};
+      Object newInstance = cons.newInstance(obj); //this Object could instead be a Command object
+      validCommands.add(newInstance);
 
-    if (commandStack.size() > 0) {
-      Method execute = clazz.getMethod("getValue");
-      double value = (double) execute.invoke(newInstance);
-      constantStack.add(new Argument(command, value));
+      if (commandStack.size() > 0) {
+        Method execute = clazz.getMethod(EVALUATE_COMMAND);
+        double value = (double) execute.invoke(newInstance);
+        Argument argument = new Argument(command, value);
+        constantStack.add(argument);
+        if (openBracket){
+          group.add(argument);
+        }
+
+      }
     }
+    catch (Exception e){
+      // this catches any error while trying to use reflection to make the Command class and adding it to the list of validCommands
+      throw new CommandException(getCommandException("reflectionError").formatted(command));
+    }
+
   }
 
 
-  private void makeCommandAndPopFromStack(String currentCommand, int numParams)
+  /**
+   * this method is used during the parsing, it creates a valid command and pops it from the commandStack
+   * @param currentCommand the currentCommand we are trying to make
+   * @param numParams the number of Parameters the command expects
+   * @param openBracket tells if a bracket is open (making a list of repeating commands)
+   * @param group the group of commands inside the bracket
+   * @throws CommandException if there are not enough constants to make the command
+   */
+  void makeCommandAndPopFromStack(String currentCommand, int numParams, boolean openBracket, Queue group)
       throws CommandException {
     double[] args;
     args = new double[numParams];
     try {
       for (int i = 0; i < numParams; i++) {
-        args[i] = constantStack.pop().getValue();
+        args[numParams-i-1] = constantStack.pop().getValue();
       }
       commandStack.pop();
-      addToValidCommandsAndConstantStack(currentCommand, args);
+      addToValidCommandsAndConstantStack(currentCommand, args, openBracket, group);
     }
     catch (Exception e) {
       System.out.println(e.getMessage());
-      throw new CommandException("Not enough constants for the given command: "+ currentCommand);
+      throw new CommandException(getCommandException("notEnoughConstants").formatted(currentCommand));
     }
   }
 
-//
-//  /**
-//   * using the Decorator pattern to hide the instanceOf from the main code and improve readability
-//   */
-//  private class CommandMaker {
-//
-//    private String currentCommand;
-//
-//    public CommandMaker(String currentCommand) {
-//      this.currentCommand = currentCommand;
-//    }
-//    private void makeCommand(List<Argument> validCommands) {
-//      if (currentCommand instanceof MathCommands){
-//
-//      }
-//      elif (currentCommand instanceof TurtleCommands){
-//
-//      }
-//    }
-//  }
-
-//    public String getSymbol(String text){
-//      for (Entry<String, Pattern> e: syntaxParser.mySymbols){
-//        if (match(text, e.getValue())){
-//          return e.getKey();
-//        }
-//      }
-//      return NO_MATCH;
-//    }
-
+  /**
+   * @param text the string we are trying to match
+   * @param regex the pattern against which we are matching
+   * @return true if the text matches the pattern
+   */
   public boolean match(String text, Pattern regex){
     return text != null && regex.matcher(text.trim()).matches();
   }
 
+  /**
+   * @param command String name of the command
+   * @return fetches the type of the command (TurtleCommand, Query, ...)
+   * used by Parser to decide what to do depending on command type
+   */
   private String getCommandType(String command){
     return ResourceBundle.getBundle(RESOURCES_PACKAGE+TYPES).getString(command);
   }
 
+  /**
+   * @param command String of the name of the command we want to find the number of parameters it expects
+   * @return the number of parameters command expects
+   * @throws Exception if the command cannot be found in the resource file
+   */
   private int getNumParams(String command) throws Exception {
     try{
       return Integer.parseInt(ResourceBundle.getBundle(RESOURCES_PACKAGE+PARAMS).getString(command));
     }
     catch(Exception e){
-      throw new CommandException("Something went wrong while getting the expected number of parameters of command: "+command);
+      throw new CommandException(getCommandException("numParamsError").formatted(command));
     }
   }
 
-  public static String readFile(String filePath) throws IOException {
-    return Files.readString(Path.of(filePath));
+  /**
+   * @param exceptionName String of the name of the exception to fetch from the Resource file
+   * @return the corresponding String to the passed name, an Exception message to display
+   */
+  public static String getCommandException(String exceptionName){
+    return ResourceBundle.getBundle(RESOURCES_PACKAGE+ EXCEPTIONS).getString(exceptionName);
   }
 
+  /**
+   * @param filePath the path of the File we want to load commands from
+   * @return a String of the same file that can be used by ParseText
+   * @throws CommandException if there are issues with the File
+   */
+  public static String readFile(String filePath) throws CommandException {
+    try {
+      return Files.readString(Path.of(filePath));
+    }
+    catch(IOException e){
+      throw new CommandException(getCommandException("fileIssue").formatted(filePath));
+    }
+    }
+
+  /**
+   * @return the List of all Commands after being parsed. The Model calls this function on the turtle
+   * making the parser completely independent from the Turtle.
+   * The only assumption is that the Model expects a List.
+   */
   public List getCommands(){
     return validCommands;
   }
@@ -273,7 +279,7 @@ public class Translater {
   public static void main(String[] args)
       throws Exception {
     Translater t = new Translater();
-    t.parseText("fd rt 20 ");
+    t.parseText("fd difference 90 100  ");
     //t.parseText(readFile("data/examples/simple/square.slogo"));
     System.out.println(t.validCommands);
   }

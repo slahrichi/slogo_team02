@@ -13,8 +13,6 @@ public class ViewPublisher {
 
   public void addObserver(ViewListener listen){
     this.listeners.add(listen);
-    System.out.println("Added listener");
-    System.out.println(listeners);
   }
 
   public void updateColor(Color color){
