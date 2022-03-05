@@ -24,7 +24,7 @@ class TurtleCommandsTest {
   Tests Backwards Command
    */
   @Test
-  void testBackwardsExecute() throws ModelExceptions {
+  void testBackwardsExecute() throws ModelExceptions, TurtleManagerException {
     setupTest(new double[]{50});
     Command backwardCommand = new BackwardCommand(input);
     double initialX = manager.getRecordTurtle(0).xCord();
@@ -43,7 +43,7 @@ class TurtleCommandsTest {
  Tests Forwards Command
   */
   @Test
-  void testForwardExecute() throws ModelExceptions {
+  void testForwardExecute() throws ModelExceptions, TurtleManagerException {
     setupTest(new double[]{50});
     Command forwardCommand = new ForwardCommand(input);
     double initialX = manager.getRecordTurtle(0).xCord();
@@ -75,7 +75,7 @@ class TurtleCommandsTest {
  Tests Right Command
   */
   @Test
-  void testRightExecute() throws ModelExceptions {
+  void testRightExecute() throws ModelExceptions, TurtleManagerException {
     setupTest(new double[]{90});
     Command rightCommand = new RightCommand(input);
     double initialAngle = manager.getRecordTurtle(0).angle();
@@ -89,7 +89,7 @@ class TurtleCommandsTest {
  Tests Left Command
   */
   @Test
-  void testLeftExecute() throws ModelExceptions {
+  void testLeftExecute() throws ModelExceptions, TurtleManagerException {
     setupTest(new double[]{90});
     Command leftCommand = new LeftCommand(input);
     double initialAngle = manager.getRecordTurtle(0).angle();
@@ -103,7 +103,7 @@ class TurtleCommandsTest {
   Tests home command, but isn't good because in order for getValue() to work, it needs to be executed first
    */
   @Test
-  void testHomeCommand() throws ModelExceptions {
+  void testHomeCommand() throws ModelExceptions, TurtleManagerException {
     setupTest(new double[]{});
     Command homeCommand = new HomeCommand(input);
     double initialX = manager.getRecordTurtle(0).xCord();
@@ -120,7 +120,7 @@ class TurtleCommandsTest {
   tests pen down command
    */
   @Test
-  void testPenDown() throws ModelExceptions {
+  void testPenDown() throws ModelExceptions, TurtleManagerException {
     setupTest(new double[]{});
     Command penDown = new PenDownCommand(input);
     manager.stepTurtle(penDown);
@@ -132,7 +132,7 @@ class TurtleCommandsTest {
   Tests pen up command
    */
   @Test
-  void testPenUp() throws ModelExceptions {
+  void testPenUp() throws ModelExceptions, TurtleManagerException {
     setupTest(new double[]{});
     Command penUp = new PenUpCommand(input);
     manager.stepTurtle(penUp);
@@ -144,7 +144,7 @@ class TurtleCommandsTest {
   Test setHeading but isn't good because in order for getValue() to work, it needs to be executed first
    */
   @Test
-  void testSetHeading() throws ModelExceptions {
+  void testSetHeading() throws ModelExceptions, TurtleManagerException {
     setupTest(new double[]{180});
     Command setHeading = new SetHeadingCommand(input);
     double initialAngle = manager.getRecordTurtle(0).angle();
@@ -158,7 +158,7 @@ class TurtleCommandsTest {
  Test setHeading but isn't good because in order for getValue() to work, it needs to be executed first
   */
   @Test
-  void testSetPosition() throws ModelExceptions {
+  void testSetPosition() throws ModelExceptions, TurtleManagerException {
     setupTest(new double[]{50, 50});
     Command setPosition = new SetPositionCommand(input);
     double initialX = manager.getRecordTurtle(0).xCord();
@@ -176,7 +176,7 @@ class TurtleCommandsTest {
 Test setTowards but isn't good because in order for getValue() to work, it needs to be executed first
 */
   @Test
-  void testSetTowards() throws ModelExceptions {
+  void testSetTowards() throws ModelExceptions, TurtleManagerException {
     setupTest(new double[]{50, 50});
     Command setTowards = new SetTowardsCommand(input);
     double initialAngle = manager.getRecordTurtle(0).angle();

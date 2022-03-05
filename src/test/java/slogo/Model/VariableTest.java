@@ -32,4 +32,5 @@ class VariableTest {
     assertEquals("60.0", testVariable.getValue());
 
   }
+
 }
