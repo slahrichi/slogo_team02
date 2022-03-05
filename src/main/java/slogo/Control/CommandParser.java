@@ -11,7 +11,6 @@ import java.util.regex.Pattern;
 public class CommandParser {
   private static final String RESOURCES_PACKAGE = "slogo.languages.";
   public static final String NO_MATCH = "NO MATCH";
-  public static final String SYNTAX = "Syntax";
   List<Entry<String, Pattern>> mySymbols;
 
 

@@ -2,7 +2,7 @@ package slogo.Control;
 
 /**
  * Since anything the user writes has a name (fd, 90, rt) and a value (the return of each command, the double of the constant), we could use
- * this class to represent that
+ * this class to represent that. This will be especially useful when adding command returns to the constant stack.
  */
 public class Argument {
 
@@ -14,11 +14,16 @@ public class Argument {
     this.value = value;
   }
 
-  public String getString(){
+
+  public String getName(){
     return name;
   }
 
   public Double getValue(){
     return value;
+  }
+
+  public String toString(){
+    return getName() + " " + getValue();
   }
 }
