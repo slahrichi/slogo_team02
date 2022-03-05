@@ -2,22 +2,39 @@ package slogo.Model.Commands.TurtleCommands;
 
 import slogo.Model.Turtle;
 
-public class SetHeadingCommand extends TurtleCommands{
+/**
+ * @author Mike Keohane
+ *
+ * Set Heading Command
+ */
+public class SetHeadingCommand extends TurtleCommands {
 
-  public SetHeadingCommand(double[] params){
+  private double ret;
+
+  public SetHeadingCommand(double[] params) {
     super(params);
   }
 
-  private double ret;
+  /**
+   * Executes by setting the angle to the specified angle
+   *
+   * @param turtle turtle to move
+   * @return degrees rotated
+   */
   @Override
-  public double execute(Turtle turtle){
+  public double execute(Turtle turtle) {
     ret = Math.abs(getParams()[0] - turtle.getAngle());
     turtle.setAngle(getParams()[0]);
     return ret;
   }
 
+  /**
+   * Returns the degrees moved, but doesn't work well because you have to call execute first
+   *
+   * @return double degrees moved
+   */
   @Override
-  public double getValue(){
-   return ret;
+  public double getValue() {
+    return ret;
   }
 }

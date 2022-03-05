@@ -1,14 +1,25 @@
 package slogo.Model.Commands.TurtleCommands;
 
-import slogo.Model.Commands.Command;
 import slogo.Model.ModelExceptions;
 import slogo.Model.Turtle;
 
+/**
+ * @author Mike Keohane
+ */
 public class ForwardCommand extends TurtleCommands {
-  public ForwardCommand(double[] values){
+
+  public ForwardCommand(double[] values) {
     super(values);
   }
 
+  /**
+   * Executes the forwards command by moving the turtle to its current location + param[0] in the
+   * direction it is facing
+   *
+   * @param turtle turtle it executes on
+   * @return double value it moved
+   * @throws ModelExceptions
+   */
   @Override
   public double execute(Turtle turtle) throws ModelExceptions {
     double angle = turtle.getAngle();
