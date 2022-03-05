@@ -5,13 +5,19 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.awt.Dimension;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.Test;
 import util.DukeApplicationTest;
 
+/**
+ * @author Eric Xie
+ * @author Mike Keohane
+ */
 class TurtleGUITest extends DukeApplicationTest {
 
   public static final String TITLE = "Slogo Application";
@@ -35,7 +41,7 @@ class TurtleGUITest extends DukeApplicationTest {
 
 
   @Override
-  public void start(Stage stage){
+  public void start(Stage stage) {
 
     slogoGUI turtleSim = new slogoGUI(stage, LANGUAGE);
     Scene scene = turtleSim.makeScene(DEFAULT_SIZE.width, DEFAULT_SIZE.height);
@@ -62,7 +68,7 @@ class TurtleGUITest extends DukeApplicationTest {
 
 
   @Test
-  void testShellInput(){
+  void testShellInput() {
 
     writeTo(myShellArea, textTest);
     assertEquals(myShellArea.getText(), textTest);
@@ -78,14 +84,46 @@ class TurtleGUITest extends DukeApplicationTest {
 
   }
 
+  /**
+   * Tests to see if the view can take an input of fd 50 and move the turtle accordingly
+   *
+   * @throws InterruptedException
+   */
   @Test
-  void testFd50(){
+  void testFd50() throws InterruptedException {
     String fd50 = "fd 50";
-    double initialY =  myTurtle.getY();
-    writeTo(myScriptEditor,  fd50);
+    double initialY = myTurtle.getY();
+    writeTo(myScriptEditor, fd50);
     clickOn(myPlayButton);
-    double finalY =  myTurtle.getY();
-    assertEquals(finalY, initialY + 50);
+    Thread.sleep(1000);
+    double finalY = myTurtle.getY();
+    assertEquals(initialY + 50, finalY);
+
+  }
+
+
+  /**
+   * Tests the shells functionality (the press command is not working which limits our coverage)
+   *
+   * @throws InterruptedException
+   */
+  @Test
+  void shellTesting() throws InterruptedException {
+    String initShell = "slogo_team02 % ";
+    String shellTest1 = "fd 50";
+    String shellTest2 = "rt 90";
+    appendTo(myShellArea, shellTest1);
+    press(KeyCode.ENTER);
+    Thread.sleep(1000);
+    appendTo(myShellArea, shellTest2);
+    Thread.sleep(1000);
+    press(KeyCode.ENTER);
+    press(KeyCode.UP);
+    press(KeyCode.UP);
+    assertEquals(myShellArea.getText(), initShell + shellTest1);
+    press(KeyCode.DOWN);
+    assertEquals(myShellArea.getText(), initShell + shellTest2);
+    Thread.sleep(1000);
 
   }
 
@@ -145,7 +183,22 @@ class TurtleGUITest extends DukeApplicationTest {
   }
 
 
+  /**
+   * Tests to see if an exception is thrown when there are too many inputs
+   *
+   * @throws InterruptedException
+   */
+  @Test
+  void showException() throws InterruptedException {
+    writeTo(myScriptEditor, "fd 50 50 50 50");
+    clickOn(myPlayButton);
+    Thread.sleep(500);
+    DialogPane alert = lookup("#alert").query();
+    assertTrue(alert.getContentText().contains("more constants than needed"));
+  }
 
+  void testUploadFile() {
 
+  }
 
 }

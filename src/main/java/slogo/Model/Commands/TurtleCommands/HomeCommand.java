@@ -1,9 +1,11 @@
 package slogo.Model.Commands.TurtleCommands;
 
-import slogo.Model.Commands.Command;
 import slogo.Model.ModelExceptions;
 import slogo.Model.Turtle;
 
+/***
+ * @author Mike Keohane
+ */
 public class HomeCommand extends TurtleCommands {
   public static final double HOME_X = 0;
   public static final double HOME_Y = 0;

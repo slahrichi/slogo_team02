@@ -1,18 +1,32 @@
 package slogo.Model.Commands.MathCommands;
 
+/**
+ * @author Mike Keohane
+ * <p>
+ * Sum Command
+ */
 public class SumCommand extends MathCommands {
 
   public SumCommand(double[] params) {
     super(params);
   }
 
+  /**
+   * Calculates the sum of the inputs
+   *
+   * @return sum of the inputs
+   */
   @Override
   public double getValue() {
-    return getParams()[0] + getParams()[1];
+    double ret = 0;
+    for (double params : getParams()) {
+      ret += params;
+    }
+    return ret;
   }
 
-  @Override
-  public String toString() {
-    return ("Sum " + getValue());
-  }
+//  @Override
+//  public String toString() {
+//    return ("Sum " + getValue());
+//  }
 }

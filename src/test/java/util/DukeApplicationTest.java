@@ -88,6 +88,12 @@ public class DukeApplicationTest extends ApplicationTest {
             write(text);
         });
     }
+    protected void appendTo (TextInputControl t, String text) {
+        simulateAction(t, () -> {
+            t.requestFocus();
+            write(text);
+        });
+    }
 
 
     protected void setValue (Slider s, double value) {
