@@ -33,7 +33,6 @@ public class Controller implements ControllerAPI {
    */
   public Controller(ObserverViewInterface gui) {
     parser = new Translater();
-    parser = new Translater();
     manager = new TurtleManager();
     resetHistory();
     view = gui;
@@ -49,8 +48,8 @@ public class Controller implements ControllerAPI {
   public void parseAndRunCommands(String contents)
       throws Exception {
     updateHistory(contents);
+    parser.resetCommands();
     parser.parseText(contents);
-
     List<CommandAPI> commands = parser.getCommands();
 
     runCommands(commands);

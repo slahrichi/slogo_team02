@@ -66,7 +66,7 @@ public class AnimationHandler implements ViewListener {
 
     RotateTransition rt = new RotateTransition(Duration.seconds(ANIMATION_DURATION), turtleView.getTurtleImage());
     if(turtleRecord.oldAngle() != turtleRecord.angle()){
-      rt.setByAngle(turtleRecord.angle() + 90);
+      rt.setByAngle(turtleRecord.angle());
       sq.getChildren().add(rt);
     }
     if(oldX != newX || oldY != newY){
