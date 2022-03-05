@@ -95,6 +95,7 @@ public class Translater {
    * @throws CommandException depdening on the situation (wrong token, too many constants)
    */
   void parseText(String program) throws Exception {
+    resetCommands();
     program = removeComments(program);
     LinkedList group = null;
     for (String token : program.split(WHITESPACE)) {
@@ -298,6 +299,8 @@ public class Translater {
       throws Exception {
     Translater t = new Translater();
     t.parseText("fd 100 rt 90");
+//    System.out.println(t.validCommands);
+//    t.parseText("fd 200 rt 20");
     //t.parseText(readFile("data/examples/simple/square.slogo"));
     System.out.println(t.validCommands);
   }
