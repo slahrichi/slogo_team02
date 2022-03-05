@@ -9,7 +9,7 @@ import slogo.Model.TurtleManager;
 import slogo.Model.TurtleManagerAPI;
 import slogo.Model.TurtleManagerException;
 import slogo.Model.TurtleRecord;
-import slogo.View.ObserverViewAPI;
+import slogo.View.APIs.ObserverViewAPI;
 
 
 public class Controller implements ControllerViewAPI {

@@ -12,20 +12,24 @@ public class CanvasPanel {
   private TurtleView turtleView;
   private CanvasView canvasView;
   private Stage myStage;
-  private ResourceBundle myResources;
+  private ResourceBundle canvasResources;
+  private ResourceBundle turtleResources;
 
-  private static final String DEFAULT_RESOURCE_PACKAGE = "/view/Canvas";
+  private static final String CANVAS_RESOURCE_PACKAGE = "/view/Canvas";
+  private static final String TURTLE_RESOURCE_PACKAGE = "/view/Turtle";
+
 
   public CanvasPanel(Stage stageInput){
 
-    myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE);
+    canvasResources = ResourceBundle.getBundle(CANVAS_RESOURCE_PACKAGE);
+    turtleResources = ResourceBundle.getBundle(TURTLE_RESOURCE_PACKAGE);
 
     myStage = stageInput;
     canvasPane = new StackPane();
     setUpCanvasPanel();
 
-    canvasView = new CanvasView(canvasPane, myResources);
-    turtleView = new TurtleView(canvasPane);
+    canvasView = new CanvasView(canvasPane, canvasResources);
+    turtleView = new TurtleView(canvasPane, turtleResources);
 
   }
 
@@ -33,7 +37,7 @@ public class CanvasPanel {
 
     canvasPane.setId("canvasBox");
     canvasPane.prefWidthProperty().bind(myStage.widthProperty().multiply(
-        Double.parseDouble(myResources.getString("WidthProperty"))));
+        Double.parseDouble(canvasResources.getString("WidthProperty"))));
 
 
   }

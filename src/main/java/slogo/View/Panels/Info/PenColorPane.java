@@ -6,8 +6,7 @@ import javafx.scene.control.ColorPicker;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import slogo.View.AnimationHandler;
-import slogo.View.Panels.Canvas.CanvasView;
-import slogo.View.ViewPublisher;
+import slogo.View.Observer.ViewPublisher;
 
 public class PenColorPane extends SideTitledPane{
 

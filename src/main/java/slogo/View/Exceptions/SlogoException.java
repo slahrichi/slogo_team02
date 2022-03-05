@@ -1,9 +1,10 @@
 package slogo.View.Exceptions;
 
+import java.io.IOException;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
-public class SlogoException extends RuntimeException{
+public class SlogoException extends IOException {
 
   /**
    * Constructs a new runtime exception with the specified detail message. The cause is not
@@ -31,6 +32,7 @@ public class SlogoException extends RuntimeException{
   public SlogoException(String message, Throwable cause) {
     super(message, cause);
   }
+
 
 }
 

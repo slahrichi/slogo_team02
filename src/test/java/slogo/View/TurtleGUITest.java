@@ -15,8 +15,8 @@ class TurtleGUITest extends DukeApplicationTest {
 
   public static final String TITLE = "Slogo Application";
   public static final String LANGUAGE = "English";
-  public static final Dimension DEFAULT_SIZE = new Dimension(1000, 800);
-  private static final String LANGUAGE_RESOURCE_PATH = "slogo.languages.";
+  public static final Dimension DEFAULT_SIZE = new Dimension(1500, 1000);
+  private static final String LANGUAGE_RESOURCE_PATH = "view";
   private static final String EXAMPLE_PROGRAMS_PATH = "/examples";
   private static final String textTest = "hello.";
 
@@ -24,6 +24,12 @@ class TurtleGUITest extends DukeApplicationTest {
   private TextArea myScriptEditor;
   private Button myPlayButton;
   private ImageView myTurtle;
+  private Button myLoadButton;
+  private Button myResetButton;
+  private Button myAddButton;
+
+
+
 
   @Override
   public void start(Stage stage){
@@ -40,8 +46,12 @@ class TurtleGUITest extends DukeApplicationTest {
 
     myShellArea = lookup("#textArea").query();
     myScriptEditor = lookup("#editorArea").query();
-    myPlayButton = lookup("#playButton").query();
-    myTurtle = lookup("#turtleImage").query();
+    myPlayButton = lookup("#PlayButton").query();
+    myTurtle = lookup("#TurtleImage").query();
+    myLoadButton = lookup("#LoadFile").query();
+    myResetButton = lookup("#resetSlogo").query();
+    myAddButton = lookup("#addSlogo").query();
+
   }
 
 
@@ -72,6 +82,22 @@ class TurtleGUITest extends DukeApplicationTest {
     assertEquals(finalY, initialY + 50);
 
   }
+
+  @Test
+  void loadButtonPressed(){
+    clickOn(myLoadButton);
+
+  }
+
+  @Test
+  void resetButtonPressed(){
+    clickOn(myResetButton);
+
+    // happy path - new stage created
+    assertEquals()
+  }
+
+
 
 
 
