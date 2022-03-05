@@ -25,8 +25,8 @@ import javafx.stage.Stage;
 import slogo.Control.CommandException;
 import slogo.Control.Controller;
 import slogo.Control.ControllerViewAPI;
-import slogo.Model.TurtleManagerException;
-import slogo.View.Configuration.FileReader;
+import slogo.View.Configuration.SlogoReader;
+import slogo.View.Configuration.SlogoWriter;
 import slogo.View.Exceptions.SlogoException;
 import slogo.View.Panels.CanvasPanel;
 import slogo.View.Panels.InformationPanel;
@@ -67,6 +67,8 @@ public class slogoGUI implements ViewAPI, ObserverViewAPI {
     STYLESHEET = "stylesheet.css";
     displayApp();
     animationHandler = new AnimationHandler(canvasPanel);
+    displayInformation();
+
   }
 
   public Scene makeScene(int width, int height) {
@@ -83,8 +85,11 @@ public class slogoGUI implements ViewAPI, ObserverViewAPI {
     myRoot.setTop(makeTitle());
     myRoot.setLeft(createInputPanel());
     myRoot.setCenter(createTurtleCanvas());
-    myRoot.setRight(createInformationPanel(control));
     myRoot.setBottom(createConfigButtons());
+  }
+
+  private void displayInformation() {
+    myRoot.setRight(createInformationPanel());
   }
 
 
@@ -145,6 +150,7 @@ public class slogoGUI implements ViewAPI, ObserverViewAPI {
   }
 
   private void saveFilePressed() {
+    SlogoWriter initial = new SlogoWriter(inputPanel.getEditorView().getContents(), myResources);
   }
 
   private void loadFilePressed() {
@@ -152,7 +158,7 @@ public class slogoGUI implements ViewAPI, ObserverViewAPI {
     try {
       File fileInput = FILE_CHOOSER.showOpenDialog(new Stage());
       if (fileInput != null) {
-        FileReader initial = new FileReader(fileInput.getCanonicalPath());
+        SlogoReader initial = new SlogoReader(fileInput.getCanonicalPath());
         String fileContents = initial.getString();
         inputPanel.getEditorView().getTextArea().setText(fileContents);
       }
@@ -164,6 +170,14 @@ public class slogoGUI implements ViewAPI, ObserverViewAPI {
 
   private void resetCanvas(){
     canvasPanel.getCanvasView().clearCanvas();
+    try {
+      control.parseAndRunCommands("home");
+    } catch (Exception e) {
+      showMessage(AlertType.ERROR, e.getMessage());
+    }
+    infoPanel.getHistoryText().setText("");
+    inputPanel.getEditorView().getTextArea().setText("");
+
 
   }
 
@@ -176,9 +190,9 @@ public class slogoGUI implements ViewAPI, ObserverViewAPI {
 
   }
 
-  private VBox createInformationPanel(ControllerViewAPI control) {
+  private VBox createInformationPanel() {
 
-    infoPanel = new InformationPanel(myStage, control);
+    infoPanel = new InformationPanel(myStage, animationHandler, canvasPanel.getCanvasView());
 
     return infoPanel.getInfoBox();
 
@@ -197,27 +211,7 @@ public class slogoGUI implements ViewAPI, ObserverViewAPI {
 
 
   @Override
-  public void clearConsole() {
-
-  }
-
-  @Override
-  public void clearDisplay() {
-
-  }
-
-  @Override
   public void clearHistory() {
-
-  }
-
-  @Override
-  public void changeBackgroundColor() {
-
-  }
-
-  @Override
-  public void displayException(String errorMsg) {
 
   }
 
@@ -261,8 +255,6 @@ public class slogoGUI implements ViewAPI, ObserverViewAPI {
     alert.showAndWait();
 
   }
-
-
 
 
 }

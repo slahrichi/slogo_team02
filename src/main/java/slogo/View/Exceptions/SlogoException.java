@@ -1,5 +1,8 @@
 package slogo.View.Exceptions;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+
 public class SlogoException extends RuntimeException{
 
   /**
@@ -28,5 +31,6 @@ public class SlogoException extends RuntimeException{
   public SlogoException(String message, Throwable cause) {
     super(message, cause);
   }
+
 }
 
