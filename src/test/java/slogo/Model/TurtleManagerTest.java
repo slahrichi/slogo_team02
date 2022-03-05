@@ -10,6 +10,12 @@ import slogo.Model.Commands.Command;
 import slogo.Model.Commands.TurtleCommands.BackwardCommand;
 import slogo.Model.Commands.TurtleCommands.ForwardCommand;
 
+/**
+ * The turtle manager class test, that holds all the different turtles tests and contains test commands for update /
+ * getting different values from the turtles
+ * @author Haris Adnan.
+ *
+ */
 class TurtleManagerTest {
   TurtleManager turtleManager = new TurtleManager();
   private double[] input;
@@ -20,11 +26,20 @@ class TurtleManagerTest {
   private void setupTest(double[] params){
     input = params;
   }
+
+  /**
+   *
+   */
   @Test
   void addNewTurtleTest() {
     turtleManager.addNewTurtle(20);
     assertEquals(turtleManager.getLatestTurtleAddedId(), 20);
   }
+
+  /**
+   *
+   * @throws TurtleManagerException
+   */
 
   @Test
   void changeActiveTurtleGoodInput() throws TurtleManagerException {
@@ -32,6 +47,10 @@ class TurtleManagerTest {
     assertEquals(turtleManager.activeTurtle.getTurtleID(), 0);
   }
 
+  /**
+   *
+   * @throws TurtleManagerException
+   */
   @Test
   void changeActiveTurtleBadInput() throws TurtleManagerException{
 
@@ -51,6 +70,10 @@ class TurtleManagerTest {
     assertEquals(turtleManager.numberOfTurtlesInList(), 3);
   }
 
+  /**
+   *
+   * @throws TurtleManagerException
+   */
   @Test
   void getRecordTurtle() throws TurtleManagerException {
     Turtle thisTurtle = turtleManager.activeTurtle;
@@ -58,6 +81,11 @@ class TurtleManagerTest {
         thisTurtle.getAngle(), thisTurtle.isPenDown(), thisTurtle.getOldX(),
         thisTurtle.getOldY(), thisTurtle.getOldAngle(), thisTurtle.getTurtleID()));
   }
+
+  /**
+   *
+   * @throws ModelExceptions
+   */
 
   @Test
   void stepTurtleTestGoodInput() throws ModelExceptions {
