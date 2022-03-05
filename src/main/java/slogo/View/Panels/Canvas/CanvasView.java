@@ -14,7 +14,7 @@ public class CanvasView implements ViewListener {
   private Canvas turtleCanvas;
   private GraphicsContext gc;
 
-  private static final int CANVAS_DIMENSIONS = 800;
+  private static final int CANVAS_DIMENSIONS = 600;
 
   public CanvasView(StackPane outerPane) {
 
