@@ -1,5 +1,8 @@
 package slogo.View.Configuration;
 
+import static slogo.View.slogoGUI.makeButton;
+import static slogo.View.slogoGUI.showMessage;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,6 +18,25 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
+/**
+ * Purpose: The purpose of this class is that it handles the writing of .slogo files by retrieving
+ * the editor contents and saving it as a .slogo file
+ * <p>
+ * Assumption: We assume that the string being passed to the SlogoWriter is the correct string of
+ * the program that the user wants to save. It doesn't check if the String is correct or not.
+ * <p>
+ * Dependencies: This class depends on multiple file imports as well as javaFx stage effects in
+ * order to create a window for user input. It then has some event handlers to check when the submit
+ * input button is pressed.
+ * <p>
+ * Example: When the save button is pressed, the users inserts a title and clicks submit file to
+ * create the file. This file is then saved in the data folder under saves.
+ * <p>
+ * Misc: N/A
+ *
+ * @author: Eric Xie
+ */
+
 public class SlogoWriter {
 
   public static final int WIDTH = 400;
@@ -27,7 +49,29 @@ public class SlogoWriter {
 
   private String editorContents;
 
-  public SlogoWriter(String fileInput, ResourceBundle resources){
+
+
+  /**
+   * Purpose: The purpose of this class is that it constructs SlogoWriters
+   * <p>
+   * Assumption: We assume that the string being passed to the SlogoWriter is the correct string of
+   * the program that the user wants to save. It doesn't check if the String is correct or not.
+   * <p>
+   * Dependencies: This class depends on multiple file imports as well as javaFx stage effects in
+   * order to create a window for user input. It then has some event handlers to check when the submit
+   * input button is pressed.
+   * <p>
+   * Example: This slogowriter object is created in the slogoGUI to create a new slogo file of the
+   * user's choice
+   * <p>
+   * Misc: N/A
+   *
+   * @param fileInput string of the editor contents to be made into a file
+   * @param resources ResourceBundle for name of buttons
+   *
+   */
+
+  public SlogoWriter(String fileInput, ResourceBundle resources) {
 
     editorContents = fileInput;
     myStage = new Stage();
@@ -40,9 +84,9 @@ public class SlogoWriter {
     myStage.show();
 
 
-
   }
 
+  // sets up window for user inputs
   private void inputsAdded() {
     TextField title = new TextField(myResources.getString("SaveTitle"));
     title.setId("titleInput");
@@ -52,38 +96,18 @@ public class SlogoWriter {
     myRoot.getChildren().addAll(title, submit);
   }
 
+  // handles when the submit button is clicked in the user input window
   private void submitButtonPressed(String title) {
     myStage.close();
-    try{
+    try {
       fw = new FileWriter(new File("data/saves", title + ".slogo"));
       fw.write(editorContents);
       fw.close();
-    }
-    catch(IOException e){
+    } catch (IOException e) {
       showMessage(AlertType.ERROR, e.getMessage());
     }
   }
 
 
-
-  public static Button makeButton(String labelName, EventHandler<ActionEvent> handler,
-      ResourceBundle resources) {
-
-    Button buttonCreated = new Button();
-    String buttonLabel = resources.getString(labelName);
-
-    buttonCreated.setText(buttonLabel);
-    buttonCreated.setOnAction(handler);
-    buttonCreated.setId(labelName);
-
-    return buttonCreated;
-
-  }
-
-  public void showMessage(AlertType type, String msg){
-    Alert alert = new Alert(type, msg);
-    alert.showAndWait();
-
-  }
 
 }

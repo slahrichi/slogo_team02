@@ -5,10 +5,25 @@ import java.util.ResourceBundle;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
-import slogo.View.AnimationHandler;
 
 
-// should create the turtle image and handle its movement along with pen down
+/**
+ * Purpose: Create and set up the Turtle Image on the StackPane with the canvas
+ * <p>
+ * Assumption: We assume that the TurtleView is correctly passed the right inputs and intialized in the correct place
+ * in the right order on the stackpane.
+ * <p>
+ * Dependencies: This class depends on StackPane and various javafx image imports as well as the Canvas Panels class
+ * <p>
+ * Example: Used in the CanvasPanel class to create a TurtleImage (ImageView) object and set it up on the StackPane
+ * <p>
+ *
+ *
+ * @author Eric Xie
+ *
+ */
+
+
 public class TurtleView {
 
   public static double TURTLE_SIZE;
@@ -20,6 +35,21 @@ public class TurtleView {
 
   private ResourceBundle myResources;
 
+  /**
+   * Purpose: Constructor for the TurtleView class that takes in the inputs and sets them to its respective
+   * instance variables; also sets up the ImageView for the turtle on the canvas
+   * <p>
+   * Assumption: We assume that the TurtleView is correctly passed the right inputs and intialized in the correct place
+   * in the right order on the stack pane.
+   * <p>
+   * Example: Used in the CanvasPanel class to create a TurtleImage (ImageView) object and set it up on the StackPane
+   * <p>
+   *
+   * @oaram canvasInput StackPane that we put the turtle image on
+   * @param resources The ResourceBundle that we get the image we want off on
+   *
+   *
+   */
 
   public TurtleView(StackPane canvasInput, ResourceBundle resources){
 

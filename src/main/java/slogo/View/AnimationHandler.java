@@ -64,8 +64,8 @@ public class AnimationHandler implements ViewListener {
       gc.strokeLine(oldX + CANVAS_OFFSET, oldY + CANVAS_OFFSET, newX + CANVAS_OFFSET, newY + CANVAS_OFFSET);
     }
 
-    RotateTransition rt = new RotateTransition(Duration.seconds(ANIMATION_DURATION), turtleView.getTurtleImage());
     if(turtleRecord.oldAngle() != turtleRecord.angle()){
+      RotateTransition rt = new RotateTransition(Duration.seconds(ANIMATION_DURATION), turtleView.getTurtleImage());
       rt.setByAngle(turtleRecord.angle() + 90);
       sq.getChildren().add(rt);
     }
@@ -82,8 +82,6 @@ public class AnimationHandler implements ViewListener {
 
     }
     System.out.println(turtleView.getTurtleImage().getX() + " " + turtleView.getTurtleImage().getY());
-
-
 
   }
 
