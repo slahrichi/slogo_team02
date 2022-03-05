@@ -24,7 +24,7 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import slogo.Control.CommandException;
 import slogo.Control.Controller;
-import slogo.Control.ControllerViewAPI;
+import slogo.Control.ControllerAPI;
 import slogo.Main;
 import slogo.Model.TurtleManagerException;
 import slogo.View.Configuration.SlogoReader;
@@ -37,7 +37,7 @@ import slogo.View.Panels.TitlePanel;
 
 // class for creating the elements
 
-public class slogoGUI implements ViewAPI, ObserverViewAPI {
+public class slogoGUI implements ViewAPI, ObserverViewInterface {
 
 
   private static final String DEFAULT_RESOURCE_PACKAGE = "/";
@@ -45,7 +45,7 @@ public class slogoGUI implements ViewAPI, ObserverViewAPI {
   private String STYLESHEET;
 
   public  final FileChooser FILE_CHOOSER = createChooser("*.slogo");
-  private ControllerViewAPI control;
+  private ControllerAPI control;
   private TitlePanel titlePanel;
   private InputPanel inputPanel;
   private InformationPanel infoPanel;
