@@ -6,22 +6,25 @@ import org.junit.jupiter.api.Test;
 import slogo.Model.Commands.Command;
 import slogo.Model.Commands.TurtleCommands.*;
 
-/*
-@author Mike Keohane
+/**
+ * @author Mike Keohane
  */
 class TurtleCommandsTest {
 
   private TurtleManager manager;
   private double[] input;
 
-  private void setupTest(double[] params){
+  private void setupTest(double[] params) {
     manager = new TurtleManager();
     input = params;
   }
 
 
-  /*
-  Tests Backwards Command
+  /**
+   * Tests Backwards Command for input of 50
+   *
+   * @throws ModelExceptions
+   * @throws TurtleManagerException
    */
   @Test
   void testBackwardsExecute() throws ModelExceptions, TurtleManagerException {
@@ -39,9 +42,12 @@ class TurtleCommandsTest {
     assertEquals(backwardCommand.getValue(), input[0]);
   }
 
-  /*
- Tests Forwards Command
-  */
+  /**
+   * Tests Forwards Command for input of 50
+   *
+   * @throws ModelExceptions
+   * @throws TurtleManagerException
+   */
   @Test
   void testForwardExecute() throws ModelExceptions, TurtleManagerException {
     setupTest(new double[]{50});
@@ -58,22 +64,27 @@ class TurtleCommandsTest {
     assertEquals(forwardCommand.getValue(), input[0]);
   }
 
-  /*
-  Test forwards expects Model exception
+  /**
+   * Test to see if Model Exception is thrown if turtle is moved forward outside of the canvas
    */
   @Test
   void testForwardBadExecuteException() {
     setupTest(new double[]{50000});
     Command forwardCommand = new ForwardCommand(input);
 
-    Exception exception = assertThrows(ModelExceptions.class, () -> manager.stepTurtle(forwardCommand));
+    Exception exception = assertThrows(ModelExceptions.class,
+        () -> manager.stepTurtle(forwardCommand));
 
     String expectedMessage = "Error with bounds";
     assertTrue(exception.getMessage().contains(expectedMessage));
   }
-  /*
- Tests Right Command
-  */
+
+  /**
+   * Tests Right Command with input 90
+   *
+   * @throws ModelExceptions
+   * @throws TurtleManagerException
+   */
   @Test
   void testRightExecute() throws ModelExceptions, TurtleManagerException {
     setupTest(new double[]{90});
@@ -81,13 +92,16 @@ class TurtleCommandsTest {
     double initialAngle = manager.getRecordTurtle(0).angle();
     manager.stepTurtle(rightCommand);
     double finalAngle = manager.getRecordTurtle(0).angle();
-    assertEquals((initialAngle + input[0])%360, finalAngle);
+    assertEquals((initialAngle + input[0]) % 360, finalAngle);
     assertEquals(rightCommand.getValue(), input[0]);
   }
 
-  /*
- Tests Left Command
-  */
+  /**
+   * Tests Left Command with input 90
+   *
+   * @throws ModelExceptions
+   * @throws TurtleManagerException
+   */
   @Test
   void testLeftExecute() throws ModelExceptions, TurtleManagerException {
     setupTest(new double[]{90});
@@ -95,12 +109,16 @@ class TurtleCommandsTest {
     double initialAngle = manager.getRecordTurtle(0).angle();
     manager.stepTurtle(leftCommand);
     double finalAngle = manager.getRecordTurtle(0).angle();
-    assertEquals((initialAngle - input[0])%360, finalAngle);
+    assertEquals((initialAngle - input[0]) % 360, finalAngle);
     assertEquals(leftCommand.getValue(), input[0]);
   }
 
-  /*
-  Tests home command, but isn't good because in order for getValue() to work, it needs to be executed first
+  /**
+   * Tests home command, but isn't great because in order for getValue() to work, it needs to be
+   * executed first
+   *
+   * @throws ModelExceptions
+   * @throws TurtleManagerException
    */
   @Test
   void testHomeCommand() throws ModelExceptions, TurtleManagerException {
@@ -116,8 +134,11 @@ class TurtleCommandsTest {
         Math.sqrt(Math.pow((finalX - initialX), 2) + Math.pow((finalY - initialY), 2)));
   }
 
-  /*
-  tests pen down command
+  /**
+   * Tests pen down command
+   *
+   * @throws ModelExceptions
+   * @throws TurtleManagerException
    */
   @Test
   void testPenDown() throws ModelExceptions, TurtleManagerException {
@@ -128,8 +149,11 @@ class TurtleCommandsTest {
     assertTrue(manager.getRecordTurtle(0).penDown());
   }
 
-  /*
-  Tests pen up command
+  /**
+   * Tests pen up command
+   *
+   * @throws ModelExceptions
+   * @throws TurtleManagerException
    */
   @Test
   void testPenUp() throws ModelExceptions, TurtleManagerException {
@@ -140,8 +164,12 @@ class TurtleCommandsTest {
     assertFalse(manager.getRecordTurtle(0).penDown());
   }
 
-  /*
-  Test setHeading but isn't good because in order for getValue() to work, it needs to be executed first
+  /**
+   * Tests setHeading but isn't great because in order for getValue() to work, it needs to be
+   * executed first
+   *
+   * @throws ModelExceptions
+   * @throws TurtleManagerException
    */
   @Test
   void testSetHeading() throws ModelExceptions, TurtleManagerException {
@@ -154,9 +182,13 @@ class TurtleCommandsTest {
     assertEquals(setHeading.getValue(), Math.abs(input[0] - initialAngle));
   }
 
-  /*
- Test setHeading but isn't good because in order for getValue() to work, it needs to be executed first
-  */
+  /**
+   * Test setHeading but isn't good because in order for getValue() to work, it needs to be executed
+   * first
+   *
+   * @throws ModelExceptions
+   * @throws TurtleManagerException
+   */
   @Test
   void testSetPosition() throws ModelExceptions, TurtleManagerException {
     setupTest(new double[]{50, 50});
@@ -172,9 +204,13 @@ class TurtleCommandsTest {
         Math.sqrt(Math.pow((finalX - initialX), 2) + Math.pow((finalY - initialY), 2)));
   }
 
-  /*
-Test setTowards but isn't good because in order for getValue() to work, it needs to be executed first
-*/
+  /**
+   * Test setTowards but isn't great because in order for getValue() to work, it needs to be
+   * executed first
+   *
+   * @throws ModelExceptions
+   * @throws TurtleManagerException
+   */
   @Test
   void testSetTowards() throws ModelExceptions, TurtleManagerException {
     setupTest(new double[]{50, 50});
@@ -183,10 +219,11 @@ Test setTowards but isn't good because in order for getValue() to work, it needs
     manager.stepTurtle(setTowards);
     double finalAngle = manager.getRecordTurtle(0).angle();
     assertEquals(finalAngle, calcAngle(manager.getRecordTurtle(0), input));
-    assertEquals(setTowards.getValue(),Math.abs(calcAngle(manager.getRecordTurtle(0),input) -initialAngle));
+    assertEquals(setTowards.getValue(),
+        Math.abs(calcAngle(manager.getRecordTurtle(0), input) - initialAngle));
   }
 
   private double calcAngle(TurtleRecord turtle, double[] input) {
-    return Math.toDegrees(Math.atan((input[1] - turtle.yCord())/(input[0] - turtle.xCord())));
+    return Math.toDegrees(Math.atan((input[1] - turtle.yCord()) / (input[0] - turtle.xCord())));
   }
 }

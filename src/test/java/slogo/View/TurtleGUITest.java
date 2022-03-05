@@ -13,6 +13,10 @@ import javafx.stage.Stage;
 import org.junit.jupiter.api.Test;
 import util.DukeApplicationTest;
 
+/**
+ * @author Eric Xie
+ * @author Mike Keohane
+ */
 class TurtleGUITest extends DukeApplicationTest {
 
   public static final String TITLE = "Slogo Application";
@@ -28,7 +32,7 @@ class TurtleGUITest extends DukeApplicationTest {
   private ImageView myTurtle;
 
   @Override
-  public void start(Stage stage){
+  public void start(Stage stage) {
 
     slogoGUI turtleSim = new slogoGUI(stage, LANGUAGE);
     Scene scene = turtleSim.makeScene(DEFAULT_SIZE.width, DEFAULT_SIZE.height);
@@ -48,7 +52,7 @@ class TurtleGUITest extends DukeApplicationTest {
 
 
   @Test
-  void testShellInput(){
+  void testShellInput() {
 
     writeTo(myShellArea, textTest);
     assertEquals(myShellArea.getText(), textTest);
@@ -67,11 +71,11 @@ class TurtleGUITest extends DukeApplicationTest {
   @Test
   void testFd50() throws InterruptedException {
     String fd50 = "fd 50";
-    double initialY =  myTurtle.getY();
-    writeTo(myScriptEditor,  fd50);
+    double initialY = myTurtle.getY();
+    writeTo(myScriptEditor, fd50);
     clickOn(myPlayButton);
     Thread.sleep(1000);
-    double finalY =  myTurtle.getY();
+    double finalY = myTurtle.getY();
     assertEquals(initialY + 50, finalY);
 
   }
@@ -91,7 +95,7 @@ class TurtleGUITest extends DukeApplicationTest {
     press(KeyCode.UP);
     assertEquals(myShellArea.getText(), initShell + shellTest1);
     press(KeyCode.DOWN);
-    assertEquals(myShellArea.getText(), initShell +shellTest2);
+    assertEquals(myShellArea.getText(), initShell + shellTest2);
     Thread.sleep(1000);
 
   }
@@ -105,7 +109,7 @@ class TurtleGUITest extends DukeApplicationTest {
     assertTrue(alert.getContentText().contains("more constants than needed"));
   }
 
-  void testUploadFile(){
+  void testUploadFile() {
 
   }
 
