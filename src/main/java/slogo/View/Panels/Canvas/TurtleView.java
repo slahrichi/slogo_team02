@@ -13,7 +13,6 @@ public class TurtleView {
   public final static double TURTLE_OFFSET = TURTLE_SIZE / 2;
   private static final int LINE_OFFSET = -10;
 
-  private AnimationHandler anim;
   private StackPane canvasBox;
   private ImageView turtleImage;
 

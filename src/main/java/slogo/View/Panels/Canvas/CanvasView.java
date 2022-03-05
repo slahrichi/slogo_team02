@@ -5,9 +5,10 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import slogo.View.ViewListener;
 
 
-public class CanvasView {
+public class CanvasView implements ViewListener {
 
   private StackPane canvasBox;
   private Canvas turtleCanvas;
@@ -43,6 +44,18 @@ public class CanvasView {
     gc.clearRect(0, 0, getTurtleCanvas().getHeight(), getTurtleCanvas().getWidth());
     gc.setFill(Color.WHITE);
     gc.fillRect(0, 0, CANVAS_DIMENSIONS, CANVAS_DIMENSIONS);
+  }
+
+
+  @Override
+  public void updateCanvas(Color colorInput) {
+    gc.setFill(colorInput);
+    gc.fillRect(0, 0, CANVAS_DIMENSIONS, CANVAS_DIMENSIONS);
+  }
+
+  @Override
+  public void updatePen(Color colorInput) {
+
   }
 
 
