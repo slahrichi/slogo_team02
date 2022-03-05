@@ -2,17 +2,11 @@ package slogo.View.Panels.Info;
 
 import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TitledPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import slogo.View.Panels.Canvas.CanvasView;
-import slogo.View.ViewListener;
-import slogo.View.ViewPublisher;
+import slogo.View.Observer.ViewPublisher;
 
 public class BackgroundColorPane extends SideTitledPane {
 

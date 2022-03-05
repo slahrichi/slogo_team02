@@ -1,10 +1,11 @@
-package slogo.View;
+package slogo.View.Observer;
 
 // internal view observer
 
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.paint.Color;
+import slogo.View.Observer.ViewListener;
 
 public class ViewPublisher {
 
