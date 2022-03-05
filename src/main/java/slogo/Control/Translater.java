@@ -290,6 +290,10 @@ public class Translater {
     return validCommands;
   }
 
+  public void resetCommands(){
+    validCommands = new ArrayList<>();
+  }
+
   public static void main(String[] args)
       throws Exception {
     Translater t = new Translater();
