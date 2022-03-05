@@ -6,9 +6,17 @@ import slogo.Model.Turtle;
 public class YCor extends TurtleQueries{
 
   private double centerOfScreenY = Main.DEFAULT_SIZE.height/2;
+  /**
+   * Query Class that gets the Y coordinate of the turtle from the center of the screen.
+   * @author Haris Adnan
+   */
   public YCor(Turtle turtle) {
     super(turtle);
   }
+  /**
+   * gets Y coordinate of the Turtle from center of screen, using getTurtleYFromCenter() method
+   * @return
+   */
   public double getYCor(){
     return getTurtleYFromCenter(myTurtle);
   }

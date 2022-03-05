@@ -28,7 +28,7 @@ class TurtleManagerTest {
   }
 
   /**
-   *
+   * test checks to see if a turtle is added to turtle lists
    */
   @Test
   void addNewTurtleTest() {
@@ -37,8 +37,8 @@ class TurtleManagerTest {
   }
 
   /**
-   *
-   * @throws TurtleManagerException
+   * test checks if changing the active turtle happens, good input
+   * @throws TurtleManagerException : exception that handles problems with changing active turtle
    */
 
   @Test
@@ -48,8 +48,8 @@ class TurtleManagerTest {
   }
 
   /**
-   *
-   * @throws TurtleManagerException
+   * test checks if changing the active turtle happens,bad input, throws exceptions
+   * @throws TurtleManagerException : exception that handles problems with changing active turtle
    */
   @Test
   void changeActiveTurtleBadInput() throws TurtleManagerException{
@@ -71,8 +71,8 @@ class TurtleManagerTest {
   }
 
   /**
-   *
-   * @throws TurtleManagerException
+   * test gets turtle record
+   * @throws TurtleManagerException : exception that handles incorrect turtle get.
    */
   @Test
   void getRecordTurtle() throws TurtleManagerException {
@@ -83,7 +83,7 @@ class TurtleManagerTest {
   }
 
   /**
-   *
+   * Tests if the turtle steps correctly
    * @throws ModelExceptions
    */
 

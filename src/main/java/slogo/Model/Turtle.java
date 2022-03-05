@@ -148,6 +148,10 @@ public class Turtle {
     return true;
   }
 
+  /**
+   * Turtle ID is the unique number assigned to every turtle made. This method gets the Turtle's ID
+   * @return turtle's ID as an integer.
+   */
   public int getTurtleID(){
     return myID;
   }
