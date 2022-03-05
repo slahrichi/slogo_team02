@@ -27,8 +27,4 @@ public class SetPositionCommand extends TurtleCommands {
   public double getValue(){
     return ret;
   }
-//  @Override
-//  public String toString(){
-//    return "SetPos "+ getValue();
-//  }
 }

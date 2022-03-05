@@ -16,16 +16,6 @@ public class VariableManager {
 
   public VariableManager(){
   }
-//  public void makeVariable(String name, String value) throws VariableExceptions {
-//    if (!variableMap.containsKey(name)){
-//      variableMap.put(name, Double.parseDouble(value));
-//      Variable newVar = new Variable(name, Double.parseDouble(value));
-//      variableList.add(newVar);
-//    }
-//    else{
-//      throw new VariableExceptions("This variable name already exists. Use the Set expression instead.");
-//    }
-//  }
 
   /**
    * makes new variable if it doesnt exist or sets the value of a variable if it does
@@ -38,7 +28,6 @@ public class VariableManager {
       variableMap.put(name, Double.parseDouble(value));
       Variable thisVariable = new Variable(name, Double.parseDouble(value));
       variableList.add(thisVariable);
-//      return Double.parseDouble(value);
     }
     //update variable
     else{

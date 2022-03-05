@@ -17,10 +17,4 @@ public class BackwardCommand extends TurtleCommands {
     turtle.changeTurtleLocation(newXpos, newYpos);
     return getValue();
   }
-
-//  @Override
-//  public String toString(){
-//    return ("Backward " + getValue());
-//  }
-
 }

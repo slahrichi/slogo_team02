@@ -26,11 +26,6 @@ public class TurtleView {
     canvasBox = canvasInput;
     setUpImage();
 
-
-//    oldX = (turtleImage.getLayoutBounds().getWidth() / 2) - turtleImage.getLayoutX();
-//    oldY = (turtleImage.getLayoutBounds().getHeight() / 2) - turtleImage.getLayoutY();
-//    System.out.println(oldX + " " + oldY);
-
   }
 
   private void setUpImage(){

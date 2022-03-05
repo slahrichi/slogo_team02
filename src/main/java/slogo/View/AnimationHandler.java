@@ -75,14 +75,7 @@ public class AnimationHandler {
           sq.getChildren().add(pt);
 
     }
-
-
     System.out.println(turtleView.getTurtleImage().getX() + " " + turtleView.getTurtleImage().getY());
-
-//    System.out.println("Old X: " + turtleRecord.oldX());
-//    System.out.println("Old Y: " + turtleRecord.oldY());
-//    System.out.println("new X: " + turtleRecord.xCord());
-//    System.out.println("new Y: " + turtleRecord.yCord());
 
 
 
