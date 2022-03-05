@@ -28,6 +28,7 @@ public class CanvasView implements ViewListener {
     setupCanvas(gc);
     canvasBox.getChildren().addAll(turtleCanvas);
 
+
   }
 
   private void setupCanvas(GraphicsContext gc){
@@ -61,6 +62,7 @@ public class CanvasView implements ViewListener {
   public void updatePen(Color colorInput) {
 
   }
+
 
 
 }

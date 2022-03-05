@@ -22,6 +22,8 @@ public class TurtleManager implements TurtleManagerAPI {
   public TurtleManager(){
    turtleList = new ArrayList<>();
    addNewTurtle(0);
+   activeTurtle = turtleList.get(0);
+
   }
 
   //function assumes all turtles spawn from (0, 0 ), with angle of 270 and with their own down pen.
@@ -40,8 +42,8 @@ public class TurtleManager implements TurtleManagerAPI {
   }
 
 
-  public TurtleRecord getRecordTurtle(int turtleId) {
-    Turtle currentTurtle = turtleList.get(turtleId);
+  public TurtleRecord getRecordTurtle(int turtleId) throws TurtleManagerException {
+    Turtle currentTurtle = getTurtle(turtleId);
     return new TurtleRecord(currentTurtle.getTurtleX(), currentTurtle.getTurtleY(),
         currentTurtle.getAngle(), currentTurtle.isPenDown(), currentTurtle.getOldX(),
         currentTurtle.getOldY(), currentTurtle.getOldAngle(), currentTurtle.getTurtleID());
@@ -63,15 +65,12 @@ public class TurtleManager implements TurtleManagerAPI {
 
   }
 
-  public TurtleRecord getTurtleRecord(int id) throws TurtleManagerException {
-    Turtle currentTurtle = getTurtle(id);
-    return new TurtleRecord(currentTurtle.getTurtleX(), currentTurtle.getTurtleY(),
-          currentTurtle.getAngle(), currentTurtle.isPenDown(), currentTurtle.getOldX(),
-          currentTurtle.getOldY()
-          , currentTurtle.getOldAngle(), currentTurtle.getTurtleID());
-    }
 
   public void stepTurtle(CommandAPI command) throws ModelExceptions {
     command.execute(activeTurtle);
   }
+  public int numberOfTurtlesInList(){
+    return turtleList.size();
+  }
+
 }

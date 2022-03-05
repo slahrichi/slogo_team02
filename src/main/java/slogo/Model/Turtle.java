@@ -1,8 +1,6 @@
 package slogo.Model;
 import java.awt.Dimension;
-import java.util.List;
 import slogo.Main;
-import slogo.Model.Commands.Command;
 
 /**
  * Class that defines a turtle object
@@ -22,10 +20,6 @@ public class Turtle {
 
   // Change this to the Bounds of the screen, get from a resource file
   public Dimension BOUNDS= Main.DEFAULT_SIZE;
-
-  // Initiliaze Centre of Screen Coordinates, get from a resource file.
-  public final Point CENTER_OF_SCREEN = new Point(500, 600);
-
 
 
 
@@ -101,39 +95,6 @@ public class Turtle {
     return myOldYPos;
   }
 
-  /**
-   * gets X position of turtle from centre of screen
-   * @return x coordinate from centre
-   */
-  public double getTurtleXFromCenter(){
-    double turtleXCor = getTurtleX();
-    if (turtleXCor < CENTER_OF_SCREEN.getPointX()){
-      return -1 *(CENTER_OF_SCREEN.getPointX() - turtleXCor);
-    }
-    else if(turtleXCor > CENTER_OF_SCREEN.getPointY()) {
-      return turtleXCor - CENTER_OF_SCREEN.getPointY();
-    }
-    else{
-      return 0.0;
-    }
-  }
-  /**
-   * gets Y position of turtle from centre of screen
-   * @return Y coordinate from centre
-   */
-  public double getTurtleYFromCenter(){
-    double turtleYCor = getTurtleY();
-    if (turtleYCor < CENTER_OF_SCREEN.getPointY()){
-      return CENTER_OF_SCREEN.getPointY() - turtleYCor;
-    }
-    else if(turtleYCor > CENTER_OF_SCREEN.getPointY()) {
-      return -1 *(turtleYCor - CENTER_OF_SCREEN.getPointY());
-    }
-    else{
-      return 0.0;
-    }
-
-  }
 
   /**
    * Changes the coordinates of the turtle to new X and Y locations
@@ -183,10 +144,8 @@ public class Turtle {
     return true;
   }
 
-
   public int getTurtleID(){
     return myID;
   }
-
 
 }

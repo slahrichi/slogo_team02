@@ -15,10 +15,6 @@ public class LeftCommand extends TurtleCommands {
     return getValue();
   }
 
-//  @Override
-//  public String toString(){
-//    return ("Left " + getValue());
-//  }
 
 }
 

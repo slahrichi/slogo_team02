@@ -10,4 +10,5 @@ public interface TurtleManagerAPI {
   void changeActiveTurtle(int turtleId) throws TurtleManagerException;
   int getLatestTurtleAddedId();
   void addMultipleTurtles(List<Integer> turtleIds);
+  int numberOfTurtlesInList();
 }

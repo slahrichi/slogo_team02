@@ -124,25 +124,18 @@ public class Translater {
     for (String token : program.split(WHITESPACE)) {
       if (syntaxParser.getSymbol(token).equals("UserCommand")) {
         String currentCommand = commandParser.getSymbol(token);
-//        int numParams = getNumParams(currentCommand);
-//        if (constantStack.size() == 0
-//            || constantStack.size() < numParams) { // no/not enough parameters in stack waiting
+
           commandStack.add(currentCommand);
           continue;
-//        } else if (constantStack.size() == numParams) {
-//          makeCommandAndPopFromStack(currentCommand, numParams);
-//        }
-        //new CommandMaker(currentCommand).makeCommand(validCommands);
+
       } else if (syntaxParser.getSymbol(token).equals("Constant")) {
         constantStack.add(new Argument(token, Double.parseDouble(token)));
-        // check if command waiting
 
         if (commandStack.isEmpty()) {
           continue;
         }
         else {
           String previousCommand = commandStack.peek();
-          //Argument currentConstant = constantStack.peek();
           int numParams = getNumParams(previousCommand);
           if (numParams > constantStack.size()) {
             continue;
@@ -161,9 +154,7 @@ public class Translater {
     if (constantStack.size() > 0) {
       throw new CommandException("there are more constants than needed!");
       }
-//    else {
-//      return constantStack.peek().getValue();
-//      }
+
     }
 
 
@@ -215,36 +206,6 @@ public class Translater {
     }
   }
 
-//
-//  /**
-//   * using the Decorator pattern to hide the instanceOf from the main code and improve readability
-//   */
-//  private class CommandMaker {
-//
-//    private String currentCommand;
-//
-//    public CommandMaker(String currentCommand) {
-//      this.currentCommand = currentCommand;
-//    }
-//    private void makeCommand(List<Argument> validCommands) {
-//      if (currentCommand instanceof MathCommands){
-//
-//      }
-//      elif (currentCommand instanceof TurtleCommands){
-//
-//      }
-//    }
-//  }
-
-//    public String getSymbol(String text){
-//      for (Entry<String, Pattern> e: syntaxParser.mySymbols){
-//        if (match(text, e.getValue())){
-//          return e.getKey();
-//        }
-//      }
-//      return NO_MATCH;
-//    }
-
   public boolean match(String text, Pattern regex){
     return text != null && regex.matcher(text.trim()).matches();
   }
@@ -274,7 +235,6 @@ public class Translater {
       throws Exception {
     Translater t = new Translater();
     t.parseText("fd rt 20 ");
-    //t.parseText(readFile("data/examples/simple/square.slogo"));
     System.out.println(t.validCommands);
   }
 }

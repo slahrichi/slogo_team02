@@ -25,6 +25,7 @@ import javafx.stage.Stage;
 import slogo.Control.CommandException;
 import slogo.Control.Controller;
 import slogo.Control.ControllerViewAPI;
+import slogo.Main;
 import slogo.Model.TurtleManagerException;
 import slogo.View.Configuration.SlogoReader;
 import slogo.View.Configuration.SlogoWriter;
@@ -117,6 +118,7 @@ public class slogoGUI implements ViewAPI, ObserverViewAPI {
 
     buttonCreated.setText(buttonLabel);
     buttonCreated.setOnAction(handler);
+    buttonCreated.setId(labelName);
 
     return buttonCreated;
 
@@ -138,14 +140,10 @@ public class slogoGUI implements ViewAPI, ObserverViewAPI {
     Button loadFile = makeButton("LoadFile", event -> loadFilePressed(), myResources);
     Button saveFile = makeButton("SaveFile", event -> saveFilePressed(), myResources);
     Button resetCanvas = makeButton("ResetCanvas", event -> resetCanvas(), myResources);
+    Button resetSlogo = makeButton("resetSlogo", event -> Main.resetSlogo(myStage), myResources);
+    Button addSlogo = makeButton("addSlogo", event -> Main.addSlogo(), myResources);
 
-    playButton.setId("playButton");
-    clearHistory.setId("clearHistory");
-    loadFile.setId("loadFile");
-    saveFile.setId("saveFile");
-    resetCanvas.setId("resetCanvas");
-
-    configBox.getChildren().addAll(playButton, clearHistory, loadFile, saveFile, resetCanvas);
+    configBox.getChildren().addAll(playButton, clearHistory, loadFile, saveFile, resetCanvas, resetSlogo, addSlogo);
     return configBox;
 
   }
@@ -243,8 +241,12 @@ public class slogoGUI implements ViewAPI, ObserverViewAPI {
   }
 
   @Override
-  public void notifyAnimation() throws TurtleManagerException {
-    animationHandler.createAnimation(control.getRecordTurtle());
+  public void notifyAnimation() {
+    try {
+      animationHandler.createAnimation(control.getRecordTurtle());
+    } catch (TurtleManagerException e) {
+      showMessage(AlertType.ERROR, e.getMessage());
+    }
   }
 
   @Override
