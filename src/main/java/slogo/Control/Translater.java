@@ -151,9 +151,14 @@ public class Translater {
     }
   }
 
-  private void handleUserCommand(String token) {
+  private void handleUserCommand(String token) throws Exception {
     String currentCommand = commandParser.getSymbol(token);
+    if (getNumParams(currentCommand) == 0){
+      validCommands.add(currentCommand);
+    }
+    else{
     commandStack.add(currentCommand);
+    }
   }
 
   private void popList(Stack constantStack) {
@@ -298,10 +303,10 @@ public class Translater {
   public static void main(String[] args)
       throws Exception {
     Translater t = new Translater();
-    t.parseText("fd 100 rt 90");
+    //t.parseText("pu");
 //    System.out.println(t.validCommands);
 //    t.parseText("fd 200 rt 20");
-    //t.parseText(readFile("data/examples/simple/square.slogo"));
+    t.parseText(readFile("data/examples/simple/square_centered.slogo"));
     System.out.println(t.validCommands);
   }
 }
