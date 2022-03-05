@@ -25,6 +25,7 @@ import javafx.stage.Stage;
 import slogo.Control.CommandException;
 import slogo.Control.Controller;
 import slogo.Control.ControllerViewAPI;
+import slogo.Model.TurtleManagerException;
 import slogo.View.Configuration.SlogoReader;
 import slogo.View.Configuration.SlogoWriter;
 import slogo.View.Exceptions.SlogoException;
@@ -39,7 +40,7 @@ public class slogoGUI implements ViewAPI, ObserverViewAPI {
 
 
   private static final String DEFAULT_RESOURCE_PACKAGE = "/";
-  private static final String LANGUAGE_PACKAGE = "slogo.languages/";
+  private static final String VIEW_RESOURCE_PACKAGE = "view/";
   private String STYLESHEET;
 
   public  final FileChooser FILE_CHOOSER = createChooser("*.slogo");
@@ -60,7 +61,7 @@ public class slogoGUI implements ViewAPI, ObserverViewAPI {
 
     //viewControlInstance = ViewController.getController();
     myStage = stage;
-    myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + LANGUAGE_PACKAGE + language);
+    myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + VIEW_RESOURCE_PACKAGE + language);
     myRoot = new BorderPane();
     myRoot.setBackground(
         new Background(new BackgroundFill(Color.LIGHTGRAY, new CornerRadii(0), Insets.EMPTY)));

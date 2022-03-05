@@ -1,6 +1,6 @@
 package slogo.View.Panels.Canvas;
 
-import java.awt.Graphics;
+import java.util.ResourceBundle;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
@@ -13,12 +13,16 @@ public class CanvasView implements ViewListener {
   private StackPane canvasBox;
   private Canvas turtleCanvas;
   private GraphicsContext gc;
+  private ResourceBundle myResources;
 
-  private static final int CANVAS_DIMENSIONS = 800;
+  private final int CANVAS_DIMENSIONS;
 
-  public CanvasView(StackPane outerPane) {
+  public CanvasView(StackPane outerPane, ResourceBundle resources) {
 
+
+    myResources = resources;
     canvasBox = outerPane;
+    CANVAS_DIMENSIONS = Integer.parseInt(myResources.getString("CanvasDimensions"));
     turtleCanvas = new Canvas(CANVAS_DIMENSIONS, CANVAS_DIMENSIONS);
     gc = turtleCanvas.getGraphicsContext2D();
     setupCanvas(gc);

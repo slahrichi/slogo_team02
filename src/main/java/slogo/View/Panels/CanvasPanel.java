@@ -1,5 +1,6 @@
 package slogo.View.Panels;
 
+import java.util.ResourceBundle;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import slogo.View.Panels.Canvas.CanvasView;
@@ -11,17 +12,19 @@ public class CanvasPanel {
   private TurtleView turtleView;
   private CanvasView canvasView;
   private Stage myStage;
+  private ResourceBundle myResources;
 
-  private static final double WIDTH_PROPORTION = 0.6;
+  private static final String DEFAULT_RESOURCE_PACKAGE = "/view/Canvas";
 
   public CanvasPanel(Stage stageInput){
 
-    myStage = stageInput;
+    myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE);
 
+    myStage = stageInput;
     canvasPane = new StackPane();
     setUpCanvasPanel();
 
-    canvasView = new CanvasView(canvasPane);
+    canvasView = new CanvasView(canvasPane, myResources);
     turtleView = new TurtleView(canvasPane);
 
   }
@@ -29,7 +32,8 @@ public class CanvasPanel {
   private void setUpCanvasPanel(){
 
     canvasPane.setId("canvasBox");
-    canvasPane.prefWidthProperty().bind(myStage.widthProperty().multiply(WIDTH_PROPORTION));
+    canvasPane.prefWidthProperty().bind(myStage.widthProperty().multiply(
+        Double.parseDouble(myResources.getString("WidthProperty"))));
 
 
   }
