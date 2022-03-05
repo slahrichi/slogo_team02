@@ -257,6 +257,8 @@ public class slogoGUI implements ViewAPI, ObserverViewAPI {
   @Override
   public void showMessage(AlertType type, String msg){
     Alert alert = new Alert(type, msg);
+    Node alertNode = alert.getDialogPane();
+    alertNode.setId("alert");
     alert.showAndWait();
 
   }

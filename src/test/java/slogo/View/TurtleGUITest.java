@@ -5,8 +5,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.awt.Dimension;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.Test;
 import util.DukeApplicationTest;
@@ -41,7 +43,7 @@ class TurtleGUITest extends DukeApplicationTest {
     myShellArea = lookup("#textArea").query();
     myScriptEditor = lookup("#editorArea").query();
     myPlayButton = lookup("#playButton").query();
-    myTurtle = lookup("#turtleImage").query();
+    myTurtle = lookup("#TurtleImage").query();
   }
 
 
@@ -63,16 +65,48 @@ class TurtleGUITest extends DukeApplicationTest {
   }
 
   @Test
-  void testFd50(){
+  void testFd50() throws InterruptedException {
     String fd50 = "fd 50";
     double initialY =  myTurtle.getY();
     writeTo(myScriptEditor,  fd50);
     clickOn(myPlayButton);
+    Thread.sleep(1000);
     double finalY =  myTurtle.getY();
-    assertEquals(finalY, initialY + 50);
+    assertEquals(initialY + 50, finalY);
 
   }
 
+  @Test
+  void shellTesting() throws InterruptedException {
+    String initShell = "slogo_team02 % ";
+    String shellTest1 = "fd 50";
+    String shellTest2 = "rt 90";
+    appendTo(myShellArea, shellTest1);
+    press(KeyCode.ENTER);
+    Thread.sleep(1000);
+    appendTo(myShellArea, shellTest2);
+    Thread.sleep(1000);
+    press(KeyCode.ENTER);
+    press(KeyCode.UP);
+    press(KeyCode.UP);
+    assertEquals(myShellArea.getText(), initShell + shellTest1);
+    press(KeyCode.DOWN);
+    assertEquals(myShellArea.getText(), initShell +shellTest2);
+    Thread.sleep(1000);
 
+  }
+
+  @Test
+  void showException() throws InterruptedException {
+    writeTo(myScriptEditor, "fd 50 50 50 50");
+    clickOn(myPlayButton);
+    Thread.sleep(500);
+    DialogPane alert = lookup("#alert").query();
+    assertTrue(alert.getContentText().contains("more constants than needed"));
+  }
+
+  void testUploadFile(){
+
+  }
 
 }

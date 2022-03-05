@@ -9,7 +9,7 @@ import slogo.View.slogoGUI;
 import util.DukeApplicationTest;
 
 /**
- * @auther Mike Keohane
+ * @author Mike Keohane
  */
 class ParseAndRunTest extends DukeApplicationTest {
   private Controller controller;
@@ -20,6 +20,10 @@ class ParseAndRunTest extends DukeApplicationTest {
     controller = new Controller(view);
   }
 
+  /**
+   * Tests to see if both the parser can read fd 50 and the turtle move 50
+   * @throws Exception
+   */
   @Test
   void forwardFifty()
       throws Exception {
@@ -31,6 +35,10 @@ class ParseAndRunTest extends DukeApplicationTest {
     assertEquals(initialY + 50 * Math.sin(Math.toRadians(controller.getRecordTurtle().angle())), controller.getRecordTurtle().yCord());
   }
 
+  /**
+   * Tests to see if both the parser can read and the turtle can execute multiple commands
+   * @throws Exception
+   */
   @Test
   void forwardFiftyRightNinetyForwardFifty()
       throws Exception {
@@ -44,6 +52,10 @@ class ParseAndRunTest extends DukeApplicationTest {
     assertEquals(initialY + 50, controller.getRecordTurtle().yCord());
   }
 
+  /**
+   * Tests to see if both the parser can read and the turtle can execute multiple commands
+   * @throws Exception
+   */
   @Test
   void forwardSumFiftyTwenty()
       throws Exception {
@@ -58,6 +70,10 @@ class ParseAndRunTest extends DukeApplicationTest {
     assertEquals(initialY + 70 * Math.sin(Math.toRadians(controller.getRecordTurtle().angle())), controller.getRecordTurtle().yCord());
   }
 
+  /**
+   * Tests to see if exception is thrown when there are too many parameters
+   * @throws Exception
+   */
   @Test
   void tooManyParameters(){
     String input = "fd 50 60 70";
@@ -66,16 +82,23 @@ class ParseAndRunTest extends DukeApplicationTest {
     assertTrue(exception.getMessage().contains("more constants than needed"));
   }
 
- // @Test
- // void LessFiftySeventy()
-  //    throws ModelExceptions{
-  //  String inputs = "less 50 70";
+  /**
+   * Tests to see if exception is thrown when there are not enough parameters
+   * @throws Exception
+   */
+  @Test
+  void notEnoughParameters(){
+    String input = "fd";
+    Exception exception = assertThrows(CommandException.class, () -> controller.parseAndRunCommands(input));
 
-   // List<Command> commands = controller.parseAndGetCommands(inputs);
-    //assertEquals(1, commands.get(0).execute(manager.getCurrentTurtle()));
+    assertTrue(exception.getMessage().contains("Not enough constants for"));
+  }
 
-//  }
 
+  /**
+   * Tests to see if the parser can parse goto and if the turtle moves there
+   * @throws Exception
+   */
   @Test
   void goToXY()
       throws Exception {
@@ -91,21 +114,9 @@ class ParseAndRunTest extends DukeApplicationTest {
 
   }
 
-//  @Test
-//  void createRandom()
-//      throws ModelExceptions, CommandException, ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-//    setupTest();
-//    String inputs = "rand 20";
-//    controller.parseAndRunCommandsNoView(inputs);
-//
-//    List<Command> commands = controller.parseAndGetCommands(inputs);
-//    System.out.println(commands.get(0).toString());
-//
-//    assertEquals(10, commands.get(0).execute(manager.getCurrentTurtle()));
-//    assertEquals(6, manager.getRecordTurtle().yCord());
-//
-//  }
-
+  /**
+   * Tests to see if the repeat command works, but we never implemented it
+   */
 //  @Test
 //  void repeatFdFifty()
 //      throws CommandException, ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, ModelExceptions {

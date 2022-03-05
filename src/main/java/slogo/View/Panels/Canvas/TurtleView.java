@@ -41,7 +41,7 @@ public class TurtleView {
     turtleImage.setX(LINE_OFFSET);
     turtleImage.setY(LINE_OFFSET);
     canvasBox.getChildren().addAll(turtleImage);
-
+    turtleImage.setId("TurtleImage");
   }
 
 
