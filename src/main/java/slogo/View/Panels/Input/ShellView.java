@@ -3,6 +3,8 @@ package slogo.View.Panels.Input;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
@@ -84,7 +86,7 @@ public class ShellView {
   }
 
 
-  private void enterKeyPressed(){
+  private void enterKeyPressed() {
     String command = getCommand();
     if(!command.equals("")){
       commandHistory.add(command);
@@ -92,8 +94,13 @@ public class ShellView {
     }
     shellArea.appendText(headCode);
     System.out.println(commandHistory);
+    try{
+      shellControllerInstance.parseAndRunCommands(command);
 
-    //shellControllerInstance.parseAndRunCommands(command);
+    }
+    catch(Exception e){
+      showMessage(AlertType.ERROR, e.getMessage());
+    }
 
   }
 
@@ -130,7 +137,11 @@ public class ShellView {
     shellArea.setText(text.substring(0, text.lastIndexOf(getCommand())));
     shellArea.positionCaret(shellArea.getText().length());
   }
-  
+
+  private void showMessage(AlertType type, String msg){
+    Alert alert = new Alert(type, msg);
+    alert.showAndWait();
+  }
 
 
 }
