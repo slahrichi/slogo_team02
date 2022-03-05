@@ -25,6 +25,7 @@ import javafx.stage.Stage;
 import slogo.Control.CommandException;
 import slogo.Control.Controller;
 import slogo.Control.ControllerViewAPI;
+import slogo.Model.TurtleManagerException;
 import slogo.View.Configuration.SlogoReader;
 import slogo.View.Configuration.SlogoWriter;
 import slogo.View.Exceptions.SlogoException;
@@ -242,8 +243,12 @@ public class slogoGUI implements ViewAPI, ObserverViewAPI {
   }
 
   @Override
-  public void notifyAnimation() throws TurtleManagerException {
-    animationHandler.createAnimation(control.getRecordTurtle());
+  public void notifyAnimation() {
+    try {
+      animationHandler.createAnimation(control.getRecordTurtle());
+    } catch (TurtleManagerException e) {
+      showMessage(AlertType.ERROR, e.getMessage());
+    }
   }
 
   @Override
