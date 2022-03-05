@@ -122,7 +122,6 @@ public class Translater {
       }
 
       else if (syntaxParser.getSymbol(token).equals("ListEnd")) {
-        openBracket = false;
         constantStack.add(new Argument(token, 0.0));
         popList(constantStack);
         //constantStack now should only have number of repeats
@@ -130,7 +129,7 @@ public class Translater {
         assert group != null;
         Argument arg = (Argument) group.getLast();
         constantStack.add(new RepeatArgument(group, arg.getValue()));
-        makeCommandAndPopFromStack(repeatCommand, getNumParams(repeatCommand), openBracket, group);
+        makeCommandAndPopFromStack(repeatCommand, getNumParams(repeatCommand), false, group);
       }
     }
     // reached the end of the String, checks if commands are waiting

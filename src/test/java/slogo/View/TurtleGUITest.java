@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.awt.Dimension;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.Test;
 import util.DukeApplicationTest;
@@ -20,6 +22,8 @@ class TurtleGUITest extends DukeApplicationTest {
 
   private TextArea myShellArea;
   private TextArea myScriptEditor;
+  private Button myPlayButton;
+  private ImageView myTurtle;
 
   @Override
   public void start(Stage stage){
@@ -31,12 +35,13 @@ class TurtleGUITest extends DukeApplicationTest {
     stage.setTitle(TITLE);
     // add our user interface components to Frame and show it
     stage.setScene(scene);
-    stage.setFullScreen(true);
+    //stage.setFullScreen(true);
     stage.show();
 
     myShellArea = lookup("#textArea").query();
     myScriptEditor = lookup("#editorArea").query();
-
+    myPlayButton = lookup("#playButton").query();
+    myTurtle = lookup("#turtleImage").query();
   }
 
 
@@ -57,6 +62,16 @@ class TurtleGUITest extends DukeApplicationTest {
 
   }
 
+  @Test
+  void testFd50(){
+    String fd50 = "fd 50";
+    double initialY =  myTurtle.getY();
+    writeTo(myScriptEditor,  fd50);
+    clickOn(myPlayButton);
+    double finalY =  myTurtle.getY();
+    assertEquals(finalY, initialY + 50);
+
+  }
 
 
 

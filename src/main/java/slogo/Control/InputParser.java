@@ -13,6 +13,7 @@ import java.util.Scanner;
 import java.util.Stack;
 import java.util.regex.Pattern;
 import java.lang.reflect.*;
+import slogo.Model.TurtleManager;
 
 /**
  * this class parses the input received from the user through typing or from an uploaded file
@@ -39,8 +40,6 @@ public class InputParser {
   public void parseText(String program)
       throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
     Scanner input = new Scanner(program);
-//    Stack<Integer> constantStack = new Stack<>();
-//    Stack<String> commandStack = new Stack<>();
     while (input.hasNextLine()) {
       String line = input.nextLine();
       Scanner nextLine = new Scanner(line);
@@ -153,20 +152,8 @@ public class InputParser {
     // set up the parser, which checks for matches in order given
     //ProgramParser parser = new ProgramParser();
     m.setLanguage("English");
-     ;
     // try against an example program
     m.parseText("fd \n 50 \nrt 90 BACK :distance Left :angle");
 
-//    m.parseText("# draw a square\n"
-//        + "fd 100\n"
-//        + "rt 90\n"
-//        + "fd 100\n"
-//        + "rt 90\n"
-//        + "fd 100\n"
-//        + "rt 90\n"
-//        + "fd 100\n"
-//        + "rt 90");
-//    m.setLanguage("French");
-//    m.parseText("Devant 50 droite 90 DERRIERE :distance Gauche :angle");
   }
 }

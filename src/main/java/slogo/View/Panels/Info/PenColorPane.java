@@ -2,41 +2,33 @@ package slogo.View.Panels.Info;
 
 import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TitledPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import slogo.View.AnimationHandler;
 import slogo.View.Panels.Canvas.CanvasView;
-import slogo.View.ViewListener;
 import slogo.View.ViewPublisher;
 
-public class BackgroundColorPane extends SideTitledPane {
+public class PenColorPane extends SideTitledPane{
 
-  private ColorPicker colorPicker;
   private ViewPublisher vp;
+  private ColorPicker colorPicker;
 
-  public BackgroundColorPane(VBox sideInput, CanvasView canvasView){
+
+  public PenColorPane(VBox sideInput, AnimationHandler animationHandler) {
     super(sideInput);
 
     colorPicker = new ColorPicker();
     vp = new ViewPublisher();
-    vp.addObserver(canvasView);
-
-    setUpColorPane();
+    vp.addObserver(animationHandler);
+    setUpPenPane();
     setUpColorGrid();
 
   }
 
-  private void setUpColorPane(){
-
-    getPane().setText("Background Colors");
-    getPane().setId("backgroundColorPane");
-
-
+  private void setUpPenPane(){
+    getPane().setText("Pen Colors");
+    getPane().setId("penPane");
   }
 
   private void setUpColorGrid(){
@@ -45,14 +37,11 @@ public class BackgroundColorPane extends SideTitledPane {
     colorPicker.setOnAction(new EventHandler() {
       public void handle(Event t) {
         Color c = colorPicker.getValue();
-        vp.updateColor(c);
+        vp.updatePen(c);
       }
     });
 
   }
-
-
-
 
   @Override
   protected void addPane() {
@@ -63,6 +52,4 @@ public class BackgroundColorPane extends SideTitledPane {
   protected void addVariable(int variable) {
 
   }
-
-
 }

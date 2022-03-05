@@ -1,18 +1,18 @@
 package slogo.Model.Commands.TurtleCommands;
 
-import slogo.Model.Commands.Command;
 import slogo.Model.ModelExceptions;
 import slogo.Model.Turtle;
 
-public class SetPosition extends TurtleCommands {
+public class SetPositionCommand extends TurtleCommands {
 
-  public SetPosition(double[] params) {
+  public SetPositionCommand(double[] params) {
     super(params);
   }
 
+  private double ret;
   @Override
   public double execute(Turtle turtle) throws ModelExceptions {
-    double ret = calcDistance(turtle);
+    ret = calcDistance(turtle);
     turtle.changeTurtleLocation(getParams()[0], getParams()[1]);
     return ret;
   }
@@ -24,7 +24,7 @@ public class SetPosition extends TurtleCommands {
   }
 
   @Override
-  public String toString(){
-    return "SetPos "+ getValue();
+  public double getValue(){
+    return ret;
   }
 }

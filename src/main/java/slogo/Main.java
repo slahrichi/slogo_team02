@@ -21,7 +21,7 @@ public class Main extends Application {
   // useful names for constant values used
   public static final String TITLE = "Slogo Application";
   public static final String LANGUAGE = "English";
-  public static final Dimension DEFAULT_SIZE = new Dimension(3000, 2000);
+  public static final Dimension DEFAULT_SIZE = new Dimension(1500, 1000);
   private static final String LANGUAGE_RESOURCE_PATH = "slogo.languages.";
   private static final String EXAMPLE_PROGRAMS_PATH = "/examples";
   public static final String INITIAL_SIMULATION = "data/testSimulations/spreadingFireEDGE4.xml";
@@ -38,6 +38,31 @@ public class Main extends Application {
     stage.setScene(scene);
     //stage.setFullScreen(true);
     stage.show();
+
+  }
+
+  // create a new slogo
+
+  public static void resetSlogo(Stage stage) {
+
+    slogoGUI newSim = new slogoGUI(stage, LANGUAGE);
+    Scene scene = newSim.makeScene(DEFAULT_SIZE.width, DEFAULT_SIZE.height);
+
+    stage.setTitle(TITLE);
+    stage.setScene(scene);
+    stage.show();
+
+
+  }
+
+  public static void addSlogo(){
+
+
+    Stage newStage = new Stage();
+    slogoGUI extraSim = new slogoGUI(newStage, LANGUAGE);
+    Scene extraScene = extraSim.makeScene(DEFAULT_SIZE.width, DEFAULT_SIZE.height);
+    newStage.setScene(extraScene);
+    newStage.show();
 
   }
 

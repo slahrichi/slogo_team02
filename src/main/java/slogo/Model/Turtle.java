@@ -1,8 +1,6 @@
 package slogo.Model;
 import java.awt.Dimension;
-import java.util.List;
 import slogo.Main;
-import slogo.Model.Commands.Command;
 
 /**
  * Class that defines a turtle object
@@ -17,14 +15,11 @@ public class Turtle {
   private double myOldYPos;
   private double myOldAngle;
   private Pen myPen;
+  private int myID;
 
 
   // Change this to the Bounds of the screen, get from a resource file
   public Dimension BOUNDS= Main.DEFAULT_SIZE;
-
-  // Initiliaze Centre of Screen Coordinates, get from a resource file.
-  public final Point CENTER_OF_SCREEN = new Point(500, 600);
-
 
 
 
@@ -35,7 +30,7 @@ public class Turtle {
    * @param turtleAngle : the heading / angle that the turtle points towards
    * @param pen : the pen associated with the turtle
    */
-  public Turtle(double Xpos, double Ypos, double turtleAngle, Pen pen){
+  public Turtle(double Xpos, double Ypos, double turtleAngle, Pen pen, int turtleID){
     this.myXPos = Xpos;
     this.myYPos = Ypos;
     this.myAngle = turtleAngle;
@@ -43,6 +38,7 @@ public class Turtle {
     this.myOldYPos = Ypos;
     this.myOldAngle = turtleAngle;
     this.myPen = pen;
+    this.myID = turtleID;
   }
 
   /**
@@ -59,7 +55,7 @@ public class Turtle {
    */
   public void setAngle(double angle){
     myOldAngle = myAngle;
-    myAngle = angle;
+    myAngle = angle % 360;
   }
 
   /**
@@ -99,39 +95,6 @@ public class Turtle {
     return myOldYPos;
   }
 
-  /**
-   * gets X position of turtle from centre of screen
-   * @return x coordinate from centre
-   */
-  public double getTurtleXFromCenter(){
-    double turtleXCor = getTurtleX();
-    if (turtleXCor < CENTER_OF_SCREEN.getPointX()){
-      return -1 *(CENTER_OF_SCREEN.getPointX() - turtleXCor);
-    }
-    else if(turtleXCor > CENTER_OF_SCREEN.getPointY()) {
-      return turtleXCor - CENTER_OF_SCREEN.getPointY();
-    }
-    else{
-      return 0.0;
-    }
-  }
-  /**
-   * gets Y position of turtle from centre of screen
-   * @return Y coordinate from centre
-   */
-  public double getTurtleYFromCenter(){
-    double turtleYCor = getTurtleY();
-    if (turtleYCor < CENTER_OF_SCREEN.getPointY()){
-      return CENTER_OF_SCREEN.getPointY() - turtleYCor;
-    }
-    else if(turtleYCor > CENTER_OF_SCREEN.getPointY()) {
-      return -1 *(turtleYCor - CENTER_OF_SCREEN.getPointY());
-    }
-    else{
-      return 0.0;
-    }
-
-  }
 
   /**
    * Changes the coordinates of the turtle to new X and Y locations
@@ -181,12 +144,8 @@ public class Turtle {
     return true;
   }
 
-  //for testing purposes=
-  /**
-   * turns the turtle by the amount in parameter
-   * @param angle
-   */
-  public void turn(double angle){myAngle += angle;}
-
+  public int getTurtleID(){
+    return myID;
+  }
 
 }

@@ -18,6 +18,7 @@ public class CanvasPanel {
 
     myStage = stageInput;
 
+
     canvasPane = new StackPane();
     setUpCanvasPanel();
 
@@ -41,6 +42,7 @@ public class CanvasPanel {
   public TurtleView getTurtleView(){ return turtleView;}
 
   public CanvasView getCanvasView(){ return canvasView;}
+
 
 
 }

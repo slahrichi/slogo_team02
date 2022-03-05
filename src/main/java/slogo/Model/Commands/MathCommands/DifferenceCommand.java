@@ -16,4 +16,5 @@ public class DifferenceCommand extends MathCommands {
   public String toString() {
     return ("Difference " + getValue());
   }
+
 }
