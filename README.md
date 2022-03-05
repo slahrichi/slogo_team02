@@ -18,7 +18,7 @@ Eric - 40 hours
 ### Haris-
 
 
-
+Handled the backend - specifically implementing the turtle, Pen , Turtle Manager, Commands, and Variables, and tests for these parts.
 
 
 ### Mike
@@ -89,8 +89,7 @@ The model is composed of turtle objects which are updated based on commands when
 
 * Model -
 
-We
-
+We assumed that the turtle will be passed correct command from the parser with the correct data structure(list in our case). Further, we assumed that the turtle will only draw straight lines and will displace in lines as well.
 
 
 ## Known Bugs:
@@ -104,7 +103,7 @@ Another bug has something to do with the record and animation handler, in which,
 
 ## Impressions
 
-Haris -
+Haris - The project started at a good, viable pace, as we were able to cope up with testing initially, but we realised that our model had many problems in it and we hastened to have a working peice as soon as we could, overlooking some design improvements. Unfortunately, I was not able to extend the back end too much after the basic implementation because we were caugt in debugging problems with our parser and frontend, although functionality for multiple turltes was created. However, this was my first project in which I worked on the beackend only and conciously tried to use the Design Concepts taught in class to improve my code as much as possible, adding and deleting code over and over again and testing different variations of what could work with better design. We had communication problems between our classes and if we were able to sort those problems out early in the project, we wouldn't have as much of a hard time making the program work in the end. 
 
 Mike - This project was definitely a struggle. I thought that we were on the right track but then kept on running into issues whether if it was a design choice for how to pass in the correct instance of a class well or practical ones like the parser, view, or model not working properly. I feel like we tried our best and could have banged our head against our computers more to get stuff done but I think that we put in a good amount of work and thought through it. It was a great oppurtunity to use some new patterns and we relied on reflection heavily in order to initialize the command classes which were well abstracted.
 
