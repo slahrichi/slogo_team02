@@ -42,7 +42,7 @@ class TranslaterTest {
   }
 
   @Test
-  void readFile() throws IOException {
+  void readFile() throws IOException, CommandException {
     assertEquals(myParser.readFile("data/examples/simple/forward.slogo"),
         "# the most basic logo command possible\n"
             + "fd 50\n");

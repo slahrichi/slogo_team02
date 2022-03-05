@@ -14,7 +14,7 @@ import slogo.View.slogoGUI;
 
 
 /**
- * Feel free to completely change this code or delete it entirely.
+ * Main class that sets uo the animation and calls the slogo GUI
  */
 public class Main extends Application {
 
