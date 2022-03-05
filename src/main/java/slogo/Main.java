@@ -43,15 +43,26 @@ public class Main extends Application {
 
   // create a new slogo
 
-  public static void createnewSlogo(Stage stage) {
+  public static void resetSlogo(Stage stage) {
 
-    slogoGUI extraSim = new slogoGUI(stage, LANGUAGE);
-    Scene scene = extraSim.makeScene(DEFAULT_SIZE.width, DEFAULT_SIZE.height);
+    slogoGUI newSim = new slogoGUI(stage, LANGUAGE);
+    Scene scene = newSim.makeScene(DEFAULT_SIZE.width, DEFAULT_SIZE.height);
 
     stage.setTitle(TITLE);
     stage.setScene(scene);
     stage.show();
 
+
+  }
+
+  public static void addSlogo(){
+
+
+    Stage newStage = new Stage();
+    slogoGUI extraSim = new slogoGUI(newStage, LANGUAGE);
+    Scene extraScene = extraSim.makeScene(DEFAULT_SIZE.width, DEFAULT_SIZE.height);
+    newStage.setScene(extraScene);
+    newStage.show();
 
   }
 
