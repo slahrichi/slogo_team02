@@ -1,5 +1,6 @@
 package slogo.Model;
 import java.awt.Dimension;
+import java.util.ResourceBundle;
 import slogo.Main;
 
 /**
@@ -16,10 +17,10 @@ public class Turtle {
   private double myOldAngle;
   private Pen myPen;
   private int myID;
-
-
-  // Change this to the Bounds of the screen, get from a resource file
-  public Dimension BOUNDS= Main.DEFAULT_SIZE;
+  private static final String DEFAULT_RESOURCE_PACKAGE = "/";
+  private static final String VIEW_RESOURCE_PACKAGE = "view/";
+  ResourceBundle myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + VIEW_RESOURCE_PACKAGE + "Canvas");
+  private final int CANVAS_DIMENSIONS;
 
 
 
@@ -39,6 +40,9 @@ public class Turtle {
     this.myOldAngle = turtleAngle;
     this.myPen = pen;
     this.myID = turtleID;
+    CANVAS_DIMENSIONS = Integer.parseInt(myResources.getString("CanvasDimensions"));
+
+
   }
 
   /**
@@ -103,7 +107,7 @@ public class Turtle {
    * @throws ModelExceptions: the exception to be thrown for when the turtle is moved to a position out of bounds
    */
   public void changeTurtleLocation(double newXPos, double newYPos) throws ModelExceptions {
-    if(newXPos > BOUNDS.width || newYPos > BOUNDS.width){
+    if(newXPos > CANVAS_DIMENSIONS || newYPos > CANVAS_DIMENSIONS){
       throw new ModelExceptions("Error with bounds");
     }
     myOldXPos = myXPos;

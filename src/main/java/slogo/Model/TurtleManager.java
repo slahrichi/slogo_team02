@@ -28,7 +28,7 @@ public class TurtleManager implements TurtleManagerAPI {
 
   //function assumes all turtles spawn from (0, 0 ), with angle of 270 and with their own down pen.
   public void addNewTurtle(int turtleId){
-    Pen turtlePen = new Pen(Color.BLUE, true, 1);
+    Pen turtlePen = new Pen(true, 1);
     Turtle newTurtle = new Turtle(0, 0, 270, turtlePen, turtleId);
     turtleList.add(newTurtle);
   }

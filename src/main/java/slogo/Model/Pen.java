@@ -20,24 +20,15 @@ public class Pen {
 
   /**
    * Constructor for the pen
-   * @param color : color of pen, the color that the pen draws with
    * @param penDown : the boolean value of if the pen is down
    * @param size : size of the pen
    */
-  public Pen(Color color, boolean penDown, int size) {
-    this.penColor = color;
+  public Pen( boolean penDown, int size) {
+
     this.myPenDown = penDown;
     this.myPenSize = size;;
 
   }
-
-  public Color getPenColor() {
-    return this.penColor;
-  }
-  public void setPenColor(Color color) {
-    this.penColor = color;
-  }
-
   public boolean isMyPenDown() {
     return this.myPenDown;
   }
