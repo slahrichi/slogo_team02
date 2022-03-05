@@ -74,4 +74,8 @@ public class TurtleManager implements TurtleManagerAPI {
   public void stepTurtle(CommandAPI command) throws ModelExceptions {
     command.execute(activeTurtle);
   }
+  public int numberOfTurtlesInList(){
+    return turtleList.size();
+  }
+
 }
