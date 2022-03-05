@@ -25,6 +25,8 @@ import javafx.stage.Stage;
 import slogo.Control.CommandException;
 import slogo.Control.Controller;
 import slogo.Control.ControllerViewAPI;
+import slogo.Main;
+import slogo.Model.TurtleManagerException;
 import slogo.View.Configuration.SlogoReader;
 import slogo.View.Configuration.SlogoWriter;
 import slogo.View.Exceptions.SlogoException;
@@ -137,12 +139,14 @@ public class slogoGUI implements ViewAPI, ObserverViewAPI {
     Button loadFile = makeButton("LoadFile", event -> loadFilePressed(), myResources);
     Button saveFile = makeButton("SaveFile", event -> saveFilePressed(), myResources);
     Button resetCanvas = makeButton("ResetCanvas", event -> resetCanvas(), myResources);
+    Button addSlogo = makeButton("AddSLogo", event -> Main.createnewSlogo(myStage), myResources);
 
     playButton.setId("playButton");
     clearHistory.setId("clearHistory");
     loadFile.setId("loadFile");
     saveFile.setId("saveFile");
     resetCanvas.setId("resetCanvas");
+    addSlogo.setId("addSlogo");
 
     configBox.getChildren().addAll(playButton, clearHistory, loadFile, saveFile, resetCanvas);
     return configBox;
