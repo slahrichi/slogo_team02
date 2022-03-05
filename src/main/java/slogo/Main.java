@@ -41,6 +41,20 @@ public class Main extends Application {
 
   }
 
+  // create a new slogo
+
+  public static void createnewSlogo(Stage stage) {
+
+    slogoGUI extraSim = new slogoGUI(stage, LANGUAGE);
+    Scene scene = extraSim.makeScene(DEFAULT_SIZE.width, DEFAULT_SIZE.height);
+
+    stage.setTitle(TITLE);
+    stage.setScene(scene);
+    stage.show();
+
+
+  }
+
 
   /**
    * Get command in a given language.

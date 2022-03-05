@@ -4,12 +4,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class FileReader {
+public class SlogoReader {
 
   private String fileContents;
   private Path fileName;
 
-  public FileReader(String file) throws IOException {
+  public SlogoReader(String file) throws IOException {
 
     fileName = Path.of(file);
     parseFile();

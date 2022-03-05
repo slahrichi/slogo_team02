@@ -2,9 +2,7 @@ package slogo.View;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ResourceBundle;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -13,7 +11,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
@@ -28,9 +25,8 @@ import javafx.stage.Stage;
 import slogo.Control.CommandException;
 import slogo.Control.Controller;
 import slogo.Control.ControllerViewAPI;
-import slogo.Control.TurtleRecord;
-import slogo.Model.ModelExceptions;
-import slogo.View.Configuration.FileReader;
+import slogo.View.Configuration.SlogoReader;
+import slogo.View.Configuration.SlogoWriter;
 import slogo.View.Exceptions.SlogoException;
 import slogo.View.Panels.CanvasPanel;
 import slogo.View.Panels.InformationPanel;
@@ -71,6 +67,8 @@ public class slogoGUI implements ViewAPI {
     STYLESHEET = "stylesheet.css";
     displayApp();
     animationHandler = new AnimationHandler(canvasPanel);
+    displayInformation();
+
   }
 
   public Scene makeScene(int width, int height) {
@@ -87,8 +85,11 @@ public class slogoGUI implements ViewAPI {
     myRoot.setTop(makeTitle());
     myRoot.setLeft(createInputPanel());
     myRoot.setCenter(createTurtleCanvas());
-    myRoot.setRight(createInformationPanel(control));
     myRoot.setBottom(createConfigButtons());
+  }
+
+  private void displayInformation() {
+    myRoot.setRight(createInformationPanel());
   }
 
 
@@ -150,6 +151,7 @@ public class slogoGUI implements ViewAPI {
   }
 
   private void saveFilePressed() {
+    SlogoWriter initial = new SlogoWriter(inputPanel.getEditorView().getContents(), myResources);
   }
 
   private void loadFilePressed() {
@@ -157,7 +159,7 @@ public class slogoGUI implements ViewAPI {
     try {
       File fileInput = FILE_CHOOSER.showOpenDialog(new Stage());
       if (fileInput != null) {
-        FileReader initial = new FileReader(fileInput.getCanonicalPath());
+        SlogoReader initial = new SlogoReader(fileInput.getCanonicalPath());
         String fileContents = initial.getString();
         inputPanel.getEditorView().getTextArea().setText(fileContents);
       }
@@ -169,6 +171,14 @@ public class slogoGUI implements ViewAPI {
 
   private void resetCanvas(){
     canvasPanel.getCanvasView().clearCanvas();
+    try {
+      control.parseAndRunCommands("home");
+    } catch (Exception e) {
+      showMessage(AlertType.ERROR, e.getMessage());
+    }
+    infoPanel.getHistoryText().setText("");
+    inputPanel.getEditorView().getTextArea().setText("");
+
 
   }
 
@@ -181,9 +191,9 @@ public class slogoGUI implements ViewAPI {
 
   }
 
-  private VBox createInformationPanel(ControllerViewAPI control) {
+  private VBox createInformationPanel() {
 
-    infoPanel = new InformationPanel(myStage, control);
+    infoPanel = new InformationPanel(myStage, animationHandler, canvasPanel.getCanvasView());
 
     return infoPanel.getInfoBox();
 
@@ -202,27 +212,7 @@ public class slogoGUI implements ViewAPI {
 
 
   @Override
-  public void clearConsole() {
-
-  }
-
-  @Override
-  public void clearDisplay() {
-
-  }
-
-  @Override
   public void clearHistory() {
-
-  }
-
-  @Override
-  public void changeBackgroundColor() {
-
-  }
-
-  @Override
-  public void displayException(String errorMsg) {
 
   }
 
@@ -266,8 +256,6 @@ public class slogoGUI implements ViewAPI {
     alert.showAndWait();
 
   }
-
-
 
 
 }

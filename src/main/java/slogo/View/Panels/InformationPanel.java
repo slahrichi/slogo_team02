@@ -6,8 +6,12 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import slogo.Control.ControllerViewAPI;
+import slogo.View.AnimationHandler;
+import slogo.View.Panels.Canvas.CanvasView;
 import slogo.View.Panels.Info.BackgroundColorPane;
 import slogo.View.Panels.Info.CommandHistoryPane;
+import slogo.View.Panels.Info.HelpPane;
+import slogo.View.Panels.Info.PenColorPane;
 import slogo.View.Panels.Info.SideTitledPane;
 import slogo.View.Panels.Info.VariableTitledPane;
 
@@ -20,12 +24,16 @@ public class InformationPanel {
   private VariableTitledPane variablePane;
   private BackgroundColorPane colorPane;
   private CommandHistoryPane historyPane;
+  private PenColorPane penPane;
+  private HelpPane helpPane;
+  private CanvasView canvasInput;
+  private AnimationHandler animationHandler;
 
 
-  public InformationPanel(Stage stageInput, ControllerViewAPI controlInput){
+  public InformationPanel(Stage stageInput, AnimationHandler anim, CanvasView canvasView){
 
-
-
+    canvasInput = canvasView;
+    animationHandler = anim;
     myStage = stageInput;
     infoBox = new VBox();
     setUpPanels();
@@ -38,7 +46,9 @@ public class InformationPanel {
 
     variablePane = new VariableTitledPane(infoBox);
     historyPane = new CommandHistoryPane(infoBox);
-    colorPane = new BackgroundColorPane(infoBox);
+    colorPane = new BackgroundColorPane(infoBox, canvasInput);
+    penPane = new PenColorPane(infoBox, animationHandler);
+    helpPane = new HelpPane(infoBox);
     infoBox.prefWidthProperty().bind(myStage.widthProperty().multiply(STAGE_WIDTH_PROPORTION));
 
   }
@@ -54,6 +64,10 @@ public class InformationPanel {
   public SideTitledPane getVariablePane(){return variablePane;}
 
   public SideTitledPane getColorPane(){return colorPane;}
+
+  public SideTitledPane getPenPane(){ return penPane;}
+
+  public SideTitledPane getHelpPane() { return helpPane;}
 
 
 }
