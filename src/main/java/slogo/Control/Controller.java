@@ -100,7 +100,7 @@ public class Controller implements ControllerAPI {
   }
 
   private void runCommands(List<CommandAPI> commands)
-      throws ModelExceptions, TurtleManagerException {
+      throws ModelExceptions {
     for (CommandAPI command : commands) {
       manager.stepTurtle(command);
       view.notifyAnimation();

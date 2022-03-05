@@ -44,15 +44,18 @@ public class AnimationHandler implements ViewListener {
     sq = new SequentialTransition();
 
   }
-
+  private boolean isNotSame(double a, double b){
+    return Math.abs(a - b) > 0.01;
+  }
 
   public void createAnimation(TurtleRecord turtleInput){
 
     turtleRecord = turtleInput;
-    double oldX = turtleRecord.oldX() + TURTLE_OFFSET;
-    double oldY = turtleRecord.oldY() + TURTLE_OFFSET;
-    double newX = turtleRecord.xCord() + TURTLE_OFFSET;
-    double newY = turtleRecord.yCord() + TURTLE_OFFSET;
+
+    double oldX = turtleRecord.oldX();
+    double oldY = turtleRecord.oldY();
+    double newX = turtleRecord.xCord();
+    double newY = turtleRecord.yCord();
 
     double CANVAS_OFFSET =  (turtleCanvas.getHeight() - TURTLE_OFFSET)/ 2;
 
@@ -64,12 +67,13 @@ public class AnimationHandler implements ViewListener {
       gc.strokeLine(oldX + CANVAS_OFFSET, oldY + CANVAS_OFFSET, newX + CANVAS_OFFSET, newY + CANVAS_OFFSET);
     }
 
-    RotateTransition rt = new RotateTransition(Duration.seconds(ANIMATION_DURATION), turtleView.getTurtleImage());
-    if(turtleRecord.oldAngle() != turtleRecord.angle()){
+
+    if(isNotSame(turtleRecord.oldAngle(),turtleRecord.angle())){
+      RotateTransition rt = new RotateTransition(Duration.seconds(ANIMATION_DURATION), turtleView.getTurtleImage());
       rt.setByAngle(turtleRecord.angle());
       sq.getChildren().add(rt);
     }
-    if(oldX != newX || oldY != newY){
+    if(isNotSame(oldX, newX) || isNotSame(oldY,newY)){
       // create something to follow
       Path path = new Path();
       path.getElements().addAll(new MoveTo(oldX, oldY),
@@ -79,6 +83,7 @@ public class AnimationHandler implements ViewListener {
           Duration.seconds(ANIMATION_DURATION),
           path, turtleView.getTurtleImage());
           sq.getChildren().add(pt);
+      System.out.println("pth trans");
 
     }
     System.out.println(turtleView.getTurtleImage().getX() + " " + turtleView.getTurtleImage().getY());
