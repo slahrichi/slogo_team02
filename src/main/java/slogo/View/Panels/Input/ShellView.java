@@ -1,6 +1,8 @@
 package slogo.View.Panels.Input;
 
 
+import static slogo.View.slogoGUI.showMessage;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import javafx.scene.control.Alert;
@@ -138,10 +140,6 @@ public class ShellView {
     shellArea.positionCaret(shellArea.getText().length());
   }
 
-  private void showMessage(AlertType type, String msg){
-    Alert alert = new Alert(type, msg);
-    alert.showAndWait();
-  }
 
 
 }

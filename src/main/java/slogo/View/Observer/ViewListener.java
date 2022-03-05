@@ -1,4 +1,4 @@
-package slogo.View;
+package slogo.View.Observer;
 
 import javafx.scene.paint.Color;
 

@@ -27,6 +27,8 @@ import slogo.Control.Controller;
 import slogo.Control.ControllerAPI;
 import slogo.Main;
 import slogo.Model.TurtleManagerException;
+import slogo.View.APIs.ObserverViewAPI;
+import slogo.View.APIs.ViewAPI;
 import slogo.View.Configuration.SlogoReader;
 import slogo.View.Configuration.SlogoWriter;
 import slogo.View.Exceptions.SlogoException;
@@ -161,7 +163,7 @@ public class slogoGUI implements ViewAPI, ObserverViewInterface {
         String fileContents = initial.getString();
         inputPanel.getEditorView().getTextArea().setText(fileContents);
       }
-    } catch (SlogoException | IOException e) {
+    } catch (IOException e) {
       showMessage(AlertType.ERROR, e.getMessage());
     }
 
@@ -210,11 +212,6 @@ public class slogoGUI implements ViewAPI, ObserverViewInterface {
 
 
   @Override
-  public void clearHistory() {
-
-  }
-
-  @Override
   public void sendFileContents(String fileContent)
       throws Exception {
 
@@ -252,13 +249,17 @@ public class slogoGUI implements ViewAPI, ObserverViewInterface {
   @Override
   public void animationComplete() { animationHandler.playEntireAnimation();}
 
-  @Override
-  public void showMessage(AlertType type, String msg){
+  public static void showMessage(AlertType type, String msg){
     Alert alert = new Alert(type, msg);
     Node alertNode = alert.getDialogPane();
     alertNode.setId("alert");
     alert.showAndWait();
 
+  }
+
+  @Override
+  public void clearHistory(){
+    infoPanel.getHistoryText().setText("");
   }
 
 

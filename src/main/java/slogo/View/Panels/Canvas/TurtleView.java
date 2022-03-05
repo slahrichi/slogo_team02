@@ -1,6 +1,7 @@
 package slogo.View.Panels.Canvas;
 
 
+import java.util.ResourceBundle;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
@@ -9,17 +10,24 @@ import slogo.View.AnimationHandler;
 
 // should create the turtle image and handle its movement along with pen down
 public class TurtleView {
-  public final static double TURTLE_SIZE = 50;
-  public final static double TURTLE_OFFSET = TURTLE_SIZE / 2;
-  private static final int LINE_OFFSET = -10;
+
+  public static double TURTLE_SIZE;
+  public static double TURTLE_OFFSET;
+  private static double LINE_OFFSET;
 
   private StackPane canvasBox;
   private ImageView turtleImage;
 
+  private ResourceBundle myResources;
 
 
+  public TurtleView(StackPane canvasInput, ResourceBundle resources){
 
-  public TurtleView(StackPane canvasInput){
+    myResources = resources;
+
+    TURTLE_SIZE = Double.parseDouble(myResources.getString("TurtleSize"));
+    TURTLE_OFFSET = Double.parseDouble(myResources.getString("TurtleOffset"));
+    LINE_OFFSET = Double.parseDouble(myResources.getString("LineOffset"));
 
     turtleImage = new ImageView();
     canvasBox = canvasInput;
