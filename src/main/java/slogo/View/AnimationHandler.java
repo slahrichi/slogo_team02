@@ -13,11 +13,12 @@ import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
 import javafx.util.Duration;
 import slogo.Model.TurtleRecord;
+import slogo.View.Observer.ViewListener;
 import slogo.View.Panels.Canvas.CanvasView;
 import slogo.View.Panels.Canvas.TurtleView;
 import slogo.View.Panels.CanvasPanel;
 
-public class AnimationHandler implements ViewListener{
+public class AnimationHandler implements ViewListener {
 
   private CanvasPanel canvasPanel;
   private TurtleRecord turtleRecord;
@@ -29,7 +30,7 @@ public class AnimationHandler implements ViewListener{
 
   private SequentialTransition sq;
 
-  private static final double ANIMATION_DURATION = 0.1;
+  private static final double ANIMATION_DURATION = 1.5;
 
 
   public AnimationHandler(CanvasPanel panelInput){

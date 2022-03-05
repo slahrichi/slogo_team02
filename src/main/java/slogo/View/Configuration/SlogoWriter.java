@@ -21,7 +21,6 @@ public class SlogoWriter {
   public static final int HEIGHT = 100;
   private final Stage myStage;
   private final VBox myRoot;
-  private String myTitle;
   private ResourceBundle myResources;
   private FileWriter fw;
 
@@ -46,6 +45,7 @@ public class SlogoWriter {
 
   private void inputsAdded() {
     TextField title = new TextField(myResources.getString("SaveTitle"));
+    title.setId("titleInput");
     Button submit = makeButton("SubmitFile",
         event -> submitButtonPressed(title.getCharacters().toString()),
         myResources);
@@ -74,6 +74,7 @@ public class SlogoWriter {
 
     buttonCreated.setText(buttonLabel);
     buttonCreated.setOnAction(handler);
+    buttonCreated.setId(labelName);
 
     return buttonCreated;
 

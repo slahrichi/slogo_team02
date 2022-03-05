@@ -1,11 +1,8 @@
 package slogo.View.Panels;
 
-import javafx.geometry.Side;
-import javafx.scene.control.TitledPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import slogo.Control.ControllerViewAPI;
 import slogo.View.AnimationHandler;
 import slogo.View.Panels.Canvas.CanvasView;
 import slogo.View.Panels.Info.BackgroundColorPane;
