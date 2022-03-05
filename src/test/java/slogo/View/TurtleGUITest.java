@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.Test;
@@ -27,6 +28,8 @@ class TurtleGUITest extends DukeApplicationTest {
   private Button myLoadButton;
   private Button myResetButton;
   private Button myAddButton;
+  private Button mySaveButton;
+
 
 
 
@@ -49,8 +52,11 @@ class TurtleGUITest extends DukeApplicationTest {
     myPlayButton = lookup("#PlayButton").query();
     myTurtle = lookup("#TurtleImage").query();
     myLoadButton = lookup("#LoadFile").query();
+    mySaveButton = lookup("#SaveFile").query();
     myResetButton = lookup("#resetSlogo").query();
     myAddButton = lookup("#addSlogo").query();
+
+
 
   }
 
@@ -84,17 +90,58 @@ class TurtleGUITest extends DukeApplicationTest {
   }
 
   @Test
+  void testRt90Fd50(){
+    String rt90fd50 = "rt 90\nfd50";
+    double initX = myTurtle.getX();
+    writeTo(myScriptEditor, rt90fd50);
+    clickOn(myPlayButton);
+    double finalX = myTurtle.getX();
+
+    assertEquals(finalX, initX + 50);
+  }
+
+  @Test
   void loadButtonPressed(){
     clickOn(myLoadButton);
 
+    // happy path
+    //clickOn(400, 1000);  // click on right file
+
+
+    // bad path
+    //clickOn(100, 1000); // click on wrong file
+
   }
+
+
 
   @Test
   void resetButtonPressed(){
     clickOn(myResetButton);
 
     // happy path - new stage created
-    assertEquals()
+
+
+
+  }
+
+  @Test
+  void addButtonPressed(){
+    clickOn(myAddButton);
+  }
+
+  @Test
+  void saveFile(){
+
+
+    writeTo(myScriptEditor, "helloWorld");
+    clickOn(mySaveButton);
+    TextField titleInput = lookup("#titleInput").query();
+    Button submitInput = lookup("#SubmitFile").query();
+    writeTo(titleInput, "testFile");
+    clickOn(submitInput);
+
+
   }
 
 
