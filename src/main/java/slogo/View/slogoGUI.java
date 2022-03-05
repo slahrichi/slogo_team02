@@ -118,6 +118,7 @@ public class slogoGUI implements ViewAPI, ObserverViewAPI {
 
     buttonCreated.setText(buttonLabel);
     buttonCreated.setOnAction(handler);
+    buttonCreated.setId(labelName);
 
     return buttonCreated;
 
@@ -139,16 +140,10 @@ public class slogoGUI implements ViewAPI, ObserverViewAPI {
     Button loadFile = makeButton("LoadFile", event -> loadFilePressed(), myResources);
     Button saveFile = makeButton("SaveFile", event -> saveFilePressed(), myResources);
     Button resetCanvas = makeButton("ResetCanvas", event -> resetCanvas(), myResources);
-    Button addSlogo = makeButton("AddSLogo", event -> Main.createnewSlogo(myStage), myResources);
+    Button resetSlogo = makeButton("resetSlogo", event -> Main.resetSlogo(myStage), myResources);
+    Button addSlogo = makeButton("addSlogo", event -> Main.addSlogo(), myResources);
 
-    playButton.setId("playButton");
-    clearHistory.setId("clearHistory");
-    loadFile.setId("loadFile");
-    saveFile.setId("saveFile");
-    resetCanvas.setId("resetCanvas");
-    addSlogo.setId("addSlogo");
-
-    configBox.getChildren().addAll(playButton, clearHistory, loadFile, saveFile, resetCanvas);
+    configBox.getChildren().addAll(playButton, clearHistory, loadFile, saveFile, resetCanvas, resetSlogo, addSlogo);
     return configBox;
 
   }
