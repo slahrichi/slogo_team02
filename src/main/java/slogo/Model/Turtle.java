@@ -1,8 +1,6 @@
 package slogo.Model;
 import java.awt.Dimension;
-import java.util.List;
 import slogo.Main;
-import slogo.Model.Commands.Command;
 
 /**
  * Class that defines a turtle object
@@ -183,10 +181,8 @@ public class Turtle {
     return true;
   }
 
-
   public int getTurtleID(){
     return myID;
   }
-
 
 }

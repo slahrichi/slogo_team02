@@ -22,6 +22,8 @@ public class TurtleManager implements TurtleManagerAPI {
   public TurtleManager(){
    turtleList = new ArrayList<>();
    addNewTurtle(0);
+   activeTurtle = turtleList.get(0);
+
   }
 
   //function assumes all turtles spawn from (0, 0 ), with angle of 270 and with their own down pen.

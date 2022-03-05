@@ -14,7 +14,7 @@ class TurtleCommandsTest {
   private TurtleManager manager;
   private double[] input;
 
-  private void setupTest(double[] params) {
+  private void setupTest(double[] params){
     manager = new TurtleManager();
     input = params;
   }
@@ -62,7 +62,7 @@ class TurtleCommandsTest {
   Test forwards expects Model exception
    */
   @Test
-  void testForwardBadExecuteException() throws ModelExceptions {
+  void testForwardBadExecuteException() {
     setupTest(new double[]{50000});
     Command forwardCommand = new ForwardCommand(input);
 
@@ -81,7 +81,7 @@ class TurtleCommandsTest {
     double initialAngle = manager.getRecordTurtle(0).angle();
     manager.stepTurtle(rightCommand);
     double finalAngle = manager.getRecordTurtle(0).angle();
-    assertEquals(initialAngle + input[0], finalAngle);
+    assertEquals((initialAngle + input[0])%360, finalAngle);
     assertEquals(rightCommand.getValue(), input[0]);
   }
 
@@ -95,7 +95,7 @@ class TurtleCommandsTest {
     double initialAngle = manager.getRecordTurtle(0).angle();
     manager.stepTurtle(leftCommand);
     double finalAngle = manager.getRecordTurtle(0).angle();
-    assertEquals(initialAngle - input[0], finalAngle);
+    assertEquals((initialAngle - input[0])%360, finalAngle);
     assertEquals(leftCommand.getValue(), input[0]);
   }
 
@@ -151,7 +151,7 @@ class TurtleCommandsTest {
     manager.stepTurtle(setHeading);
     double finalAngle = manager.getRecordTurtle(0).angle();
     assertEquals(finalAngle, input[0]);
-    assertEquals(setHeading.getValue(), input[0] - initialAngle);
+    assertEquals(setHeading.getValue(), Math.abs(input[0] - initialAngle));
   }
 
   /*
@@ -183,7 +183,7 @@ Test setTowards but isn't good because in order for getValue() to work, it needs
     manager.stepTurtle(setTowards);
     double finalAngle = manager.getRecordTurtle(0).angle();
     assertEquals(finalAngle, calcAngle(manager.getRecordTurtle(0), input));
-    assertEquals(setTowards.getValue(),calcAngle(manager.getRecordTurtle(0),input) -initialAngle);
+    assertEquals(setTowards.getValue(),Math.abs(calcAngle(manager.getRecordTurtle(0),input) -initialAngle));
   }
 
   private double calcAngle(TurtleRecord turtle, double[] input) {

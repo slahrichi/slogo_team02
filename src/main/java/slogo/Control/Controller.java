@@ -18,7 +18,7 @@ public class Controller implements ControllerViewAPI {
   private ObserverViewAPI view;
   private List<String> history;
   private int currentTurtleID;
-  public Controller(ObserverViewAPI gui){
+  public Controller(ObserverViewAPI gui) {
     parser = new Translater();
     parser = new Translater();
     manager = new TurtleManager();
