@@ -13,7 +13,7 @@ import javafx.scene.layout.VBox;
 import slogo.Control.CommandException;
 import slogo.Control.Controller;
 import slogo.Model.ModelExceptions;
-//import slogo.View.ViewController;
+
 
 
 public class ShellView {
