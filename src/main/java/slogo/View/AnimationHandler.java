@@ -74,7 +74,8 @@ public class AnimationHandler implements ViewListener {
     sq = new SequentialTransition();
 
   }
-  private boolean isNotSame(double a, double b){
+
+  private boolean isNotSame(double a, double b) {
     return Math.abs(a - b) > 0.01;
   }
 
@@ -105,23 +106,13 @@ public class AnimationHandler implements ViewListener {
           newY + CANVAS_OFFSET);
     }
 
-<<<<<<< HEAD
-    if (turtleRecord.oldAngle() != turtleRecord.angle()) {
+    if (isNotSame(turtleRecord.oldAngle(), turtleRecord.angle())) {
       RotateTransition rt = new RotateTransition(Duration.seconds(ANIMATION_DURATION),
           turtleView.getTurtleImage());
-      rt.setByAngle(turtleRecord.angle() + 90);
-      sq.getChildren().add(rt);
-    }
-    if (oldX != newX || oldY != newY) {
-=======
-
-    if(isNotSame(turtleRecord.oldAngle(),turtleRecord.angle())){
-      RotateTransition rt = new RotateTransition(Duration.seconds(ANIMATION_DURATION), turtleView.getTurtleImage());
       rt.setByAngle(turtleRecord.angle());
       sq.getChildren().add(rt);
     }
-    if(isNotSame(oldX, newX) || isNotSame(oldY,newY)){
->>>>>>> 2156646c9231f9a738e29df3c8e8ac58000e8546
+    if (isNotSame(oldX, newX) || isNotSame(oldY, newY)) {
       // create something to follow
       Path path = new Path();
       path.getElements().addAll(new MoveTo(oldX, oldY),
@@ -130,12 +121,8 @@ public class AnimationHandler implements ViewListener {
       PathTransition pt = new PathTransition(
           Duration.seconds(ANIMATION_DURATION),
           path, turtleView.getTurtleImage());
-<<<<<<< HEAD
       sq.getChildren().add(pt);
-=======
-          sq.getChildren().add(pt);
       System.out.println("pth trans");
->>>>>>> 2156646c9231f9a738e29df3c8e8ac58000e8546
 
     }
     System.out.println(
