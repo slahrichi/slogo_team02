@@ -9,7 +9,7 @@ import slogo.Model.TurtleManager;
 import slogo.Model.TurtleManagerAPI;
 import slogo.Model.TurtleManagerException;
 import slogo.Model.TurtleRecord;
-import slogo.View.ObserverViewInterface;
+import slogo.View.APIs.ObserverViewInterface;
 
 /**
  * @author Mike Keohane

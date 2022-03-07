@@ -3,20 +3,35 @@ package slogo.View.Panels.Input;
 
 import static slogo.View.slogoGUI.showMessage;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
-import slogo.Control.CommandException;
 import slogo.Control.Controller;
-import slogo.Model.ModelExceptions;
 
-
+/**
+ * Purpose: The ShellView encapsulates the shell input area in the input panel, which is located on
+ * the left side of the GUI. It serves as the console for the user.
+ * <p>
+ * Assumptions: I assume that this is correctly created in the InputPanel class and passed the
+ * correct VBox javafx node that it should be added to in order to be displayed correctly. I also
+ * assume that the user uses this program to type in code one line at a time.
+ * <p>
+ * Dependencies: Depends on JavaFX scene and the Controller class as well as some other imports in
+ * order to function
+ * <p>
+ * Example: Use this as a console, typing in variables or other commands; automatically runs the
+ * input when you press enter to submit the command; it also remembers previous commands, which can
+ * be accessed with the up and down keys
+ * <p>
+ * Exceptions: Catches command exceptions that can be caused when submitting commands that the user
+ * runs in this shell
+ *
+ * @author Eric Xie
+ **/
 
 public class ShellView {
 
@@ -31,6 +46,16 @@ public class ShellView {
   private static final int shellRowSize = 10;
 
 
+  /**
+   * Purpose: The ShellView object constructor
+   * <p>
+   * Assumptions: I assume that this is correctly created in the InputPanel class and passed the
+   * correct VBox javafx node that it should be added to in order to be displayed correctly. I also
+   * assume that the user uses this program to type in code one line at a time.
+   *
+   * @param sidePanel VBox which the shell is added to
+   **/
+
   public ShellView(VBox sidePanel) {
 
     //shellControllerInstance = ViewController.getController();
@@ -42,6 +67,8 @@ public class ShellView {
     commandHistory = new ArrayList<>();
 
   }
+
+  // sets up the shell / text area
 
   private void setUpShell() {
 
@@ -56,7 +83,9 @@ public class ShellView {
 
   }
 
-  private void shellKeyPress(KeyEvent e){
+  // sets up the event and logic for when a key is pressed in the shell
+
+  private void shellKeyPress(KeyEvent e) {
 
     // need to create key events for left, right, up, down
     // need to connect to the history of commands
@@ -76,6 +105,8 @@ public class ShellView {
 
   }
 
+  // handles backspace event
+
   private void backSpacePressed(KeyEvent e) {
     if (e.getCode() == KeyCode.BACK_SPACE || e.getCode() == KeyCode.LEFT) {
       // checks if backspace used to prevent it from deleting header
@@ -87,24 +118,26 @@ public class ShellView {
     }
   }
 
+  // handles enter key event
 
   private void enterKeyPressed() {
     String command = getCommand();
-    if(!command.equals("")){
+    if (!command.equals("")) {
       commandHistory.add(command);
       currentCommandIndex = commandHistory.size() - 1;
     }
     shellArea.appendText(headCode);
     System.out.println(commandHistory);
-    try{
+    try {
       shellControllerInstance.parseAndRunCommands(command);
 
-    }
-    catch(Exception e){
+    } catch (Exception e) {
       showMessage(AlertType.ERROR, e.getMessage());
     }
 
   }
+
+  // handles up key event and runs through command history to find previous commands
 
   private void upKeyPressed() {
 
@@ -117,6 +150,8 @@ public class ShellView {
 
   }
 
+  // handles down key event and runs through command history to find commands moved past
+
   private void downKeyPressed() {
     if (currentCommandIndex < commandHistory.size() - 1) {
       clearLine();
@@ -127,6 +162,8 @@ public class ShellView {
 
   }
 
+  // gets the line of where the command is and strips off the headCode in order to return the command itself
+
   private String getCommand() {
     int caretPosition = shellArea.getText().lastIndexOf(headCode);
     String command = shellArea.getText(caretPosition + headCode.length(),
@@ -134,12 +171,13 @@ public class ShellView {
     return command.strip();
   }
 
+  // clears the line
+
   private void clearLine() {
     String text = shellArea.getText();
     shellArea.setText(text.substring(0, text.lastIndexOf(getCommand())));
     shellArea.positionCaret(shellArea.getText().length());
   }
-
 
 
 }
