@@ -2,14 +2,23 @@ package slogo.Model.Commands.Boolean;
 
 import slogo.Model.ModelExceptions;
 import slogo.Model.Turtle;
-
+/**
+ * Command that checks if a value is less than the other
+ * @author Haris Adnan
+ */
 public class LessThanCommand extends BooleanOperation{
 
 
+  /**
+   * Main Constructor for the class
+   * @param values
+   */
   public LessThanCommand(double[] values) {
     super(values);
   }
-
+  /**
+   * @return 1 if the first value is greater than the second value, 0 if not
+   */
   @Override
   public double getValue(){
     if( areSame(getParams()[0], getParams()[1])){

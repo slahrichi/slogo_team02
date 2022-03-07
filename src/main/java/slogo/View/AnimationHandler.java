@@ -74,7 +74,9 @@ public class AnimationHandler implements ViewListener {
     sq = new SequentialTransition();
 
   }
-
+  private boolean isNotSame(double a, double b){
+    return Math.abs(a - b) > 0.01;
+  }
 
   /**
    * Purpose: Creates the animation for one command in an iteration
@@ -88,10 +90,11 @@ public class AnimationHandler implements ViewListener {
   public void createAnimation(TurtleRecord turtleInput) {
 
     turtleRecord = turtleInput;
-    double oldX = turtleRecord.oldX() + TURTLE_OFFSET;
-    double oldY = turtleRecord.oldY() + TURTLE_OFFSET;
-    double newX = turtleRecord.xCord() + TURTLE_OFFSET;
-    double newY = turtleRecord.yCord() + TURTLE_OFFSET;
+
+    double oldX = turtleRecord.oldX();
+    double oldY = turtleRecord.oldY();
+    double newX = turtleRecord.xCord();
+    double newY = turtleRecord.yCord();
 
     double CANVAS_OFFSET = (turtleCanvas.getHeight() - TURTLE_OFFSET) / 2;
 
@@ -102,6 +105,7 @@ public class AnimationHandler implements ViewListener {
           newY + CANVAS_OFFSET);
     }
 
+<<<<<<< HEAD
     if (turtleRecord.oldAngle() != turtleRecord.angle()) {
       RotateTransition rt = new RotateTransition(Duration.seconds(ANIMATION_DURATION),
           turtleView.getTurtleImage());
@@ -109,6 +113,15 @@ public class AnimationHandler implements ViewListener {
       sq.getChildren().add(rt);
     }
     if (oldX != newX || oldY != newY) {
+=======
+
+    if(isNotSame(turtleRecord.oldAngle(),turtleRecord.angle())){
+      RotateTransition rt = new RotateTransition(Duration.seconds(ANIMATION_DURATION), turtleView.getTurtleImage());
+      rt.setByAngle(turtleRecord.angle());
+      sq.getChildren().add(rt);
+    }
+    if(isNotSame(oldX, newX) || isNotSame(oldY,newY)){
+>>>>>>> 2156646c9231f9a738e29df3c8e8ac58000e8546
       // create something to follow
       Path path = new Path();
       path.getElements().addAll(new MoveTo(oldX, oldY),
@@ -117,7 +130,12 @@ public class AnimationHandler implements ViewListener {
       PathTransition pt = new PathTransition(
           Duration.seconds(ANIMATION_DURATION),
           path, turtleView.getTurtleImage());
+<<<<<<< HEAD
       sq.getChildren().add(pt);
+=======
+          sq.getChildren().add(pt);
+      System.out.println("pth trans");
+>>>>>>> 2156646c9231f9a738e29df3c8e8ac58000e8546
 
     }
     System.out.println(

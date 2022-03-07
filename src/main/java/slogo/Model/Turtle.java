@@ -107,7 +107,7 @@ public class Turtle {
    * @throws ModelExceptions: the exception to be thrown for when the turtle is moved to a position out of bounds
    */
   public void changeTurtleLocation(double newXPos, double newYPos) throws ModelExceptions {
-    if(newXPos > CANVAS_DIMENSIONS || newYPos > CANVAS_DIMENSIONS){
+    if(Math.abs(newXPos) > CANVAS_DIMENSIONS || Math.abs(newYPos) > CANVAS_DIMENSIONS){
       throw new ModelExceptions("Error with bounds");
     }
     myOldXPos = myXPos;
@@ -148,6 +148,10 @@ public class Turtle {
     return true;
   }
 
+  /**
+   * Turtle ID is the unique number assigned to every turtle made. This method gets the Turtle's ID
+   * @return turtle's ID as an integer.
+   */
   public int getTurtleID(){
     return myID;
   }

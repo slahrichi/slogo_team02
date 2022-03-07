@@ -10,6 +10,7 @@ import slogo.Control.ControllerExceptions.VariableExceptions;
 /**
  *
  * the class that manages and holds all the variables, has method to set the value of a variable and make a new one.
+ * Has function to get the value of a variable.
  * @author Haris Adnan
  */
 public class VariableManager {
@@ -22,7 +23,7 @@ public class VariableManager {
   }
 
   /**
-   * makes new variable if it doesnt exist or sets the value of a variable if it does
+   * makes new variable if it doesnt exist or sets the value of a variable if it does.
    * @param name : variable name
    * @param value : value of variable to be set
    */
@@ -63,7 +64,7 @@ public class VariableManager {
   }
 
   /**
-   * creates dummy variable
+   * creates dummy variable with the value as 0.
    * @param variableNameUsedByUser
    * @return
    */

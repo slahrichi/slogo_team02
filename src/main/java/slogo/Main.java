@@ -14,6 +14,7 @@ import slogo.View.slogoGUI;
 
 
 /**
+<<<<<<< HEAD
  * Purpose: Where it all starts, automatically runs when the program is run and creates the slogoGUI
  * application and scene for displaying
  * <p>
@@ -23,6 +24,9 @@ import slogo.View.slogoGUI;
  * Dependencies: Depends on JavaFX imports and on the SlogoGUI class for constructing a scene
  * <p>
  * Example: Click the run button to run the program.
+=======
+ * Main class that sets uo the animation and calls the slogo GUI
+>>>>>>> 2156646c9231f9a738e29df3c8e8ac58000e8546
  */
 public class Main extends Application {
 

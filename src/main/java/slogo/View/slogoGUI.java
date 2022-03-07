@@ -384,6 +384,7 @@ public class slogoGUI implements ViewAPI, ObserverViewInterface {
   @Override
   public void clearHistory() {
     infoPanel.getHistoryText().setText("");
+    control.resetHistory();
   }
 
 

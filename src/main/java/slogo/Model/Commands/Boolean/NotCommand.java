@@ -3,6 +3,10 @@ package slogo.Model.Commands.Boolean;
 import slogo.Model.ModelExceptions;
 import slogo.Model.Turtle;
 
+/**
+ * Command that returns the opposite of the value input
+ * @author Haris Adnan
+ */
 public class NotCommand extends BooleanOperation {
 
 
