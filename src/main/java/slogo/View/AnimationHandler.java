@@ -88,8 +88,6 @@ public class AnimationHandler implements ViewListener {
     }
     System.out.println(turtleView.getTurtleImage().getX() + " " + turtleView.getTurtleImage().getY());
 
-
-
   }
 
   public void playEntireAnimation(){
