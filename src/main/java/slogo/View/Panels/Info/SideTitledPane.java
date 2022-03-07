@@ -5,7 +5,24 @@ import javafx.geometry.Insets;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
+
+
+/**
+ * Purpose: This is the super class for Titled Panes that I created in order to handle similarities
+ * between all the informational titled panes I was going to create for the right side of the GUI
+ * <p>
+ * Assumptions: I assume that each titled pane created takes in a VBox, which is where it'll be
+ * added to in order for it to show up in the display; furthermore, I assume that the VBox that its
+ * passed is the correct VBox that is on the right side of the program
+ * <p>
+ * Dependencies: This superclass is utilized by all its subclasses titled panes and is used in the
+ * InformationPanel class to create all the various kinds of informational panes
+ * <p>
+ * Example: We never call/create this abstract class directly and construct its children instead;
+ * however each of them takes on characteristics in setting up
+ *
+ * @author Eric Xie
+ **/
 
 // will be super class for the informational titled panes
 public abstract class SideTitledPane {
@@ -17,29 +34,44 @@ public abstract class SideTitledPane {
   private GridPane titledGrid;
   private TitledPane titledPane;
 
+  /**
+   * Purpose: The superclass constructor for side titled panes
+   * <p>
+   * Assumptions: I assume that each titled pane created takes in a VBox, which is where it'll be
+   * added to in order for it to show up in the display; furthermore, I assume that the VBox that
+   * its passed is the correct VBox that is on the right side of the program
+   * <p>
+   *
+   * @param sideInput VBox we want the panel to be in
+   **/
 
-  public SideTitledPane(VBox sideInput){
 
-      sidePanel = sideInput;
-      titledPane = new TitledPane();
-      titledGrid = new GridPane();
+  public SideTitledPane(VBox sideInput) {
 
-      setUpPane();
-      setUpGrid();
+    sidePanel = sideInput;
+    titledPane = new TitledPane();
+    titledGrid = new GridPane();
 
-      sidePanel.getChildren().add(titledPane);
+    setUpPane();
+    setUpGrid();
+
+    sidePanel.getChildren().add(titledPane);
 
 
   }
 
-  private void setUpPane(){
+  // sets up the pane
+
+  private void setUpPane() {
 
     titledPane.setExpanded(false);
     titledPane.setContent(titledGrid);
 
   }
 
-  private void setUpGrid(){
+  // sets up the grid inside the pane that holds the content
+
+  private void setUpGrid() {
 
     titledGrid.setPadding(new Insets(PANE_PADDING));
     titledGrid.setHgap(PANE_GAP);
@@ -47,19 +79,15 @@ public abstract class SideTitledPane {
 
   }
 
+  // used by subclasses to retrieve title pane
 
-
-  protected abstract void addPane();
-
-
-  protected abstract void addVariable(int variable);
-
-
-  public TitledPane getPane(){
+  protected TitledPane getPane() {
     return titledPane;
   }
 
-  public GridPane getGridPane(){
+  // used by subclasses to retrieve gridpane inside title pane
+
+  protected GridPane getGridPane() {
     return titledGrid;
   }
 

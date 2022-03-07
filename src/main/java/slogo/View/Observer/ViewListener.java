@@ -22,10 +22,29 @@ import javafx.scene.paint.Color;
 public interface ViewListener {
 
 
-  // described more in-depth where it's used in the concrete class, this updates the canvas background color
-  public void updateCanvas(Color colorInput);
+  /**
+   * Used by the ViewPublisher when a change has been notified and is implemented by the CanvasView
+   * class to update the canvas
+   * <p>
+   * Assumed to be used correctly and called correctly whenever the color picker detects that a new
+   * color has been chosen
+   *
+   * @param colorInput Color that we want to canvas to be
+   */
+
+  void updateCanvas(Color colorInput);
+
+  /**
+   * Used by the ViewPublisher when a change has been notified and is implemented by the
+   * Animationhandler class
+   * <p>
+   * Assumed to be used and called correctly whenever the pen color colorpicker is notified of a
+   * color change
+   *
+   * @param colorInput color that we want the pen to be
+   */
 
   // described more in-depth where it's used, updates the pen colors when drawing
-  public void updatePen(Color colorInput);
+  void updatePen(Color colorInput);
 
 }

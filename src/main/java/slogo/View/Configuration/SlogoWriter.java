@@ -7,10 +7,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -43,8 +40,7 @@ public class SlogoWriter {
   public static final int HEIGHT = 100;
   private final Stage myStage;
   private final VBox myRoot;
-  private ResourceBundle myResources;
-  private FileWriter fw;
+  private final ResourceBundle myResources;
 
 
   private String editorContents;
@@ -100,7 +96,7 @@ public class SlogoWriter {
   private void submitButtonPressed(String title) {
     myStage.close();
     try {
-      fw = new FileWriter(new File("data/saves", title + ".slogo"));
+      FileWriter fw = new FileWriter(new File("data/saves", title + ".slogo"));
       fw.write(editorContents);
       fw.close();
     } catch (IOException e) {

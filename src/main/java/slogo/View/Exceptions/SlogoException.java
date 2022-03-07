@@ -1,8 +1,6 @@
 package slogo.View.Exceptions;
 
 import java.io.IOException;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 
 public class SlogoException extends IOException {
 

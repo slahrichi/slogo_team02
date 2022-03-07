@@ -14,7 +14,15 @@ import slogo.View.slogoGUI;
 
 
 /**
- * Feel free to completely change this code or delete it entirely.
+ * Purpose: Where it all starts, automatically runs when the program is run and creates the slogoGUI
+ * application and scene for displaying
+ * <p>
+ * Assumptions: Runs correctly whenever we click run and correctly constructs the slogoGUI for
+ * displaying
+ * <p>
+ * Dependencies: Depends on JavaFX imports and on the SlogoGUI class for constructing a scene
+ * <p>
+ * Example: Click the run button to run the program.
  */
 public class Main extends Application {
 
@@ -24,7 +32,16 @@ public class Main extends Application {
   public static final Dimension DEFAULT_SIZE = new Dimension(1500, 1000);
   private static final String LANGUAGE_RESOURCE_PATH = "slogo.languages.";
   private static final String EXAMPLE_PROGRAMS_PATH = "/examples";
-  public static final String INITIAL_SIMULATION = "data/testSimulations/spreadingFireEDGE4.xml";
+
+  /**
+   * Overrides the start with our own to create a slogoGUI application for displaying
+   * <p>
+   * Assumption: Assumed to correctly override the start method when we run the program and
+   * correctly display the slogoGUI program
+   *
+   * @param stage, the Stage where we want to display our application on
+   */
+
 
   @Override
   public void start(Stage stage) {
@@ -41,7 +58,14 @@ public class Main extends Application {
 
   }
 
-  // create a new slogo
+  /**
+   * Used to reset the entire slogoGUI application by creating a new one and setting the stage to
+   * it
+   * <p>
+   * Assumed to be correctly used whenever the reset slogo button in the application is pressed
+   *
+   * @param stage, the Stage where we want to display the application on
+   */
 
   public static void resetSlogo(Stage stage) {
 
@@ -55,8 +79,14 @@ public class Main extends Application {
 
   }
 
-  public static void addSlogo(){
+  /**
+   * Used to add the entire slogoGUI application by creating a new one and adding a Stage
+   * <p>
+   * Assumed to be correctly used whenever the add slogo button in the application is pressed
+   */
 
+
+  public static void addSlogo() {
 
     Stage newStage = new Stage();
     slogoGUI extraSim = new slogoGUI(newStage, LANGUAGE);
