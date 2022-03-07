@@ -109,7 +109,7 @@ One known bug is that depending on the computer it is run on, the program can pu
 
 Another bug has something to do with the record and animationhandler, in which, the turtle seems to incorrectly move. In fact, it does animations twice and in the incorrect order.
 
-
+ResetCanvas button has its bugs and Changing the Background color can erase work done already.
 
 
 ## Impressions
