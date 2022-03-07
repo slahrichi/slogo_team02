@@ -19,7 +19,7 @@ public class Translater {
 
   public static final String WHITESPACE = "\\s+";
   public static final char HASHTAG = '#';
-  public static final char LIST_LEFT = '[';
+  private static boolean openBracket;
   public static final String NO_MATCH = "NO MATCH";
   public static final String SYNTAX = "Syntax";
   public static final String PARAMS = "Params";
@@ -47,6 +47,7 @@ public class Translater {
     syntaxParser.addPatterns(SYNTAX);
     commandParser.addPatterns(DEFAULT_LANG);
     commandParser.addPatterns(SYNTAX);
+
   }
 
 
@@ -94,26 +95,18 @@ public class Translater {
    * @throws CommandException depdening on the situation (wrong token, too many constants)
    */
   void parseText(String program) throws Exception {
+    resetCommands();
     program = removeComments(program);
-    boolean openBracket = false;
     LinkedList group = null;
     for (String token : program.split(WHITESPACE)) {
       if (syntaxParser.getSymbol(token).equals(NO_MATCH)){
         throw new CommandException(getCommandException("wrongToken").formatted(token));
       }
       if (syntaxParser.getSymbol(token).equals("UserCommand")) {
-        String currentCommand = commandParser.getSymbol(token);
-          commandStack.add(currentCommand);
+        handleUserCommand(token);
       }
       else if (syntaxParser.getSymbol(token).equals("Constant")) {
-        constantStack.add(new Argument(token, Double.parseDouble(token)));
-        if (!commandStack.isEmpty()) {
-          String previousCommand = commandStack.peek();
-          int numParams = getNumParams(previousCommand);
-          if (numParams <= constantStack.size()) {
-            makeCommandAndPopFromStack(previousCommand, numParams, openBracket, group);
-          }
-        }
+        handleConstant(openBracket, group, token);
       }
       else if (syntaxParser.getSymbol(token).equals("ListStart")){
         openBracket = true;
@@ -122,14 +115,7 @@ public class Translater {
       }
 
       else if (syntaxParser.getSymbol(token).equals("ListEnd")) {
-        constantStack.add(new Argument(token, 0.0));
-        popList(constantStack);
-        //constantStack now should only have number of repeats
-        String repeatCommand = commandStack.peek();
-        assert group != null;
-        Argument arg = (Argument) group.getLast();
-        constantStack.add(new RepeatArgument(group, arg.getValue()));
-        makeCommandAndPopFromStack(repeatCommand, getNumParams(repeatCommand), false, group);
+        handleListEnd(group, token);
       }
     }
     // reached the end of the String, checks if commands are waiting
@@ -143,10 +129,43 @@ public class Translater {
       }
     }
 
-    private void popList(Stack constantStack) {
+  private void handleListEnd(LinkedList group, String token) throws Exception {
+    constantStack.add(new Argument(token, 0.0));
+    popList(constantStack);
+    //constantStack now should only have number of repeats
+    String repeatCommand = commandStack.peek();
+    assert group != null;
+    Argument arg = (Argument) group.getLast();
+    constantStack.add(new RepeatArgument(group, arg.getValue()));
+    makeCommandAndPopFromStack(repeatCommand, getNumParams(repeatCommand), false, group);
+  }
+
+  private void handleConstant(boolean openBracket, LinkedList group, String token) throws Exception {
+    constantStack.add(new Argument(token, Double.parseDouble(token)));
+    if (!commandStack.isEmpty()) {
+      String previousCommand = commandStack.peek();
+      int numParams = getNumParams(previousCommand);
+      if (numParams <= constantStack.size()) {
+        makeCommandAndPopFromStack(previousCommand, numParams, openBracket, group);
+      }
+    }
+  }
+
+  private void handleUserCommand(String token) throws Exception {
+    String currentCommand = commandParser.getSymbol(token);
+    if (getNumParams(currentCommand) == 0){
+      validCommands.add(currentCommand);
+    }
+    else{
+    commandStack.add(currentCommand);
+    }
+  }
+
+  private void popList(Stack constantStack) {
       Argument currentArgument = (Argument) constantStack.peek();
-      while (!currentArgument.getName().equals(LIST_LEFT)) {
+      while (!currentArgument.getName().equals("[")) {
         constantStack.pop();
+        currentArgument = (Argument) constantStack.peek();
       }
       constantStack.pop(); // the LIST_LEFT that remains
     }
@@ -167,8 +186,9 @@ public class Translater {
       Constructor<?> cons = clazz.getConstructor(type);
       Object[] obj = {args};
       Object newInstance = cons.newInstance(obj); //this Object could instead be a Command object
-      validCommands.add(newInstance);
-
+      if (!openBracket) {
+        validCommands.add(newInstance);
+      }
       if (commandStack.size() > 0) {
         Method execute = clazz.getMethod(EVALUATE_COMMAND);
         double value = (double) execute.invoke(newInstance);
@@ -276,11 +296,17 @@ public class Translater {
     return validCommands;
   }
 
+  public void resetCommands(){
+    validCommands = new ArrayList<>();
+  }
+
   public static void main(String[] args)
       throws Exception {
     Translater t = new Translater();
-    t.parseText("fd difference 90 100  ");
-    //t.parseText(readFile("data/examples/simple/square.slogo"));
+    //t.parseText("pu");
+//    System.out.println(t.validCommands);
+//    t.parseText("fd 200 rt 20");
+    t.parseText(readFile("data/examples/simple/square_centered.slogo"));
     System.out.println(t.validCommands);
   }
 }
