@@ -50,6 +50,8 @@
 ## Assumptions or Simplifications
 * Model: We assumed that the turtle will be passed correct command from the parser with the correct data structure(list in our case). Further, we assumed that the turtle will only draw straight lines and will displace in lines as well. Further, the turtle implementation assumes that the parser will pass it the id of the active turtle that will be moved.
 * The parser expects to receive text data either directly from the View, or be passed a text file it would read from. It also expects the commands to be passed to be among the ones listed in the resource files and with the correct number of parameters being passed to each. Should there be a problem a custom exception gets thrown
+* View: For the visualization, I made assumptions about what I was getting from the back-end, specifically that the information about the turtle and when they were calling my API methods were correct. For example, in the AnimationHandler class, we take advantage of a TurtleRecord object, which separates the back and front-end with a database of sorts. From here, I get the old X, Y and new X, Y of the turtle and update it in the front end as commands are made.
+
 
 ## Changes from the Plan
 We were originally supposed to finish most of basic commands and do some of the advanced changes. We spent a lot of time trying to figure out the proper way to work on our respective parts, connect them effectively, and ensure the turtle/pen/canvas the Model, View, and Controller are talking to are the same instance. We also spent a lot of time planning on the best way to handle multiple turtles. Although our final product does not support that, the structure we have makes it easy by using an index of each turtle.
