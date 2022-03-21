@@ -3,7 +3,6 @@ package slogo.Model;
 
 import java.util.ArrayList;
 import java.util.List;
-import javafx.scene.paint.Color;
 import slogo.Model.Commands.CommandAPI;
 
 /**
@@ -81,6 +80,7 @@ public class TurtleManager implements TurtleManagerAPI {
 
   }
 
+  //returns the turtle that corresponds to the id
   private Turtle getTurtle(int idOfTurtle) throws TurtleManagerException {
 
     for (Turtle turtle : turtleList) {

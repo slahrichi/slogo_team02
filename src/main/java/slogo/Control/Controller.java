@@ -73,6 +73,7 @@ public class Controller implements ControllerAPI {
   }
 
 
+  //Updates the history, called when I parse the input
   private void updateHistory(String contents) {
     history.addAll(Arrays.asList(contents.split("\n")));
     view.notifyHistory();
@@ -99,6 +100,7 @@ public class Controller implements ControllerAPI {
     return manager.getRecordTurtle(currentTurtleID);
   }
 
+  //Runs the commands gotten from the parsed input
   private void runCommands(List<CommandAPI> commands)
       throws ModelExceptions {
     for (CommandAPI command : commands) {
