@@ -12,10 +12,18 @@ import slogo.Model.TurtleRecord;
 
 /**
  * @author Mike Keohane, Haris Adnan.
- * This class keeps record of all turtles and executes stepTurtle
- * function on them
+ * This class keeps record of all turtles and executes stepTurtle function on them. Allows user to
+ * add turtles and obtain information about turltes in the program.
+ *
+ * This class shows good design as it not only implements from an API, but also only provides the
+ * user with a record and not the turtle itself. This goes in line with the Open-Closed Principle.
+ * Further, there is implementation of lambda function, for example in th e function
+ * addMultipleTurtles(). Exceptions are also thrown when the turlte requested cannot be found. The
+ * stepTurtle() functiom is also implemented in such a way that reflection can be used with it.
+ *
+ * git commits: https://coursework.cs.duke.edu/compsci308_2022spring/slogo_team02/-/commit/5a57602214da648b8879ed5cae7fb7d26dbcd75d
+ *
  ***/
-
 
 public class TurtleManager implements TurtleManagerAPI {
 
@@ -84,7 +92,8 @@ public class TurtleManager implements TurtleManagerAPI {
     return turtleList.get(turtleList.size() - 1).getTurtleID();
 
   }
-
+  // function returns the Turtle, given the ID, the function is purposelfully made public so that
+  // it does not appear on the API.
   private Turtle getTurtle(int idOfTurtle) throws TurtleManagerException {
 
     for (Turtle turtle : turtleList) {

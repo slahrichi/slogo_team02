@@ -4,7 +4,8 @@ import slogo.MasterPiece.BooleanOperation;
 
 /**
  * Command that checks if a value is less than the other
- *
+ * Class shows an implementation of BooleanOperation abstraction.
+ * git commits: https://coursework.cs.duke.edu/compsci308_2022spring/slogo_team02/-/commit/32640eeee0b3465876010f4647da055913bc6302
  * @author Haris Adnan
  */
 public class LessThanCommand extends BooleanOperation {
