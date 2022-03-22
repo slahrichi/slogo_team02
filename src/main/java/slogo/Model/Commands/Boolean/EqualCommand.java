@@ -1,12 +1,12 @@
 package slogo.Model.Commands.Boolean;
 
-import slogo.Model.ModelExceptions;
-import slogo.Model.Turtle;
+import slogo.MasterPiece.BooleanOperation;
+
 /**
  * Command that checks if two values are the same
  * @author Haris Adnan
  */
-public class EqualCommand extends BooleanOperation{
+public class EqualCommand extends BooleanOperation {
 
   public EqualCommand(double[] values) {
     super(values);

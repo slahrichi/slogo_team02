@@ -1,7 +1,7 @@
 package slogo.Control;
 
 import java.util.List;
-import slogo.Model.TurtleManagerException;
+import slogo.MasterPiece.TurtleManagerException;
 import slogo.Model.TurtleRecord;
 
 public interface ControllerAPI {

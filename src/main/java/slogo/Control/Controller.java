@@ -5,9 +5,9 @@ import java.util.Arrays;
 import java.util.List;
 import slogo.Model.Commands.CommandAPI;
 import slogo.Model.ModelExceptions;
-import slogo.Model.TurtleManager;
+import slogo.MasterPiece.TurtleManager;
 import slogo.Model.TurtleManagerAPI;
-import slogo.Model.TurtleManagerException;
+import slogo.MasterPiece.TurtleManagerException;
 import slogo.Model.TurtleRecord;
 import slogo.View.ObserverViewInterface;
 

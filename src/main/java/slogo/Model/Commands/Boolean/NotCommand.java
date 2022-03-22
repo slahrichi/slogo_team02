@@ -1,7 +1,6 @@
 package slogo.Model.Commands.Boolean;
 
-import slogo.Model.ModelExceptions;
-import slogo.Model.Turtle;
+import slogo.MasterPiece.BooleanOperation;
 
 /**
  * Command that returns the opposite of the value input

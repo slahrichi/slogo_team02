@@ -1,6 +1,7 @@
 package slogo.Model;
 
 import java.util.List;
+import slogo.MasterPiece.TurtleManagerException;
 import slogo.Model.Commands.CommandAPI;
 
 /**

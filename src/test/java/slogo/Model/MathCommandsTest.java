@@ -3,7 +3,7 @@ package slogo.Model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
-import slogo.Model.Commands.Command;
+import slogo.MasterPiece.TurtleManager;
 import slogo.Model.Commands.MathCommands.ArcTangentCommand;
 import slogo.Model.Commands.MathCommands.CosineCommand;
 import slogo.Model.Commands.MathCommands.DifferenceCommand;

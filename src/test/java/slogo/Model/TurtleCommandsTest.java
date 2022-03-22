@@ -3,6 +3,8 @@ package slogo.Model;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+import slogo.MasterPiece.TurtleManager;
+import slogo.MasterPiece.TurtleManagerException;
 import slogo.Model.Commands.Command;
 import slogo.Model.Commands.TurtleCommands.*;
 

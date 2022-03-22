@@ -4,10 +4,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import javafx.scene.paint.Color;
 import org.junit.jupiter.api.Test;
+import slogo.MasterPiece.TurtleManager;
+import slogo.MasterPiece.TurtleManagerException;
 import slogo.Model.Commands.Command;
-import slogo.Model.Commands.TurtleCommands.BackwardCommand;
 import slogo.Model.Commands.TurtleCommands.ForwardCommand;
 
 /**

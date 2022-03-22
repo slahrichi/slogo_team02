@@ -1,12 +1,12 @@
 package slogo.Model.Commands.Boolean;
 
-import slogo.Model.ModelExceptions;
-import slogo.Model.Turtle;
+import slogo.MasterPiece.BooleanOperation;
+
 /**
  * Command that checks if a value is less than or Equal to the other
  * @author Haris Adnan
  */
-public class LessEqualCommand extends BooleanOperation{
+public class LessEqualCommand extends BooleanOperation {
 
 
   public LessEqualCommand(double[] values) {

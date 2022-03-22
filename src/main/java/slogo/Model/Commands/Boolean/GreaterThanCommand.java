@@ -1,12 +1,12 @@
 package slogo.Model.Commands.Boolean;
 
-import slogo.Model.ModelExceptions;
-import slogo.Model.Turtle;
+import slogo.MasterPiece.BooleanOperation;
+
 /**
  * Command that checks if a value is greater than the other
  * @author Haris Adnan
  */
-public class GreaterThanCommand extends BooleanOperation{
+public class GreaterThanCommand extends BooleanOperation {
 
   /**
    * Main Constructor for the class

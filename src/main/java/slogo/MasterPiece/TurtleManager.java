@@ -1,15 +1,19 @@
-package slogo.Model;
+package slogo.MasterPiece;
 
 
 import java.util.ArrayList;
 import java.util.List;
-import javafx.scene.paint.Color;
 import slogo.Model.Commands.CommandAPI;
+import slogo.Model.ModelExceptions;
+import slogo.Model.Pen;
+import slogo.Model.Turtle;
+import slogo.Model.TurtleManagerAPI;
+import slogo.Model.TurtleRecord;
 
 /**
- * @author Mike Keohane
- *
- * This class keeps record of all turtles and executes stepTurtle function on them
+ * @author Mike Keohane, Haris Adnan.
+ * This class keeps record of all turtles and executes stepTurtle
+ * function on them
  ***/
 
 
@@ -102,9 +106,10 @@ public class TurtleManager implements TurtleManagerAPI {
 
   /**
    * Returns the number of turtles
+   *
    * @return turtlelist.size()
    */
-  public int numberOfTurtlesInList(){
+  public int numberOfTurtlesInList() {
     return turtleList.size();
   }
 

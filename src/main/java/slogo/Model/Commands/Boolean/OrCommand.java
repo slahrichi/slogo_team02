@@ -1,12 +1,12 @@
 package slogo.Model.Commands.Boolean;
 
-import slogo.Model.ModelExceptions;
-import slogo.Model.Turtle;
+import slogo.MasterPiece.BooleanOperation;
+
 /**
  * Command that checks if either value is 1 or not
  * @author Haris Adnan
  */
-public class OrCommand extends BooleanOperation{
+public class OrCommand extends BooleanOperation {
 
   public OrCommand(double[] values) {
     super(values);
